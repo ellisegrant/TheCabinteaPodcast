@@ -1,155 +1,91 @@
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
-import EpisodeArtwork from "../components/EpisodeArtwork";
 import PlayIcon from "../components/PlayIcon";
 
+function useReveal(threshold = 0.1) {
+  const ref = useRef(null);
+  const [visible, setVisible] = useState(false);
+  useEffect(() => {
+    const obs = new IntersectionObserver(([e]) => { if (e.isIntersecting) setVisible(true); }, { threshold });
+    if (ref.current) obs.observe(ref.current);
+    return () => obs.disconnect();
+  }, [threshold]);
+  return [ref, visible];
+}
+
 const episodes = [
-  {
-    num: "01",
-    guest: "Amara Diallo",
-    role: "Maritime Lawyer",
-    location: "Dakar",
-    title: '"Who Really Owns the Sea?"',
-    tag: "Governance",
-    tagColor: "#C4A44E",
-    season: 1,
-  },
-  {
-    num: "02",
-    guest: "Kofi Mensah",
-    role: "Documentary Filmmaker",
-    location: "Accra",
-    title: '"The Last Fisher"',
-    tag: "Community",
-    tagColor: "#2C8C7C",
-    season: 1,
-  },
-  {
-    num: "03",
-    guest: "Nkechi Obi",
-    role: "Marine Economist",
-    location: "Lagos",
-    title: '"Blue Money"',
-    tag: "Blue Economy",
-    tagColor: "#1E6B5F",
-    season: 1,
-  },
+  { num: "01", guest: "Amara Diallo", role: "Maritime Lawyer", location: "Dakar", title: '"Who Really Owns the Sea?"', tag: "Governance", season: 1, img: "https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=600&q=80" },
+  { num: "02", guest: "Kofi Mensah", role: "Documentary Filmmaker", location: "Accra", title: '"The Last Fisher"', tag: "Community", season: 1, img: "https://images.unsplash.com/photo-1504164996022-09080787b6b3?w=600&q=80" },
+  { num: "03", guest: "Nkechi Obi", role: "Marine Economist", location: "Lagos", title: '"Blue Money"', tag: "Blue Economy", season: 1, img: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=600&q=80" },
 ];
 
 const filters = ["All Episodes", "Season 1", "Most Recent"];
 
 export default function Episodes() {
   const [activeFilter, setActiveFilter] = useState("All Episodes");
+  const [gridRef, gridVis] = useReveal(0.05);
 
   return (
-    <div className="min-h-screen flex flex-col overflow-hidden" style={{ background: "var(--dark)" }}>
+    <div className="min-h-screen flex flex-col" style={{ background: "var(--dark)" }}>
+      <Navbar />
 
-      <Navbar activePage="EPISODES" />
+      {/* ═══ HEADER — with background image ═══ */}
+      <section className="relative overflow-hidden" style={{ height: "35vh", minHeight: "260px" }}>
+        <img src="https://images.unsplash.com/photo-1505118380757-91f5f5632de0?w=1400&q=80" alt="Ocean" className="absolute top-0 left-0 w-full h-full object-cover" />
+        <div className="absolute top-0 left-0 w-full h-full" style={{ background: "linear-gradient(to top, var(--dark) 10%, rgba(21,42,47,0.6) 50%, rgba(21,42,47,0.75) 100%)" }} />
+        <div className="ct-grain" />
 
-      {/* ═══ PAGE HEADER ═══ */}
-      <section className="px-6 md:px-12 pt-10 pb-6">
-        <span
-          className="font-medium block mb-2"
-          style={{ fontSize: "12px", letterSpacing: "3px", color: "var(--gold)" }}
-        >
-          EPISODES
-        </span>
-        <h1
-          className="font-serif italic"
-          style={{ fontSize: "clamp(24px, 3.5vw, 36px)", color: "var(--gold)", lineHeight: 1.3 }}
-        >
-          Every conversation. Every cup.
-        </h1>
+        <div className="anim-fade-up relative flex flex-col justify-end h-full p-6 md:p-12 lg:p-16 pb-12" style={{ zIndex: 2 }}>
+          <span className="font-medium block mb-2" style={{ fontSize: "11px", letterSpacing: "4px", color: "var(--gold)" }}>EPISODES</span>
+          <h1 className="font-serif italic" style={{ fontSize: "clamp(26px, 4vw, 42px)", color: "var(--cream)", lineHeight: 1.2 }}>
+            Every conversation. Every cup.
+          </h1>
+        </div>
       </section>
 
-      {/* ═══ FILTER TABS ═══ */}
-      <div className="px-6 md:px-12 pb-8">
+      {/* ═══ FILTERS ═══ */}
+      <section className="px-6 md:px-12 lg:px-16 py-6">
         <div className="flex gap-3 flex-wrap">
-          {filters.map((filter) => (
-            <button
-              key={filter}
-              onClick={() => setActiveFilter(filter)}
-              className="ct-filter-tab py-2.5 px-6 text-xs font-medium cursor-pointer"
-              style={{
-                letterSpacing: "1.5px",
-                background: activeFilter === filter ? "var(--gold)" : "transparent",
-                color: activeFilter === filter ? "var(--dark)" : "var(--text-muted)",
-                border: activeFilter === filter
-                  ? "1px solid var(--gold)"
-                  : "1px solid rgba(138,158,165,0.35)",
-              }}
-            >
-              {filter}
+          {filters.map((f) => (
+            <button key={f} onClick={() => setActiveFilter(f)} className="ct-filter-tab py-2.5 px-6 text-xs font-medium cursor-pointer rounded-sm" style={{
+              letterSpacing: "1.5px",
+              background: activeFilter === f ? "var(--gold)" : "transparent",
+              color: activeFilter === f ? "var(--dark)" : "var(--text-muted)",
+              border: activeFilter === f ? "1px solid var(--gold)" : "1px solid rgba(138,158,165,0.25)",
+            }}>
+              {f}
             </button>
           ))}
         </div>
-      </div>
+      </section>
 
       {/* ═══ EPISODES GRID ═══ */}
-      <section className="flex-1 px-6 md:px-12 pb-12">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <section ref={gridRef} className="flex-1 px-6 md:px-12 lg:px-16 pb-16 pt-2">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {episodes.map((ep, i) => (
-            <div
-              key={ep.num}
-              className={`ct-episode-card rounded overflow-hidden flex flex-col anim-fade-up${i > 0 ? `-d${i}` : ""}`}
-            >
-              {/* Artwork section */}
-              <div className="p-6 pb-4" style={{ background: "var(--teal-dark)" }}>
-                <EpisodeArtwork num={ep.num} size={180} />
-              </div>
-
-              {/* Tag */}
-              <div className="px-6 pt-4">
-                <span
-                  className="inline-block py-1 px-3 rounded-sm text-xs font-medium"
-                  style={{
-                    background: ep.tagColor,
-                    color: ep.tagColor === "#C4A44E" ? "var(--dark)" : "white",
-                    letterSpacing: "1px",
-                    fontSize: "11px",
-                  }}
-                >
-                  {ep.tag}
+            <div key={ep.num} className={`ct-reveal ${gridVis ? "ct-visible" : ""} ct-episode-card ct-image-card rounded-lg overflow-hidden flex flex-col`} style={{ transitionDelay: `${0.1 + i * 0.12}s` }}>
+              {/* Image */}
+              <div className="relative overflow-hidden" style={{ height: "220px" }}>
+                <img src={ep.img} alt={ep.guest} className="ct-img-cover" />
+                <div className="absolute top-0 left-0 w-full h-full" style={{ background: "linear-gradient(to top, var(--teal-dark) 5%, transparent 50%)" }} />
+                <span className="absolute top-3 left-3 py-1.5 px-3 rounded-sm font-medium" style={{ fontSize: "10px", letterSpacing: "1.5px", background: "var(--gold)", color: "var(--dark)" }}>
+                  {ep.tag.toUpperCase()}
+                </span>
+                <span className="absolute bottom-3 right-4 font-display font-bold italic" style={{ fontSize: "36px", color: "rgba(255,255,255,0.12)" }}>
+                  EP. {ep.num}
                 </span>
               </div>
 
-              {/* Info section */}
-              <div className="px-6 pt-4 pb-6 flex flex-col flex-1">
-                <p
-                  className="font-serif mb-0.5"
-                  style={{ fontSize: "14px", color: "var(--text-muted)" }}
-                >
-                  Sipping with
-                </p>
-                <h3
-                  className="font-display text-white font-bold mb-1.5"
-                  style={{ fontSize: "24px", lineHeight: 1.2 }}
-                >
-                  {ep.guest}
-                </h3>
-                <p
-                  className="mb-4"
-                  style={{ fontSize: "13px", letterSpacing: "0.5px", color: "var(--gold)" }}
-                >
-                  {ep.role} · {ep.location}
-                </p>
-                <p
-                  className="font-serif italic mb-6"
-                  style={{ fontSize: "15px", lineHeight: 1.5, color: "var(--text-main)" }}
-                >
-                  {ep.title}
-                </p>
-
-                {/* Play row */}
-                <div className="mt-auto flex items-center gap-3">
+              {/* Info */}
+              <div className="p-6 flex flex-col flex-1">
+                <p className="font-serif mb-0.5" style={{ fontSize: "14px", color: "var(--text-muted)" }}>Sipping with</p>
+                <h3 className="font-display text-white font-bold mb-1.5" style={{ fontSize: "24px", lineHeight: 1.2 }}>{ep.guest}</h3>
+                <p className="mb-3" style={{ fontSize: "12px", letterSpacing: "0.5px", color: "var(--gold)" }}>{ep.role} · {ep.location}</p>
+                <p className="font-serif italic mb-6 flex-1" style={{ fontSize: "15px", lineHeight: 1.5, color: "var(--text-main)" }}>{ep.title}</p>
+                <div className="flex items-center gap-3 mt-auto">
                   <PlayIcon size={36} />
-                  <span
-                    className="font-medium"
-                    style={{ fontSize: "11px", letterSpacing: "2px", color: "var(--text-muted)" }}
-                  >
-                    PLAY · 60 MIN
-                  </span>
+                  <span className="font-medium" style={{ fontSize: "11px", letterSpacing: "2px", color: "var(--text-muted)" }}>PLAY · 60 MIN</span>
                 </div>
               </div>
             </div>

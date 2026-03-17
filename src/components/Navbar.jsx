@@ -4,6 +4,7 @@ const navItems = [
   { label: "HOME", path: "/" },
   { label: "ABOUT", path: "/about" },
   { label: "EPISODES", path: "/episodes" },
+  { label: "SHOP", path: "/shop" },
   { label: "PARTNER WITH US", path: "/partner" },
 ];
 
