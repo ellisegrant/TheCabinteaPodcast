@@ -4,6 +4,7 @@ import About from "./Pages/About";
 import Episodes from "./Pages/Episodes";
 import Partner from "./Pages/Partner";
 import Shop from "./Pages/Shop";
+import Contact from "./Pages/Contact";
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
         <Route path="/episodes" element={<Episodes />} />
         <Route path="/partner" element={<Partner />} />
         <Route path="/shop" element={<Shop />} />
+        <Route path="/contact" element={<Contact />} />
       </Routes>
     </BrowserRouter>
   );
