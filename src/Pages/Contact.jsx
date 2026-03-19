@@ -596,7 +596,7 @@ export default function Contact() {
             {[
               {
                 q: "How do I nominate a guest?",
-                a: "Use the form above and select "Guest Nomination." Tell us who they are, why their story matters to the ocean, and how we can reach them.",
+                a: "Use the form above and select 'Guest Nomination.' Tell us who they are, why their story matters to the ocean, and how we can reach them.",
               },
               {
                 q: "Can I attend a live recording?",
@@ -604,7 +604,7 @@ export default function Contact() {
               },
               {
                 q: "How do brand partnerships work?",
-                a: "We work exclusively with organic and herbal tea brands. Select "Brand Partnership" in the form and we'll send our media kit.",
+                a: "We work exclusively with organic and herbal tea brands. Select 'Brand Partnership' in the form and we'll send our media kit.",
               },
               {
                 q: "Where are episodes recorded?",
