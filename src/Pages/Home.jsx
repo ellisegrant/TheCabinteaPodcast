@@ -6,6 +6,15 @@ import WaveLine from "../components/WaveLine";
 import EpisodeArtwork from "../components/EpisodeArtwork";
 import PlayIcon from "../components/PlayIcon";
 
+/*
+  FONT STACK (add to your global CSS / index.html):
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garant:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600;1,700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+
+  CSS variables to add/update:
+    --font-display: 'Cormorant Garant', Georgia, serif;
+    --font-body:    'DM Sans', sans-serif;
+*/
+
 /* ─── Scroll reveal hook ─── */
 function useReveal(threshold = 0.15) {
   const ref = useRef(null);
@@ -39,10 +48,30 @@ function Counter({ value, suffix = "", label, visible }) {
   }, [visible, num]);
   return (
     <div className="text-center">
-      <span className="font-display font-bold block" style={{ fontSize: "52px", color: "var(--gold)", lineHeight: 1 }}>
+      <span
+        className="block"
+        style={{
+          fontFamily: "var(--font-display, 'Cormorant Garant', Georgia, serif)",
+          fontWeight: 700,
+          fontSize: "54px",
+          color: "var(--gold)",
+          lineHeight: 1,
+          letterSpacing: "-1px",
+        }}
+      >
         {num ? count : value}{suffix}
       </span>
-      <span className="block mt-2 font-medium" style={{ fontSize: "11px", letterSpacing: "2.5px", color: "var(--text-muted)" }}>
+      <span
+        className="block mt-2"
+        style={{
+          fontFamily: "var(--font-body, 'DM Sans', sans-serif)",
+          fontWeight: 400,
+          fontSize: "10px",
+          letterSpacing: "3px",
+          color: "var(--text-muted)",
+          textTransform: "uppercase",
+        }}
+      >
         {label}
       </span>
     </div>
@@ -69,43 +98,89 @@ const IMG = {
   accra: "https://images.unsplash.com/photo-1523805009345-7448845a9e53?w=1200&q=80",
 };
 
+/* ─── Shared typography helpers ─── */
+const display = { fontFamily: "var(--font-display, 'Cormorant Garant', Georgia, serif)" };
+const body    = { fontFamily: "var(--font-body, 'DM Sans', sans-serif)" };
+const label   = { ...body, fontSize: "10px", letterSpacing: "3.5px", textTransform: "uppercase", fontWeight: 400 };
+
 export default function Home() {
-  const [heroRef, heroVis] = useReveal(0.05);
-  const [aboutRef, aboutVis] = useReveal(0.1);
-  const [statsRef, statsVis] = useReveal(0.2);
-  const [epRef, epVis] = useReveal(0.1);
+  const [heroRef,    heroVis]    = useReveal(0.05);
+  const [aboutRef,   aboutVis]   = useReveal(0.1);
+  const [statsRef,   statsVis]   = useReveal(0.2);
+  const [epRef,      epVis]      = useReveal(0.1);
   const [sponsorRef, sponsorVis] = useReveal(0.1);
-  const [ctaRef, ctaVis] = useReveal(0.1);
+  const [ctaRef,     ctaVis]     = useReveal(0.1);
 
   return (
     <div className="min-h-screen flex flex-col">
       <Navbar />
 
       {/* ═══ HERO ═══ */}
-      <section ref={heroRef} className="relative overflow-hidden" style={{ minHeight: "94vh", background: "var(--dark)" }}>
+      <section
+        ref={heroRef}
+        className="relative overflow-hidden"
+        style={{ minHeight: "94vh", background: "var(--dark)" }}
+      >
         {/* Background video */}
-        <video autoPlay muted loop playsInline className="absolute top-0 left-0 w-full h-full object-cover" style={{ zIndex: 0 }}>
+        <video
+          autoPlay muted loop playsInline
+          className="absolute top-0 left-0 w-full h-full object-cover"
+          style={{ zIndex: 0 }}
+        >
           <source src="/herovideo.mp4" type="video/mp4" />
         </video>
 
-        {/* Overlays */}
-        <div className="absolute top-0 left-0 w-full h-full" style={{ zIndex: 1, background: "linear-gradient(135deg, rgba(21,42,47,0.92) 30%, rgba(21,42,47,0.6) 70%, rgba(30,107,95,0.4) 100%)" }} />
-        <div className="absolute bottom-0 left-0 w-full" style={{ zIndex: 1, height: "160px", background: "linear-gradient(to top, var(--dark), transparent)" }} />
+        {/* Single clean dark overlay — no complex gradient */}
+        <div
+          className="absolute top-0 left-0 w-full h-full"
+          style={{ zIndex: 1, background: "rgba(21,42,47,0.80)" }}
+        />
+        {/* Subtle bottom fade into page */}
+        <div
+          className="absolute bottom-0 left-0 w-full"
+          style={{ zIndex: 1, height: "120px", background: "linear-gradient(to top, var(--dark), transparent)" }}
+        />
         <div className="ct-grain" style={{ zIndex: 2 }} />
 
-        <div className="relative flex flex-col lg:flex-row p-6 md:p-12 lg:p-16 gap-10 lg:gap-16" style={{ zIndex: 3, minHeight: "calc(94vh - 64px)" }}>
-
+        <div
+          className="relative flex flex-col lg:flex-row p-6 md:p-12 lg:p-16 gap-10 lg:gap-16"
+          style={{ zIndex: 3, minHeight: "calc(94vh - 64px)" }}
+        >
           {/* LEFT */}
           <div className="lg:flex-1 flex flex-col justify-center lg:pr-6">
-            <span className={`ct-reveal ${heroVis ? "ct-visible" : ""} font-medium block mb-5`} style={{ fontSize: "11px", letterSpacing: "4px", color: "var(--teal)", transitionDelay: "0.1s" }}>
+            <span
+              className={`ct-reveal ${heroVis ? "ct-visible" : ""} block mb-6`}
+              style={{ ...label, color: "var(--teal)", transitionDelay: "0.1s" }}
+            >
               A PODCAST FROM THE GULF OF GUINEA
             </span>
 
-            <h1 className={`ct-reveal ${heroVis ? "ct-visible" : ""} font-display text-white font-black mb-4`} style={{ fontSize: "clamp(60px, 9vw, 130px)", lineHeight: 0.88, letterSpacing: "-3px", transitionDelay: "0.2s" }}>
+            <h1
+              className={`ct-reveal ${heroVis ? "ct-visible" : ""} text-white mb-4`}
+              style={{
+                ...display,
+                fontWeight: 700,
+                fontSize: "clamp(64px, 9vw, 134px)",
+                lineHeight: 0.88,
+                letterSpacing: "-3px",
+                transitionDelay: "0.2s",
+              }}
+            >
               CABIN<br />TEA
             </h1>
 
-            <p className={`ct-reveal ${heroVis ? "ct-visible" : ""} font-serif italic mb-5`} style={{ color: "var(--gold)", fontSize: "clamp(18px, 2.2vw, 26px)", lineHeight: 1.35, transitionDelay: "0.35s" }}>
+            <p
+              className={`ct-reveal ${heroVis ? "ct-visible" : ""} mb-6`}
+              style={{
+                ...display,
+                fontStyle: "italic",
+                color: "var(--gold)",
+                fontSize: "clamp(18px, 2vw, 24px)",
+                fontWeight: 400,
+                lineHeight: 1.4,
+                transitionDelay: "0.35s",
+              }}
+            >
               Sipping with the people who know the sea.
             </p>
 
@@ -113,21 +188,41 @@ export default function Home() {
               <WaveLine />
             </div>
 
-            <p className={`ct-reveal ${heroVis ? "ct-visible" : ""} mb-8 font-light`} style={{ fontSize: "15.5px", lineHeight: 1.85, color: "rgba(214,207,194,0.75)", maxWidth: "460px", transitionDelay: "0.5s" }}>
-              A live conversation series where ocean professionals and unexpected ocean-adjacent voices come together over a carefully chosen cup of tea.
+            <p
+              className={`ct-reveal ${heroVis ? "ct-visible" : ""} mb-8`}
+              style={{
+                ...body,
+                fontWeight: 300,
+                fontSize: "15px",
+                lineHeight: 1.9,
+                color: "rgba(214,207,194,0.72)",
+                maxWidth: "440px",
+                transitionDelay: "0.5s",
+              }}
+            >
+              A live conversation series where ocean professionals and unexpected
+              ocean-adjacent voices come together over a carefully chosen cup of tea.
             </p>
 
-            <div className={`ct-reveal ${heroVis ? "ct-visible" : ""} flex gap-4 flex-wrap mb-9`} style={{ transitionDelay: "0.6s" }}>
-              <Link to="/episodes" className="ct-btn-primary py-4 px-10 font-medium text-xs no-underline inline-block" style={{ letterSpacing: "3px" }}>
+            <div className={`ct-reveal ${heroVis ? "ct-visible" : ""} flex gap-4 flex-wrap mb-10`} style={{ transitionDelay: "0.6s" }}>
+              <Link
+                to="/episodes"
+                className="ct-btn-primary py-4 px-10 no-underline inline-block"
+                style={{ ...label, letterSpacing: "3px" }}
+              >
                 LISTEN NOW
               </Link>
-              <Link to="/partner" className="ct-btn-gold py-4 px-10 font-medium text-xs no-underline inline-block" style={{ letterSpacing: "3px" }}>
+              <Link
+                to="/partner"
+                className="ct-btn-gold py-4 px-10 no-underline inline-block"
+                style={{ ...label, letterSpacing: "3px" }}
+              >
                 PARTNER WITH US
               </Link>
             </div>
 
             <div className={`ct-reveal ${heroVis ? "ct-visible" : ""} flex items-center gap-6`} style={{ transitionDelay: "0.7s" }}>
-              <span style={{ fontSize: "11px", letterSpacing: "2px", color: "var(--text-muted)" }}>LISTEN ON</span>
+              <span style={{ ...label, color: "var(--text-muted)" }}>LISTEN ON</span>
               <div className="flex items-center gap-5">
                 <a href="#" className="ct-icon-link"><YoutubeIcon /></a>
                 <a href="#" className="ct-icon-link"><SpotifyIcon /></a>
@@ -136,109 +231,211 @@ export default function Home() {
             </div>
           </div>
 
-          {/* RIGHT — Latest Episode */}
-          <div className={`ct-reveal ${heroVis ? "ct-visible" : ""} ct-episode-card rounded-lg p-7 pb-8 flex flex-col self-center relative overflow-hidden mt-4 lg:mt-0`} style={{ flex: "0 1 420px", maxWidth: "420px", transitionDelay: "0.4s" }}>
-            <div className="absolute top-0 left-6 right-6 h-[3px]" style={{ background: "var(--gold)" }} />
-            <div className="absolute top-0 left-0 right-0 bottom-0 pointer-events-none" style={{ background: "linear-gradient(180deg, rgba(44,140,124,0.12) 0%, transparent 40%)" }} />
+          {/* RIGHT — Latest Episode card */}
+          <div
+            className={`ct-reveal ${heroVis ? "ct-visible" : ""} ct-episode-card rounded-lg p-7 pb-8 flex flex-col self-center relative overflow-hidden mt-4 lg:mt-0`}
+            style={{ flex: "0 1 420px", maxWidth: "420px", transitionDelay: "0.4s" }}
+          >
+            <div className="absolute top-0 left-6 right-6 h-[2px]" style={{ background: "var(--gold)" }} />
 
-            <span className="font-medium mb-4 relative" style={{ fontSize: "11px", letterSpacing: "3px", color: "rgba(255,255,255,0.55)" }}>LATEST EPISODE</span>
+            <span style={{ ...label, color: "rgba(255,255,255,0.45)", marginBottom: "16px", display: "block" }}>
+              LATEST EPISODE
+            </span>
 
-            <div className="ct-episode-artwork-wrap rounded-lg p-5 mb-5 relative">
+            <div className="ct-episode-artwork-wrap rounded-lg p-5 mb-5">
               <EpisodeArtwork num="01" size={165} />
             </div>
 
-            <p className="font-serif mb-0.5 relative" style={{ fontSize: "15px", color: "rgba(255,255,255,0.6)" }}>Sipping with</p>
-            <h3 className="font-display text-white font-bold mb-2 leading-tight relative" style={{ fontSize: "24px" }}>Amara Diallo</h3>
-            <p className="mb-3 relative" style={{ fontSize: "12px", letterSpacing: "1.5px", color: "var(--gold)" }}>Maritime Lawyer · Dakar</p>
-            <p className="font-serif italic leading-relaxed mb-5 relative" style={{ fontSize: "14.5px", color: "rgba(214,207,194,0.65)" }}>
+            <p style={{ ...body, fontWeight: 300, fontSize: "13px", color: "rgba(255,255,255,0.5)", marginBottom: "2px" }}>
+              Sipping with
+            </p>
+            <h3 style={{ ...display, fontWeight: 700, fontSize: "26px", color: "white", marginBottom: "6px", lineHeight: 1.15 }}>
+              Amara Diallo
+            </h3>
+            <p style={{ ...label, color: "var(--gold)", marginBottom: "14px" }}>
+              Maritime Lawyer · Dakar
+            </p>
+            <p style={{ ...display, fontStyle: "italic", fontSize: "15px", lineHeight: 1.7, color: "rgba(214,207,194,0.6)", marginBottom: "22px" }}>
               "Who Really Owns the Sea?" — ocean governance, identity and the politics of West African waters.
             </p>
-            <button className="ct-play-btn flex items-center gap-3.5 bg-transparent border-none p-0 cursor-pointer relative">
+            <button className="ct-play-btn flex items-center gap-3.5 bg-transparent border-none p-0 cursor-pointer">
               <PlayIcon size={38} />
-              <span className="font-medium text-xs" style={{ letterSpacing: "2.5px", color: "rgba(255,255,255,0.55)" }}>PLAY EPISODE</span>
+              <span style={{ ...label, color: "rgba(255,255,255,0.5)", letterSpacing: "2.5px" }}>PLAY EPISODE</span>
             </button>
           </div>
         </div>
       </section>
 
-      {/* ═══ ABOUT STRIP — Image left, text right ═══ */}
-      <section ref={aboutRef} className="relative" style={{ background: "var(--cream)" }}>
-        <div className="flex flex-col lg:flex-row">
-          {/* Image */}
-          <div className={`ct-reveal-left ${aboutVis ? "ct-visible" : ""} lg:w-1/2 relative overflow-hidden`} style={{ minHeight: "400px", transitionDelay: "0.1s" }}>
-            <img src={IMG.tea} alt="Tea preparation" className="ct-img-cover ct-img-zoom" style={{ position: "absolute", top: 0, left: 0 }} />
-            <div className="absolute top-0 left-0 w-full h-full" style={{ background: "linear-gradient(to right, transparent 60%, var(--cream) 100%)" }} />
+      {/* ═══ ABOUT — Clean editorial two-column ═══ */}
+      <section ref={aboutRef} style={{ background: "var(--cream)" }}>
+        <div className="flex flex-col lg:flex-row" style={{ minHeight: "520px" }}>
+
+          {/* Image — full bleed, no gradient overlay */}
+          <div
+            className={`ct-reveal-left ${aboutVis ? "ct-visible" : ""} lg:w-5/12 relative overflow-hidden`}
+            style={{ minHeight: "380px", transitionDelay: "0.1s" }}
+          >
+            <img
+              src={IMG.tea}
+              alt="Tea preparation"
+              className="ct-img-cover ct-img-zoom"
+              style={{ position: "absolute", top: 0, left: 0, width: "100%", height: "100%", objectFit: "cover" }}
+            />
+            {/* Thin right border only — no gradient */}
+            <div
+              className="absolute top-0 right-0 h-full"
+              style={{ width: "3px", background: "var(--gold)", opacity: 0.7 }}
+            />
           </div>
-          {/* Text */}
-          <div className={`ct-reveal-right ${aboutVis ? "ct-visible" : ""} lg:w-1/2 flex flex-col justify-center p-8 md:p-14 lg:p-16`} style={{ transitionDelay: "0.3s" }}>
-            <span className="font-medium block mb-3" style={{ fontSize: "11px", letterSpacing: "4px", color: "var(--teal)" }}>THE SHOW</span>
-            <h2 className="font-display italic font-bold mb-5" style={{ fontSize: "clamp(26px, 3.5vw, 38px)", color: "var(--dark)", lineHeight: 1.2 }}>
+
+          {/* Text — structured, no-frills */}
+          <div
+            className={`ct-reveal-right ${aboutVis ? "ct-visible" : ""} lg:w-7/12 flex flex-col justify-center`}
+            style={{ padding: "clamp(40px, 6vw, 80px) clamp(32px, 6vw, 80px)", transitionDelay: "0.25s" }}
+          >
+            <span style={{ ...label, color: "var(--teal)", marginBottom: "16px", display: "block" }}>
+              THE SHOW
+            </span>
+
+            <h2
+              style={{
+                ...display,
+                fontStyle: "italic",
+                fontWeight: 700,
+                fontSize: "clamp(28px, 3.2vw, 42px)",
+                color: "var(--dark)",
+                lineHeight: 1.15,
+                marginBottom: "20px",
+                maxWidth: "520px",
+              }}
+            >
               Every great conversation starts with a cup of tea.
             </h2>
-            <p className="font-light mb-6" style={{ fontSize: "15px", lineHeight: 1.85, color: "rgba(21,42,47,0.7)", maxWidth: "460px" }}>
-              Cabin Tea is a live podcast series rooted in the Gulf of Guinea. We bring together marine scientists, fishers, maritime lawyers, artists, and coastal community voices for honest, unhurried dialogue.
+
+            {/* Ruled separator */}
+            <div style={{ width: "48px", height: "2px", background: "var(--gold)", marginBottom: "24px" }} />
+
+            <p
+              style={{
+                ...body,
+                fontWeight: 300,
+                fontSize: "15px",
+                lineHeight: 1.9,
+                color: "rgba(21,42,47,0.65)",
+                maxWidth: "500px",
+                marginBottom: "28px",
+              }}
+            >
+              Cabin Tea is a live podcast series rooted in the Gulf of Guinea. We bring together
+              marine scientists, fishers, maritime lawyers, artists, and coastal community voices
+              for honest, unhurried dialogue.
             </p>
-            <div className="ct-quote mb-6" style={{ maxWidth: "420px" }}>
-              <p className="font-serif italic" style={{ fontSize: "17px", lineHeight: 1.7, color: "var(--teal-dark)" }}>
-                A ship's cabin is where honest conversations happen — below deck, away from performance, between people who trust each other.
+
+            {/* Pull quote — left-bordered, no background fill */}
+            <div
+              style={{
+                borderLeft: "3px solid var(--teal)",
+                paddingLeft: "20px",
+                marginBottom: "32px",
+                maxWidth: "460px",
+              }}
+            >
+              <p
+                style={{
+                  ...display,
+                  fontStyle: "italic",
+                  fontSize: "18px",
+                  lineHeight: 1.65,
+                  color: "var(--teal-dark)",
+                  fontWeight: 400,
+                }}
+              >
+                A ship's cabin is where honest conversations happen — below deck,
+                away from performance, between people who trust each other.
               </p>
             </div>
-            <Link to="/about" className="font-medium no-underline inline-flex items-center gap-2" style={{ fontSize: "13px", letterSpacing: "2px", color: "var(--gold)", transition: "gap 0.3s" }}>
-              LEARN MORE <span style={{ fontSize: "18px" }}>→</span>
+
+            <Link
+              to="/about"
+              className="no-underline inline-flex items-center gap-2"
+              style={{ ...label, color: "var(--gold)", letterSpacing: "2.5px", transition: "opacity 0.2s" }}
+            >
+              LEARN MORE <span style={{ fontSize: "16px", fontFamily: "sans-serif" }}>→</span>
             </Link>
           </div>
         </div>
       </section>
 
       {/* ═══ STATS ═══ */}
-      <section ref={statsRef} style={{ background: "var(--dark)", borderTop: "3px solid var(--gold)" }}>
+      <section ref={statsRef} style={{ background: "var(--dark)", borderTop: "2px solid var(--gold)" }}>
         <div className="flex flex-col md:flex-row items-center justify-center gap-10 md:gap-20 py-14 px-6 md:px-12">
-          <Counter value="60" suffix="min" label="PER EPISODE" visible={statsVis} />
+          <Counter value="60" suffix="min" label="PER EPISODE"     visible={statsVis} />
           <div className="ct-hide-mobile" style={{ width: "1px", height: "50px", background: "rgba(138,158,165,0.2)" }} />
-          <Counter value="3" suffix="+" label="PLATFORMS" visible={statsVis} />
+          <Counter value="3"  suffix="+"   label="PLATFORMS"       visible={statsVis} />
           <div className="ct-hide-mobile" style={{ width: "1px", height: "50px", background: "rgba(138,158,165,0.2)" }} />
-          <Counter value="Live" label="FROM ACCRA, GHANA" visible={statsVis} />
+          <Counter value="Live"            label="FROM ACCRA, GHANA" visible={statsVis} />
           <div className="ct-hide-mobile" style={{ width: "1px", height: "50px", background: "rgba(138,158,165,0.2)" }} />
-          <Counter value="1" suffix="hr" label="UNHURRIED" visible={statsVis} />
+          <Counter value="1"  suffix="hr"  label="UNHURRIED"       visible={statsVis} />
         </div>
       </section>
 
-      {/* ═══ FEATURED EPISODES — with images ═══ */}
+      {/* ═══ FEATURED EPISODES ═══ */}
       <section ref={epRef} className="relative py-20 px-6 md:px-12 lg:px-16" style={{ background: "var(--dark-alt)" }}>
         <div className="ct-grain" />
         <div className="relative max-w-6xl mx-auto">
           <div className={`ct-reveal ${epVis ? "ct-visible" : ""} text-center mb-14`} style={{ transitionDelay: "0.1s" }}>
-            <span className="font-medium block mb-3" style={{ fontSize: "11px", letterSpacing: "4px", color: "var(--teal)" }}>LATEST EPISODES</span>
-            <h2 className="font-display italic font-bold" style={{ fontSize: "clamp(28px, 3.5vw, 40px)", color: "var(--cream)" }}>
+            <span style={{ ...label, color: "var(--teal)", display: "block", marginBottom: "12px" }}>
+              LATEST EPISODES
+            </span>
+            <h2 style={{ ...display, fontStyle: "italic", fontWeight: 700, fontSize: "clamp(28px, 3.5vw, 42px)", color: "var(--cream)" }}>
               Every conversation. Every cup.
             </h2>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {[
-              { num: "01", guest: "Amara Diallo", role: "Maritime Lawyer · Dakar", title: '"Who Really Owns the Sea?"', tag: "Governance", img: "https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=600&q=80" },
-              { num: "02", guest: "Kofi Mensah", role: "Documentary Filmmaker · Accra", title: '"The Last Fisher"', tag: "Community", img: "https://images.unsplash.com/photo-1504164996022-09080787b6b3?w=600&q=80" },
-              { num: "03", guest: "Nkechi Obi", role: "Marine Economist · Lagos", title: '"Blue Money"', tag: "Blue Economy", img: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=600&q=80" },
+              { num: "01", guest: "Amara Diallo",  role: "Maritime Lawyer · Dakar",       title: '"Who Really Owns the Sea?"', tag: "Governance",   img: "https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=600&q=80" },
+              { num: "02", guest: "Kofi Mensah",   role: "Documentary Filmmaker · Accra", title: '"The Last Fisher"',          tag: "Community",    img: "https://images.unsplash.com/photo-1504164996022-09080787b6b3?w=600&q=80" },
+              { num: "03", guest: "Nkechi Obi",    role: "Marine Economist · Lagos",      title: '"Blue Money"',               tag: "Blue Economy", img: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=600&q=80" },
             ].map((ep, i) => (
-              <div key={ep.num} className={`ct-reveal ${epVis ? "ct-visible" : ""} ct-episode-card ct-image-card rounded-lg overflow-hidden flex flex-col`} style={{ transitionDelay: `${0.2 + i * 0.15}s` }}>
+              <div
+                key={ep.num}
+                className={`ct-reveal ${epVis ? "ct-visible" : ""} ct-episode-card ct-image-card rounded-lg overflow-hidden flex flex-col`}
+                style={{ transitionDelay: `${0.2 + i * 0.15}s` }}
+              >
                 <div className="relative overflow-hidden" style={{ height: "200px" }}>
                   <img src={ep.img} alt={ep.guest} className="ct-img-cover" />
-                  <div className="absolute top-0 left-0 w-full h-full" style={{ background: "linear-gradient(to top, var(--teal-dark) 5%, transparent 60%)" }} />
-                  <span className="absolute top-3 left-3 py-1 px-3 rounded-sm font-medium" style={{ fontSize: "10px", letterSpacing: "1.5px", background: "var(--gold)", color: "var(--dark)" }}>
+                  <div className="absolute top-0 left-0 w-full h-full" style={{ background: "rgba(21,42,47,0.35)" }} />
+                  <span
+                    className="absolute top-3 left-3 py-1 px-3 rounded-sm"
+                    style={{ ...label, fontSize: "9px", background: "var(--gold)", color: "var(--dark)", letterSpacing: "1.5px" }}
+                  >
                     {ep.tag.toUpperCase()}
                   </span>
-                  <span className="absolute bottom-3 right-4 font-display font-bold italic" style={{ fontSize: "32px", color: "rgba(255,255,255,0.15)" }}>
+                  <span
+                    className="absolute bottom-3 right-4"
+                    style={{ ...display, fontWeight: 700, fontStyle: "italic", fontSize: "32px", color: "rgba(255,255,255,0.13)" }}
+                  >
                     EP. {ep.num}
                   </span>
                 </div>
+
                 <div className="p-6 flex flex-col flex-1">
-                  <p className="font-serif mb-0.5" style={{ fontSize: "14px", color: "var(--text-muted)" }}>Sipping with</p>
-                  <h3 className="font-display text-white font-bold mb-1" style={{ fontSize: "22px", lineHeight: 1.2 }}>{ep.guest}</h3>
-                  <p className="mb-3" style={{ fontSize: "12px", letterSpacing: "0.5px", color: "var(--gold)" }}>{ep.role}</p>
-                  <p className="font-serif italic mb-5 flex-1" style={{ fontSize: "15px", lineHeight: 1.5, color: "var(--text-main)" }}>{ep.title}</p>
+                  <p style={{ ...body, fontWeight: 300, fontSize: "13px", color: "var(--text-muted)", marginBottom: "2px" }}>
+                    Sipping with
+                  </p>
+                  <h3 style={{ ...display, fontWeight: 700, fontSize: "24px", color: "white", lineHeight: 1.2, marginBottom: "6px" }}>
+                    {ep.guest}
+                  </h3>
+                  <p style={{ ...label, color: "var(--gold)", marginBottom: "14px" }}>
+                    {ep.role}
+                  </p>
+                  <p style={{ ...display, fontStyle: "italic", fontSize: "15px", lineHeight: 1.55, color: "var(--text-main)", marginBottom: "20px", flex: 1 }}>
+                    {ep.title}
+                  </p>
                   <div className="flex items-center gap-3 mt-auto">
                     <PlayIcon size={34} />
-                    <span className="font-medium" style={{ fontSize: "11px", letterSpacing: "2px", color: "var(--text-muted)" }}>PLAY · 60 MIN</span>
+                    <span style={{ ...label, color: "var(--text-muted)", letterSpacing: "2px" }}>PLAY · 60 MIN</span>
                   </div>
                 </div>
               </div>
@@ -246,7 +443,11 @@ export default function Home() {
           </div>
 
           <div className={`ct-reveal ${epVis ? "ct-visible" : ""} text-center mt-12`} style={{ transitionDelay: "0.6s" }}>
-            <Link to="/episodes" className="ct-btn-outline py-3.5 px-10 font-medium text-xs no-underline inline-block" style={{ letterSpacing: "3px" }}>
+            <Link
+              to="/episodes"
+              className="ct-btn-outline py-3.5 px-10 no-underline inline-block"
+              style={{ ...label, letterSpacing: "3px" }}
+            >
               ALL EPISODES
             </Link>
           </div>
@@ -257,66 +458,97 @@ export default function Home() {
       <section ref={sponsorRef} className="relative py-20 px-6 md:px-12 lg:px-16 overflow-hidden" style={{ background: "var(--dark)" }}>
         <div className="ct-grain" />
 
-        {/* Background image accent */}
-        <div className="absolute top-0 right-0 w-1/3 h-full ct-hide-mobile" style={{ opacity: 0.06 }}>
+        <div className="absolute top-0 right-0 w-1/3 h-full ct-hide-mobile" style={{ opacity: 0.05 }}>
           <img src={IMG.coast} alt="" className="ct-img-cover" />
         </div>
 
         <div className="relative max-w-5xl mx-auto">
           <div className={`ct-reveal ${sponsorVis ? "ct-visible" : ""} text-center mb-14`} style={{ transitionDelay: "0.1s" }}>
-            <span className="font-medium block mb-3" style={{ fontSize: "11px", letterSpacing: "4px", color: "var(--teal)" }}>OUR PARTNERS</span>
-            <h2 className="font-display italic font-bold mb-4" style={{ fontSize: "clamp(28px, 3.5vw, 40px)", color: "var(--cream)" }}>
+            <span style={{ ...label, color: "var(--teal)", display: "block", marginBottom: "12px" }}>OUR PARTNERS</span>
+            <h2 style={{ ...display, fontStyle: "italic", fontWeight: 700, fontSize: "clamp(28px, 3.5vw, 40px)", color: "var(--cream)", marginBottom: "16px" }}>
               Brewed with intention. Backed by purpose.
             </h2>
-            <p className="mx-auto font-light" style={{ fontSize: "15px", lineHeight: 1.85, color: "rgba(214,207,194,0.6)", maxWidth: "500px" }}>
-              We partner exclusively with organic and herbal tea brands who share our values — sustainability, storytelling, and the sea.
+            <p
+              className="mx-auto"
+              style={{ ...body, fontWeight: 300, fontSize: "15px", lineHeight: 1.85, color: "rgba(214,207,194,0.58)", maxWidth: "480px" }}
+            >
+              We partner exclusively with organic and herbal tea brands who share our values —
+              sustainability, storytelling, and the sea.
             </p>
           </div>
 
-          {/* Partner tiers */}
           <div className={`ct-reveal ${sponsorVis ? "ct-visible" : ""} grid grid-cols-1 md:grid-cols-3 gap-6 mb-12`} style={{ transitionDelay: "0.3s" }}>
             {[
-              { title: "FOUNDING BLEND", sub: "Season Partner", desc: "Full season tea integration, branded keepsake tins, logo on all platforms, co-branded social content." },
-              { title: "SINGLE ORIGIN", sub: "Episode Partner", desc: "Per-episode tea integration, keepsake tin for the guest, logo on artwork, intro mention." },
-              { title: "TEA HOUSE", sub: "Experience Partner", desc: "Live event branding, product sampling for audience, social media feature, community association." },
-            ].map((t, i) => (
+              { title: "FOUNDING BLEND",  sub: "Season Partner",     desc: "Full season tea integration, branded keepsake tins, logo on all platforms, co-branded social content." },
+              { title: "SINGLE ORIGIN",   sub: "Episode Partner",    desc: "Per-episode tea integration, keepsake tin for the guest, logo on artwork, intro mention." },
+              { title: "TEA HOUSE",       sub: "Experience Partner", desc: "Live event branding, product sampling for audience, social media feature, community association." },
+            ].map((t) => (
               <div key={t.title} className="ct-tier-home rounded-lg p-6">
-                <h4 className="font-medium mb-1" style={{ fontSize: "14px", letterSpacing: "2.5px", color: "var(--gold)" }}>{t.title}</h4>
-                <p className="font-serif italic mb-3" style={{ fontSize: "14px", color: "rgba(255,255,255,0.55)" }}>{t.sub}</p>
-                <p className="font-light" style={{ fontSize: "13.5px", lineHeight: 1.75, color: "rgba(214,207,194,0.5)" }}>{t.desc}</p>
+                <h4 style={{ ...label, color: "var(--gold)", fontSize: "12px", marginBottom: "6px" }}>{t.title}</h4>
+                <p style={{ ...display, fontStyle: "italic", fontSize: "14px", color: "rgba(255,255,255,0.5)", marginBottom: "12px" }}>{t.sub}</p>
+                <p style={{ ...body, fontWeight: 300, fontSize: "13.5px", lineHeight: 1.8, color: "rgba(214,207,194,0.48)" }}>{t.desc}</p>
               </div>
             ))}
           </div>
 
           <div className={`ct-reveal ${sponsorVis ? "ct-visible" : ""} text-center`} style={{ transitionDelay: "0.5s" }}>
-            <Link to="/partner" className="ct-btn-gold py-3.5 px-10 font-medium text-xs no-underline inline-block" style={{ letterSpacing: "3px" }}>
+            <Link
+              to="/partner"
+              className="ct-btn-gold py-3.5 px-10 no-underline inline-block"
+              style={{ ...label, letterSpacing: "3px" }}
+            >
               BECOME A PARTNER
             </Link>
           </div>
         </div>
       </section>
 
-      {/* ═══ BOTTOM CTA — with background image ═══ */}
+      {/* ═══ BOTTOM CTA ═══ */}
       <section ref={ctaRef} className="relative overflow-hidden" style={{ minHeight: "400px" }}>
         <img src={IMG.accra} alt="Accra coastline" className="absolute top-0 left-0 w-full h-full object-cover" />
-        <div className="absolute top-0 left-0 w-full h-full" style={{ background: "linear-gradient(135deg, rgba(30,107,95,0.9) 0%, rgba(21,42,47,0.85) 100%)" }} />
+        {/* Single flat dark overlay — no multi-stop gradient */}
+        <div className="absolute top-0 left-0 w-full h-full" style={{ background: "rgba(21,42,47,0.82)" }} />
         <div className="ct-grain" style={{ zIndex: 1 }} />
 
-        <div className={`ct-reveal ${ctaVis ? "ct-visible" : ""} relative flex flex-col items-center justify-center text-center py-24 px-6`} style={{ zIndex: 2, transitionDelay: "0.1s" }}>
+        <div
+          className={`ct-reveal ${ctaVis ? "ct-visible" : ""} relative flex flex-col items-center justify-center text-center py-24 px-6`}
+          style={{ zIndex: 2, transitionDelay: "0.1s" }}
+        >
           <div className="mx-auto mb-6" style={{ maxWidth: "180px" }}>
-            <WaveLine color="rgba(196,164,78,0.6)" />
+            <WaveLine color="rgba(196,164,78,0.55)" />
           </div>
-          <h2 className="font-display italic font-bold mb-4" style={{ fontSize: "clamp(26px, 3.5vw, 42px)", color: "var(--cream)" }}>
+          <h2
+            style={{
+              ...display,
+              fontStyle: "italic",
+              fontWeight: 700,
+              fontSize: "clamp(26px, 3.5vw, 44px)",
+              color: "var(--cream)",
+              marginBottom: "16px",
+            }}
+          >
             Recorded live in Accra. Heard everywhere.
           </h2>
-          <p className="mx-auto mb-10 font-light" style={{ fontSize: "15.5px", lineHeight: 1.85, color: "rgba(214,207,194,0.7)", maxWidth: "460px" }}>
-            New episodes released on YouTube, Spotify, and Apple Podcasts. Subscribe wherever you listen.
+          <p
+            className="mx-auto mb-10"
+            style={{ ...body, fontWeight: 300, fontSize: "15px", lineHeight: 1.9, color: "rgba(214,207,194,0.65)", maxWidth: "440px" }}
+          >
+            New episodes released on YouTube, Spotify, and Apple Podcasts.
+            Subscribe wherever you listen.
           </p>
           <div className="flex gap-4 flex-wrap justify-center">
-            <Link to="/episodes" className="ct-btn-primary py-4 px-10 font-medium text-xs no-underline inline-block" style={{ letterSpacing: "3px" }}>
+            <Link
+              to="/episodes"
+              className="ct-btn-primary py-4 px-10 no-underline inline-block"
+              style={{ ...label, letterSpacing: "3px" }}
+            >
               EXPLORE EPISODES
             </Link>
-            <Link to="/shop" className="ct-btn-outline py-4 px-10 font-medium text-xs no-underline inline-block" style={{ letterSpacing: "3px", borderColor: "rgba(255,255,255,0.3)", color: "white" }}>
+            <Link
+              to="/shop"
+              className="ct-btn-outline py-4 px-10 no-underline inline-block"
+              style={{ ...label, letterSpacing: "3px", borderColor: "rgba(255,255,255,0.28)", color: "white" }}
+            >
               VISIT SHOP
             </Link>
           </div>
