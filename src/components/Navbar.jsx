@@ -6,6 +6,7 @@ const navItems = [
   { label: "EPISODES", path: "/episodes" },
   { label: "SHOP", path: "/shop" },
   { label: "PARTNER WITH US", path: "/partner" },
+  { label: "CONTACT US", path: "/contact" },
 ];
 
 export default function Navbar() {
