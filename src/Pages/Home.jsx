@@ -6,15 +6,6 @@ import WaveLine from "../components/WaveLine";
 import EpisodeArtwork from "../components/EpisodeArtwork";
 import PlayIcon from "../components/PlayIcon";
 
-/*
-  FONT STACK (add to your global CSS / index.html):
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garant:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600;1,700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
-
-  CSS variables to add/update:
-    --font-display: 'Cormorant Garant', Georgia, serif;
-    --font-body:    'DM Sans', sans-serif;
-*/
-
 /* ─── Scroll reveal hook ─── */
 function useReveal(threshold = 0.15) {
   const ref = useRef(null);
@@ -30,54 +21,6 @@ function useReveal(threshold = 0.15) {
   return [ref, visible];
 }
 
-/* ─── Animated counter ─── */
-function Counter({ value, suffix = "", label, visible }) {
-  const [count, setCount] = useState(0);
-  const num = parseInt(value) || 0;
-  useEffect(() => {
-    if (!visible || !num) return;
-    let start = 0;
-    const dur = 1400;
-    const step = (ts) => {
-      if (!start) start = ts;
-      const p = Math.min((ts - start) / dur, 1);
-      setCount(Math.floor((1 - Math.pow(1 - p, 3)) * num));
-      if (p < 1) requestAnimationFrame(step);
-    };
-    requestAnimationFrame(step);
-  }, [visible, num]);
-  return (
-    <div className="text-center">
-      <span
-        className="block"
-        style={{
-          fontFamily: "var(--font-display, 'Cormorant Garant', Georgia, serif)",
-          fontWeight: 700,
-          fontSize: "54px",
-          color: "var(--gold)",
-          lineHeight: 1,
-          letterSpacing: "-1px",
-        }}
-      >
-        {num ? count : value}{suffix}
-      </span>
-      <span
-        className="block mt-2"
-        style={{
-          fontFamily: "var(--font-body, 'DM Sans', sans-serif)",
-          fontWeight: 400,
-          fontSize: "10px",
-          letterSpacing: "3px",
-          color: "var(--text-muted)",
-          textTransform: "uppercase",
-        }}
-      >
-        {label}
-      </span>
-    </div>
-  );
-}
-
 /* ─── Platform icons ─── */
 function SpotifyIcon() {
   return <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/></svg>;
@@ -91,22 +34,19 @@ function YoutubeIcon() {
 
 /* ─── Images ─── */
 const IMG = {
-  ocean: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=1400&q=80",
-  tea: "https://images.unsplash.com/photo-1556679343-c7306c1976bc?w=800&q=80",
+  tea:   "https://images.unsplash.com/photo-1556679343-c7306c1976bc?w=800&q=80",
   coast: "https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=1200&q=80",
-  conversation: "https://images.unsplash.com/photo-1556761175-5973dc0f32e7?w=800&q=80",
   accra: "https://images.unsplash.com/photo-1523805009345-7448845a9e53?w=1200&q=80",
 };
 
-/* ─── Shared typography helpers ─── */
-const display = { fontFamily: "var(--font-display, 'Cormorant Garant', Georgia, serif)" };
-const body    = { fontFamily: "var(--font-body, 'DM Sans', sans-serif)" };
+/* ─── Typography — Playfair Display + Jost ─── */
+const display = { fontFamily: "var(--font-display, 'Playfair Display', Georgia, serif)" };
+const body    = { fontFamily: "var(--font-body, 'Jost', sans-serif)" };
 const label   = { ...body, fontSize: "10px", letterSpacing: "3.5px", textTransform: "uppercase", fontWeight: 400 };
 
 export default function Home() {
   const [heroRef,    heroVis]    = useReveal(0.05);
   const [aboutRef,   aboutVis]   = useReveal(0.1);
-  const [statsRef,   statsVis]   = useReveal(0.2);
   const [epRef,      epVis]      = useReveal(0.1);
   const [sponsorRef, sponsorVis] = useReveal(0.1);
   const [ctaRef,     ctaVis]     = useReveal(0.1);
@@ -121,7 +61,6 @@ export default function Home() {
         className="relative overflow-hidden"
         style={{ minHeight: "94vh", background: "var(--dark)" }}
       >
-        {/* Background video */}
         <video
           autoPlay muted loop playsInline
           className="absolute top-0 left-0 w-full h-full object-cover"
@@ -129,17 +68,8 @@ export default function Home() {
         >
           <source src="/herovideo.mp4" type="video/mp4" />
         </video>
-
-        {/* Single clean dark overlay — no complex gradient */}
-        <div
-          className="absolute top-0 left-0 w-full h-full"
-          style={{ zIndex: 1, background: "rgba(21,42,47,0.80)" }}
-        />
-        {/* Subtle bottom fade into page */}
-        <div
-          className="absolute bottom-0 left-0 w-full"
-          style={{ zIndex: 1, height: "120px", background: "linear-gradient(to top, var(--dark), transparent)" }}
-        />
+        <div className="absolute top-0 left-0 w-full h-full" style={{ zIndex: 1, background: "rgba(21,42,47,0.80)" }} />
+        <div className="absolute bottom-0 left-0 w-full" style={{ zIndex: 1, height: "120px", background: "linear-gradient(to top, var(--dark), transparent)" }} />
         <div className="ct-grain" style={{ zIndex: 2 }} />
 
         <div
@@ -237,15 +167,12 @@ export default function Home() {
             style={{ flex: "0 1 420px", maxWidth: "420px", transitionDelay: "0.4s" }}
           >
             <div className="absolute top-0 left-6 right-6 h-[2px]" style={{ background: "var(--gold)" }} />
-
             <span style={{ ...label, color: "rgba(255,255,255,0.45)", marginBottom: "16px", display: "block" }}>
               LATEST EPISODE
             </span>
-
             <div className="ct-episode-artwork-wrap rounded-lg p-5 mb-5">
               <EpisodeArtwork num="01" size={165} />
             </div>
-
             <p style={{ ...body, fontWeight: 300, fontSize: "13px", color: "rgba(255,255,255,0.5)", marginBottom: "2px" }}>
               Sipping with
             </p>
@@ -269,8 +196,7 @@ export default function Home() {
       {/* ═══ ABOUT — Clean editorial two-column ═══ */}
       <section ref={aboutRef} style={{ background: "var(--cream)" }}>
         <div className="flex flex-col lg:flex-row" style={{ minHeight: "520px" }}>
-
-          {/* Image — full bleed, no gradient overlay */}
+          {/* Image */}
           <div
             className={`ct-reveal-left ${aboutVis ? "ct-visible" : ""} lg:w-5/12 relative overflow-hidden`}
             style={{ minHeight: "380px", transitionDelay: "0.1s" }}
@@ -281,14 +207,13 @@ export default function Home() {
               className="ct-img-cover ct-img-zoom"
               style={{ position: "absolute", top: 0, left: 0, width: "100%", height: "100%", objectFit: "cover" }}
             />
-            {/* Thin right border only — no gradient */}
             <div
               className="absolute top-0 right-0 h-full"
               style={{ width: "3px", background: "var(--gold)", opacity: 0.7 }}
             />
           </div>
 
-          {/* Text — structured, no-frills */}
+          {/* Text */}
           <div
             className={`ct-reveal-right ${aboutVis ? "ct-visible" : ""} lg:w-7/12 flex flex-col justify-center`}
             style={{ padding: "clamp(40px, 6vw, 80px) clamp(32px, 6vw, 80px)", transitionDelay: "0.25s" }}
@@ -296,7 +221,6 @@ export default function Home() {
             <span style={{ ...label, color: "var(--teal)", marginBottom: "16px", display: "block" }}>
               THE SHOW
             </span>
-
             <h2
               style={{
                 ...display,
@@ -311,10 +235,7 @@ export default function Home() {
             >
               Every great conversation starts with a cup of tea.
             </h2>
-
-            {/* Ruled separator */}
             <div style={{ width: "48px", height: "2px", background: "var(--gold)", marginBottom: "24px" }} />
-
             <p
               style={{
                 ...body,
@@ -330,8 +251,6 @@ export default function Home() {
               marine scientists, fishers, maritime lawyers, artists, and coastal community voices
               for honest, unhurried dialogue.
             </p>
-
-            {/* Pull quote — left-bordered, no background fill */}
             <div
               style={{
                 borderLeft: "3px solid var(--teal)",
@@ -354,7 +273,6 @@ export default function Home() {
                 away from performance, between people who trust each other.
               </p>
             </div>
-
             <Link
               to="/about"
               className="no-underline inline-flex items-center gap-2"
@@ -363,19 +281,6 @@ export default function Home() {
               LEARN MORE <span style={{ fontSize: "16px", fontFamily: "sans-serif" }}>→</span>
             </Link>
           </div>
-        </div>
-      </section>
-
-      {/* ═══ STATS ═══ */}
-      <section ref={statsRef} style={{ background: "var(--dark)", borderTop: "2px solid var(--gold)" }}>
-        <div className="flex flex-col md:flex-row items-center justify-center gap-10 md:gap-20 py-14 px-6 md:px-12">
-          <Counter value="60" suffix="min" label="PER EPISODE"     visible={statsVis} />
-          <div className="ct-hide-mobile" style={{ width: "1px", height: "50px", background: "rgba(138,158,165,0.2)" }} />
-          <Counter value="3"  suffix="+"   label="PLATFORMS"       visible={statsVis} />
-          <div className="ct-hide-mobile" style={{ width: "1px", height: "50px", background: "rgba(138,158,165,0.2)" }} />
-          <Counter value="Live"            label="FROM ACCRA, GHANA" visible={statsVis} />
-          <div className="ct-hide-mobile" style={{ width: "1px", height: "50px", background: "rgba(138,158,165,0.2)" }} />
-          <Counter value="1"  suffix="hr"  label="UNHURRIED"       visible={statsVis} />
         </div>
       </section>
 
@@ -419,7 +324,6 @@ export default function Home() {
                     EP. {ep.num}
                   </span>
                 </div>
-
                 <div className="p-6 flex flex-col flex-1">
                   <p style={{ ...body, fontWeight: 300, fontSize: "13px", color: "var(--text-muted)", marginBottom: "2px" }}>
                     Sipping with
@@ -457,11 +361,9 @@ export default function Home() {
       {/* ═══ SPONSORS ═══ */}
       <section ref={sponsorRef} className="relative py-20 px-6 md:px-12 lg:px-16 overflow-hidden" style={{ background: "var(--dark)" }}>
         <div className="ct-grain" />
-
         <div className="absolute top-0 right-0 w-1/3 h-full ct-hide-mobile" style={{ opacity: 0.05 }}>
           <img src={IMG.coast} alt="" className="ct-img-cover" />
         </div>
-
         <div className="relative max-w-5xl mx-auto">
           <div className={`ct-reveal ${sponsorVis ? "ct-visible" : ""} text-center mb-14`} style={{ transitionDelay: "0.1s" }}>
             <span style={{ ...label, color: "var(--teal)", display: "block", marginBottom: "12px" }}>OUR PARTNERS</span>
@@ -506,10 +408,8 @@ export default function Home() {
       {/* ═══ BOTTOM CTA ═══ */}
       <section ref={ctaRef} className="relative overflow-hidden" style={{ minHeight: "400px" }}>
         <img src={IMG.accra} alt="Accra coastline" className="absolute top-0 left-0 w-full h-full object-cover" />
-        {/* Single flat dark overlay — no multi-stop gradient */}
         <div className="absolute top-0 left-0 w-full h-full" style={{ background: "rgba(21,42,47,0.82)" }} />
         <div className="ct-grain" style={{ zIndex: 1 }} />
-
         <div
           className={`ct-reveal ${ctaVis ? "ct-visible" : ""} relative flex flex-col items-center justify-center text-center py-24 px-6`}
           style={{ zIndex: 2, transitionDelay: "0.1s" }}
