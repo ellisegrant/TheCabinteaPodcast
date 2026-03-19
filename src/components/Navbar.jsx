@@ -24,57 +24,66 @@ function DropdownMenu({ items, visible }) {
   return (
     <div style={{
       position: "absolute",
-      top: "calc(100% + 12px)",
+      top: "100%",          /* flush against button — no gap */
       left: "50%",
-      transform: "translateX(-50%)",
-      background: "var(--dark-alt)",
-      border: "1px solid rgba(196,164,78,0.2)",
-      borderTop: "2px solid var(--gold)",
-      borderRadius: "3px",
-      minWidth: "190px",
-      padding: "6px 0",
-      opacity: visible ? 1 : 0,
-      pointerEvents: visible ? "auto" : "none",
-      transform: visible
-        ? "translateX(-50%) translateY(0)"
-        : "translateX(-50%) translateY(-8px)",
-      transition: "opacity 0.22s ease, transform 0.22s ease",
       zIndex: 200,
-      boxShadow: "0 12px 32px rgba(0,0,0,0.35)",
+      paddingTop: "8px",   /* invisible bridge replaces the gap */
+      transform: "translateX(-50%)",
+      pointerEvents: visible ? "auto" : "none",
+      opacity: visible ? 1 : 0,
+      transition: "opacity 0.2s ease, transform 0.2s ease",
     }}>
-      {/* Arrow tip */}
       <div style={{
-        position: "absolute",
-        top: "-6px",
-        left: "50%",
-        transform: "translateX(-50%)",
-        width: 0, height: 0,
-        borderLeft: "6px solid transparent",
-        borderRight: "6px solid transparent",
-        borderBottom: "6px solid var(--gold)",
-      }} />
-      {items.map((item) => (
-        <Link
-          key={item.path}
-          to={item.path}
-          style={{
-            ...body,
-            display: "block",
-            padding: "11px 20px",
-            fontSize: "10.5px",
-            letterSpacing: "2px",
-            fontWeight: 400,
-            color: "var(--text-muted)",
-            textDecoration: "none",
-            transition: "color 0.2s, background 0.2s",
-            whiteSpace: "nowrap",
-          }}
-          onMouseEnter={e => { e.currentTarget.style.color = "var(--gold)"; e.currentTarget.style.background = "rgba(196,164,78,0.05)"; }}
-          onMouseLeave={e => { e.currentTarget.style.color = "var(--text-muted)"; e.currentTarget.style.background = "transparent"; }}
-        >
-          {item.label.toUpperCase()}
-        </Link>
-      ))}
+        background: "var(--dark-alt)",
+        border: "1px solid rgba(196,164,78,0.2)",
+        borderTop: "2px solid var(--gold)",
+        borderRadius: "3px",
+        minWidth: "200px",
+        padding: "6px 0",
+        boxShadow: "0 12px 32px rgba(0,0,0,0.4)",
+        transform: visible ? "translateY(0)" : "translateY(-6px)",
+        transition: "transform 0.2s ease",
+      }}>
+        {/* Arrow tip */}
+        <div style={{
+          position: "absolute",
+          top: "2px",
+          left: "50%",
+          transform: "translateX(-50%)",
+          width: 0, height: 0,
+          borderLeft: "6px solid transparent",
+          borderRight: "6px solid transparent",
+          borderBottom: "6px solid var(--gold)",
+        }} />
+        {items.map((item) => (
+          <Link
+            key={item.path}
+            to={item.path}
+            style={{
+              ...body,
+              display: "block",
+              padding: "12px 22px",
+              fontSize: "10.5px",
+              letterSpacing: "2px",
+              fontWeight: 400,
+              color: "var(--text-muted)",
+              textDecoration: "none",
+              transition: "color 0.2s, background 0.2s",
+              whiteSpace: "nowrap",
+            }}
+            onMouseEnter={e => {
+              e.currentTarget.style.color = "var(--gold)";
+              e.currentTarget.style.background = "rgba(196,164,78,0.05)";
+            }}
+            onMouseLeave={e => {
+              e.currentTarget.style.color = "var(--text-muted)";
+              e.currentTarget.style.background = "transparent";
+            }}
+          >
+            {item.label.toUpperCase()}
+          </Link>
+        ))}
+      </div>
     </div>
   );
 }
@@ -84,22 +93,21 @@ export default function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [aboutOpen, setAboutOpen]   = useState(false);
   const [mobileAboutOpen, setMobileAboutOpen] = useState(false);
-  const dropdownRef = useRef(null);
+  const closeTimer = useRef(null);
 
   const isAboutActive = location.pathname.startsWith("/about");
 
-  // Close dropdown on outside click
-  useEffect(() => {
-    const handler = (e) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(e.target)) {
-        setAboutOpen(false);
-      }
-    };
-    document.addEventListener("mousedown", handler);
-    return () => document.removeEventListener("mousedown", handler);
-  }, []);
+  const openDropdown  = () => {
+    clearTimeout(closeTimer.current);
+    setAboutOpen(true);
+  };
 
-  // Close mobile menu on route change
+  /* 150ms delay before closing — gives the mouse time to travel into the menu */
+  const closeDropdown = () => {
+    closeTimer.current = setTimeout(() => setAboutOpen(false), 150);
+  };
+
+  useEffect(() => () => clearTimeout(closeTimer.current), []);
   useEffect(() => { setMobileOpen(false); setAboutOpen(false); }, [location.pathname]);
 
   return (
@@ -130,13 +138,11 @@ export default function Navbar() {
               return (
                 <div
                   key={item.label}
-                  ref={dropdownRef}
                   style={{ position: "relative" }}
-                  onMouseEnter={() => setAboutOpen(true)}
-                  onMouseLeave={() => setAboutOpen(false)}
+                  onMouseEnter={openDropdown}
+                  onMouseLeave={closeDropdown}
                 >
                   <button
-                    onClick={() => setAboutOpen((o) => !o)}
                     style={{
                       ...body,
                       background: "none",
@@ -146,7 +152,7 @@ export default function Navbar() {
                       fontSize: "10.5px",
                       letterSpacing: "2px",
                       fontWeight: 400,
-                      color: isAboutActive ? "var(--gold)" : "var(--text-muted)",
+                      color: isAboutActive || aboutOpen ? "var(--gold)" : "var(--text-muted)",
                       display: "flex",
                       alignItems: "center",
                       gap: "5px",
@@ -155,7 +161,7 @@ export default function Navbar() {
                     }}
                   >
                     {item.label}
-                    {/* Underline when active */}
+                    {/* Active underline */}
                     {isAboutActive && (
                       <span style={{
                         position: "absolute",
@@ -168,11 +174,16 @@ export default function Navbar() {
                     <svg
                       width="8" height="5" viewBox="0 0 8 5" fill="none"
                       stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"
-                      style={{ transition: "transform 0.2s", transform: aboutOpen ? "rotate(180deg)" : "rotate(0deg)" }}
+                      style={{
+                        transition: "transform 0.2s",
+                        transform: aboutOpen ? "rotate(180deg)" : "rotate(0deg)",
+                        flexShrink: 0,
+                      }}
                     >
                       <path d="M1 1l3 3 3-3" />
                     </svg>
                   </button>
+
                   <DropdownMenu items={item.dropdown} visible={aboutOpen} />
                 </div>
               );
@@ -266,7 +277,6 @@ export default function Navbar() {
                       <path d="M1 1l3 3 3-3" />
                     </svg>
                   </button>
-                  {/* Sub-items */}
                   <div style={{
                     overflow: "hidden",
                     maxHeight: mobileAboutOpen ? "120px" : "0px",
