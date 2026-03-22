@@ -8,22 +8,27 @@ import Shop from "./Pages/Shop";
 import CreativeAgency from "./Pages/CreativeAgency";
 import Afrocean from "./Pages/Afrocean";
 import Anchorage from "./Pages/Anchorage";
+import { PlayerProvider } from "./components/EpisodePlayer";
+import CategoryStrip from "./components/CategoryStrip";
 
 function App() {
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/about" element={<About />} />
-        <Route path="/about-host" element={<AboutHost />} />
-        <Route path="/episodes" element={<Episodes />} />
-        <Route path="/partner" element={<Partner />} />
-        <Route path="/shop" element={<Shop />} />
-        <Route path="/creative-agency" element={<CreativeAgency />} />
-        <Route path="/afrocean" element={<Afrocean />} />
-        <Route path="/anchorage" element={<Anchorage />} />
-      </Routes>
-    </BrowserRouter>
+    <PlayerProvider>
+      <BrowserRouter>
+        <CategoryStrip />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/about-host" element={<AboutHost />} />
+          <Route path="/episodes" element={<Episodes />} />
+          <Route path="/partner" element={<Partner />} />
+          <Route path="/shop" element={<Shop />} />
+          <Route path="/creative-agency" element={<CreativeAgency />} />
+          <Route path="/afrocean" element={<Afrocean />} />
+          <Route path="/anchorage" element={<Anchorage />} />
+        </Routes>
+      </BrowserRouter>
+    </PlayerProvider>
   );
 }
 
