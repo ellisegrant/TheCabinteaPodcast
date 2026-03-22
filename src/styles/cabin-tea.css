@@ -1,8 +1,8 @@
 /* ═══ CABIN TEA — Global Styles ═══ */
 
 /* Fonts loaded via index.html:
-   Playfair Display — display / headings
-   Jost             — body / UI
+   Cormorant Garamond — display / headings (weights: 500, 600, 700, italic)
+   DM Sans            — body / UI (weights: 300, 400, 500, 700)
 */
 
 :root {
@@ -17,8 +17,8 @@
   --text-main:   #D6CFC2;
   --text-muted:  #8A9EA5;
 
-  --font-display: 'Playfair Display', Georgia, serif;
-  --font-body:    'Jost', sans-serif;
+  --font-display: 'Cormorant Garamond', 'Cormorant', Georgia, serif;
+  --font-body:    'DM Sans', 'Helvetica Neue', sans-serif;
 }
 
 *, *::before, *::after { box-sizing: border-box; }
@@ -44,8 +44,8 @@ body {
 /* ─── Tailwind font-weight overrides ─── */
 .font-light   { font-weight: 300; }
 .font-medium  { font-weight: 500; }
-.font-bold    { font-weight: 700; }
-.font-black   { font-weight: 800; }
+.font-bold    { font-weight: 600; }
+.font-black   { font-weight: 700; }
 
 ::selection {
   background: rgba(196, 164, 78, 0.3);
