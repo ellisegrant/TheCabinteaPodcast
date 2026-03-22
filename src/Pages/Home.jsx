@@ -145,7 +145,7 @@ export default function Home() {
       <section ref={heroRef} style={{
         minHeight: "100vh", position: "relative", overflow: "hidden",
         display: "flex", flexDirection: "column", justifyContent: "flex-end",
-        padding: "0 0 80px",
+        padding: "0 0 96px",
       }}>
         <video autoPlay muted loop playsInline style={{
           position: "absolute", inset: 0, width: "100%", height: "100%",
