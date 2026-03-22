@@ -31,195 +31,115 @@ export default function Navbar() {
 
   const navLinks = [
     { label: "About", to: "/about" },
-    { label: "Creative Agency", to: "/creative-agency" },
+    { label: "Agency", to: "/creative-agency" },
     { label: "Shop", to: "/shop" },
-    { label: "Partner", to: "/partner" },
   ];
 
   const episodesDropdown = [
-    { label: "All Episodes", to: "/episodes", desc: "Browse every conversation" },
+    { label: "All Episodes", to: "/episodes", desc: "Every conversation" },
     { label: "Afrocean", to: "/afrocean", desc: "Diaspora maritime gatherings" },
     { label: "Anchorage", to: "/anchorage", desc: "Maritime media hub" },
   ];
 
+  const isActive = (to) => location.pathname === to;
+
   return (
     <>
-      <nav
-        style={{
-          position: "fixed",
-          top: 0,
-          left: 0,
-          right: 0,
-          zIndex: 100,
-          transition: "background 0.4s, backdrop-filter 0.4s, box-shadow 0.4s",
-          background: scrolled ? "rgba(21,42,47,0.96)" : "transparent",
-          backdropFilter: scrolled ? "blur(14px)" : "none",
-          boxShadow: scrolled ? "0 1px 0 rgba(196,164,78,0.15)" : "none",
-          height: "64px",
-          display: "flex",
-          alignItems: "center",
-          padding: "0 24px",
-        }}
-      >
-        {/* Logo */}
-        <Link
-          to="/"
-          style={{
-            textDecoration: "none",
-            display: "flex",
-            alignItems: "center",
-            gap: "10px",
-            flexShrink: 0,
-          }}
-        >
-          <span
-            style={{
-              fontFamily: "var(--font-display, serif)",
-              fontWeight: 900,
-              fontSize: "22px",
-              color: "white",
-              letterSpacing: "-0.5px",
-            }}
-          >
-            CABIN
-          </span>
-          <span
-            style={{
-              width: "5px",
-              height: "5px",
-              borderRadius: "50%",
-              background: "var(--gold, #c4a44e)",
-              flexShrink: 0,
-            }}
-          />
-          <span
-            style={{
-              fontFamily: "var(--font-serif, serif)",
-              fontStyle: "italic",
-              fontSize: "18px",
-              color: "var(--gold, #c4a44e)",
-              letterSpacing: "1px",
-            }}
-          >
-            TEA
-          </span>
+      <nav style={{
+        position: "fixed",
+        top: 0, left: 0, right: 0,
+        zIndex: 100,
+        height: "64px",
+        display: "flex",
+        alignItems: "center",
+        padding: "0 5vw",
+        transition: "background 0.4s, box-shadow 0.4s",
+        background: scrolled ? "rgba(21,42,47,0.97)" : "transparent",
+        backdropFilter: scrolled ? "blur(16px)" : "none",
+        boxShadow: scrolled ? "0 1px 0 rgba(196,164,78,0.12)" : "none",
+      }}>
+
+        {/* Logo — bold wordmark like AIAC */}
+        <Link to="/" style={{ textDecoration: "none", display: "flex", alignItems: "baseline", gap: "6px", flexShrink: 0 }}>
+          <span style={{
+            fontFamily: "var(--font-display)",
+            fontWeight: 700,
+            fontSize: "20px",
+            color: "white",
+            letterSpacing: "-0.5px",
+            lineHeight: 1,
+          }}>Cabin</span>
+          <span style={{
+            fontFamily: "var(--font-display)",
+            fontWeight: 700,
+            fontStyle: "italic",
+            fontSize: "20px",
+            color: "var(--gold)",
+            letterSpacing: "0px",
+            lineHeight: 1,
+          }}>Tea</span>
         </Link>
 
-        {/* Desktop nav */}
-        <div
-          style={{
-            display: "flex",
-            alignItems: "center",
-            gap: "36px",
-            marginLeft: "auto",
-            marginRight: "32px",
-          }}
-          className="ct-desktop-nav"
-        >
+        {/* Desktop links — center */}
+        <div style={{
+          display: "flex", alignItems: "center", gap: "32px",
+          marginLeft: "auto", marginRight: "32px",
+        }} className="ct-desktop-nav">
+
           {/* Episodes dropdown */}
           <div ref={dropdownRef} style={{ position: "relative" }}>
-            <button
-              onClick={() => setEpisodesOpen((v) => !v)}
-              style={{
-                background: "none",
-                border: "none",
-                cursor: "pointer",
-                display: "flex",
-                alignItems: "center",
-                gap: "5px",
-                fontSize: "11px",
-                letterSpacing: "2px",
-                fontWeight: 500,
-                color: episodesOpen ? "var(--gold, #c4a44e)" : "rgba(255,255,255,0.7)",
-                transition: "color 0.2s",
-                padding: 0,
-                fontFamily: "inherit",
-              }}
+            <button onClick={() => setEpisodesOpen(v => !v)} style={{
+              background: "none", border: "none", cursor: "pointer",
+              display: "flex", alignItems: "center", gap: "4px",
+              fontSize: "12px", letterSpacing: "0.5px", fontWeight: 400,
+              color: episodesOpen ? "white" : "rgba(214,207,194,0.55)",
+              transition: "color 0.2s", padding: 0, fontFamily: "inherit",
+            }}
+              onMouseEnter={e => e.currentTarget.style.color = "white"}
+              onMouseLeave={e => { if (!episodesOpen) e.currentTarget.style.color = "rgba(214,207,194,0.55)"; }}
             >
-              EPISODES
-              <svg
-                width="10"
-                height="6"
-                viewBox="0 0 10 6"
-                fill="none"
-                style={{
-                  transition: "transform 0.25s",
-                  transform: episodesOpen ? "rotate(180deg)" : "rotate(0deg)",
-                  opacity: 0.6,
-                }}
-              >
-                <path d="M1 1l4 4 4-4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+              Episodes
+              <svg width="9" height="5" viewBox="0 0 10 6" fill="none" style={{
+                transition: "transform 0.2s",
+                transform: episodesOpen ? "rotate(180deg)" : "none",
+                opacity: 0.5,
+              }}>
+                <path d="M1 1l4 4 4-4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
               </svg>
             </button>
 
-            {/* Dropdown panel */}
-            <div
-              style={{
-                position: "absolute",
-                top: "calc(100% + 18px)",
-                left: "50%",
-                transform: "translateX(-50%)",
-                background: "rgba(21,42,47,0.98)",
-                border: "1px solid rgba(196,164,78,0.2)",
-                borderRadius: "10px",
-                padding: "8px",
-                minWidth: "220px",
-                boxShadow: "0 16px 40px rgba(0,0,0,0.4)",
-                opacity: episodesOpen ? 1 : 0,
-                pointerEvents: episodesOpen ? "all" : "none",
-                transform: episodesOpen
-                  ? "translateX(-50%) translateY(0)"
-                  : "translateX(-50%) translateY(-8px)",
-                transition: "opacity 0.2s, transform 0.2s",
-              }}
-            >
-              {/* gold top accent */}
-              <div
-                style={{
-                  position: "absolute",
-                  top: 0,
-                  left: "20px",
-                  right: "20px",
-                  height: "2px",
-                  background: "var(--gold, #c4a44e)",
-                  borderRadius: "0 0 2px 2px",
+            {/* Dropdown */}
+            <div style={{
+              position: "absolute",
+              top: "calc(100% + 16px)",
+              left: "50%",
+              background: "rgba(18,36,40,0.99)",
+              border: "1px solid rgba(196,164,78,0.18)",
+              borderTop: "2px solid var(--gold)",
+              borderRadius: "4px",
+              padding: "6px",
+              minWidth: "210px",
+              boxShadow: "0 20px 48px rgba(0,0,0,0.5)",
+              opacity: episodesOpen ? 1 : 0,
+              pointerEvents: episodesOpen ? "all" : "none",
+              transform: episodesOpen
+                ? "translateX(-50%) translateY(0)"
+                : "translateX(-50%) translateY(-6px)",
+              transition: "opacity 0.18s, transform 0.18s",
+            }}>
+              {episodesDropdown.map(item => (
+                <Link key={item.to} to={item.to} style={{
+                  display: "block", padding: "10px 14px",
+                  borderRadius: "3px", textDecoration: "none",
+                  transition: "background 0.12s",
                 }}
-              />
-              {episodesDropdown.map((item) => (
-                <Link
-                  key={item.to}
-                  to={item.to}
-                  style={{
-                    display: "block",
-                    padding: "11px 14px",
-                    borderRadius: "7px",
-                    textDecoration: "none",
-                    transition: "background 0.15s",
-                  }}
-                  onMouseEnter={(e) => (e.currentTarget.style.background = "rgba(196,164,78,0.08)")}
-                  onMouseLeave={(e) => (e.currentTarget.style.background = "transparent")}
+                  onMouseEnter={e => e.currentTarget.style.background = "rgba(196,164,78,0.07)"}
+                  onMouseLeave={e => e.currentTarget.style.background = "transparent"}
                 >
-                  <span
-                    style={{
-                      display: "block",
-                      fontSize: "12px",
-                      fontWeight: 600,
-                      letterSpacing: "1.5px",
-                      color: "white",
-                      marginBottom: "2px",
-                    }}
-                  >
-                    {item.label.toUpperCase()}
+                  <span style={{ display: "block", fontSize: "12px", fontWeight: 500, color: "white", marginBottom: "2px" }}>
+                    {item.label}
                   </span>
-                  <span
-                    style={{
-                      display: "block",
-                      fontSize: "12px",
-                      color: "rgba(214,207,194,0.5)",
-                      fontFamily: "var(--font-serif, serif)",
-                      fontStyle: "italic",
-                    }}
-                  >
+                  <span style={{ display: "block", fontSize: "11px", color: "rgba(214,207,194,0.4)", fontFamily: "var(--font-display)", fontStyle: "italic" }}>
                     {item.desc}
                   </span>
                 </Link>
@@ -227,158 +147,99 @@ export default function Navbar() {
             </div>
           </div>
 
-          {navLinks.map((link) => (
-            <Link
-              key={link.to}
-              to={link.to}
-              style={{
-                textDecoration: "none",
-                fontSize: "11px",
-                letterSpacing: "2px",
-                fontWeight: 500,
-                color:
-                  location.pathname === link.to
-                    ? "var(--gold, #c4a44e)"
-                    : "rgba(255,255,255,0.7)",
-                transition: "color 0.2s",
-              }}
-              onMouseEnter={(e) => (e.currentTarget.style.color = "white")}
-              onMouseLeave={(e) =>
-                (e.currentTarget.style.color =
-                  location.pathname === link.to
-                    ? "var(--gold, #c4a44e)"
-                    : "rgba(255,255,255,0.7)")
-              }
+          {navLinks.map(link => (
+            <Link key={link.to} to={link.to} style={{
+              textDecoration: "none",
+              fontSize: "12px", letterSpacing: "0.5px", fontWeight: 400,
+              color: isActive(link.to) ? "white" : "rgba(214,207,194,0.55)",
+              transition: "color 0.2s",
+              borderBottom: isActive(link.to) ? "1px solid rgba(196,164,78,0.6)" : "1px solid transparent",
+              paddingBottom: "1px",
+            }}
+              onMouseEnter={e => e.currentTarget.style.color = "white"}
+              onMouseLeave={e => e.currentTarget.style.color = isActive(link.to) ? "white" : "rgba(214,207,194,0.55)"}
             >
-              {link.label.toUpperCase()}
+              {link.label}
             </Link>
           ))}
         </div>
 
-        {/* CTA */}
-        <Link
-          to="/partner"
-          className="ct-desktop-nav"
-          style={{
-            textDecoration: "none",
-            fontSize: "10px",
-            letterSpacing: "2.5px",
-            fontWeight: 600,
-            color: "var(--dark, #152a2f)",
-            background: "var(--gold, #c4a44e)",
-            padding: "9px 20px",
-            borderRadius: "3px",
-            flexShrink: 0,
-            transition: "opacity 0.2s",
-          }}
-          onMouseEnter={(e) => (e.currentTarget.style.opacity = "0.85")}
-          onMouseLeave={(e) => (e.currentTarget.style.opacity = "1")}
+        {/* Partner CTA */}
+        <Link to="/partner" className="ct-desktop-nav" style={{
+          textDecoration: "none",
+          fontSize: "10px", letterSpacing: "2px", fontWeight: 600,
+          color: "var(--dark)",
+          background: "var(--gold)",
+          padding: "8px 18px",
+          borderRadius: "2px",
+          flexShrink: 0,
+          transition: "opacity 0.2s",
+        }}
+          onMouseEnter={e => e.currentTarget.style.opacity = "0.85"}
+          onMouseLeave={e => e.currentTarget.style.opacity = "1"}
         >
           PARTNER
         </Link>
 
         {/* Mobile hamburger */}
-        <button
-          className="ct-mobile-nav"
-          onClick={() => setMenuOpen((v) => !v)}
-          style={{
-            marginLeft: "auto",
-            background: "none",
-            border: "none",
-            cursor: "pointer",
-            padding: "6px",
-            display: "flex",
-            flexDirection: "column",
-            gap: "5px",
-          }}
-        >
-          {[0, 1, 2].map((i) => (
-            <span
-              key={i}
-              style={{
-                display: "block",
-                width: i === 1 ? "18px" : "24px",
-                height: "1.5px",
-                background: "white",
-                transition: "width 0.2s",
-              }}
-            />
-          ))}
+        <button className="ct-mobile-nav" onClick={() => setMenuOpen(v => !v)} style={{
+          marginLeft: "auto", background: "none", border: "none",
+          cursor: "pointer", padding: "6px",
+          display: "flex", flexDirection: "column", gap: "5px",
+        }}>
+          <span style={{ display: "block", width: menuOpen ? "24px" : "24px", height: "1.5px", background: "white", transition: "all 0.2s", transform: menuOpen ? "rotate(45deg) translateY(6.5px)" : "none" }} />
+          <span style={{ display: "block", width: "18px", height: "1.5px", background: "white", transition: "all 0.2s", opacity: menuOpen ? 0 : 1 }} />
+          <span style={{ display: "block", width: "24px", height: "1.5px", background: "white", transition: "all 0.2s", transform: menuOpen ? "rotate(-45deg) translateY(-6.5px)" : "none" }} />
         </button>
       </nav>
 
-      {/* Mobile menu */}
-      <div
-        className="ct-mobile-nav"
-        style={{
-          position: "fixed",
-          top: "64px",
-          left: 0,
-          right: 0,
-          bottom: 0,
-          zIndex: 99,
-          background: "rgba(21,42,47,0.98)",
-          backdropFilter: "blur(14px)",
-          padding: "32px 24px",
-          display: "flex",
-          flexDirection: "column",
-          gap: "4px",
-          opacity: menuOpen ? 1 : 0,
-          pointerEvents: menuOpen ? "all" : "none",
-          transform: menuOpen ? "translateY(0)" : "translateY(-10px)",
-          transition: "opacity 0.25s, transform 0.25s",
-        }}
-      >
-        {/* Episodes heading in mobile */}
-        <p
-          style={{
-            fontSize: "10px",
-            letterSpacing: "3px",
-            color: "var(--teal, #2c8c7c)",
-            marginBottom: "4px",
-            marginTop: "8px",
+      {/* Mobile fullscreen menu */}
+      <div className="ct-mobile-nav" style={{
+        position: "fixed", top: "64px", left: 0, right: 0, bottom: 0,
+        zIndex: 99, background: "rgba(18,36,40,0.99)",
+        backdropFilter: "blur(20px)",
+        padding: "40px 5vw 32px",
+        display: "flex", flexDirection: "column",
+        opacity: menuOpen ? 1 : 0,
+        pointerEvents: menuOpen ? "all" : "none",
+        transform: menuOpen ? "translateY(0)" : "translateY(-8px)",
+        transition: "opacity 0.25s, transform 0.25s",
+      }}>
+        {/* Category label */}
+        <span style={{ fontSize: "9px", letterSpacing: "3px", color: "var(--teal)", marginBottom: "8px" }}>EPISODES</span>
+        {episodesDropdown.map((item, i) => (
+          <Link key={item.to} to={item.to} style={{
+            textDecoration: "none",
+            fontFamily: "var(--font-display)",
+            fontSize: "clamp(28px, 7vw, 40px)",
+            fontWeight: 700, color: "white",
+            padding: "10px 0",
+            borderBottom: "1px solid rgba(255,255,255,0.06)",
+            letterSpacing: "-0.5px",
+            transition: "color 0.2s",
           }}
-        >
-          EPISODES
-        </p>
-        {episodesDropdown.map((item) => (
-          <Link
-            key={item.to}
-            to={item.to}
-            style={{
-              textDecoration: "none",
-              fontSize: "28px",
-              fontFamily: "var(--font-display, serif)",
-              fontWeight: 700,
-              color: "white",
-              letterSpacing: "-0.5px",
-              padding: "6px 0",
-              borderBottom: "1px solid rgba(255,255,255,0.06)",
-            }}
-          >
-            {item.label}
-          </Link>
+            onMouseEnter={e => e.currentTarget.style.color = "var(--gold)"}
+            onMouseLeave={e => e.currentTarget.style.color = "white"}
+          >{item.label}</Link>
         ))}
 
-        <div style={{ height: "16px" }} />
+        <div style={{ height: "24px" }} />
+        <span style={{ fontSize: "9px", letterSpacing: "3px", color: "var(--teal)", marginBottom: "8px" }}>NAVIGATE</span>
 
-        {navLinks.map((link) => (
-          <Link
-            key={link.to}
-            to={link.to}
-            style={{
-              textDecoration: "none",
-              fontSize: "28px",
-              fontFamily: "var(--font-display, serif)",
-              fontWeight: 700,
-              color: "white",
-              letterSpacing: "-0.5px",
-              padding: "6px 0",
-              borderBottom: "1px solid rgba(255,255,255,0.06)",
-            }}
-          >
-            {link.label}
-          </Link>
+        {[...navLinks, { label: "Partner", to: "/partner" }].map(link => (
+          <Link key={link.to} to={link.to} style={{
+            textDecoration: "none",
+            fontFamily: "var(--font-display)",
+            fontSize: "clamp(28px, 7vw, 40px)",
+            fontWeight: 700, color: "white",
+            padding: "10px 0",
+            borderBottom: "1px solid rgba(255,255,255,0.06)",
+            letterSpacing: "-0.5px",
+            transition: "color 0.2s",
+          }}
+            onMouseEnter={e => e.currentTarget.style.color = "var(--gold)"}
+            onMouseLeave={e => e.currentTarget.style.color = "white"}
+          >{link.label}</Link>
         ))}
       </div>
 
