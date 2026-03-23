@@ -118,13 +118,13 @@ const GOLD   = "#C4A44E";
 
 /* ── Local image paths — drop files into /public/images/anchorage/ ── */
 const IMGS = {
-  hero:      "/images/anchorage/hero.jpg",       /* Hero background — media/broadcast feel   */
-  community: "/images/anchorage/community.jpg",  /* African community media / storytelling   */
+  hero:      "/maritimeheritage.jpg",       /* Hero background — media/broadcast feel   */
+  community: "/stortelling.jpg",  /* African community media / storytelling   */
   digital:   "/images/anchorage/digital.jpg",    /* Digital platform / screen / tech         */
-  culture:   "/images/anchorage/culture.jpg",    /* African cultural content                 */
-  people:    "/images/anchorage/people.jpg",     /* Diaspora people engaging with content    */
-  coastal:   "/images/anchorage/coastal.jpg",    /* African coastal / maritime               */
-  cta:       "/images/anchorage/cta.jpg",        /* CTA background                           */
+  culture:   "/flagwoman.jpg",    /* African cultural content                 */
+  people:    "/festival.jpg",     /* Diaspora people engaging with content    */
+  coastal:   "/fisherman.jpg",    /* African coastal / maritime               */
+  cta:       "/maritimeheritage.jpg",        /* CTA background                           */
 };
 
 const features = [
