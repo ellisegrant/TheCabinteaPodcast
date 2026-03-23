@@ -98,7 +98,7 @@ export default function Navbar() {
               onMouseEnter={e => e.currentTarget.style.color = "white"}
               onMouseLeave={e => { if (!episodesOpen) e.currentTarget.style.color = "rgba(214,207,194,0.55)"; }}
             >
-              Episodes
+              Our Works
               <svg width="9" height="5" viewBox="0 0 10 6" fill="none" style={{
                 transition: "transform 0.2s",
                 transform: episodesOpen ? "rotate(180deg)" : "none",
