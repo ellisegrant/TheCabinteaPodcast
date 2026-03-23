@@ -128,11 +128,11 @@ const IMGS = {
   fishermen: "/dis1.jpg",  /* Indigenous coastal community  */
   culture1:  "/dis2.jpg",   /* African traditional dress     */
   diaspora1: "/africandrum.jpg",  /* Diaspora gathering            */
-  market:    "/images/afrocean/market.jpg",     /* African market / community    */
-  harbour:   "/images/afrocean/harbour.jpg",    /* Coastal / harbour             */
-  attire:    "/images/afrocean/attire.jpg",     /* Traditional attire            */
-  youth:     "/images/afrocean/youth.jpg",      /* African youth community       */
-  cta:       "/images/afrocean/cta.jpg",        /* CTA section background        */
+  market:    "/africanmask1.jpg",     /* African market / community    */
+  harbour:   "/africanmask2.jpg",    /* Coastal / harbour             */
+  attire:    "/afrique.jpg",     /* Traditional attire            */
+  youth:     "/afrique3.jpg",      /* African youth community       */
+  cta:       "/cabin.jpg",        /* CTA section background        */
 };
 
 const pillars = [
