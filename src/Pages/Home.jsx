@@ -294,11 +294,10 @@ export default function Home() {
           }}>
             <source src="/herovideo.mp4" type="video/mp4" />
           </video>
-          {/* Warm earth overlay — not cold */}
-          <div style={{ position: "absolute", inset: 0, zIndex: 1, background: `linear-gradient(to top, ${EARTH} 0%, rgba(42,26,14,0.82) 40%, rgba(42,26,14,0.25) 100%)` }} />
-          <div style={{ position: "absolute", inset: 0, zIndex: 1, background: `linear-gradient(110deg, rgba(42,26,14,0.95) 38%, transparent 68%)` }} />
-          {/* Warm terracotta glow */}
-          <div style={{ position: "absolute", inset: 0, zIndex: 1, background: `radial-gradient(ellipse at 72% 40%, rgba(181,84,30,0.12) 0%, transparent 55%)` }} />
+          {/* Bottom-only overlay — text stays readable, video breathes */}
+          <div style={{ position: "absolute", inset: 0, zIndex: 1, background: `linear-gradient(to top, ${EARTH} 0%, rgba(42,26,14,0.7) 35%, rgba(42,26,14,0.1) 65%, transparent 100%)` }} />
+          {/* Subtle left vignette for text legibility only */}
+          <div style={{ position: "absolute", inset: 0, zIndex: 1, background: `linear-gradient(to right, rgba(42,26,14,0.5) 0%, transparent 50%)` }} />
         </div>
 
         <WaxBg opacity={0.04} color={GOLD} />
