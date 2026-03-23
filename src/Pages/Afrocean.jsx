@@ -122,26 +122,17 @@ const EARTH = "#2A1A0E";
 const WARM  = "#1E2D1A";
 const OCHRE = "#C4870A";
 
-/* ── Images: real African people, indigenous culture, Diaspora community ── */
+/* ── Images: drop your files into /public/images/afrocean/ ── */
 const IMGS = {
-  /* Hero — vibrant African festival / cultural gathering */
-  hero:      "https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=1600&q=85",
-  /* Indigenous African coastal community */
-  fishermen: "https://images.unsplash.com/photo-1596524430615-b46475ddff6e?w=900&q=80",
-  /* African women in traditional dress */
-  culture1:  "https://images.unsplash.com/photo-1607990281513-2c110a25bd8c?w=900&q=80",
-  /* Diaspora gathering / community */
-  diaspora1: "https://images.unsplash.com/photo-1531206715517-5c0ba140b2b8?w=900&q=80",
-  /* African market / community */
-  market:    "https://images.unsplash.com/photo-1519677100203-a0e668c92439?w=900&q=80",
-  /* African coastal / harbour */
-  harbour:   "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=900&q=80",
-  /* Traditional African attire */
-  attire:    "https://images.unsplash.com/photo-1489424731084-a5d8b219a5bb?w=900&q=80",
-  /* African youth community */
-  youth:     "https://images.unsplash.com/photo-1504439904031-93ded9f93e4e?w=900&q=80",
-  /* CTA background */
-  cta:       "https://images.unsplash.com/photo-1523805009345-7448845a9e53?w=1600&q=80",
+  hero:      "/handshero.jpg",       /* Hero — full screen background */
+  fishermen: "/dis1.jpg",  /* Indigenous coastal community  */
+  culture1:  "/dis2.jpg",   /* African traditional dress     */
+  diaspora1: "/africandrum.jpg",  /* Diaspora gathering            */
+  market:    "/images/afrocean/market.jpg",     /* African market / community    */
+  harbour:   "/images/afrocean/harbour.jpg",    /* Coastal / harbour             */
+  attire:    "/images/afrocean/attire.jpg",     /* Traditional attire            */
+  youth:     "/images/afrocean/youth.jpg",      /* African youth community       */
+  cta:       "/images/afrocean/cta.jpg",        /* CTA section background        */
 };
 
 const pillars = [
