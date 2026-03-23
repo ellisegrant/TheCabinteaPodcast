@@ -116,18 +116,18 @@ const DEEP  = "#152A2F";
    LOCAL IMAGES — drop into /public/images/home/
 ═══════════════════════════════════════════════════ */
 const IMGS = {
-  hero:      "/images/home/hero.jpg",          /* Full screen — African cultural energy     */
-  people1:   "/images/home/people1.jpg",       /* Polaroid 1 — Diaspora community           */
-  people2:   "/images/home/people2.jpg",       /* Polaroid 2 — African gathering            */
-  people3:   "/images/home/people3.jpg",       /* Polaroid 3 — Cultural attire / roots      */
-  mission:   "/images/home/mission.jpg",       /* Mission split section — left image        */
-  afrocean:  "/images/home/afrocean.jpg",      /* Afrocean event card                       */
-  anchorage: "/images/home/anchorage.jpg",     /* Anchorage media hub card                  */
-  agency:    "/images/home/agency.jpg",        /* Creative Agency section image             */
-  mosaic1:   "/images/home/mosaic1.jpg",       /* Mosaic row — community                    */
-  mosaic2:   "/images/home/mosaic2.jpg",       /* Mosaic row — indigenous culture           */
-  mosaic3:   "/images/home/mosaic3.jpg",       /* Mosaic row — maritime / coastal           */
-  cta:       "/images/home/cta.jpg",           /* CTA background                            */
+  hero:      "/podcast.jpg",          /* Full screen — African cultural energy     */
+  people1:   "/africatotheworld.jpg",       /* Polaroid 1 — Diaspora community           */
+  people2:   "/people1.jpg",       /* Polaroid 2 — African gathering            */
+  people3:   "/festival.jpg",       /* Polaroid 3 — Cultural attire / roots      */
+  mission:   "/stortelling.jpg",       /* Mission split section — left image        */
+  afrocean:  "/africanface.jpg",      /* Afrocean event card                       */
+  anchorage: "/fisherman.jpg",     /* Anchorage media hub card                  */
+  agency:    "/creativeagency.jpg",        /* Creative Agency section image             */
+  mosaic1:   "/flagwoman.jpg",       /* Mosaic row — community                    */
+  mosaic2:   "/africanwomen.jpg",       /* Mosaic row — indigenous culture           */
+  mosaic3:   "/ship.jpg",       /* Mosaic row — maritime / coastal           */
+  cta:       "/maritimeheritage.jpg",           /* CTA background                            */
 };
 
 /* ═══════════════════════════════════════════════════
