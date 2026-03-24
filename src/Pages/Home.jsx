@@ -110,7 +110,7 @@ const IMGS = {
   agency:    "/creativeagency.jpg",
   mosaic1:   "/flagwoman.jpg",
   mosaic2:   "/africanwomen.jpg",
-  mosaic3:   "/ship.jpg",
+  mosaic3:   "/tech.jpg",
   cta:       "/maritimeheritage.jpg",
 };
 
