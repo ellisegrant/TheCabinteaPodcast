@@ -17,11 +17,6 @@ function useReveal(threshold = 0.1) {
   return [ref, visible];
 }
 
-/* ═══════════════════════════════════════════════════
-   ADINKRA SYMBOLS
-═══════════════════════════════════════════════════ */
-
-/* Sankofa — "Go back and get it" — Diaspora & roots */
 function Sankofa({ size = 56, color = "currentColor" }) {
   return (
     <svg width={size} height={size} viewBox="0 0 100 100" fill="none">
@@ -37,7 +32,6 @@ function Sankofa({ size = 56, color = "currentColor" }) {
   );
 }
 
-/* Adinkrahene — authority, leadership, greatness */
 function Adinkrahene({ size = 56, color = "currentColor" }) {
   return (
     <svg width={size} height={size} viewBox="0 0 100 100" fill="none">
@@ -49,7 +43,6 @@ function Adinkrahene({ size = 56, color = "currentColor" }) {
   );
 }
 
-/* Funtunfunefu — unity in diversity */
 function Funtunfunefu({ size = 56, color = "currentColor" }) {
   return (
     <svg width={size} height={size} viewBox="0 0 100 100" fill="none">
@@ -61,10 +54,6 @@ function Funtunfunefu({ size = 56, color = "currentColor" }) {
     </svg>
   );
 }
-
-/* ═══════════════════════════════════════════════════
-   DESIGN SYSTEM COMPONENTS
-═══════════════════════════════════════════════════ */
 
 function WaxBg({ opacity = 0.05, color = "#C4A44E" }) {
   const id = `wax-${Math.random().toString(36).substr(2, 5)}`;
@@ -102,9 +91,6 @@ function TextileBand() {
   );
 }
 
-/* ═══════════════════════════════════════════════════
-   PALETTE
-═══════════════════════════════════════════════════ */
 const EARTH = "#2A1A0E";
 const WARM  = "#1E2D1A";
 const TERRA = "#B5541E";
@@ -112,27 +98,22 @@ const GOLD  = "#C4A44E";
 const TEAL  = "#2C8C7C";
 const DEEP  = "#152A2F";
 
-/* ═══════════════════════════════════════════════════
-   LOCAL IMAGES — drop into /public/images/home/
-═══════════════════════════════════════════════════ */
+/* ── exact image paths from user's code ── */
 const IMGS = {
-  hero:      "/images/home/hero.jpg",          /* Full screen — African cultural energy     */
-  people1:   "/images/home/people1.jpg",       /* Polaroid 1 — Diaspora community           */
-  people2:   "/images/home/people2.jpg",       /* Polaroid 2 — African gathering            */
-  people3:   "/images/home/people3.jpg",       /* Polaroid 3 — Cultural attire / roots      */
-  mission:   "/images/home/mission.jpg",       /* Mission split section — left image        */
-  afrocean:  "/images/home/afrocean.jpg",      /* Afrocean event card                       */
-  anchorage: "/images/home/anchorage.jpg",     /* Anchorage media hub card                  */
-  agency:    "/images/home/agency.jpg",        /* Creative Agency section image             */
-  mosaic1:   "/images/home/mosaic1.jpg",       /* Mosaic row — community                    */
-  mosaic2:   "/images/home/mosaic2.jpg",       /* Mosaic row — indigenous culture           */
-  mosaic3:   "/images/home/mosaic3.jpg",       /* Mosaic row — maritime / coastal           */
-  cta:       "/images/home/cta.jpg",           /* CTA background                            */
+  hero:      "/podcast.jpg",
+  people1:   "/africatotheworld.jpg",
+  people2:   "/people1.jpg",
+  people3:   "/festival.jpg",
+  mission:   "/stortelling.jpg",
+  afrocean:  "/africanface.jpg",
+  anchorage: "/fisherman.jpg",
+  agency:    "/creativeagency.jpg",
+  mosaic1:   "/flagwoman.jpg",
+  mosaic2:   "/africanwomen.jpg",
+  mosaic3:   "/ship.jpg",
+  cta:       "/maritimeheritage.jpg",
 };
 
-/* ═══════════════════════════════════════════════════
-   PLATFORM ICONS
-═══════════════════════════════════════════════════ */
 function SpotifyIcon() {
   return <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/></svg>;
 }
@@ -143,9 +124,6 @@ function YoutubeIcon() {
   return <svg width="24" height="17" viewBox="0 0 26 18" fill="currentColor"><path d="M25.456 2.818A3.26 3.26 0 0023.162.51C21.13 0 13 0 13 0S4.87 0 2.838.51A3.26 3.26 0 00.544 2.818C0 4.862 0 9 0 9s0 4.138.544 6.182a3.26 3.26 0 002.294 2.308C4.87 18 13 18 13 18s8.13 0 10.162-.51a3.26 3.26 0 002.294-2.308C26 13.138 26 9 26 9s0-4.138-.544-6.182zM10.4 12.857V5.143L17.143 9 10.4 12.857z"/></svg>;
 }
 
-/* ═══════════════════════════════════════════════════
-   MARQUEE TICKER
-═══════════════════════════════════════════════════ */
 function Marquee() {
   const items = [
     "AFRICAN DIASPORA", "MARITIME CULTURE", "BLUE ECONOMY",
@@ -174,9 +152,6 @@ function Marquee() {
   );
 }
 
-/* ═══════════════════════════════════════════════════
-   EVENT CARD — cultural design treatment
-═══════════════════════════════════════════════════ */
 function EventCard({ name, tag, tagBg, tagColor, description, image, to, index, visible, accentColor }) {
   const [hovered, setHovered] = useState(false);
   return (
@@ -195,14 +170,11 @@ function EventCard({ name, tag, tagBg, tagColor, description, image, to, index, 
         position: "relative",
       }}
     >
-      {/* Top accent stripe — textile band mini */}
       <div style={{ display: "flex", height: "4px", width: "100%", overflow: "hidden" }}>
         {[accentColor, TEAL, GOLD, accentColor, TEAL].map((c, i) => (
           <div key={i} style={{ flex: 1, background: c }} />
         ))}
       </div>
-
-      {/* Image */}
       <div style={{ position: "relative", height: "260px", overflow: "hidden", flexShrink: 0 }}>
         <img src={image} alt={name} style={{
           width: "100%", height: "100%", objectFit: "cover",
@@ -216,8 +188,6 @@ function EventCard({ name, tag, tagBg, tagColor, description, image, to, index, 
           color: tagColor, background: tagBg, padding: "5px 13px",
         }}>{tag}</span>
       </div>
-
-      {/* Content */}
       <div style={{
         padding: "36px 36px 40px", background: EARTH,
         flex: 1, display: "flex", flexDirection: "column",
@@ -264,17 +234,23 @@ function EventCard({ name, tag, tagBg, tagColor, description, image, to, index, 
 
 /* ═══════════════════════════════════════════════════
    CULTURE CAROUSEL
+   4 slides using the existing image paths exactly
+   mosaic1 = /flagwoman.jpg    → Community
+   mosaic2 = /africanwomen.jpg → Industry
+   mosaic3 = /ship.jpg         → Tech & Innovation
+   cta     = /maritimeheritage.jpg → Maritime Heritage
 ═══════════════════════════════════════════════════ */
 const SLIDES = [
-  { src: IMGS.mosaic1, label: "Community",              sub: "The People"       },
-  { src: IMGS.mosaic2, label: "Industry, Tech & Innovation", sub: "African Future"   },
-  { src: IMGS.mosaic3, label: "Maritime Heritage",      sub: "The Ocean"        },
+  { src: IMGS.mosaic1, label: "Community",        sub: "The People"         },
+  { src: IMGS.mosaic2, label: "Industry",          sub: "African Enterprise" },
+  { src: IMGS.mosaic3, label: "Tech & Innovation", sub: "The Future"         },
+  { src: IMGS.cta,     label: "Maritime Heritage", sub: "The Ocean"          },
 ];
 
 function CultureCarousel({ mosaicRef, mosaicVis }) {
   const [active, setActive] = useState(0);
-  const [prev, setPrev] = useState(null);
-  const [dir, setDir] = useState(1); /* 1 = forward, -1 = backward */
+  const [prev,   setPrev]   = useState(null);
+  const [dir,    setDir]    = useState(1);
   const timerRef = useRef(null);
 
   const goTo = (idx, direction) => {
@@ -286,20 +262,20 @@ function CultureCarousel({ mosaicRef, mosaicVis }) {
   const next = () => goTo((active + 1) % SLIDES.length, 1);
   const back = () => goTo((active - 1 + SLIDES.length) % SLIDES.length, -1);
 
-  /* Auto-advance every 4s */
+  const resetTimer = () => {
+    clearInterval(timerRef.current);
+    timerRef.current = setInterval(next, 4500);
+  };
+
   useEffect(() => {
-    timerRef.current = setInterval(next, 4000);
+    timerRef.current = setInterval(next, 4500);
     return () => clearInterval(timerRef.current);
   }, [active]);
 
-  const resetTimer = () => {
-    clearInterval(timerRef.current);
-    timerRef.current = setInterval(next, 4000);
-  };
-
   return (
     <section ref={mosaicRef} style={{ background: EARTH, overflow: "hidden", position: "relative" }}>
-      {/* Header row */}
+
+      {/* Header */}
       <div style={{
         display: "flex", alignItems: "center", justifyContent: "space-between",
         padding: "48px 5vw 28px",
@@ -308,49 +284,54 @@ function CultureCarousel({ mosaicRef, mosaicVis }) {
       }}>
         <span style={{ fontSize: "10px", letterSpacing: "4px", color: TERRA }}>THE CULTURE</span>
 
-        {/* Dot indicators */}
-        <div style={{ display: "flex", gap: "10px", alignItems: "center" }}>
+        {/* Dots */}
+        <div style={{ display: "flex", gap: "8px", alignItems: "center" }}>
           {SLIDES.map((_, i) => (
-            <button key={i} onClick={() => { goTo(i, i > active ? 1 : -1); resetTimer(); }}
+            <button key={i}
+              onClick={() => { goTo(i, i > active ? 1 : -1); resetTimer(); }}
               style={{
-                width: i === active ? "28px" : "8px",
-                height: "8px",
+                width: i === active ? "28px" : "8px", height: "8px",
                 borderRadius: "4px",
                 background: i === active ? TERRA : "rgba(181,84,30,0.25)",
                 border: "none", cursor: "pointer", padding: 0,
                 transition: "width 0.35s cubic-bezier(0.16,1,0.3,1), background 0.3s",
-              }} />
+              }}
+            />
           ))}
         </div>
 
-        {/* Arrow controls */}
+        {/* Arrows */}
         <div style={{ display: "flex", gap: "8px" }}>
-          {[{ fn: back, d: "M15 12H3m0 0l5-5m-5 5l5 5" }, { fn: next, d: "M9 12h12m0 0l-5-5m5 5l-5 5" }].map((btn, i) => (
-            <button key={i} onClick={() => { btn.fn(); resetTimer(); }}
+          {[
+            { fn: back, path: "M15 12H3m0 0l5-5m-5 5l5 5" },
+            { fn: next, path: "M9 12h12m0 0l-5-5m5 5l-5 5" },
+          ].map((btn, i) => (
+            <button key={i}
+              onClick={() => { btn.fn(); resetTimer(); }}
               style={{
                 width: "40px", height: "40px",
                 border: `1px solid rgba(181,84,30,0.3)`,
                 background: "transparent", cursor: "pointer",
                 display: "flex", alignItems: "center", justifyContent: "center",
-                transition: "background 0.2s, border-color 0.2s",
                 borderRadius: "2px",
+                transition: "background 0.2s, border-color 0.2s",
               }}
               onMouseEnter={e => { e.currentTarget.style.background = TERRA; e.currentTarget.style.borderColor = TERRA; }}
               onMouseLeave={e => { e.currentTarget.style.background = "transparent"; e.currentTarget.style.borderColor = "rgba(181,84,30,0.3)"; }}
             >
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-                <path d={btn.d} />
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none"
+                stroke="white" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+                <path d={btn.path}/>
               </svg>
             </button>
           ))}
         </div>
       </div>
 
-      {/* Slide viewport */}
+      {/* Viewport */}
       <div style={{
-        position: "relative", height: "420px", overflow: "hidden",
-        opacity: mosaicVis ? 1 : 0,
-        transition: "opacity 0.8s 0.1s",
+        position: "relative", height: "440px", overflow: "hidden",
+        opacity: mosaicVis ? 1 : 0, transition: "opacity 0.8s 0.1s",
       }}>
         {SLIDES.map((slide, i) => {
           const isCurrent = i === active;
@@ -358,26 +339,19 @@ function CultureCarousel({ mosaicRef, mosaicVis }) {
           return (
             <div key={i} style={{
               position: "absolute", inset: 0,
-              transform: isCurrent
-                ? "translateX(0)"
-                : isPrev
-                  ? `translateX(${-dir * 100}%)`
-                  : `translateX(${dir * 100}%)`,
+              transform: isCurrent ? "translateX(0)" : isPrev ? `translateX(${-dir * 100}%)` : `translateX(${dir * 100}%)`,
               opacity: isCurrent ? 1 : isPrev ? 0 : 0,
-              transition: isCurrent || isPrev
-                ? "transform 0.65s cubic-bezier(0.76,0,0.24,1), opacity 0.65s"
-                : "none",
+              transition: (isCurrent || isPrev) ? "transform 0.65s cubic-bezier(0.76,0,0.24,1), opacity 0.65s" : "none",
               zIndex: isCurrent ? 2 : 1,
             }}>
               <img src={slide.src} alt={slide.label}
                 style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} />
 
-              {/* Bottom gradient */}
-              <div style={{ position: "absolute", inset: 0, background: `linear-gradient(to top, ${EARTH} 0%, rgba(42,26,14,0.4) 40%, transparent 70%)` }} />
+              <div style={{ position: "absolute", inset: 0, background: `linear-gradient(to top, ${EARTH} 0%, rgba(42,26,14,0.35) 40%, transparent 70%)` }} />
 
-              {/* Label */}
+              {/* Label + counter */}
               <div style={{
-                position: "absolute", bottom: "0", left: 0, right: 0,
+                position: "absolute", bottom: 0, left: 0, right: 0,
                 padding: "32px 5vw",
                 display: "flex", alignItems: "flex-end", justifyContent: "space-between",
               }}>
@@ -385,7 +359,7 @@ function CultureCarousel({ mosaicRef, mosaicVis }) {
                   <span style={{
                     display: "block",
                     fontFamily: "var(--font-display)", fontWeight: 700,
-                    fontSize: "clamp(28px, 4vw, 52px)",
+                    fontSize: "clamp(28px, 4vw, 56px)",
                     color: "white", lineHeight: 1, letterSpacing: "-1px",
                     transform: isCurrent ? "translateY(0)" : "translateY(16px)",
                     opacity: isCurrent ? 1 : 0,
@@ -399,21 +373,16 @@ function CultureCarousel({ mosaicRef, mosaicVis }) {
                     transition: "transform 0.5s 0.35s, opacity 0.5s 0.35s",
                   }}>{slide.sub.toUpperCase()}</span>
                 </div>
-
-                {/* Slide counter */}
                 <span style={{
                   fontFamily: "var(--font-display)", fontStyle: "italic",
-                  fontSize: "clamp(32px, 5vw, 64px)",
-                  color: "rgba(255,255,255,0.08)", fontWeight: 700,
+                  fontSize: "clamp(40px, 6vw, 80px)",
+                  color: "rgba(255,255,255,0.07)", fontWeight: 700,
                   lineHeight: 1, userSelect: "none",
                 }}>0{i + 1}</span>
               </div>
 
-              {/* Left textile accent strip */}
-              <div style={{
-                position: "absolute", left: 0, top: 0, bottom: 0, width: "4px",
-                display: "flex", flexDirection: "column",
-              }}>
+              {/* Left textile stripe */}
+              <div style={{ position: "absolute", left: 0, top: 0, bottom: 0, width: "4px", display: "flex", flexDirection: "column" }}>
                 {[TERRA, TEAL, GOLD, TERRA, TEAL, GOLD, TERRA].map((c, ci) => (
                   <div key={ci} style={{ flex: 1, background: c }} />
                 ))}
@@ -426,17 +395,12 @@ function CultureCarousel({ mosaicRef, mosaicVis }) {
         <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, height: "3px", background: "rgba(181,84,30,0.15)", zIndex: 10 }}>
           <div key={active} style={{
             height: "100%", background: TERRA,
-            animation: "progress 4s linear forwards",
+            animation: "ctprogress 4.5s linear forwards",
           }} />
         </div>
       </div>
 
-      <style>{`
-        @keyframes progress {
-          from { width: 0%; }
-          to   { width: 100%; }
-        }
-      `}</style>
+      <style>{`@keyframes ctprogress { from { width: 0%; } to { width: 100%; } }`}</style>
     </section>
   );
 }
@@ -457,15 +421,11 @@ export default function Home() {
     <div style={{ minHeight: "100vh", background: DEEP, color: "var(--cream)", overflowX: "hidden" }}>
       <Navbar />
 
-      {/* ══════════════════════════════════════════════════════
-          HERO — cinematic, African cultural energy
-          Warm earth overlays, Sankofa watermark, polaroids
-      ══════════════════════════════════════════════════════ */}
+      {/* ══ HERO ══ */}
       <section ref={heroRef} style={{
         minHeight: "100vh", position: "relative", overflow: "hidden",
         display: "flex", flexDirection: "column", justifyContent: "flex-end",
       }}>
-        {/* Background — video if available, image fallback */}
         <div style={{ position: "absolute", inset: 0 }}>
           <video autoPlay muted loop playsInline style={{
             position: "absolute", inset: 0, width: "100%", height: "100%",
@@ -473,16 +433,11 @@ export default function Home() {
           }}>
             <source src="/herovideo.mp4" type="video/mp4" />
           </video>
-          {/* Bottom-only overlay — text stays readable, video breathes */}
           <div style={{ position: "absolute", inset: 0, zIndex: 1, background: `linear-gradient(to top, ${EARTH} 0%, rgba(42,26,14,0.7) 35%, rgba(42,26,14,0.1) 65%, transparent 100%)` }} />
-          {/* Subtle left vignette for text legibility only */}
           <div style={{ position: "absolute", inset: 0, zIndex: 1, background: `linear-gradient(to right, rgba(42,26,14,0.5) 0%, transparent 50%)` }} />
         </div>
-
         <WaxBg opacity={0.04} color={GOLD} />
         <div className="ct-grain" style={{ zIndex: 2 }} />
-
-        {/* Giant Sankofa watermark */}
         <div style={{
           position: "absolute", top: "100px", right: "3vw", zIndex: 2,
           opacity: heroVis ? 0.09 : 0, transition: "opacity 1.5s 0.5s",
@@ -492,8 +447,6 @@ export default function Home() {
         </div>
 
         <div style={{ position: "relative", zIndex: 3, padding: "80px 5vw 100px" }}>
-
-          {/* Eyebrow — Sankofa proverb */}
           <div style={{
             display: "flex", alignItems: "center", gap: "14px", marginBottom: "32px",
             opacity: heroVis ? 1 : 0, transform: heroVis ? "none" : "translateY(12px)",
@@ -504,8 +457,6 @@ export default function Home() {
               SANKOFA — "GO BACK AND GET IT"
             </span>
           </div>
-
-          {/* Title */}
           <h1 style={{
             fontFamily: "var(--font-display)", fontWeight: 700,
             fontSize: "clamp(72px, 13vw, 180px)",
@@ -523,7 +474,6 @@ export default function Home() {
             transition: "opacity 0.8s 0.3s, transform 0.8s 0.3s",
           }}>TEA</h1>
 
-          {/* Bottom row */}
           <div style={{
             display: "grid", gridTemplateColumns: "minmax(0,1fr) minmax(0,1fr)",
             gap: "60px", alignItems: "end",
@@ -544,8 +494,7 @@ export default function Home() {
                   display: "inline-block", padding: "13px 32px",
                   background: GOLD, color: DEEP,
                   textDecoration: "none", fontSize: "10px",
-                  letterSpacing: "3px", fontWeight: 700,
-                  transition: "opacity 0.2s",
+                  letterSpacing: "3px", fontWeight: 700, transition: "opacity 0.2s",
                 }}
                   onMouseEnter={e => e.currentTarget.style.opacity = "0.85"}
                   onMouseLeave={e => e.currentTarget.style.opacity = "1"}
@@ -561,8 +510,6 @@ export default function Home() {
                   onMouseLeave={e => { e.currentTarget.style.borderColor = "rgba(196,164,78,0.35)"; e.currentTarget.style.color = "rgba(214,207,194,0.75)"; }}
                 >PARTNER WITH US</Link>
               </div>
-
-              {/* Platform links */}
               <div style={{ display: "flex", alignItems: "center", gap: "20px" }}>
                 <span style={{ fontSize: "9px", letterSpacing: "2.5px", color: "rgba(138,158,165,0.5)" }}>LISTEN ON</span>
                 {[<YoutubeIcon/>, <SpotifyIcon/>, <AppleIcon/>].map((icon, i) => (
@@ -574,7 +521,6 @@ export default function Home() {
               </div>
             </div>
 
-            {/* Polaroid mosaic */}
             <div style={{ display: "flex", gap: "10px", justifyContent: "flex-end", alignItems: "flex-end" }}>
               {[
                 { src: IMGS.people1, angle: -3, h: "130px" },
@@ -597,21 +543,12 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Textile divider */}
       <TextileBand />
-
-      {/* ══════════════════════════════════════════════════════
-          MARQUEE TICKER
-      ══════════════════════════════════════════════════════ */}
       <Marquee />
 
-      {/* ══════════════════════════════════════════════════════
-          MISSION — warm split, earthy, real people image
-      ══════════════════════════════════════════════════════ */}
+      {/* ══ MISSION ══ */}
       <section ref={missionRef} style={{ background: EARTH, overflow: "hidden", position: "relative" }}>
         <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", minHeight: "640px" }}>
-
-          {/* Left — image */}
           <div style={{
             position: "relative", overflow: "hidden",
             opacity: missionVis ? 1 : 0, transform: missionVis ? "none" : "translateX(-20px)",
@@ -620,8 +557,6 @@ export default function Home() {
             <img src={IMGS.mission} alt="Cabin Tea community"
               style={{ width: "100%", height: "100%", objectFit: "cover", display: "block", minHeight: "640px" }} />
             <div style={{ position: "absolute", inset: 0, background: `linear-gradient(to right, rgba(42,26,14,0.05), rgba(42,26,14,0.65) 100%)` }} />
-
-            {/* Floating stat */}
             <div style={{
               position: "absolute", bottom: "40px", left: "28px",
               background: TERRA, color: "white", padding: "20px 24px", maxWidth: "220px",
@@ -633,7 +568,6 @@ export default function Home() {
             </div>
           </div>
 
-          {/* Right — mission text */}
           <div style={{
             padding: "80px 5vw 80px 56px",
             display: "flex", flexDirection: "column", justifyContent: "center",
@@ -644,7 +578,6 @@ export default function Home() {
             <WaxBg opacity={0.05} color={GOLD} />
             <div style={{ position: "relative", zIndex: 1 }}>
               <span style={{ fontSize: "10px", letterSpacing: "4px", color: TERRA, display: "block", marginBottom: "20px" }}>WHO WE ARE</span>
-
               <h2 style={{
                 fontFamily: "var(--font-display)", fontWeight: 700,
                 fontSize: "clamp(32px, 4vw, 56px)", lineHeight: 0.95,
@@ -654,12 +587,9 @@ export default function Home() {
                 <span style={{ color: GOLD, fontStyle: "italic" }}>Maritime</span><br />
                 Media Brand.
               </h2>
-
               <p style={{ fontSize: "15px", lineHeight: 1.95, color: "rgba(214,207,194,0.6)", fontWeight: 300, maxWidth: "420px", marginBottom: "32px" }}>
                 A 360° maritime media and industry network built for the African community and Diaspora. Through insight-sharing, community engagement and digital media, we amplify African maritime culture and bring the voices of the Diaspora into the heart of the continent's blue economy conversation.
               </p>
-
-              {/* Service link list */}
               <div style={{ display: "flex", flexDirection: "column", borderTop: `1px solid rgba(181,84,30,0.2)`, paddingTop: "24px" }}>
                 {[
                   { label: "Afrocean", desc: "Diaspora maritime gatherings", to: "/afrocean" },
@@ -689,24 +619,15 @@ export default function Home() {
 
       <TextileBand />
 
-      {/* ══════════════════════════════════════════════════════
-          IMAGE CAROUSEL — African culture strip
-      ══════════════════════════════════════════════════════ */}
+      {/* ══ CULTURE CAROUSEL ══ */}
       <CultureCarousel mosaicRef={mosaicRef} mosaicVis={mosaicVis} />
 
       <TextileBand />
 
-      {/* ══════════════════════════════════════════════════════
-          EVENTS SECTION — Afrocean + Anchorage cards
-      ══════════════════════════════════════════════════════ */}
-      <section ref={epRef} style={{
-        background: WARM, padding: "100px 5vw",
-        position: "relative", overflow: "hidden",
-      }}>
+      {/* ══ EVENTS ══ */}
+      <section ref={epRef} style={{ background: WARM, padding: "100px 5vw", position: "relative", overflow: "hidden" }}>
         <WaxBg opacity={0.05} color={TERRA} />
-
         <div style={{ maxWidth: "1300px", margin: "0 auto", position: "relative", zIndex: 1 }}>
-          {/* Header */}
           <div style={{
             display: "flex", alignItems: "flex-end", justifyContent: "space-between",
             flexWrap: "wrap", gap: "20px", marginBottom: "64px",
@@ -714,9 +635,7 @@ export default function Home() {
             transition: "opacity 0.6s, transform 0.6s",
           }}>
             <div>
-              <span style={{ fontSize: "10px", letterSpacing: "4px", color: TERRA, display: "block", marginBottom: "14px" }}>
-                LATEST EVENTS
-              </span>
+              <span style={{ fontSize: "10px", letterSpacing: "4px", color: TERRA, display: "block", marginBottom: "14px" }}>LATEST EVENTS</span>
               <h2 style={{
                 fontFamily: "var(--font-display)", fontWeight: 700, fontStyle: "italic",
                 fontSize: "clamp(32px, 4vw, 56px)", color: "white", lineHeight: 1, margin: 0,
@@ -732,32 +651,16 @@ export default function Home() {
               onMouseLeave={e => e.currentTarget.style.color = "rgba(214,207,194,0.35)"}
             >ALL EPISODES →</Link>
           </div>
-
-          {/* Cards */}
           <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(360px, 1fr))", gap: "2px", background: `rgba(181,84,30,0.08)` }}>
             <EventCard
-              name="Afrocean"
-              tag="GATHERING"
-              tagBg={TERRA}
-              tagColor="white"
+              name="Afrocean" tag="GATHERING" tagBg={TERRA} tagColor="white"
               description="A dynamic and inclusive gathering that unites individuals of the African Diaspora, fostering a deep connection with their maritime heritage through cultural exchange, knowledge-sharing, and networking."
-              image={IMGS.afrocean}
-              to="/afrocean"
-              index={0}
-              visible={epVis}
-              accentColor={TERRA}
+              image={IMGS.afrocean} to="/afrocean" index={0} visible={epVis} accentColor={TERRA}
             />
             <EventCard
-              name="Anchorage"
-              tag="MEDIA HUB"
-              tagBg={TEAL}
-              tagColor="white"
+              name="Anchorage" tag="MEDIA HUB" tagBg={TEAL} tagColor="white"
               description="A centralized media hub combined with in-person and digital experiences. We curate personalized recommendations tailored to your interests, reshaping the way we explore the maritime world."
-              image={IMGS.anchorage}
-              to="/anchorage"
-              index={1}
-              visible={epVis}
-              accentColor={TEAL}
+              image={IMGS.anchorage} to="/anchorage" index={1} visible={epVis} accentColor={TEAL}
             />
           </div>
         </div>
@@ -765,15 +668,9 @@ export default function Home() {
 
       <TextileBand />
 
-      {/* ══════════════════════════════════════════════════════
-          CREATIVE AGENCY — split layout, warm dark
-      ══════════════════════════════════════════════════════ */}
-      <section ref={agencyRef} style={{
-        background: EARTH, overflow: "hidden", position: "relative",
-      }}>
+      {/* ══ CREATIVE AGENCY ══ */}
+      <section ref={agencyRef} style={{ background: EARTH, overflow: "hidden", position: "relative" }}>
         <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", minHeight: "580px" }}>
-
-          {/* Left — agency image */}
           <div style={{
             position: "relative", overflow: "hidden",
             opacity: agencyVis ? 1 : 0, transform: agencyVis ? "none" : "translateX(-20px)",
@@ -782,22 +679,13 @@ export default function Home() {
             <img src={IMGS.agency} alt="Creative Agency"
               style={{ width: "100%", height: "100%", objectFit: "cover", display: "block", minHeight: "580px" }} />
             <div style={{ position: "absolute", inset: 0, background: `linear-gradient(to right, rgba(42,26,14,0.05), rgba(42,26,14,0.7) 100%)` }} />
-
-            {/* Adinkrahene symbol overlay */}
             <div style={{ position: "absolute", bottom: "32px", right: "32px", opacity: 0.12 }}>
               <Adinkrahene size={120} color="white" />
             </div>
-
-            {/* Floating label */}
-            <div style={{
-              position: "absolute", top: "36px", left: "28px",
-              background: GOLD, color: DEEP, padding: "8px 16px",
-            }}>
+            <div style={{ position: "absolute", top: "36px", left: "28px", background: GOLD, color: DEEP, padding: "8px 16px" }}>
               <span style={{ fontSize: "9px", letterSpacing: "2.5px", fontWeight: 700 }}>CABIN TEA · AGENCY</span>
             </div>
           </div>
-
-          {/* Right — agency content */}
           <div style={{
             padding: "80px 5vw 80px 56px",
             display: "flex", flexDirection: "column", justifyContent: "center",
@@ -807,27 +695,18 @@ export default function Home() {
           }}>
             <WaxBg opacity={0.05} color={GOLD} />
             <div style={{ position: "relative", zIndex: 1 }}>
-
               <span style={{ fontSize: "10px", letterSpacing: "4px", color: TERRA, display: "block", marginBottom: "20px" }}>OUR SERVICES</span>
-
-              {/* Adinkrahene small */}
               <div style={{ marginBottom: "20px", opacity: 0.15 }}>
                 <Adinkrahene size={56} color="white" />
               </div>
-
               <h2 style={{
                 fontFamily: "var(--font-display)", fontWeight: 700,
                 fontSize: "clamp(28px, 3.5vw, 48px)", lineHeight: 0.95,
                 letterSpacing: "-1.5px", color: "white", marginBottom: "24px",
-              }}>
-                Connect your brand to African maritime culture.
-              </h2>
-
+              }}>Connect your brand to African maritime culture.</h2>
               <p style={{ fontSize: "15px", lineHeight: 1.95, color: "rgba(214,207,194,0.55)", fontWeight: 300, maxWidth: "420px", marginBottom: "32px" }}>
                 Strategy, creativity, and immersive experiences designed to deliver measurable impact for brands and leaders in the blue economy space.
               </p>
-
-              {/* Three pillars */}
               <div style={{ display: "flex", flexDirection: "column", marginBottom: "36px" }}>
                 {[
                   { num: "01", title: "Context", body: "Deep audience insight and strategic analysis." },
@@ -846,7 +725,6 @@ export default function Home() {
                   </div>
                 ))}
               </div>
-
               <Link to="/creative-agency" style={{
                 display: "inline-flex", alignItems: "center", gap: "10px",
                 padding: "13px 32px", background: TERRA, color: "white",
@@ -864,19 +742,11 @@ export default function Home() {
 
       <TextileBand />
 
-      {/* ══════════════════════════════════════════════════════
-          PARTNERS — warm teal section
-      ══════════════════════════════════════════════════════ */}
-      <section ref={partnerRef} style={{
-        background: WARM, padding: "100px 5vw",
-        position: "relative", overflow: "hidden",
-      }}>
+      {/* ══ PARTNERS ══ */}
+      <section ref={partnerRef} style={{ background: WARM, padding: "100px 5vw", position: "relative", overflow: "hidden" }}>
         <WaxBg opacity={0.05} color={TEAL} />
-
         <div style={{ maxWidth: "1300px", margin: "0 auto", position: "relative", zIndex: 1 }}>
           <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "80px", alignItems: "center" }}>
-
-            {/* Left */}
             <div style={{
               opacity: partnerVis ? 1 : 0, transform: partnerVis ? "none" : "translateY(20px)",
               transition: "opacity 0.7s, transform 0.7s",
@@ -893,14 +763,10 @@ export default function Home() {
               <p style={{ fontSize: "15px", lineHeight: 1.85, color: "rgba(214,207,194,0.5)", fontWeight: 300, maxWidth: "380px" }}>
                 We partner exclusively with brands who share our values — sustainability, storytelling, and the sea.
               </p>
-
-              {/* Funtunfunefu proverb */}
               <p style={{ fontSize: "12px", color: `rgba(44,140,124,0.6)`, fontStyle: "italic", marginTop: "20px", letterSpacing: "0.5px" }}>
                 "Funtunfunefu Denkyemfunefu" — unity in diversity.
               </p>
             </div>
-
-            {/* Right */}
             <div style={{
               opacity: partnerVis ? 1 : 0, transform: partnerVis ? "none" : "translateY(20px)",
               transition: "opacity 0.7s 0.2s, transform 0.7s 0.2s",
@@ -914,8 +780,7 @@ export default function Home() {
               ].map((p) => (
                 <div key={p.title} style={{
                   display: "flex", gap: "20px", alignItems: "flex-start",
-                  padding: "24px 28px",
-                  background: WARM,
+                  padding: "24px 28px", background: WARM,
                   borderLeft: `3px solid ${p.accent}`,
                 }}>
                   <div>
@@ -940,9 +805,7 @@ export default function Home() {
 
       <TextileBand />
 
-      {/* ══════════════════════════════════════════════════════
-          FINAL CTA — full bleed, warm earth, Sankofa ghost
-      ══════════════════════════════════════════════════════ */}
+      {/* ══ FINAL CTA ══ */}
       <section ref={ctaRef} style={{
         position: "relative", overflow: "hidden",
         minHeight: "500px", display: "flex", alignItems: "center",
@@ -952,25 +815,19 @@ export default function Home() {
         <div style={{ position: "absolute", inset: 0, background: `linear-gradient(110deg, ${EARTH} 40%, rgba(181,84,30,0.45) 100%)` }} />
         <WaxBg opacity={0.04} color={GOLD} />
         <div className="ct-grain" style={{ zIndex: 1 }} />
-
-        {/* Sankofa ghost */}
         <div style={{ position: "absolute", right: "3vw", top: "50%", transform: "translateY(-50%)", opacity: 0.07, zIndex: 1 }}>
           <Sankofa size={360} color="white" />
         </div>
-
         <div style={{
           position: "relative", zIndex: 2, padding: "80px 5vw", maxWidth: "760px",
           opacity: ctaVis ? 1 : 0, transform: ctaVis ? "none" : "translateY(20px)",
           transition: "opacity 0.8s, transform 0.8s",
         }}>
-          {/* Textile mini stripe */}
           <div style={{ display: "flex", height: "4px", width: "100px", marginBottom: "32px", overflow: "hidden" }}>
             {[TERRA, TEAL, GOLD, TERRA, TEAL].map((c, i) => (
               <div key={i} style={{ flex: 1, background: c }} />
             ))}
           </div>
-
-          {/* Akan proverb */}
           <p style={{
             fontFamily: "var(--font-display)", fontStyle: "italic",
             fontSize: "clamp(13px, 1.5vw, 16px)", color: `rgba(181,84,30,0.8)`,
@@ -978,7 +835,6 @@ export default function Home() {
           }}>
             "Se wo were fi na wosankofa a yenkyi." — It is not wrong to go back for what you forgot.
           </p>
-
           <h2 style={{
             fontFamily: "var(--font-display)", fontWeight: 700,
             fontSize: "clamp(36px, 5.5vw, 80px)", lineHeight: 0.92,
@@ -987,11 +843,9 @@ export default function Home() {
             Recorded live.<br />
             <span style={{ color: GOLD, fontStyle: "italic" }}>Heard everywhere.</span>
           </h2>
-
           <p style={{ fontSize: "15px", lineHeight: 1.85, color: "rgba(214,207,194,0.55)", fontWeight: 300, maxWidth: "420px", marginBottom: "44px" }}>
             New episodes released on YouTube, Spotify, and Apple Podcasts. Subscribe wherever you listen.
           </p>
-
           <div style={{ display: "flex", gap: "14px", flexWrap: "wrap" }}>
             <Link to="/episodes" style={{
               display: "inline-block", padding: "14px 36px",
