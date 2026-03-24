@@ -128,11 +128,11 @@ const ecosystem = [
 const IMGS = {
   hero:     "/diaspora1.jpg",
   community:"/ghanamen.jpg",
-  market:   "https://images.unsplash.com/photo-1519677100203-a0e668c92439?w=900&q=80",
-  people:   "affricandance.jpg",
+  market:   "/market.jpg",
+  people:   "/affricandance.jpg",
   diaspora: "/diaspora2.jpg",
-  host:     "https://images.unsplash.com/photo-1556761175-5973dc0f32e7?w=900&q=80",
-  cta:      "https://images.unsplash.com/photo-1523805009345-7448845a9e53?w=1600&q=80",
+  host:     "/podcastttt.jpg",
+  cta:      "/africanwomen.jpg",
 };
 
 /* ── Terracotta / earth colour palette (warmer than brand defaults) ── */
