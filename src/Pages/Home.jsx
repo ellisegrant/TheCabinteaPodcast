@@ -116,18 +116,18 @@ const DEEP  = "#152A2F";
    LOCAL IMAGES — drop into /public/images/home/
 ═══════════════════════════════════════════════════ */
 const IMGS = {
-  hero:      "/podcast.jpg",          /* Full screen — African cultural energy     */
-  people1:   "/africatotheworld.jpg",       /* Polaroid 1 — Diaspora community           */
-  people2:   "/people1.jpg",       /* Polaroid 2 — African gathering            */
-  people3:   "/festival.jpg",       /* Polaroid 3 — Cultural attire / roots      */
-  mission:   "/stortelling.jpg",       /* Mission split section — left image        */
-  afrocean:  "/africanface.jpg",      /* Afrocean event card                       */
-  anchorage: "/fisherman.jpg",     /* Anchorage media hub card                  */
-  agency:    "/creativeagency.jpg",        /* Creative Agency section image             */
-  mosaic1:   "/flagwoman.jpg",       /* Mosaic row — community                    */
-  mosaic2:   "/africanwomen.jpg",       /* Mosaic row — indigenous culture           */
-  mosaic3:   "/ship.jpg",       /* Mosaic row — maritime / coastal           */
-  cta:       "/maritimeheritage.jpg",           /* CTA background                            */
+  hero:      "/images/home/hero.jpg",          /* Full screen — African cultural energy     */
+  people1:   "/images/home/people1.jpg",       /* Polaroid 1 — Diaspora community           */
+  people2:   "/images/home/people2.jpg",       /* Polaroid 2 — African gathering            */
+  people3:   "/images/home/people3.jpg",       /* Polaroid 3 — Cultural attire / roots      */
+  mission:   "/images/home/mission.jpg",       /* Mission split section — left image        */
+  afrocean:  "/images/home/afrocean.jpg",      /* Afrocean event card                       */
+  anchorage: "/images/home/anchorage.jpg",     /* Anchorage media hub card                  */
+  agency:    "/images/home/agency.jpg",        /* Creative Agency section image             */
+  mosaic1:   "/images/home/mosaic1.jpg",       /* Mosaic row — community                    */
+  mosaic2:   "/images/home/mosaic2.jpg",       /* Mosaic row — indigenous culture           */
+  mosaic3:   "/images/home/mosaic3.jpg",       /* Mosaic row — maritime / coastal           */
+  cta:       "/images/home/cta.jpg",           /* CTA background                            */
 };
 
 /* ═══════════════════════════════════════════════════
@@ -259,6 +259,185 @@ function EventCard({ name, tag, tagBg, tagColor, description, image, to, index, 
         </div>
       </div>
     </Link>
+  );
+}
+
+/* ═══════════════════════════════════════════════════
+   CULTURE CAROUSEL
+═══════════════════════════════════════════════════ */
+const SLIDES = [
+  { src: IMGS.mosaic1, label: "Community",              sub: "The People"       },
+  { src: IMGS.mosaic2, label: "Industry, Tech & Innovation", sub: "African Future"   },
+  { src: IMGS.mosaic3, label: "Maritime Heritage",      sub: "The Ocean"        },
+];
+
+function CultureCarousel({ mosaicRef, mosaicVis }) {
+  const [active, setActive] = useState(0);
+  const [prev, setPrev] = useState(null);
+  const [dir, setDir] = useState(1); /* 1 = forward, -1 = backward */
+  const timerRef = useRef(null);
+
+  const goTo = (idx, direction) => {
+    setPrev(active);
+    setDir(direction);
+    setActive(idx);
+  };
+
+  const next = () => goTo((active + 1) % SLIDES.length, 1);
+  const back = () => goTo((active - 1 + SLIDES.length) % SLIDES.length, -1);
+
+  /* Auto-advance every 4s */
+  useEffect(() => {
+    timerRef.current = setInterval(next, 4000);
+    return () => clearInterval(timerRef.current);
+  }, [active]);
+
+  const resetTimer = () => {
+    clearInterval(timerRef.current);
+    timerRef.current = setInterval(next, 4000);
+  };
+
+  return (
+    <section ref={mosaicRef} style={{ background: EARTH, overflow: "hidden", position: "relative" }}>
+      {/* Header row */}
+      <div style={{
+        display: "flex", alignItems: "center", justifyContent: "space-between",
+        padding: "48px 5vw 28px",
+        opacity: mosaicVis ? 1 : 0, transform: mosaicVis ? "none" : "translateY(16px)",
+        transition: "opacity 0.6s, transform 0.6s",
+      }}>
+        <span style={{ fontSize: "10px", letterSpacing: "4px", color: TERRA }}>THE CULTURE</span>
+
+        {/* Dot indicators */}
+        <div style={{ display: "flex", gap: "10px", alignItems: "center" }}>
+          {SLIDES.map((_, i) => (
+            <button key={i} onClick={() => { goTo(i, i > active ? 1 : -1); resetTimer(); }}
+              style={{
+                width: i === active ? "28px" : "8px",
+                height: "8px",
+                borderRadius: "4px",
+                background: i === active ? TERRA : "rgba(181,84,30,0.25)",
+                border: "none", cursor: "pointer", padding: 0,
+                transition: "width 0.35s cubic-bezier(0.16,1,0.3,1), background 0.3s",
+              }} />
+          ))}
+        </div>
+
+        {/* Arrow controls */}
+        <div style={{ display: "flex", gap: "8px" }}>
+          {[{ fn: back, d: "M15 12H3m0 0l5-5m-5 5l5 5" }, { fn: next, d: "M9 12h12m0 0l-5-5m5 5l-5 5" }].map((btn, i) => (
+            <button key={i} onClick={() => { btn.fn(); resetTimer(); }}
+              style={{
+                width: "40px", height: "40px",
+                border: `1px solid rgba(181,84,30,0.3)`,
+                background: "transparent", cursor: "pointer",
+                display: "flex", alignItems: "center", justifyContent: "center",
+                transition: "background 0.2s, border-color 0.2s",
+                borderRadius: "2px",
+              }}
+              onMouseEnter={e => { e.currentTarget.style.background = TERRA; e.currentTarget.style.borderColor = TERRA; }}
+              onMouseLeave={e => { e.currentTarget.style.background = "transparent"; e.currentTarget.style.borderColor = "rgba(181,84,30,0.3)"; }}
+            >
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+                <path d={btn.d} />
+              </svg>
+            </button>
+          ))}
+        </div>
+      </div>
+
+      {/* Slide viewport */}
+      <div style={{
+        position: "relative", height: "420px", overflow: "hidden",
+        opacity: mosaicVis ? 1 : 0,
+        transition: "opacity 0.8s 0.1s",
+      }}>
+        {SLIDES.map((slide, i) => {
+          const isCurrent = i === active;
+          const isPrev    = i === prev;
+          return (
+            <div key={i} style={{
+              position: "absolute", inset: 0,
+              transform: isCurrent
+                ? "translateX(0)"
+                : isPrev
+                  ? `translateX(${-dir * 100}%)`
+                  : `translateX(${dir * 100}%)`,
+              opacity: isCurrent ? 1 : isPrev ? 0 : 0,
+              transition: isCurrent || isPrev
+                ? "transform 0.65s cubic-bezier(0.76,0,0.24,1), opacity 0.65s"
+                : "none",
+              zIndex: isCurrent ? 2 : 1,
+            }}>
+              <img src={slide.src} alt={slide.label}
+                style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} />
+
+              {/* Bottom gradient */}
+              <div style={{ position: "absolute", inset: 0, background: `linear-gradient(to top, ${EARTH} 0%, rgba(42,26,14,0.4) 40%, transparent 70%)` }} />
+
+              {/* Label */}
+              <div style={{
+                position: "absolute", bottom: "0", left: 0, right: 0,
+                padding: "32px 5vw",
+                display: "flex", alignItems: "flex-end", justifyContent: "space-between",
+              }}>
+                <div>
+                  <span style={{
+                    display: "block",
+                    fontFamily: "var(--font-display)", fontWeight: 700,
+                    fontSize: "clamp(28px, 4vw, 52px)",
+                    color: "white", lineHeight: 1, letterSpacing: "-1px",
+                    transform: isCurrent ? "translateY(0)" : "translateY(16px)",
+                    opacity: isCurrent ? 1 : 0,
+                    transition: "transform 0.5s 0.25s, opacity 0.5s 0.25s",
+                  }}>{slide.label}</span>
+                  <span style={{
+                    display: "block", fontSize: "9px", letterSpacing: "3px",
+                    color: TERRA, marginTop: "6px",
+                    transform: isCurrent ? "translateY(0)" : "translateY(10px)",
+                    opacity: isCurrent ? 1 : 0,
+                    transition: "transform 0.5s 0.35s, opacity 0.5s 0.35s",
+                  }}>{slide.sub.toUpperCase()}</span>
+                </div>
+
+                {/* Slide counter */}
+                <span style={{
+                  fontFamily: "var(--font-display)", fontStyle: "italic",
+                  fontSize: "clamp(32px, 5vw, 64px)",
+                  color: "rgba(255,255,255,0.08)", fontWeight: 700,
+                  lineHeight: 1, userSelect: "none",
+                }}>0{i + 1}</span>
+              </div>
+
+              {/* Left textile accent strip */}
+              <div style={{
+                position: "absolute", left: 0, top: 0, bottom: 0, width: "4px",
+                display: "flex", flexDirection: "column",
+              }}>
+                {[TERRA, TEAL, GOLD, TERRA, TEAL, GOLD, TERRA].map((c, ci) => (
+                  <div key={ci} style={{ flex: 1, background: c }} />
+                ))}
+              </div>
+            </div>
+          );
+        })}
+
+        {/* Progress bar */}
+        <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, height: "3px", background: "rgba(181,84,30,0.15)", zIndex: 10 }}>
+          <div key={active} style={{
+            height: "100%", background: TERRA,
+            animation: "progress 4s linear forwards",
+          }} />
+        </div>
+      </div>
+
+      <style>{`
+        @keyframes progress {
+          from { width: 0%; }
+          to   { width: 100%; }
+        }
+      `}</style>
+    </section>
   );
 }
 
@@ -511,39 +690,9 @@ export default function Home() {
       <TextileBand />
 
       {/* ══════════════════════════════════════════════════════
-          IMAGE MOSAIC — African culture strip
+          IMAGE CAROUSEL — African culture strip
       ══════════════════════════════════════════════════════ */}
-      <section ref={mosaicRef} style={{ background: EARTH, overflow: "hidden" }}>
-        <div style={{
-          padding: "56px 5vw 32px",
-          opacity: mosaicVis ? 1 : 0, transform: mosaicVis ? "none" : "translateY(16px)",
-          transition: "opacity 0.6s, transform 0.6s",
-        }}>
-          <span style={{ fontSize: "10px", letterSpacing: "4px", color: TERRA }}>THE CULTURE</span>
-        </div>
-
-        <div style={{
-          display: "grid", gridTemplateColumns: "1fr 1.5fr 1fr", gap: "4px",
-          opacity: mosaicVis ? 1 : 0, transform: mosaicVis ? "none" : "translateY(24px)",
-          transition: "opacity 0.8s 0.1s, transform 0.8s 0.1s",
-        }}>
-          {[
-            { src: IMGS.mosaic1, h: "280px", label: "Community", sub: "The People" },
-            { src: IMGS.mosaic2, h: "280px", label: "Indigenous Culture", sub: "African Roots" },
-            { src: IMGS.mosaic3, h: "280px", label: "Maritime Heritage", sub: "The Ocean" },
-          ].map((img, i) => (
-            <div key={i} style={{ position: "relative", overflow: "hidden" }}>
-              <img src={img.src} alt={img.label}
-                style={{ width: "100%", height: img.h, objectFit: "cover", display: "block" }} />
-              <div style={{ position: "absolute", inset: 0, background: `linear-gradient(to top, ${EARTH} 0%, transparent 50%)` }} />
-              <div style={{ position: "absolute", bottom: "16px", left: "16px" }}>
-                <span style={{ fontSize: "12px", fontWeight: 600, color: "white", display: "block" }}>{img.label}</span>
-                <span style={{ fontSize: "9px", letterSpacing: "2px", color: TERRA }}>{img.sub.toUpperCase()}</span>
-              </div>
-            </div>
-          ))}
-        </div>
-      </section>
+      <CultureCarousel mosaicRef={mosaicRef} mosaicVis={mosaicVis} />
 
       <TextileBand />
 
