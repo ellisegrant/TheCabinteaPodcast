@@ -126,11 +126,11 @@ const ecosystem = [
 
 /* African & Diaspora people, not generic ocean stock */
 const IMGS = {
-  hero:     "https://images.unsplash.com/photo-1531206715517-5c0ba140b2b8?w=1600&q=85",
-  community:"https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=900&q=80",
+  hero:     "/diaspora1.jpg",
+  community:"/ghanamen.jpg",
   market:   "https://images.unsplash.com/photo-1519677100203-a0e668c92439?w=900&q=80",
-  people:   "https://images.unsplash.com/photo-1489424731084-a5d8b219a5bb?w=900&q=80",
-  diaspora: "https://images.unsplash.com/photo-1504439904031-93ded9f93e4e?w=900&q=80",
+  people:   "affricandance.jpg",
+  diaspora: "/diaspora2.jpg",
   host:     "https://images.unsplash.com/photo-1556761175-5973dc0f32e7?w=900&q=80",
   cta:      "https://images.unsplash.com/photo-1523805009345-7448845a9e53?w=1600&q=80",
 };
