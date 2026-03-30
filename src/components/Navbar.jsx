@@ -60,34 +60,25 @@ export default function Navbar() {
         boxShadow: scrolled ? "0 1px 0 rgba(196,164,78,0.12)" : "none",
       }}>
 
-        {/* Logo — bold wordmark like AIAC */}
         <Link to="/" style={{ textDecoration: "none", display: "flex", alignItems: "baseline", gap: "6px", flexShrink: 0 }}>
           <span style={{
             fontFamily: "var(--font-display)",
-            fontWeight: 700,
-            fontSize: "20px",
-            color: "white",
-            letterSpacing: "-0.5px",
-            lineHeight: 1,
+            fontWeight: 700, fontSize: "20px",
+            color: "white", letterSpacing: "-0.5px", lineHeight: 1,
           }}>Cabin</span>
           <span style={{
             fontFamily: "var(--font-display)",
-            fontWeight: 700,
-            fontStyle: "italic",
-            fontSize: "20px",
-            color: "var(--gold)",
-            letterSpacing: "0px",
-            lineHeight: 1,
+            fontWeight: 700, fontStyle: "italic", fontSize: "20px",
+            color: "var(--gold)", letterSpacing: "0px", lineHeight: 1,
           }}>Tea</span>
         </Link>
 
-        {/* Desktop links — center */}
         <div style={{
           display: "flex", alignItems: "center", gap: "32px",
           marginLeft: "auto", marginRight: "32px",
         }} className="ct-desktop-nav">
 
-          {/* Episodes dropdown */}
+          {/* Our Works dropdown */}
           <div ref={dropdownRef} style={{ position: "relative" }}>
             <button onClick={() => setEpisodesOpen(v => !v)} style={{
               background: "none", border: "none", cursor: "pointer",
@@ -99,7 +90,7 @@ export default function Navbar() {
               onMouseEnter={e => e.currentTarget.style.color = "white"}
               onMouseLeave={e => { if (!episodesOpen) e.currentTarget.style.color = "rgba(214,207,194,0.55)"; }}
             >
-              Episodes
+              Our Works
               <svg width="9" height="5" viewBox="0 0 10 6" fill="none" style={{
                 transition: "transform 0.2s",
                 transform: episodesOpen ? "rotate(180deg)" : "none",
@@ -109,7 +100,6 @@ export default function Navbar() {
               </svg>
             </button>
 
-            {/* Dropdown */}
             <div style={{
               position: "absolute",
               top: "calc(100% + 16px)",
@@ -165,15 +155,11 @@ export default function Navbar() {
           ))}
         </div>
 
-        {/* Partner CTA */}
         <Link to="/partner" className="ct-desktop-nav" style={{
           textDecoration: "none",
           fontSize: "10px", letterSpacing: "2px", fontWeight: 600,
-          color: "var(--dark)",
-          background: "var(--gold)",
-          padding: "8px 18px",
-          borderRadius: "2px",
-          flexShrink: 0,
+          color: "var(--dark)", background: "var(--gold)",
+          padding: "8px 18px", borderRadius: "2px", flexShrink: 0,
           transition: "opacity 0.2s",
         }}
           onMouseEnter={e => e.currentTarget.style.opacity = "0.85"}
@@ -182,19 +168,17 @@ export default function Navbar() {
           PARTNER
         </Link>
 
-        {/* Mobile hamburger */}
         <button className="ct-mobile-nav" onClick={() => setMenuOpen(v => !v)} style={{
           marginLeft: "auto", background: "none", border: "none",
           cursor: "pointer", padding: "6px",
           display: "flex", flexDirection: "column", gap: "5px",
         }}>
-          <span style={{ display: "block", width: menuOpen ? "24px" : "24px", height: "1.5px", background: "white", transition: "all 0.2s", transform: menuOpen ? "rotate(45deg) translateY(6.5px)" : "none" }} />
+          <span style={{ display: "block", width: "24px", height: "1.5px", background: "white", transition: "all 0.2s", transform: menuOpen ? "rotate(45deg) translateY(6.5px)" : "none" }} />
           <span style={{ display: "block", width: "18px", height: "1.5px", background: "white", transition: "all 0.2s", opacity: menuOpen ? 0 : 1 }} />
           <span style={{ display: "block", width: "24px", height: "1.5px", background: "white", transition: "all 0.2s", transform: menuOpen ? "rotate(-45deg) translateY(-6.5px)" : "none" }} />
         </button>
       </nav>
 
-      {/* Mobile fullscreen menu */}
       <div className="ct-mobile-nav" style={{
         position: "fixed", top: "64px", left: 0, right: 0, bottom: 0,
         zIndex: 99, background: "rgba(18,36,40,0.99)",
@@ -206,9 +190,8 @@ export default function Navbar() {
         transform: menuOpen ? "translateY(0)" : "translateY(-8px)",
         transition: "opacity 0.25s, transform 0.25s",
       }}>
-        {/* Category label */}
-        <span style={{ fontSize: "9px", letterSpacing: "3px", color: "var(--teal)", marginBottom: "8px" }}>EPISODES</span>
-        {episodesDropdown.map((item, i) => (
+        <span style={{ fontSize: "9px", letterSpacing: "3px", color: "var(--teal)", marginBottom: "8px" }}>OUR WORKS</span>
+        {episodesDropdown.map((item) => (
           <Link key={item.to} to={item.to} style={{
             textDecoration: "none",
             fontFamily: "var(--font-display)",
@@ -216,8 +199,7 @@ export default function Navbar() {
             fontWeight: 700, color: "white",
             padding: "10px 0",
             borderBottom: "1px solid rgba(255,255,255,0.06)",
-            letterSpacing: "-0.5px",
-            transition: "color 0.2s",
+            letterSpacing: "-0.5px", transition: "color 0.2s",
           }}
             onMouseEnter={e => e.currentTarget.style.color = "var(--gold)"}
             onMouseLeave={e => e.currentTarget.style.color = "white"}
@@ -235,8 +217,7 @@ export default function Navbar() {
             fontWeight: 700, color: "white",
             padding: "10px 0",
             borderBottom: "1px solid rgba(255,255,255,0.06)",
-            letterSpacing: "-0.5px",
-            transition: "color 0.2s",
+            letterSpacing: "-0.5px", transition: "color 0.2s",
           }}
             onMouseEnter={e => e.currentTarget.style.color = "var(--gold)"}
             onMouseLeave={e => e.currentTarget.style.color = "white"}
