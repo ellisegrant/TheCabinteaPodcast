@@ -40,6 +40,7 @@ export default function Navbar() {
     { label: "All Episodes", to: "/episodes", desc: "Every conversation" },
     { label: "Afrocean", to: "/afrocean", desc: "Diaspora maritime gatherings" },
     { label: "Anchorage", to: "/anchorage", desc: "Maritime media hub" },
+    { label: "Africa Ocean Dynamism", to: "/africa-ocean-dynamism", desc: "Blue economy investment thesis" },
   ];
 
   const isActive = (to) => location.pathname === to;
