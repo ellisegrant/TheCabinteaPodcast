@@ -10,6 +10,7 @@ import Afrocean from "./Pages/Afrocean";
 import Anchorage from "./Pages/Anchorage";
 import { PlayerProvider } from "./components/EpisodePlayer";
 import CategoryStrip from "./components/CategoryStrip";
+import AfricaOceanDynamism from "./Pages/AfricaOceanDynamism";
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
           <Route path="/creative-agency" element={<CreativeAgency />} />
           <Route path="/afrocean" element={<Afrocean />} />
           <Route path="/anchorage" element={<Anchorage />} />
+          <Route path="/africa-ocean-dynamism" element={<AfricaOceanDynamism />} />
         </Routes>
       </BrowserRouter>
     </PlayerProvider>
