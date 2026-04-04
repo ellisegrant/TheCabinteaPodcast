@@ -409,7 +409,7 @@ export default function About() {
               fontWeight: 700, fontSize: "clamp(28px, 4vw, 52px)",
               lineHeight: 1.05, color: "white", marginBottom: "8px",
             }}>
-              Your Name
+              Lawrence Dogli
             </h2>
 
             <p style={{ fontSize: "11px", letterSpacing: "2px", color: GOLD, marginBottom: "28px" }}>
