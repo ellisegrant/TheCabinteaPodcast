@@ -35,7 +35,7 @@ const IMGS = {
   ep1:       "/flagwoman.jpg",
   ep2:       "/africanwomen.jpg",
   ep3:       "/maritimeheritage.jpg",
-  cta:       "/festival.jpg",
+  cta:       "/ship.jpg",
 };
 
 /* ── Platform icons ── */
@@ -115,14 +115,12 @@ export default function Home() {
         position: "relative", overflow: "hidden",
         display: "flex", flexDirection: "column", justifyContent: "flex-end",
       }}>
-        <img
-          src={IMGS.hero}
-          alt="Cabin Tea"
-          style={{
-            position: "absolute", inset: 0,
-            width: "100%", height: "100%", objectFit: "cover",
-          }}
-        />
+        <video autoPlay muted loop playsInline
+          style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover" }}>
+          <source src="/herovideo.mp4" type="video/mp4" />
+          <img src={IMGS.hero} alt="Cabin Tea"
+            style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover" }} />
+        </video>
         {/* Single clean gradient — bottom only */}
         <div style={{
           position: "absolute", inset: 0,
@@ -146,9 +144,9 @@ export default function Home() {
 
           {/* Headline — large, confident, nothing else */}
           <h1 style={{
-            fontFamily: "var(--font-display)", fontWeight: 700,
+            fontWeight: 700,
             fontSize: "clamp(48px, 8vw, 112px)",
-            lineHeight: 1, letterSpacing: "-2px",
+            lineHeight: 1, letterSpacing: "normal",
             color: "white", margin: "0 0 10px",
             opacity: heroVis ? 1 : 0, transform: heroVis ? "none" : "translateY(24px)",
             transition: "opacity 0.7s 0.18s, transform 0.7s 0.18s",
@@ -156,9 +154,9 @@ export default function Home() {
             Sipping with the
           </h1>
           <h1 style={{
-            fontFamily: "var(--font-display)", fontWeight: 700, fontStyle: "italic",
+            fontWeight: 700,
             fontSize: "clamp(48px, 8vw, 112px)",
-            lineHeight: 1, letterSpacing: "-2px",
+            lineHeight: 1, letterSpacing: "normal",
             color: GOLD, margin: "0 0 36px",
             opacity: heroVis ? 1 : 0, transform: heroVis ? "none" : "translateY(24px)",
             transition: "opacity 0.7s 0.26s, transform 0.7s 0.26s",
@@ -251,7 +249,7 @@ export default function Home() {
                 padding: "20px 24px",
               }}>
                 <span style={{
-                  fontFamily: "var(--font-display)", fontSize: "36px",
+                   fontSize: "36px",
                   fontWeight: 700, display: "block", lineHeight: 1,
                 }}>360°</span>
                 <span style={{ fontSize: "9px", letterSpacing: "2px", fontWeight: 600, display: "block", marginTop: "4px" }}>
@@ -269,9 +267,9 @@ export default function Home() {
                 ABOUT CABIN TEA
               </p>
               <h2 style={{
-                fontFamily: "var(--font-display)", fontWeight: 700,
+                fontWeight: 700,
                 fontSize: "clamp(28px, 3.5vw, 44px)", lineHeight: 1.1,
-                letterSpacing: "-1px", color: "white", marginBottom: "24px",
+                letterSpacing: "normal", color: "white", marginBottom: "24px",
               }}>
                 Africa's #1 maritime media brand.
               </h2>
@@ -301,7 +299,7 @@ export default function Home() {
                 ].map(s => (
                   <div key={s.label}>
                     <span style={{
-                      fontFamily: "var(--font-display)", fontSize: "26px",
+                       fontSize: "26px",
                       fontWeight: 700, color: "white", display: "block", lineHeight: 1,
                     }}>{s.val}</span>
                     <span style={{
@@ -332,9 +330,9 @@ export default function Home() {
             transition: "opacity 0.6s, transform 0.6s",
           }}>
             <h2 style={{
-              fontFamily: "var(--font-display)", fontWeight: 700,
+              fontWeight: 700,
               fontSize: "clamp(22px, 3vw, 36px)", color: "white",
-              margin: 0, letterSpacing: "-0.5px",
+              margin: 0, letterSpacing: "normal",
             }}>Latest Episodes</h2>
             <Link to="/episodes" style={{
               fontSize: "11px", letterSpacing: "2px", fontWeight: 600,
@@ -385,9 +383,9 @@ export default function Home() {
                     {ep.guest}
                   </p>
                   <h3 style={{
-                    fontFamily: "var(--font-display)", fontWeight: 600,
+                    fontWeight: 600,
                     fontSize: "clamp(16px, 1.8vw, 20px)", color: "white",
-                    lineHeight: 1.25, margin: 0, letterSpacing: "-0.3px",
+                    lineHeight: 1.25, margin: 0, letterSpacing: "0",
                   }}>{ep.title}</h3>
                 </div>
 
@@ -428,9 +426,9 @@ export default function Home() {
               THE ECOSYSTEM
             </p>
             <h2 style={{
-              fontFamily: "var(--font-display)", fontWeight: 700,
+              fontWeight: 700,
               fontSize: "clamp(22px, 3vw, 36px)", color: "white",
-              margin: 0, letterSpacing: "-0.5px",
+              margin: 0, letterSpacing: "normal",
             }}>More than a podcast.</h2>
           </div>
 
@@ -477,9 +475,9 @@ export default function Home() {
                       color: GOLD, fontWeight: 600, display: "block", marginBottom: "6px",
                     }}>{brand.tag}</span>
                     <h3 style={{
-                      fontFamily: "var(--font-display)", fontWeight: 700,
+                      fontWeight: 700,
                       fontSize: "26px", color: "white", margin: "0 0 8px",
-                      letterSpacing: "-0.5px",
+                      letterSpacing: "normal",
                     }}>{brand.name}</h3>
                     <p style={{
                       fontSize: "13px", color: CREAM, lineHeight: 1.6,
@@ -522,12 +520,12 @@ export default function Home() {
             NEW EPISODES OUT NOW
           </p>
           <h2 style={{
-            fontFamily: "var(--font-display)", fontWeight: 700,
+            fontWeight: 700,
             fontSize: "clamp(32px, 5vw, 64px)", lineHeight: 1,
-            letterSpacing: "-1.5px", color: "white", marginBottom: "16px",
+            letterSpacing: "0", color: "white", marginBottom: "16px",
           }}>
             Recorded live.<br />
-            <span style={{ color: GOLD, fontStyle: "italic" }}>Heard everywhere.</span>
+            <span style={{ color: GOLD }}>Heard everywhere.</span>
           </h2>
           <p style={{
             fontSize: "16px", color: CREAM, fontWeight: 300,
