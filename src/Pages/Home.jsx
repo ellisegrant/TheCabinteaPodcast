@@ -104,12 +104,7 @@ export default function Home() {
     <div style={{ minHeight: "100vh", background: BG, color: "white", overflowX: "hidden" }}>
       <Navbar />
 
-      {/* ════════════════════════════════════════════════
-          HERO
-          Full screen. Real photo. Big type. One CTA.
-          No overlays stacked 4 deep. Just the image
-          and the words.
-      ════════════════════════════════════════════════ */}
+
       <section ref={heroRef} style={{
         height: "100vh", minHeight: "640px",
         position: "relative", overflow: "hidden",
@@ -132,20 +127,13 @@ export default function Home() {
           position: "relative", zIndex: 2,
           padding: "0 5vw 72px",
         }}>
-          {/* Eyebrow */}
-          <p style={{
-            fontSize: "11px", letterSpacing: "4px", color: GOLD,
-            fontWeight: 500, marginBottom: "20px",
-            opacity: heroVis ? 1 : 0, transform: heroVis ? "none" : "translateY(10px)",
-            transition: "opacity 0.6s 0.1s, transform 0.6s 0.1s",
-          }}>
-            CABIN TEA · ACCRA, GHANA
-          </p>
+
+        
 
           {/* Headline — large, confident, nothing else */}
           <h1 style={{
             fontWeight: 700,
-            fontSize: "clamp(48px, 8vw, 112px)",
+            fontSize: "clamp(38px, 5vw, 96px)",
             lineHeight: 1, letterSpacing: "normal",
             color: "white", margin: "0 0 10px",
             opacity: heroVis ? 1 : 0, transform: heroVis ? "none" : "translateY(24px)",
@@ -155,7 +143,7 @@ export default function Home() {
           </h1>
           <h1 style={{
             fontWeight: 700,
-            fontSize: "clamp(48px, 8vw, 112px)",
+            fontSize: "clamp(38px, 5vw, 96px)",
             lineHeight: 1, letterSpacing: "normal",
             color: GOLD, margin: "0 0 36px",
             opacity: heroVis ? 1 : 0, transform: heroVis ? "none" : "translateY(24px)",
