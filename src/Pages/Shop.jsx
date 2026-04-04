@@ -75,37 +75,37 @@ const products = [
   {
     id: 2, name: "Ocean Ceramic Mug", price: 24, category: "Drinkware",
     desc: "Hand-finished stoneware mug in deep teal glaze. 12oz.",
-    img: "/images/shop/mug.jpg", accent: TEAL,
+    img: "/occeanmug.jpg", accent: TEAL,
   },
   {
     id: 3, name: "Sipping With... Cap", price: 28, category: "Apparel",
     desc: "Structured cotton cap with gold thread embroidery. Adjustable.",
-    img: "/images/shop/cap.jpg", accent: GOLD,
+    img: "/occeancap.jpg", accent: GOLD,
   },
   {
     id: 4, name: "Gulf Canvas Tote", price: 22, category: "Accessories",
     desc: "Heavyweight cotton canvas tote with screen-printed wave motif.",
-    img: "/images/shop/tote.jpg", accent: TERRA,
+    img: "/gulftotebag.jpg", accent: TERRA,
   },
   {
     id: 5, name: "Episode Blend Tea Tin", price: 18, category: "Tea",
     desc: "Organic herbal blend curated for the show. Same tea our guests sip. 50g.",
-    img: "/images/shop/tea-tin.jpg", accent: GOLD,
+    img: "/teatin.jpg", accent: GOLD,
   },
   {
     id: 6, name: "Cabin Tea Hoodie", price: 58, category: "Apparel",
     desc: "Premium fleece hoodie with Cabin Tea crest. Relaxed fit. Organic cotton blend.",
-    img: "/images/shop/hoodie.jpg", accent: TERRA,
+    img: "/teahoodie.jpg", accent: TERRA,
   },
   {
     id: 7, name: "Keepsake Gift Set", price: 45, category: "Tea",
     desc: "Tea tin + ceramic mug + hand-written card in a branded box.",
-    img: "/images/shop/gift-set.jpg", accent: GOLD,
+    img: "/giftbox.jpg", accent: GOLD,
   },
   {
     id: 8, name: "Wave Enamel Pin", price: 12, category: "Accessories",
     desc: "Gold-plated enamel pin with the Cabin Tea wave motif.",
-    img: "/images/shop/pin.jpg", accent: GOLD,
+    img: "/enamelpin.jpg", accent: GOLD,
   },
 ];
 
