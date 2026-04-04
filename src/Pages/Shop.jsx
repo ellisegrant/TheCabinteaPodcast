@@ -70,7 +70,7 @@ const products = [
   {
     id: 1, name: "Cabin Tea Classic Tee", price: 35, category: "Apparel",
     desc: "Heavyweight organic cotton tee with embroidered wordmark. Unisex fit.",
-    img: "/images/shop/classic-tee.jpg", accent: TERRA,
+    img: "/cabintea.jpg", accent: TERRA,
   },
   {
     id: 2, name: "Ocean Ceramic Mug", price: 24, category: "Drinkware",
