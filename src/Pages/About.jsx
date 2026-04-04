@@ -31,7 +31,7 @@ const MUTED = "rgba(214,207,194,0.42)";
 const IMGS = {
   hero:      "/maritimeheritage.jpg",
   community: "/ghanamen.jpg",
-  market:    "/diaspora2.jpg",
+  market:    "/diaspora1.jpg",
   diaspora:  "/diaspora2.jpg",
   host:      "/podcastttt.jpg",
   cta:       "/africanwomen.jpg",
