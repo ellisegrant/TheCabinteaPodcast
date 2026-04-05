@@ -28,7 +28,7 @@ const TEAL  = "#2C8C7C";
 /* ── Image paths ── */
 const IMGS = {
   hero:      "/podcast.jpg",
-  host:      "/podcastimage.jpg",
+  host:      "/PodcastStudio.jpg",
   afrocean:  "/africanface.jpg",
   anchorage: "/fisherman.jpg",
   agency:    "/creativeagency.jpg",
