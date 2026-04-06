@@ -139,7 +139,7 @@ export default function Home() {
             opacity: heroVis ? 1 : 0, transform: heroVis ? "none" : "translateY(24px)",
             transition: "opacity 0.7s 0.18s, transform 0.7s 0.18s",
           }}>
-            Sipping with the
+            Where Africa's maritime industry
           </h1>
           <h1 style={{
             fontWeight: 700,
@@ -149,7 +149,7 @@ export default function Home() {
             opacity: heroVis ? 1 : 0, transform: heroVis ? "none" : "translateY(24px)",
             transition: "opacity 0.7s 0.26s, transform 0.7s 0.26s",
           }}>
-            people who know the sea.
+            finds its voice
           </h1>
 
           {/* Bottom row — short description + CTAs + platforms */}
@@ -164,7 +164,8 @@ export default function Home() {
                 fontSize: "16px", color: CREAM, lineHeight: 1.7,
                 fontWeight: 300, maxWidth: "400px", marginBottom: "24px",
               }}>
-                Africa's maritime podcast. Live conversations with the people shaping the continent's blue economy.
+                Cabin Tea is a maritime media and industry network built for Africa's blue economy. Through digital media, live events, and curated communities, we connect stakeholders across the continent and Diaspora — shifting the global conversation from potential to possibility. We don't just cover the industry.
+                We build the relationships that move it.
               </p>
               <div style={{ display: "flex", gap: "12px", flexWrap: "wrap" }}>
                 <Link to="/episodes" style={{
