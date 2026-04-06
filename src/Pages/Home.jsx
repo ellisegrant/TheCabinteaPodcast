@@ -259,13 +259,14 @@ export default function Home() {
                 fontSize: "clamp(28px, 3.5vw, 44px)", lineHeight: 1.1,
                 letterSpacing: "normal", color: "white", marginBottom: "24px",
               }}>
-                Africa's #1 maritime media brand.
+                Where Africa's maritime industry finds its voice
               </h2>
               <p style={{
                 fontSize: "16px", lineHeight: 1.85,
                 color: CREAM, fontWeight: 300, marginBottom: "20px",
               }}>
-                A 360° maritime media and industry network built for the African community and Diaspora. Through live conversations, community events, and digital media, we amplify African maritime culture and bring the voices of the Diaspora into the heart of the continent's blue economy.
+                Cabin Tea is a maritime media and industry network built for Africa's blue economy. Through digital media, live events, and curated communities, we connect stakeholders across the continent and Diaspora — shifting the global conversation from potential to possibility.
+                We don't just cover the industry. We build the relationships that move it.
               </p>
               <p style={{
                 fontSize: "16px", lineHeight: 1.85,
