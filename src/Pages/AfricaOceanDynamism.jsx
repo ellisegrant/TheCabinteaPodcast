@@ -95,7 +95,7 @@ export default function AfricaOceanDynamism() {
       }}>
         {/* Hero image */}
         <img
-          src="/ship.jpg"
+          src="/maritimetech.jpg"
           alt="Africa Ocean Dynamism"
           style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover" }}
         />
