@@ -424,13 +424,15 @@ export default function About() {
               fontSize: "16px", lineHeight: 1.9, color: CREAM,
               fontWeight: 300, marginBottom: "16px", maxWidth: "400px",
             }}>
-              Add your bio here — your background, your connection to the ocean, and what drove you to create Cabin Tea.
+              Lawrence Dogli didn't just study Africa's maritime world — he lived it from the inside. A graduate of the Regional Maritime University in Ghana, Lawrence spent the beginning of his professional career at the Gulf of 
+              Guinea Maritime Institute, coordinating some of the most consequential maritime security and blue economy projects in West and Central Africa.
             </p>
             <p style={{
               fontSize: "14px", lineHeight: 1.8, color: MUTED,
               fontWeight: 300, maxWidth: "400px", marginBottom: "36px",
             }}>
-              This is your moment to make the audience feel like they already know you before the show even starts. Your story is the anchor of this entire brand.
+               He contributed to the development of Ghana's National Maritime Strategy, worked with the European Union to train local journalists on maritime affairs, and carried African perspectives into policy rooms from Lisbon to Brussels, Naples to Dakar — including as a technical expert to the International Maritime Organisation and contributing expert to the North Atlantic Treaty Organisation on maritime security in the Gulf of Guinea. He is a Chatham House Common Futures Conversations alumnus and a global voice on blue economy issues in Africa's marine sector.
+Cabin Tea is built on everything he saw, heard, and learned inside that world. Because Africa's ocean story deserves to be told by the people who live it.
             </p>
 
             <Link to="/about-host" style={{
