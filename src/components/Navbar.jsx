@@ -66,7 +66,7 @@ export default function Navbar() {
           <img
             src="/YellowNoLogo.png"
             alt="Cabin Tea"
-            style={{ height: "48px", width: "auto", display: "block" }}
+            style={{ height: "72px", width: "auto", display: "block" }}
           />
         </Link>
 
