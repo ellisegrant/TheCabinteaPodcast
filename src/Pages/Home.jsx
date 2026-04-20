@@ -223,11 +223,11 @@ export default function Home() {
               opacity: aboutVis ? 1 : 0, transform: aboutVis ? "none" : "translateX(-20px)",
               transition: "opacity 0.8s, transform 0.8s",
             }}>
-              <div style={{ aspectRatio: "4/5", overflow: "hidden" }}>
+                <div style={{ overflow: "hidden" }}>
                 <img
                   src={IMGS.host}
                   alt="Host"
-                  style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
+                  style={{ width: "100%", height: "auto", objectFit: "contain", display: "block" }}
                 />
               </div>
               {/* Floating stat */}
