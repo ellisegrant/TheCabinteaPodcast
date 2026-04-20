@@ -30,7 +30,7 @@ const IMGS = {
   hero:      "/podcast.jpg",
   host:      "/vibes.jpg",
   afrocean:  "/africanface.jpg",
-  anchorage: "/fisherman.jpg",
+  anchorage: "/canoe.jpg",
   agency:    "/creativeagency.jpg",
   ep1:       "/flagwoman.jpg",
   ep2:       "/africanwomen.jpg",
