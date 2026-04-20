@@ -61,17 +61,13 @@ export default function Navbar() {
         boxShadow: scrolled ? "0 1px 0 rgba(196,164,78,0.12)" : "none",
       }}>
 
-        <Link to="/" style={{ textDecoration: "none", display: "flex", alignItems: "baseline", gap: "6px", flexShrink: 0 }}>
-          <span style={{
-            fontFamily: "var(--font-display)",
-            fontWeight: 700, fontSize: "20px",
-            color: "white", letterSpacing: "-0.5px", lineHeight: 1,
-          }}>Cabin</span>
-          <span style={{
-            fontFamily: "var(--font-display)",
-            fontWeight: 700, fontStyle: "italic", fontSize: "20px",
-            color: "var(--gold)", letterSpacing: "0px", lineHeight: 1,
-          }}>Tea</span>
+        {/* ── Logo image — drop your file at /public/logo.png ── */}
+        <Link to="/" style={{ textDecoration: "none", display: "flex", alignItems: "center", flexShrink: 0 }}>
+          <img
+            src="/cabinlogo1.jpg"
+            alt="Cabin Tea"
+            style={{ height: "36px", width: "auto", display: "block" }}
+          />
         </Link>
 
         <div style={{
@@ -131,7 +127,7 @@ export default function Navbar() {
                   <span style={{ display: "block", fontSize: "12px", fontWeight: 500, color: "white", marginBottom: "2px" }}>
                     {item.label}
                   </span>
-                  <span style={{ display: "block", fontSize: "11px", color: "rgba(214,207,194,0.4)", fontFamily: "var(--font-display)", fontStyle: "italic" }}>
+                  <span style={{ display: "block", fontSize: "11px", color: "rgba(214,207,194,0.4)", fontStyle: "italic" }}>
                     {item.desc}
                   </span>
                 </Link>
@@ -180,6 +176,7 @@ export default function Navbar() {
         </button>
       </nav>
 
+      {/* Mobile fullscreen menu */}
       <div className="ct-mobile-nav" style={{
         position: "fixed", top: "64px", left: 0, right: 0, bottom: 0,
         zIndex: 99, background: "rgba(18,36,40,0.99)",
@@ -195,12 +192,11 @@ export default function Navbar() {
         {episodesDropdown.map((item) => (
           <Link key={item.to} to={item.to} style={{
             textDecoration: "none",
-            fontFamily: "var(--font-display)",
             fontSize: "clamp(28px, 7vw, 40px)",
             fontWeight: 700, color: "white",
             padding: "10px 0",
             borderBottom: "1px solid rgba(255,255,255,0.06)",
-            letterSpacing: "-0.5px", transition: "color 0.2s",
+            transition: "color 0.2s",
           }}
             onMouseEnter={e => e.currentTarget.style.color = "var(--gold)"}
             onMouseLeave={e => e.currentTarget.style.color = "white"}
@@ -213,12 +209,11 @@ export default function Navbar() {
         {[...navLinks, { label: "Partner", to: "/partner" }].map(link => (
           <Link key={link.to} to={link.to} style={{
             textDecoration: "none",
-            fontFamily: "var(--font-display)",
             fontSize: "clamp(28px, 7vw, 40px)",
             fontWeight: 700, color: "white",
             padding: "10px 0",
             borderBottom: "1px solid rgba(255,255,255,0.06)",
-            letterSpacing: "-0.5px", transition: "color 0.2s",
+            transition: "color 0.2s",
           }}
             onMouseEnter={e => e.currentTarget.style.color = "var(--gold)"}
             onMouseLeave={e => e.currentTarget.style.color = "white"}
