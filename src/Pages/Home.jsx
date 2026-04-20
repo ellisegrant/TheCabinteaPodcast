@@ -35,7 +35,7 @@ const IMGS = {
   ep1:       "/flagwoman.jpg",
   ep2:       "/africanwomen.jpg",
   ep3:       "/maritimeheritage.jpg",
-  cta:       "/ship.jpg",
+  cta:       "/lighthouse.jpg",
 };
 
 /* ── Platform icons ── */
