@@ -29,7 +29,7 @@ const MUTED = "rgba(214,207,194,0.42)";
 
 /* ── Exact image paths from the document ── */
 const IMGS = {
-  hero:      "/maritimeheritage.jpg",
+  hero:      "/abouthero1.jpg",
   community: "/ghanamen.jpg",
   market:    "/diaspora1.jpg",
   diaspora:  "/diaspora2.jpg",
