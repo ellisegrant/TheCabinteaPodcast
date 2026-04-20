@@ -33,7 +33,7 @@ const IMGS = {
   community: "/ghanamen.jpg",
   market:    "/diaspora1.jpg",
   diaspora:  "/diaspora2.jpg",
-  host:      "/podcastttt.jpg",
+  host:      "/hostimage.jpg",
   cta:       "/africanwomen.jpg",
 };
 
