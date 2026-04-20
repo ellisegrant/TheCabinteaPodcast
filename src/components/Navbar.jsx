@@ -64,7 +64,7 @@ export default function Navbar() {
         {/* ── Logo image — drop your file at /public/logo.png ── */}
         <Link to="/" style={{ textDecoration: "none", display: "flex", alignItems: "center", flexShrink: 0 }}>
           <img
-            src="/cabinlogo1.jpg"
+            src="/Cabinlogo1.jpg"
             alt="Cabin Tea"
             style={{ height: "36px", width: "auto", display: "block" }}
           />
