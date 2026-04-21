@@ -36,7 +36,7 @@ const episodes = [
     season: 1,
     duration: "60 min",
     date: "Apr 27, 2026",
-    img: "/images/episodes/ep01.jpg",
+    img: "/fakethumbnail.jpg",
     links: {
       youtube: "#",   // replace with real YouTube URL
       spotify: "#",   // replace with real Spotify URL
