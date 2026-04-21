@@ -191,7 +191,7 @@ export default function Episodes() {
         display: "flex", flexDirection: "column", justifyContent: "flex-end",
       }}>
         <img
-          src="/maritimeheritage.jpg"
+          src="/episodehero"
           alt="Episodes"
           style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover" }}
         />
