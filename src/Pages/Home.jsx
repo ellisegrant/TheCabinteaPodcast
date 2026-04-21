@@ -214,7 +214,7 @@ export default function Home() {
                 onMouseEnter={e => e.currentTarget.style.color = GOLD}
                 onMouseLeave={e => e.currentTarget.style.color = MUTED}
               ><Instagram /></a>
-              <a href="https://www.linkedin.com/company/cabin-tea-network/" target="_blank" rel="noopener noreferrer"
+              <a href="https://www.linkedin.com/company/cabin-tea-network/about/?viewAsMember=true" target="_blank" rel="noopener noreferrer"
                 style={{ color: MUTED, display: "inline-flex", transition: "color 0.2s" }}
                 onMouseEnter={e => e.currentTarget.style.color = GOLD}
                 onMouseLeave={e => e.currentTarget.style.color = MUTED}
