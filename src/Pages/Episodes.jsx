@@ -19,24 +19,28 @@ function useReveal(threshold = 0.1) {
 /* ── Palette ── */
 const BG    = "#0F1912";
 const PANEL = "#141F18";
-const DARK2 = "#1A2820";
 const GOLD  = "#C4A44E";
-const TEAL  = "#2C8C7C";
 const CREAM = "rgba(214,207,194,0.75)";
 const MUTED = "rgba(214,207,194,0.42)";
 
-/* ── Episodes data — update with real content ── */
+/* ── Episodes data ── */
 const episodes = [
   {
     num: "01",
-    guest: "Amara Diallo",
-    role: "Maritime Lawyer",
-    location: "Dakar",
-    title: "Who Really Owns the Sea?",
+    guest: "Prof. Christian Bueger",
+    role: "Maritime Security Scholar",
+    location: "University of Copenhagen",
+    title: "Maritime Security at the UN",
+    excerpt: "Fresh from high-level preparatory discussions at the United Nations, one of the world's leading maritime security scholars breaks down what the global agenda means for Africa and the Indian Ocean.",
     tag: "Governance",
     season: 1,
     duration: "60 min",
+    date: "Apr 27, 2026",
     img: "/images/episodes/ep01.jpg",
+    links: {
+      youtube: "#",   // replace with real YouTube URL
+      spotify: "#",   // replace with real Spotify URL
+    },
   },
   {
     num: "02",
@@ -44,10 +48,13 @@ const episodes = [
     role: "Documentary Filmmaker",
     location: "Accra",
     title: "The Last Fisher",
+    excerpt: "A documentary filmmaker documents the vanishing world of Ghana's coastal fishing communities.",
     tag: "Community",
     season: 1,
     duration: "58 min",
+    date: "Coming Soon",
     img: "/images/episodes/ep02.jpg",
+    links: { youtube: null, spotify: null },
   },
   {
     num: "03",
@@ -55,34 +62,146 @@ const episodes = [
     role: "Marine Economist",
     location: "Lagos",
     title: "Blue Money",
+    excerpt: "How Africa's blue economy could reshape the continent's financial future.",
     tag: "Blue Economy",
     season: 1,
     duration: "52 min",
+    date: "Coming Soon",
     img: "/images/episodes/ep03.jpg",
+    links: { youtube: null, spotify: null },
   },
 ];
 
 const FILTERS = ["All Episodes", "Season 1", "Most Recent"];
 
-/* ── Play button ── */
-function PlayButton() {
-  const [hovered, setHovered] = useState(false);
+/* ── Platform Selector ── */
+function PlatformSelector({ links }) {
+  const [open, setOpen] = useState(false);
+  const ref = useRef(null);
+  const hasLinks = links.youtube || links.spotify;
+
+  useEffect(() => {
+    const handler = (e) => {
+      if (ref.current && !ref.current.contains(e.target)) setOpen(false);
+    };
+    document.addEventListener("mousedown", handler);
+    return () => document.removeEventListener("mousedown", handler);
+  }, []);
+
+  if (!hasLinks) {
+    return (
+      <div style={{
+        display: "flex", alignItems: "center", gap: "10px",
+        padding: "8px 14px",
+        border: "1px solid rgba(196,164,78,0.15)",
+        color: MUTED, fontSize: "10px", letterSpacing: "2px", fontWeight: 600,
+      }}>
+        <svg width="10" height="12" viewBox="0 0 10 12" fill={MUTED}>
+          <path d="M0 0l10 6-10 6V0z"/>
+        </svg>
+        COMING SOON
+      </div>
+    );
+  }
+
   return (
-    <div
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}
-      style={{
-        width: "40px", height: "40px", borderRadius: "50%",
-        border: `1px solid ${hovered ? GOLD : "rgba(196,164,78,0.35)"}`,
-        display: "flex", alignItems: "center", justifyContent: "center",
-        flexShrink: 0, cursor: "pointer",
-        transition: "border-color 0.2s, background 0.2s",
-        background: hovered ? "rgba(196,164,78,0.1)" : "transparent",
-      }}
-    >
-      <svg width="12" height="14" viewBox="0 0 12 14" fill={hovered ? GOLD : "rgba(196,164,78,0.6)"}>
-        <path d="M0 0l12 7-12 7V0z"/>
-      </svg>
+    <div ref={ref} style={{ position: "relative" }}>
+      {/* Trigger button */}
+      <button
+        onClick={(e) => { e.stopPropagation(); setOpen(v => !v); }}
+        style={{
+          display: "flex", alignItems: "center", gap: "10px",
+          padding: "9px 16px",
+          background: open ? GOLD : "transparent",
+          border: `1px solid ${open ? GOLD : "rgba(196,164,78,0.4)"}`,
+          color: open ? "#0F1912" : CREAM,
+          fontSize: "10px", letterSpacing: "2px", fontWeight: 700,
+          cursor: "pointer", fontFamily: "inherit",
+          transition: "all 0.2s",
+        }}
+        onMouseEnter={e => { if (!open) { e.currentTarget.style.borderColor = GOLD; e.currentTarget.style.color = "white"; }}}
+        onMouseLeave={e => { if (!open) { e.currentTarget.style.borderColor = "rgba(196,164,78,0.4)"; e.currentTarget.style.color = CREAM; }}}
+      >
+        <svg width="11" height="13" viewBox="0 0 10 12" fill="currentColor">
+          <path d="M0 0l10 6-10 6V0z"/>
+        </svg>
+        LISTEN NOW
+        <svg width="8" height="5" viewBox="0 0 10 6" fill="none" style={{
+          marginLeft: "2px",
+          transform: open ? "rotate(180deg)" : "none",
+          transition: "transform 0.2s",
+          opacity: 0.7,
+        }}>
+          <path d="M1 1l4 4 4-4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+        </svg>
+      </button>
+
+      {/* Dropdown */}
+      <div style={{
+        position: "absolute",
+        bottom: "calc(100% + 8px)",
+        left: 0,
+        background: "#0F1912",
+        border: "1px solid rgba(196,164,78,0.25)",
+        borderTop: `2px solid ${GOLD}`,
+        minWidth: "180px",
+        opacity: open ? 1 : 0,
+        pointerEvents: open ? "all" : "none",
+        transform: open ? "translateY(0)" : "translateY(6px)",
+        transition: "opacity 0.18s, transform 0.18s",
+        zIndex: 10,
+      }}>
+        <p style={{
+          fontSize: "9px", letterSpacing: "2.5px", color: MUTED,
+          padding: "10px 14px 6px", margin: 0, fontWeight: 600,
+        }}>LISTEN ON</p>
+
+        {links.youtube && (
+          <a
+            href={links.youtube}
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={e => e.stopPropagation()}
+            style={{
+              display: "flex", alignItems: "center", gap: "10px",
+              padding: "10px 14px", textDecoration: "none",
+              color: CREAM, fontSize: "12px", fontWeight: 500,
+              transition: "background 0.15s, color 0.15s",
+            }}
+            onMouseEnter={e => { e.currentTarget.style.background = "rgba(196,164,78,0.08)"; e.currentTarget.style.color = "white"; }}
+            onMouseLeave={e => { e.currentTarget.style.background = "transparent"; e.currentTarget.style.color = CREAM; }}
+          >
+            {/* YouTube icon */}
+            <svg width="18" height="13" viewBox="0 0 26 18" fill={GOLD}>
+              <path d="M25.456 2.818A3.26 3.26 0 0023.162.51C21.13 0 13 0 13 0S4.87 0 2.838.51A3.26 3.26 0 00.544 2.818C0 4.862 0 9 0 9s0 4.138.544 6.182a3.26 3.26 0 002.294 2.308C4.87 18 13 18 13 18s8.13 0 10.162-.51a3.26 3.26 0 002.294-2.308C26 13.138 26 9 26 9s0-4.138-.544-6.182zM10.4 12.857V5.143L17.143 9 10.4 12.857z"/>
+            </svg>
+            YouTube
+          </a>
+        )}
+
+        {links.spotify && (
+          <a
+            href={links.spotify}
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={e => e.stopPropagation()}
+            style={{
+              display: "flex", alignItems: "center", gap: "10px",
+              padding: "10px 14px 12px", textDecoration: "none",
+              color: CREAM, fontSize: "12px", fontWeight: 500,
+              transition: "background 0.15s, color 0.15s",
+            }}
+            onMouseEnter={e => { e.currentTarget.style.background = "rgba(196,164,78,0.08)"; e.currentTarget.style.color = "white"; }}
+            onMouseLeave={e => { e.currentTarget.style.background = "transparent"; e.currentTarget.style.color = CREAM; }}
+          >
+            {/* Spotify icon */}
+            <svg width="16" height="16" viewBox="0 0 24 24" fill={GOLD}>
+              <path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/>
+            </svg>
+            Spotify
+          </a>
+        )}
+      </div>
     </div>
   );
 }
@@ -90,22 +209,23 @@ function PlayButton() {
 /* ── Episode card ── */
 function EpisodeCard({ ep, index, visible }) {
   const [hovered, setHovered] = useState(false);
+
   return (
     <div
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
       style={{
         display: "flex", flexDirection: "column",
-        background: PANEL, overflow: "hidden",
+        background: PANEL, overflow: "visible",
+        position: "relative",
         opacity: visible ? 1 : 0,
         transform: visible ? "none" : "translateY(24px)",
         transition: `opacity 0.6s ${0.05 + index * 0.1}s, transform 0.6s ${0.05 + index * 0.1}s, box-shadow 0.3s`,
-        boxShadow: hovered ? "0 16px 40px rgba(0,0,0,0.35)" : "none",
-        cursor: "pointer",
+        boxShadow: hovered ? "0 16px 40px rgba(0,0,0,0.4)" : "0 4px 20px rgba(0,0,0,0.2)",
       }}
     >
-      {/* Image */}
-      <div style={{ position: "relative", height: "240px", overflow: "hidden" }}>
+      {/* ── Thumbnail area ── */}
+      <div style={{ position: "relative", height: "220px", overflow: "hidden", flexShrink: 0 }}>
         <img
           src={ep.img}
           alt={ep.guest}
@@ -115,52 +235,83 @@ function EpisodeCard({ ep, index, visible }) {
             transition: "transform 0.6s cubic-bezier(0.16,1,0.3,1)",
           }}
         />
+        {/* Gradient overlay */}
         <div style={{
           position: "absolute", inset: 0,
-          background: "linear-gradient(to top, rgba(20,31,24,0.95) 0%, transparent 55%)",
+          background: "linear-gradient(to top, rgba(20,31,24,1) 0%, rgba(20,31,24,0.3) 60%, transparent 100%)",
         }} />
 
-        {/* Tag */}
-        <span style={{
-          position: "absolute", top: "14px", left: "14px",
-          background: GOLD, color: "#0F1912",
-          fontSize: "9px", letterSpacing: "2px", fontWeight: 700,
-          padding: "4px 10px",
-        }}>{ep.tag.toUpperCase()}</span>
+        {/* Top row: tag + date */}
+        <div style={{
+          position: "absolute", top: "14px", left: "14px", right: "14px",
+          display: "flex", justifyContent: "space-between", alignItems: "center",
+        }}>
+          <span style={{
+            background: GOLD, color: "#0F1912",
+            fontSize: "9px", letterSpacing: "2px", fontWeight: 700,
+            padding: "4px 10px",
+          }}>{ep.tag.toUpperCase()}</span>
+          <span style={{
+            fontSize: "10px", color: "rgba(255,255,255,0.55)",
+            letterSpacing: "1px", fontWeight: 500,
+          }}>{ep.date}</span>
+        </div>
 
-        {/* Episode number watermark */}
-        <span style={{
-          position: "absolute", bottom: "14px", right: "16px",
-          fontSize: "48px", fontWeight: 700, lineHeight: 1,
-          color: "rgba(255,255,255,0.07)", userSelect: "none",
-        }}>EP. {ep.num}</span>
+        {/* Bottom of image: episode number + duration */}
+        <div style={{
+          position: "absolute", bottom: "14px", left: "16px", right: "16px",
+          display: "flex", justifyContent: "space-between", alignItems: "flex-end",
+        }}>
+          <span style={{
+            fontSize: "11px", letterSpacing: "3px",
+            color: "rgba(196,164,78,0.6)", fontWeight: 600,
+          }}>EP. {ep.num}</span>
+          <span style={{
+            fontSize: "10px", color: "rgba(255,255,255,0.4)",
+            letterSpacing: "1px",
+          }}>{ep.duration}</span>
+        </div>
       </div>
 
-      {/* Content */}
-      <div style={{ padding: "24px", flex: 1, display: "flex", flexDirection: "column" }}>
-        <p style={{ fontSize: "11px", color: MUTED, marginBottom: "4px" }}>Sipping with</p>
+      {/* ── Card body ── */}
+      <div style={{ padding: "20px 22px 22px", flex: 1, display: "flex", flexDirection: "column" }}>
+
+        {/* Guest name */}
         <h3 style={{
-          fontSize: "22px", fontWeight: 700,
+          fontSize: "19px", fontWeight: 700,
           color: hovered ? GOLD : "white",
-          lineHeight: 1.2, marginBottom: "6px",
+          lineHeight: 1.2, margin: "0 0 4px",
           transition: "color 0.2s",
         }}>{ep.guest}</h3>
-        <p style={{ fontSize: "11px", letterSpacing: "1px", color: GOLD, marginBottom: "14px" }}>
+
+        {/* Role · Location */}
+        <p style={{
+          fontSize: "11px", letterSpacing: "1px",
+          color: GOLD, margin: "0 0 12px", fontWeight: 500,
+        }}>
           {ep.role} · {ep.location}
         </p>
-        <div style={{ width: "24px", height: "1px", background: "rgba(196,164,78,0.3)", marginBottom: "14px" }} />
+
+        {/* Divider */}
+        <div style={{ width: "24px", height: "1px", background: "rgba(196,164,78,0.3)", marginBottom: "12px" }} />
+
+        {/* Episode title */}
         <p style={{
-          fontSize: "14px", lineHeight: 1.65,
-          color: CREAM, fontWeight: 300,
-          flex: 1, marginBottom: "20px",
+          fontSize: "13px", letterSpacing: "0.5px",
+          color: "white", fontWeight: 600,
+          margin: "0 0 10px", lineHeight: 1.4,
         }}>"{ep.title}"</p>
 
-        {/* Footer */}
-        <div style={{ display: "flex", alignItems: "center", gap: "12px", marginTop: "auto" }}>
-          <PlayButton />
-          <span style={{ fontSize: "10px", letterSpacing: "2px", color: MUTED, fontWeight: 500 }}>
-            PLAY · {ep.duration}
-          </span>
+        {/* Excerpt */}
+        <p style={{
+          fontSize: "13px", lineHeight: 1.65,
+          color: CREAM, fontWeight: 300,
+          margin: "0 0 20px", flex: 1,
+        }}>{ep.excerpt}</p>
+
+        {/* Platform selector */}
+        <div style={{ marginTop: "auto" }}>
+          <PlatformSelector links={ep.links} />
         </div>
       </div>
     </div>
@@ -182,16 +333,14 @@ export default function Episodes() {
     <div style={{ minHeight: "100vh", background: BG, color: "white", overflowX: "hidden" }}>
       <Navbar />
 
-      {/* ══════════════════════════════════════════════
-          HERO
-      ══════════════════════════════════════════════ */}
+      {/* ════════ HERO ════════ */}
       <section ref={heroRef} style={{
         height: "55vh", minHeight: "360px",
         position: "relative", overflow: "hidden",
         display: "flex", flexDirection: "column", justifyContent: "flex-end",
       }}>
         <img
-          src="/episodehero"
+          src="/episodehero.jpg"
           alt="Episodes"
           style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover" }}
         />
@@ -234,9 +383,7 @@ export default function Episodes() {
         </div>
       </section>
 
-      {/* ══════════════════════════════════════════════
-          FILTERS + GRID
-      ══════════════════════════════════════════════ */}
+      {/* ════════ FILTERS + GRID ════════ */}
       <section ref={gridRef} style={{ background: BG, padding: "48px 5vw 96px" }}>
         <div style={{ maxWidth: "1200px", margin: "0 auto" }}>
 
@@ -271,7 +418,7 @@ export default function Episodes() {
             <div style={{
               display: "grid",
               gridTemplateColumns: "repeat(auto-fill, minmax(320px, 1fr))",
-              gap: "2px", background: "rgba(255,255,255,0.03)",
+              gap: "24px",
             }}>
               {filtered.map((ep, i) => (
                 <EpisodeCard key={ep.num} ep={ep} index={i} visible={gridVis} />
@@ -283,7 +430,7 @@ export default function Episodes() {
             </div>
           )}
 
-          {/* Load more — for when you add more episodes */}
+          {/* Load more */}
           {filtered.length >= 3 && (
             <div style={{ textAlign: "center", marginTop: "56px" }}>
               <button style={{
@@ -302,9 +449,7 @@ export default function Episodes() {
         </div>
       </section>
 
-      {/* ══════════════════════════════════════════════
-          SUBSCRIBE STRIP
-      ══════════════════════════════════════════════ */}
+      {/* ════════ SUBSCRIBE STRIP ════════ */}
       <section style={{
         background: PANEL,
         borderTop: "1px solid rgba(255,255,255,0.06)",
