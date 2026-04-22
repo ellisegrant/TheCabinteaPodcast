@@ -31,7 +31,7 @@ const episodes = [
     role: "Maritime Security Scholar",
     location: "University of Copenhagen",
     title: "Maritime Security at the UN",
-    excerpt: "Fresh from high-level preparatory discussions at the United Nations, one of the world's leading maritime security scholars breaks down what the global agenda means for Africa and the Indian Ocean.",
+    excerpt: "One of the world's leading voices on international security and global governance sits down with  Cabin Tea to discuss the global maritime security agenda — and what role Africa and the Indian Ocean can play in shaping it",
     tag: "Governance",
     season: 1,
     duration: "60 min",
