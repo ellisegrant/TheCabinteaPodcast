@@ -53,7 +53,7 @@ const episodes = [
     season: 1,
     duration: "58 min",
     date: "Coming Soon",
-    img: "/images/episodes/ep02.jpg",
+    img: "ep2fake.jpg",
     links: { youtube: null, spotify: null },
   },
   {
@@ -67,7 +67,7 @@ const episodes = [
     season: 1,
     duration: "52 min",
     date: "Coming Soon",
-    img: "/images/episodes/ep03.jpg",
+    img: "ep3fake.jpg",
     links: { youtube: null, spotify: null },
   },
 ];
