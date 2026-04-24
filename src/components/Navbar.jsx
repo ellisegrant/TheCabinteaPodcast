@@ -45,13 +45,25 @@ export default function Navbar() {
 
   const isActive = (to) => location.pathname === to;
 
+  const linkStyle = (active) => ({
+    textDecoration: "none",
+    fontSize: "12px",
+    letterSpacing: "0.8px",
+    fontWeight: 600,
+    color: active ? "white" : "rgba(214,207,194,0.9)",
+    transition: "color 0.2s",
+    textShadow: "0 1px 6px rgba(0,0,0,0.7), 0 0 2px rgba(0,0,0,0.5)",
+    borderBottom: active ? "1px solid rgba(196,164,78,0.6)" : "1px solid transparent",
+    paddingBottom: "1px",
+  });
+
   return (
     <>
       <nav style={{
         position: "fixed",
         top: 0, left: 0, right: 0,
         zIndex: 100,
-        height: "64px",
+        height: "80px",
         display: "flex",
         alignItems: "center",
         padding: "0 5vw",
@@ -61,15 +73,16 @@ export default function Navbar() {
         boxShadow: scrolled ? "0 1px 0 rgba(196,164,78,0.12)" : "none",
       }}>
 
-        {/* ── Logo image — drop your file at /public/logo.png ── */}
+        {/* Logo */}
         <Link to="/" style={{ textDecoration: "none", display: "flex", alignItems: "center", flexShrink: 0 }}>
           <img
             src="/YellowNoLogo.png"
             alt="Cabin Tea"
-            style={{ height: "72px", width: "auto", display: "block" }}
+            style={{ height: "96px", width: "auto", display: "block" }}
           />
         </Link>
 
+        {/* Desktop nav */}
         <div style={{
           display: "flex", alignItems: "center", gap: "32px",
           marginLeft: "auto", marginRight: "32px",
@@ -80,18 +93,19 @@ export default function Navbar() {
             <button onClick={() => setEpisodesOpen(v => !v)} style={{
               background: "none", border: "none", cursor: "pointer",
               display: "flex", alignItems: "center", gap: "4px",
-              fontSize: "12px", letterSpacing: "0.5px", fontWeight: 400,
-              color: episodesOpen ? "white" : "rgba(214,207,194,0.55)",
+              fontSize: "12px", letterSpacing: "0.8px", fontWeight: 600,
+              color: episodesOpen ? "white" : "rgba(214,207,194,0.9)",
+              textShadow: "0 1px 6px rgba(0,0,0,0.7), 0 0 2px rgba(0,0,0,0.5)",
               transition: "color 0.2s", padding: 0, fontFamily: "inherit",
             }}
               onMouseEnter={e => e.currentTarget.style.color = "white"}
-              onMouseLeave={e => { if (!episodesOpen) e.currentTarget.style.color = "rgba(214,207,194,0.55)"; }}
+              onMouseLeave={e => { if (!episodesOpen) e.currentTarget.style.color = "rgba(214,207,194,0.9)"; }}
             >
               Our Works
               <svg width="9" height="5" viewBox="0 0 10 6" fill="none" style={{
                 transition: "transform 0.2s",
                 transform: episodesOpen ? "rotate(180deg)" : "none",
-                opacity: 0.5,
+                opacity: 0.6,
               }}>
                 <path d="M1 1l4 4 4-4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
               </svg>
@@ -136,16 +150,12 @@ export default function Navbar() {
           </div>
 
           {navLinks.map(link => (
-            <Link key={link.to} to={link.to} style={{
-              textDecoration: "none",
-              fontSize: "12px", letterSpacing: "0.5px", fontWeight: 400,
-              color: isActive(link.to) ? "white" : "rgba(214,207,194,0.55)",
-              transition: "color 0.2s",
-              borderBottom: isActive(link.to) ? "1px solid rgba(196,164,78,0.6)" : "1px solid transparent",
-              paddingBottom: "1px",
-            }}
+            <Link
+              key={link.to}
+              to={link.to}
+              style={linkStyle(isActive(link.to))}
               onMouseEnter={e => e.currentTarget.style.color = "white"}
-              onMouseLeave={e => e.currentTarget.style.color = isActive(link.to) ? "white" : "rgba(214,207,194,0.55)"}
+              onMouseLeave={e => e.currentTarget.style.color = isActive(link.to) ? "white" : "rgba(214,207,194,0.9)"}
             >
               {link.label}
             </Link>
@@ -165,6 +175,7 @@ export default function Navbar() {
           PARTNER
         </Link>
 
+        {/* Hamburger */}
         <button className="ct-mobile-nav" onClick={() => setMenuOpen(v => !v)} style={{
           marginLeft: "auto", background: "none", border: "none",
           cursor: "pointer", padding: "6px",
@@ -178,7 +189,7 @@ export default function Navbar() {
 
       {/* Mobile fullscreen menu */}
       <div className="ct-mobile-nav" style={{
-        position: "fixed", top: "64px", left: 0, right: 0, bottom: 0,
+        position: "fixed", top: "80px", left: 0, right: 0, bottom: 0,
         zIndex: 99, background: "rgba(18,36,40,0.99)",
         backdropFilter: "blur(20px)",
         padding: "40px 5vw 32px",
