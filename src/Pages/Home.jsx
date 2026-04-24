@@ -32,7 +32,7 @@ const IMGS = {
   afrocean:  "/africanface.jpg",
   anchorage: "/canoe.jpg",
   agency:    "/creativeagency.jpg",
-  ep1:       "/flagwoman.jpg",
+  ep1:       "/ep1thumbnail.jpg",
   ep2:       "/africanwomen.jpg",
   ep3:       "/maritimeheritage.jpg",
   cta:       "/lighthouse.jpg",
@@ -77,9 +77,9 @@ function LinkedIn() {
 
 /* ── Featured episodes ── */
 const EPISODES = [
-  { num: "EP. 12", guest: "Featured Guest", title: "The Future of Africa's Blue Economy", duration: "48 min", img: IMGS.ep1 },
-  { num: "EP. 11", guest: "Featured Guest", title: "Maritime Trade & the Diaspora Connection", duration: "52 min", img: IMGS.ep2 },
-  { num: "EP. 10", guest: "Featured Guest", title: "Navigating the Gulf of Guinea", duration: "44 min", img: IMGS.ep3 },
+  { num: "EP. 1", guest: "Prof. Christian Bueger Maritime Security Scholar · University of Copenhagen", title: "Maritime Security at the UN", duration: "14 min", img: IMGS.ep1 },
+  { num: "EP. 2", guest: "Featured Guest", title: "Maritime Trade & the Diaspora Connection", duration: "52 min", img: IMGS.ep2 },
+  { num: "EP. 3", guest: "Featured Guest", title: "Navigating the Gulf of Guinea", duration: "44 min", img: IMGS.ep3 },
 ];
 
 /* ── Sub-brands ── */
