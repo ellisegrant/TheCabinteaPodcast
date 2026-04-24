@@ -34,11 +34,11 @@ const episodes = [
     excerpt: "One of the world's leading voices on international security and global governance sits down with  Cabin Tea to discuss the global maritime security agenda — and what role Africa and the Indian Ocean can play in shaping it",
     tag: "Governance",
     season: 1,
-    duration: "60 min",
+    duration: "14 min",
     date: "Apr 27, 2026",
     img: "/ep1thumbnail.jpg",
     links: {
-      youtube: "#",   // replace with real YouTube URL
+      youtube: "https://www.youtube.com/watch?v=h2B6kPP16-M",   // replace with real YouTube URL
       spotify: "#",   // replace with real Spotify URL
     },
   },
