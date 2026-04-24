@@ -470,7 +470,7 @@ export default function Episodes() {
           </div>
           <div style={{ display: "flex", gap: "12px", flexWrap: "wrap" }}>
             {[
-              { label: "YouTube", href: "#" },
+              { label: "YouTube", href: "https://www.youtube.com/watch?v=h2B6kPP16-M" },
               { label: "Spotify", href: "#" },
               { label: "Apple Podcasts", href: "#" },
             ].map(p => (
