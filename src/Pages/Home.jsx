@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import { Link } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
@@ -77,9 +77,36 @@ function LinkedIn() {
 
 /* ── Featured episodes ── */
 const EPISODES = [
-  { num: "EP. 1", guest: "Prof. Christian Bueger Maritime Security Scholar · University of Copenhagen", title: "Maritime Security at the UN", duration: "14 min", img: IMGS.ep1 },
-  { num: "EP. 2", guest: "Featured Guest", title: "Maritime Trade & the Diaspora Connection", duration: "52 min", img: IMGS.ep2 },
-  { num: "EP. 3", guest: "Featured Guest", title: "Navigating the Gulf of Guinea", duration: "44 min", img: IMGS.ep3 },
+  {
+    num: "EP. 1",
+    guest: "Prof. Christian Bueger",
+    role: "Maritime Security Scholar · University of Copenhagen",
+    title: "Maritime Security at the UN",
+    tag: "Governance",
+    duration: "14 min",
+    date: "Apr 27, 2026",
+    img: IMGS.ep1,
+  },
+  {
+    num: "EP. 2",
+    guest: "Featured Guest",
+    role: "Role · Location",
+    title: "Maritime Trade & the Diaspora Connection",
+    tag: "Diaspora",
+    duration: "52 min",
+    date: "Coming Soon",
+    img: IMGS.ep2,
+  },
+  {
+    num: "EP. 3",
+    guest: "Featured Guest",
+    role: "Role · Location",
+    title: "Navigating the Gulf of Guinea",
+    tag: "Blue Economy",
+    duration: "44 min",
+    date: "Coming Soon",
+    img: IMGS.ep3,
+  },
 ];
 
 /* ── Sub-brands ── */
@@ -107,6 +134,303 @@ const BRANDS = [
   },
 ];
 
+/* ══════════════════════════════════════════
+   EPISODE CAROUSEL
+══════════════════════════════════════════ */
+function EpisodeCarousel({ episodes }) {
+  const [current, setCurrent] = useState(0);
+  const [animating, setAnimating] = useState(false);
+  const [dir, setDir] = useState("next");
+  const [dragStart, setDragStart] = useState(null);
+  const autoRef = useRef(null);
+  const total = episodes.length;
+
+  const goTo = useCallback((idx, direction) => {
+    if (animating) return;
+    setDir(direction);
+    setAnimating(true);
+    setTimeout(() => {
+      setCurrent(idx);
+      setAnimating(false);
+    }, 440);
+  }, [animating]);
+
+  const next = useCallback(() => goTo((current + 1) % total, "next"), [current, total, goTo]);
+  const prev = useCallback(() => goTo((current - 1 + total) % total, "prev"), [current, total, goTo]);
+
+  const startAuto = useCallback(() => {
+    clearInterval(autoRef.current);
+    autoRef.current = setInterval(next, 5500);
+  }, [next]);
+
+  useEffect(() => {
+    startAuto();
+    return () => clearInterval(autoRef.current);
+  }, [startAuto]);
+
+  const pause = () => clearInterval(autoRef.current);
+  const resume = () => startAuto();
+
+  const onDragStart = (e) => {
+    pause();
+    setDragStart(e.touches ? e.touches[0].clientX : e.clientX);
+  };
+  const onDragEnd = (e) => {
+    if (dragStart === null) return;
+    const endX = e.changedTouches ? e.changedTouches[0].clientX : e.clientX;
+    const diff = dragStart - endX;
+    if (Math.abs(diff) > 50) diff > 0 ? next() : prev();
+    setDragStart(null);
+    resume();
+  };
+
+  const ep = episodes[current];
+
+  return (
+    <div
+      onMouseEnter={pause}
+      onMouseLeave={resume}
+      onMouseDown={onDragStart}
+      onMouseUp={onDragEnd}
+      onTouchStart={onDragStart}
+      onTouchEnd={onDragEnd}
+      style={{ userSelect: "none" }}
+    >
+      {/* ── Main stage ── */}
+      <div style={{
+        display: "grid",
+        gridTemplateColumns: "1fr 400px",
+        minHeight: "500px",
+        overflow: "hidden",
+        background: PANEL,
+      }}>
+        {/* Left — image */}
+        <div style={{ position: "relative", overflow: "hidden" }}>
+          <img
+            key={`img-${current}`}
+            src={ep.img}
+            alt={ep.title}
+            style={{
+              width: "100%", height: "100%",
+              objectFit: "cover", display: "block",
+              animation: `${dir === "next" ? "ctSlideInRight" : "ctSlideInLeft"} 0.44s cubic-bezier(0.16,1,0.3,1) forwards`,
+            }}
+          />
+          {/* Overlays */}
+          <div style={{
+            position: "absolute", inset: 0,
+            background: "linear-gradient(to right, transparent 45%, rgba(20,31,24,0.92) 100%)",
+          }} />
+          <div style={{
+            position: "absolute", inset: 0,
+            background: "linear-gradient(to top, rgba(15,25,18,0.65) 0%, transparent 45%)",
+          }} />
+
+          {/* Tag + date */}
+          <div style={{
+            position: "absolute", top: "24px", left: "24px",
+            display: "flex", alignItems: "center", gap: "12px",
+          }}>
+            <span style={{
+              background: GOLD, color: "#0F1912",
+              fontSize: "9px", letterSpacing: "2.5px", fontWeight: 700,
+              padding: "5px 12px",
+            }}>{ep.tag.toUpperCase()}</span>
+            <span style={{ fontSize: "11px", color: "rgba(255,255,255,0.5)", letterSpacing: "1px" }}>
+              {ep.date}
+            </span>
+          </div>
+
+          {/* Counter */}
+          <div style={{
+            position: "absolute", bottom: "22px", left: "24px",
+            fontSize: "11px", letterSpacing: "4px",
+            color: "rgba(196,164,78,0.55)", fontWeight: 600,
+          }}>
+            {String(current + 1).padStart(2, "0")} / {String(total).padStart(2, "0")}
+          </div>
+        </div>
+
+        {/* Right — info */}
+        <div style={{
+          padding: "48px 40px",
+          display: "flex", flexDirection: "column",
+          justifyContent: "center",
+          background: PANEL,
+          borderLeft: "1px solid rgba(255,255,255,0.04)",
+        }}>
+          <div
+            key={`content-${current}`}
+            style={{
+              animation: `${dir === "next" ? "ctFadeUp" : "ctFadeDown"} 0.44s cubic-bezier(0.16,1,0.3,1) forwards`,
+            }}
+          >
+            <p style={{
+              fontSize: "10px", letterSpacing: "4px",
+              color: GOLD, fontWeight: 600, margin: "0 0 18px",
+            }}>{ep.num}</p>
+
+            <h3 style={{
+              fontSize: "clamp(20px, 2vw, 28px)", fontWeight: 700,
+              color: "white", lineHeight: 1.2,
+              margin: "0 0 8px", letterSpacing: "-0.2px",
+            }}>{ep.guest}</h3>
+
+            <p style={{
+              fontSize: "11px", letterSpacing: "0.5px",
+              color: GOLD, margin: "0 0 18px", fontWeight: 500,
+            }}>{ep.role}</p>
+
+            <div style={{
+              width: "28px", height: "1px",
+              background: "rgba(196,164,78,0.3)",
+              margin: "0 0 18px",
+            }} />
+
+            <p style={{
+              fontSize: "clamp(14px, 1.4vw, 17px)", fontWeight: 400,
+              color: CREAM, lineHeight: 1.6,
+              margin: "0 0 6px", fontStyle: "italic",
+            }}>"{ep.title}"</p>
+
+            <p style={{
+              fontSize: "11px", letterSpacing: "2px",
+              color: MUTED, margin: "0 0 32px",
+            }}>{ep.duration}</p>
+
+            <Link to="/episodes" style={{
+              display: "inline-flex", alignItems: "center", gap: "10px",
+              padding: "11px 26px",
+              background: GOLD, color: "#0F1912",
+              textDecoration: "none", fontSize: "10px",
+              letterSpacing: "2px", fontWeight: 700,
+              transition: "opacity 0.2s",
+            }}
+              onMouseEnter={e => e.currentTarget.style.opacity = "0.85"}
+              onMouseLeave={e => e.currentTarget.style.opacity = "1"}
+            >
+              <svg width="9" height="11" viewBox="0 0 9 11" fill="currentColor">
+                <path d="M0 0l9 5.5-9 5.5V0z"/>
+              </svg>
+              LISTEN NOW
+            </Link>
+          </div>
+        </div>
+      </div>
+
+      {/* ── Controls ── */}
+      <div style={{
+        display: "flex", alignItems: "center",
+        justifyContent: "space-between",
+        padding: "18px 0 0",
+      }}>
+        {/* Progress dots */}
+        <div style={{ display: "flex", gap: "8px", alignItems: "center" }}>
+          {episodes.map((_, i) => (
+            <button key={i}
+              onClick={() => goTo(i, i > current ? "next" : "prev")}
+              style={{
+                width: i === current ? "30px" : "8px",
+                height: "3px", border: "none", cursor: "pointer", padding: 0,
+                background: i === current ? GOLD : "rgba(196,164,78,0.22)",
+                borderRadius: "2px",
+                transition: "width 0.38s cubic-bezier(0.16,1,0.3,1), background 0.3s",
+              }}
+            />
+          ))}
+        </div>
+
+        {/* Arrow buttons */}
+        <div style={{ display: "flex", gap: "6px" }}>
+          {[["←", prev], ["→", next]].map(([label, action]) => (
+            <button key={label} onClick={action} style={{
+              width: "42px", height: "42px",
+              background: "transparent",
+              border: "1px solid rgba(196,164,78,0.22)",
+              color: MUTED, cursor: "pointer",
+              fontSize: "15px", fontFamily: "inherit",
+              display: "flex", alignItems: "center", justifyContent: "center",
+              transition: "border-color 0.2s, color 0.2s, background 0.2s",
+            }}
+              onMouseEnter={e => {
+                e.currentTarget.style.borderColor = GOLD;
+                e.currentTarget.style.color = "white";
+                e.currentTarget.style.background = "rgba(196,164,78,0.07)";
+              }}
+              onMouseLeave={e => {
+                e.currentTarget.style.borderColor = "rgba(196,164,78,0.22)";
+                e.currentTarget.style.color = MUTED;
+                e.currentTarget.style.background = "transparent";
+              }}
+            >{label}</button>
+          ))}
+        </div>
+      </div>
+
+      {/* ── Thumbnail strip ── */}
+      <div style={{
+        display: "grid",
+        gridTemplateColumns: `repeat(${total}, 1fr)`,
+        gap: "2px", marginTop: "2px",
+      }}>
+        {episodes.map((e, i) => (
+          <button key={i}
+            onClick={() => goTo(i, i > current ? "next" : "prev")}
+            style={{
+              position: "relative", height: "86px",
+              overflow: "hidden", border: "none",
+              cursor: "pointer", padding: 0,
+              outline: i === current ? `2px solid ${GOLD}` : "2px solid transparent",
+              outlineOffset: "-2px",
+              transition: "outline-color 0.25s",
+            }}
+          >
+            <img src={e.img} alt={e.title}
+              style={{
+                width: "100%", height: "100%", objectFit: "cover", display: "block",
+                filter: i === current ? "none" : "brightness(0.35) saturate(0.6)",
+                transition: "filter 0.35s",
+              }}
+            />
+            <div style={{
+              position: "absolute", inset: 0,
+              background: "linear-gradient(to top, rgba(15,25,18,0.85) 0%, transparent 55%)",
+            }} />
+            <span style={{
+              position: "absolute", bottom: "7px", left: "10px",
+              fontSize: "9px", letterSpacing: "2px",
+              color: i === current ? GOLD : "rgba(255,255,255,0.35)",
+              fontWeight: 600, transition: "color 0.3s",
+            }}>EP. {String(i + 1).padStart(2, "0")}</span>
+          </button>
+        ))}
+      </div>
+
+      <style>{`
+        @keyframes ctSlideInRight {
+          from { transform: translateX(48px); opacity: 0; }
+          to   { transform: translateX(0);    opacity: 1; }
+        }
+        @keyframes ctSlideInLeft {
+          from { transform: translateX(-48px); opacity: 0; }
+          to   { transform: translateX(0);     opacity: 1; }
+        }
+        @keyframes ctFadeUp {
+          from { transform: translateY(16px); opacity: 0; }
+          to   { transform: translateY(0);    opacity: 1; }
+        }
+        @keyframes ctFadeDown {
+          from { transform: translateY(-16px); opacity: 0; }
+          to   { transform: translateY(0);     opacity: 1; }
+        }
+      `}</style>
+    </div>
+  );
+}
+
+/* ══════════════════════════════════════════
+   HOME PAGE
+══════════════════════════════════════════ */
 export default function Home() {
   const [heroRef,    heroVis]    = useReveal(0.05);
   const [aboutRef,   aboutVis]   = useReveal(0.1);
@@ -137,29 +461,21 @@ export default function Home() {
         <div className="ct-grain" style={{ zIndex: 1 }} />
 
         <div style={{ position: "relative", zIndex: 2, padding: "0 5vw 72px" }}>
-
           <h1 style={{
-            fontWeight: 700,
-            fontSize: "clamp(38px, 5vw, 96px)",
+            fontWeight: 700, fontSize: "clamp(38px, 5vw, 96px)",
             lineHeight: 1, letterSpacing: "normal",
             color: "white", margin: "0 0 10px",
             opacity: heroVis ? 1 : 0, transform: heroVis ? "none" : "translateY(24px)",
             transition: "opacity 0.7s 0.18s, transform 0.7s 0.18s",
-          }}>
-            Sipping with the
-          </h1>
+          }}>Sipping with the</h1>
           <h1 style={{
-            fontWeight: 700,
-            fontSize: "clamp(38px, 5vw, 96px)",
+            fontWeight: 700, fontSize: "clamp(38px, 5vw, 96px)",
             lineHeight: 1, letterSpacing: "normal",
             color: GOLD, margin: "0 0 36px",
             opacity: heroVis ? 1 : 0, transform: heroVis ? "none" : "translateY(24px)",
             transition: "opacity 0.7s 0.26s, transform 0.7s 0.26s",
-          }}>
-            people who know the sea.
-          </h1>
+          }}>people who know the sea.</h1>
 
-          {/* Bottom row */}
           <div style={{
             display: "flex", alignItems: "flex-end",
             justifyContent: "space-between", gap: "40px", flexWrap: "wrap",
@@ -167,10 +483,7 @@ export default function Home() {
             transition: "opacity 0.7s 0.36s, transform 0.7s 0.36s",
           }}>
             <div>
-              <p style={{
-                fontSize: "16px", color: CREAM, lineHeight: 1.7,
-                fontWeight: 300, maxWidth: "400px", marginBottom: "24px",
-              }}>
+              <p style={{ fontSize: "16px", color: CREAM, lineHeight: 1.7, fontWeight: 300, maxWidth: "400px", marginBottom: "24px" }}>
                 Africa's maritime podcast. Live conversations with the people shaping the continent's blue economy.
               </p>
               <div style={{ display: "flex", gap: "12px", flexWrap: "wrap" }}>
@@ -178,8 +491,7 @@ export default function Home() {
                   display: "inline-block", padding: "13px 32px",
                   background: GOLD, color: "#0F1912",
                   textDecoration: "none", fontSize: "11px",
-                  letterSpacing: "2px", fontWeight: 700,
-                  transition: "opacity 0.2s",
+                  letterSpacing: "2px", fontWeight: 700, transition: "opacity 0.2s",
                 }}
                   onMouseEnter={e => e.currentTarget.style.opacity = "0.85"}
                   onMouseLeave={e => e.currentTarget.style.opacity = "1"}
@@ -197,7 +509,6 @@ export default function Home() {
               </div>
             </div>
 
-            {/* Listen on + Socials */}
             <div style={{ display: "flex", alignItems: "center", gap: "20px", flexShrink: 0 }}>
               <span style={{ fontSize: "9px", letterSpacing: "2.5px", color: MUTED }}>LISTEN ON</span>
               {[[<Youtube key="yt"/>, "#"], [<Spotify key="sp"/>, "#"], [<Apple key="ap"/>, "#"]].map(([icon, href], i) => (
@@ -206,9 +517,7 @@ export default function Home() {
                   onMouseLeave={e => e.currentTarget.style.color = MUTED}
                 >{icon}</a>
               ))}
-              {/* Divider */}
               <div style={{ width: "1px", height: "16px", background: "rgba(214,207,194,0.15)" }} />
-              {/* Social links */}
               <a href="https://www.instagram.com/cabinteapodcast/" target="_blank" rel="noopener noreferrer"
                 style={{ color: MUTED, display: "inline-flex", transition: "color 0.2s" }}
                 onMouseEnter={e => e.currentTarget.style.color = GOLD}
@@ -227,28 +536,19 @@ export default function Home() {
       {/* ════════ ABOUT ════════ */}
       <section ref={aboutRef} style={{ background: PANEL, padding: "96px 5vw" }}>
         <div style={{ maxWidth: "1200px", margin: "0 auto" }}>
-          <div style={{
-            display: "grid", gridTemplateColumns: "1fr 1fr",
-            gap: "80px", alignItems: "center",
-          }}>
-            {/* Left — host photo */}
+          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "80px", alignItems: "center" }}>
             <div style={{
               position: "relative",
               opacity: aboutVis ? 1 : 0, transform: aboutVis ? "none" : "translateX(-20px)",
               transition: "opacity 0.8s, transform 0.8s",
             }}>
               <div style={{ overflow: "hidden" }}>
-                <img
-                  src={IMGS.host}
-                  alt="Host"
-                  style={{ width: "100%", height: "auto", objectFit: "contain", display: "block" }}
-                />
+                <img src={IMGS.host} alt="Host"
+                  style={{ width: "100%", height: "auto", objectFit: "contain", display: "block" }} />
               </div>
-              {/* Floating stat */}
               <div style={{
                 position: "absolute", bottom: "-1px", right: "-1px",
-                background: GOLD, color: "#0F1912",
-                padding: "20px 24px",
+                background: GOLD, color: "#0F1912", padding: "20px 24px",
               }}>
                 <span style={{ fontSize: "36px", fontWeight: 700, display: "block", lineHeight: 1 }}>360°</span>
                 <span style={{ fontSize: "9px", letterSpacing: "2px", fontWeight: 600, display: "block", marginTop: "4px" }}>
@@ -257,7 +557,6 @@ export default function Home() {
               </div>
             </div>
 
-            {/* Right — about text */}
             <div style={{
               opacity: aboutVis ? 1 : 0, transform: aboutVis ? "none" : "translateX(20px)",
               transition: "opacity 0.8s 0.15s, transform 0.8s 0.15s",
@@ -266,32 +565,19 @@ export default function Home() {
                 ABOUT CABIN TEA
               </p>
               <h2 style={{
-                fontWeight: 700,
-                fontSize: "clamp(28px, 3.5vw, 44px)", lineHeight: 1.1,
+                fontWeight: 700, fontSize: "clamp(28px, 3.5vw, 44px)", lineHeight: 1.1,
                 letterSpacing: "normal", color: "white", marginBottom: "24px",
               }}>
                 Where Africa's maritime industry finds its voice
               </h2>
-              <p style={{
-                fontSize: "16px", lineHeight: 1.85,
-                color: CREAM, fontWeight: 300, marginBottom: "20px",
-              }}>
+              <p style={{ fontSize: "16px", lineHeight: 1.85, color: CREAM, fontWeight: 300, marginBottom: "20px" }}>
                 Cabin Tea is a maritime media and industry network built for Africa's blue economy. Through digital media, live events, and curated communities, we connect stakeholders across the continent and Diaspora — shifting the global conversation from potential to possibility.
                 We don't just cover the industry. We build the relationships that move it.
               </p>
-              <p style={{
-                fontSize: "16px", lineHeight: 1.85,
-                color: MUTED, fontWeight: 300, marginBottom: "36px",
-              }}>
+              <p style={{ fontSize: "16px", lineHeight: 1.85, color: MUTED, fontWeight: 300, marginBottom: "36px" }}>
                 Recorded live in Accra, Ghana. Heard everywhere.
               </p>
-
-              {/* Stats row */}
-              <div style={{
-                display: "flex", gap: "40px",
-                paddingTop: "28px",
-                borderTop: "1px solid rgba(255,255,255,0.07)",
-              }}>
+              <div style={{ display: "flex", gap: "40px", paddingTop: "28px", borderTop: "1px solid rgba(255,255,255,0.07)" }}>
                 {[
                   { val: "54", label: "African Nations" },
                   { val: "Global", label: "Diaspora Reach" },
@@ -310,80 +596,33 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ════════ LATEST EPISODES ════════ */}
+      {/* ════════ LATEST EPISODES — CAROUSEL ════════ */}
       <section ref={epRef} style={{ background: BG, padding: "96px 5vw" }}>
         <div style={{ maxWidth: "1200px", margin: "0 auto" }}>
-
           <div style={{
             display: "flex", alignItems: "baseline",
-            justifyContent: "space-between", marginBottom: "48px",
+            justifyContent: "space-between", marginBottom: "36px",
             opacity: epVis ? 1 : 0, transform: epVis ? "none" : "translateY(12px)",
             transition: "opacity 0.6s, transform 0.6s",
           }}>
             <h2 style={{
-              fontWeight: 700,
-              fontSize: "clamp(22px, 3vw, 36px)", color: "white",
-              margin: 0, letterSpacing: "normal",
+              fontWeight: 700, fontSize: "clamp(22px, 3vw, 36px)",
+              color: "white", margin: 0, letterSpacing: "normal",
             }}>Latest Episodes</h2>
             <Link to="/episodes" style={{
               fontSize: "11px", letterSpacing: "2px", fontWeight: 600,
-              color: MUTED, textDecoration: "none",
-              transition: "color 0.2s",
+              color: MUTED, textDecoration: "none", transition: "color 0.2s",
             }}
               onMouseEnter={e => e.currentTarget.style.color = GOLD}
               onMouseLeave={e => e.currentTarget.style.color = MUTED}
             >ALL EPISODES →</Link>
           </div>
 
-          <div style={{ display: "flex", flexDirection: "column", gap: "0" }}>
-            {EPISODES.map((ep, i) => (
-              <Link key={i} to="/episodes" style={{
-                display: "grid",
-                gridTemplateColumns: "80px 240px 1fr 80px",
-                gap: "28px", alignItems: "center",
-                borderTop: "1px solid rgba(255,255,255,0.06)",
-                textDecoration: "none",
-                margin: "0 -20px",
-                padding: "20px 20px",
-                opacity: epVis ? 1 : 0, transform: epVis ? "none" : "translateY(16px)",
-                transitionProperty: "background, opacity, transform",
-                transitionDuration: "0.2s, 0.6s, 0.6s",
-                transitionDelay: `0s, ${0.1 + i * 0.1}s, ${0.1 + i * 0.1}s`,
-              }}
-                onMouseEnter={e => e.currentTarget.style.background = "rgba(255,255,255,0.03)"}
-                onMouseLeave={e => e.currentTarget.style.background = "transparent"}
-              >
-                <div style={{ width: "80px", height: "80px", overflow: "hidden", flexShrink: 0 }}>
-                  <img src={ep.img} alt={ep.title}
-                    style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} />
-                </div>
-                <span style={{ fontSize: "11px", letterSpacing: "2px", color: MUTED, fontWeight: 500 }}>{ep.num}</span>
-                <div>
-                  <p style={{ fontSize: "10px", letterSpacing: "2px", color: GOLD, marginBottom: "6px", fontWeight: 500 }}>
-                    {ep.guest}
-                  </p>
-                  <h3 style={{
-                    fontWeight: 600,
-                    fontSize: "clamp(16px, 1.8vw, 20px)", color: "white",
-                    lineHeight: 1.25, margin: 0, letterSpacing: "0",
-                  }}>{ep.title}</h3>
-                </div>
-                <div style={{ textAlign: "right", flexShrink: 0 }}>
-                  <span style={{ fontSize: "12px", color: MUTED, display: "block", marginBottom: "8px" }}>{ep.duration}</span>
-                  <div style={{
-                    width: "32px", height: "32px", borderRadius: "50%",
-                    border: `1px solid rgba(196,164,78,0.3)`,
-                    display: "flex", alignItems: "center", justifyContent: "center",
-                    marginLeft: "auto",
-                  }}>
-                    <svg width="10" height="12" viewBox="0 0 10 12" fill={GOLD}>
-                      <path d="M0 0l10 6-10 6V0z"/>
-                    </svg>
-                  </div>
-                </div>
-              </Link>
-            ))}
-            <div style={{ borderTop: "1px solid rgba(255,255,255,0.06)" }} />
+          <div style={{
+            opacity: epVis ? 1 : 0, transform: epVis ? "none" : "translateY(24px)",
+            transition: "opacity 0.7s 0.15s, transform 0.7s 0.15s",
+          }}>
+            <EpisodeCarousel episodes={EPISODES} />
           </div>
         </div>
       </section>
@@ -400,9 +639,8 @@ export default function Home() {
               THE ECOSYSTEM
             </p>
             <h2 style={{
-              fontWeight: 700,
-              fontSize: "clamp(22px, 3vw, 36px)", color: "white",
-              margin: 0, letterSpacing: "normal",
+              fontWeight: 700, fontSize: "clamp(22px, 3vw, 36px)",
+              color: "white", margin: 0, letterSpacing: "normal",
             }}>More than a podcast.</h2>
           </div>
 
@@ -431,9 +669,8 @@ export default function Home() {
                   </div>
                   <div style={{
                     position: "absolute", inset: 0,
-                    background: `linear-gradient(to top, rgba(15,25,18,0.95) 0%, rgba(15,25,18,0.5) 50%, transparent 100%)`,
-                    opacity: hovered ? 1 : 0.6,
-                    transition: "opacity 0.4s",
+                    background: "linear-gradient(to top, rgba(15,25,18,0.95) 0%, rgba(15,25,18,0.5) 50%, transparent 100%)",
+                    opacity: hovered ? 1 : 0.6, transition: "opacity 0.4s",
                   }} />
                   <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, padding: "28px 24px" }}>
                     <span style={{
@@ -441,16 +678,14 @@ export default function Home() {
                       color: GOLD, fontWeight: 600, display: "block", marginBottom: "6px",
                     }}>{brand.tag}</span>
                     <h3 style={{
-                      fontWeight: 700,
-                      fontSize: "26px", color: "white", margin: "0 0 8px",
-                      letterSpacing: "normal",
+                      fontWeight: 700, fontSize: "26px", color: "white",
+                      margin: "0 0 8px", letterSpacing: "normal",
                     }}>{brand.name}</h3>
                     <p style={{
                       fontSize: "13px", color: CREAM, lineHeight: 1.6,
                       fontWeight: 300, margin: 0,
                       maxHeight: hovered ? "80px" : "0",
-                      overflow: "hidden",
-                      transition: "max-height 0.4s ease",
+                      overflow: "hidden", transition: "max-height 0.4s ease",
                     }}>{brand.desc}</p>
                   </div>
                 </Link>
@@ -483,8 +718,7 @@ export default function Home() {
             NEW EPISODES OUT NOW
           </p>
           <h2 style={{
-            fontWeight: 700,
-            fontSize: "clamp(32px, 5vw, 64px)", lineHeight: 1,
+            fontWeight: 700, fontSize: "clamp(32px, 5vw, 64px)", lineHeight: 1,
             letterSpacing: "0", color: "white", marginBottom: "16px",
           }}>
             Recorded live.<br />
@@ -501,8 +735,7 @@ export default function Home() {
               display: "inline-block", padding: "13px 32px",
               background: GOLD, color: "#0F1912",
               textDecoration: "none", fontSize: "11px",
-              letterSpacing: "2px", fontWeight: 700,
-              transition: "opacity 0.2s",
+              letterSpacing: "2px", fontWeight: 700, transition: "opacity 0.2s",
             }}
               onMouseEnter={e => e.currentTarget.style.opacity = "0.85"}
               onMouseLeave={e => e.currentTarget.style.opacity = "1"}
