@@ -401,7 +401,7 @@ export default function Home() {
           }}>
             <div>
               <p style={{ fontSize: "16px", color: CREAM, lineHeight: 1.7, fontWeight: 300, maxWidth: "400px", marginBottom: "24px" }}>
-                Africa's maritime podcast. Live conversations with the people shaping the continent's blue economy.
+                Africa's new ocean podcast. Live conversations with the people shaping the continent's blue economy.
               </p>
               <div style={{ display: "flex", gap: "12px", flexWrap: "wrap" }}>
                 <Link to="/episodes" style={{ display: "inline-block", padding: "13px 32px", background: GOLD, color: "#0F1912", textDecoration: "none", fontSize: "11px", letterSpacing: "2px", fontWeight: 700, transition: "opacity 0.2s" }}
