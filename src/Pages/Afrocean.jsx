@@ -28,8 +28,8 @@ const CREAM = "rgba(214,207,194,0.75)";
 const MUTED = "rgba(214,207,194,0.42)";
 
 const IMGS = {
-  hero:      "/afroceanhero",
-  fishermen: "/disface.png",
+  hero:      "/handshero.jpg",
+  fishermen: "/afroceanhero",
   culture1:  "/dis2.jpg",
   diaspora1: "/africandrum.jpg",
   market:    "/africanmask1.jpg",
