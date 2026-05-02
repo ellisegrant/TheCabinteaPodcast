@@ -11,6 +11,8 @@ import Anchorage from "./Pages/Anchorage";
 import { PlayerProvider } from "./components/EpisodePlayer";
 import CategoryStrip from "./components/CategoryStrip";
 import AfricaOceanDynamism from "./Pages/AfricaOceanDynamism";
+import OnDeck from "./Pages/OnDeck";
+import WhatsRising from "./Pages/WhatsRising";
 
 function App() {
   return (
@@ -28,6 +30,8 @@ function App() {
           <Route path="/afrocean" element={<Afrocean />} />
           <Route path="/anchorage" element={<Anchorage />} />
           <Route path="/africa-ocean-dynamism" element={<AfricaOceanDynamism />} />
+          <Route path="/on-deck" element={<OnDeck />} />
+          <Route path="/whats-rising" element={<WhatsRising />} />
         </Routes>
       </BrowserRouter>
     </PlayerProvider>
