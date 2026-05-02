@@ -27,7 +27,6 @@ const TEAL  = "#2C8C7C";
 const CREAM = "rgba(214,207,194,0.75)";
 const MUTED = "rgba(214,207,194,0.42)";
 
-/* ── Exact image paths from document ── */
 const IMGS = {
   hero:      "/handshero1.png",
   fishermen: "/disface.png",
@@ -40,7 +39,6 @@ const IMGS = {
   cta:       "/cabin.jpg",
 };
 
-/* ── Pillars — exact content from document ── */
 const pillars = [
   {
     num: "01",
@@ -64,6 +62,91 @@ const pillars = [
   },
 ];
 
+/* ── Reusable hoverable mosaic tile ── */
+function MosaicTile({ src, label, sub, to, height = "300px", badge, badgeColor = GOLD }) {
+  const [hovered, setHovered] = useState(false);
+  return (
+    <Link
+      to={to}
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+      style={{
+        position: "relative", overflow: "hidden",
+        display: "block", textDecoration: "none",
+        cursor: "pointer",
+      }}
+    >
+      <img
+        src={src}
+        alt={label}
+        style={{
+          width: "100%",
+          height,
+          objectFit: "cover",
+          display: "block",
+          transform: hovered ? "scale(1.05)" : "scale(1)",
+          transition: "transform 0.65s cubic-bezier(0.16,1,0.3,1)",
+        }}
+      />
+
+      {/* Dark overlay strengthens on hover */}
+      <div style={{
+        position: "absolute", inset: 0,
+        background: "linear-gradient(to top, rgba(15,25,18,0.92) 0%, rgba(15,25,18,0.3) 55%, transparent 100%)",
+        opacity: hovered ? 1 : 0.75,
+        transition: "opacity 0.35s",
+      }} />
+
+      {/* Bottom label */}
+      <div style={{ position: "absolute", bottom: "18px", left: "18px", right: "18px" }}>
+        <span style={{
+          fontSize: "14px", fontWeight: 700,
+          color: "white", display: "block", marginBottom: "4px",
+          letterSpacing: "0",
+        }}>{label}</span>
+        <span style={{
+          fontSize: "9px", letterSpacing: "2.5px",
+          color: GOLD, fontWeight: 600,
+        }}>{sub.toUpperCase()}</span>
+      </div>
+
+      {/* Badge top-right — appears on hover */}
+      {badge && (
+        <div style={{
+          position: "absolute", top: "16px", right: "16px",
+          background: badgeColor,
+          color: badgeColor === GOLD ? BG : "white",
+          fontSize: "8px", letterSpacing: "2px", fontWeight: 700,
+          padding: "5px 10px",
+          opacity: hovered ? 1 : 0,
+          transform: hovered ? "translateY(0)" : "translateY(-6px)",
+          transition: "opacity 0.25s, transform 0.3s",
+        }}>{badge}</div>
+      )}
+
+      {/* Arrow indicator — appears on hover */}
+      <div style={{
+        position: "absolute", top: "16px", left: "16px",
+        opacity: hovered ? 1 : 0,
+        transform: hovered ? "translateX(0)" : "translateX(-8px)",
+        transition: "opacity 0.25s, transform 0.3s",
+      }}>
+        <div style={{
+          background: "rgba(15,25,18,0.85)",
+          backdropFilter: "blur(8px)",
+          border: "1px solid rgba(196,164,78,0.25)",
+          padding: "5px 12px",
+          display: "flex", alignItems: "center", gap: "6px",
+        }}>
+          <span style={{ fontSize: "9px", letterSpacing: "2px", color: GOLD, fontWeight: 700 }}>
+            READ MORE →
+          </span>
+        </div>
+      </div>
+    </Link>
+  );
+}
+
 export default function Afrocean() {
   const [heroRef,    heroVis]    = useReveal(0.05);
   const [rootsRef,   rootsVis]   = useReveal(0.08);
@@ -76,31 +159,16 @@ export default function Afrocean() {
     <div style={{ minHeight: "100vh", background: BG, color: "white", overflowX: "hidden" }}>
       <Navbar />
 
-      {/* ══════════════════════════════════════════════
-          HERO
-      ══════════════════════════════════════════════ */}
+      {/* ════════ HERO ════════ */}
       <section ref={heroRef} style={{
         height: "100vh", minHeight: "600px",
         position: "relative", overflow: "hidden",
         display: "flex", flexDirection: "column", justifyContent: "flex-end",
       }}>
-        <img
-          src={IMGS.hero}
-          alt="African cultural gathering"
-          style={{
-            position: "absolute", inset: 0,
-            width: "100%", height: "100%",
-            objectFit: "cover", objectPosition: "center 40%",
-          }}
-        />
-        <div style={{
-          position: "absolute", inset: 0,
-          background: "linear-gradient(to top, rgba(15,25,18,1) 0%, rgba(15,25,18,0.6) 50%, transparent 85%)",
-        }} />
-        <div style={{
-          position: "absolute", inset: 0,
-          background: "linear-gradient(to right, rgba(15,25,18,0.78) 0%, transparent 60%)",
-        }} />
+        <img src={IMGS.hero} alt="African cultural gathering"
+          style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", objectPosition: "center 40%" }} />
+        <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to top, rgba(15,25,18,1) 0%, rgba(15,25,18,0.6) 50%, transparent 85%)" }} />
+        <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to right, rgba(15,25,18,0.78) 0%, transparent 60%)" }} />
         <div className="ct-grain" style={{ zIndex: 1 }} />
 
         <div style={{ position: "relative", zIndex: 2, padding: "0 5vw 72px" }}>
@@ -109,20 +177,14 @@ export default function Afrocean() {
             fontWeight: 500, marginBottom: "16px",
             opacity: heroVis ? 1 : 0, transform: heroVis ? "none" : "translateY(10px)",
             transition: "opacity 0.6s 0.1s, transform 0.6s 0.1s",
-          }}>
-            CABIN TEA · CULTURAL GATHERING
-          </p>
+          }}>CABIN TEA · CULTURAL GATHERING</p>
 
           <h1 style={{
-            fontWeight: 700,
-            fontSize: "clamp(36px, 5vw, 64px)",
-            lineHeight: 1.1, color: "white",
-            margin: "0 0 16px", maxWidth: "600px",
+            fontWeight: 700, fontSize: "clamp(36px, 5vw, 64px)",
+            lineHeight: 1.1, color: "white", margin: "0 0 16px", maxWidth: "600px",
             opacity: heroVis ? 1 : 0, transform: heroVis ? "none" : "translateY(20px)",
             transition: "opacity 0.7s 0.18s, transform 0.7s 0.18s",
-          }}>
-            Afrocean
-          </h1>
+          }}>Afrocean</h1>
 
           <p style={{
             fontSize: "16px", color: CREAM, lineHeight: 1.7,
@@ -142,8 +204,7 @@ export default function Afrocean() {
               display: "inline-block", padding: "13px 32px",
               background: GOLD, color: "#0F1912",
               textDecoration: "none", fontSize: "11px",
-              letterSpacing: "2px", fontWeight: 700,
-              transition: "opacity 0.2s",
+              letterSpacing: "2px", fontWeight: 700, transition: "opacity 0.2s",
             }}
               onMouseEnter={e => e.currentTarget.style.opacity = "0.85"}
               onMouseLeave={e => e.currentTarget.style.opacity = "1"}
@@ -162,28 +223,17 @@ export default function Afrocean() {
         </div>
       </section>
 
-      {/* ══════════════════════════════════════════════
-          ROOTS — split image + text
-      ══════════════════════════════════════════════ */}
+      {/* ════════ ROOTS ════════ */}
       <section ref={rootsRef} style={{ background: PANEL }}>
         <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", minHeight: "560px" }}>
-
-          {/* Left — image */}
           <div style={{
             position: "relative", overflow: "hidden",
             opacity: rootsVis ? 1 : 0, transform: rootsVis ? "none" : "translateX(-16px)",
             transition: "opacity 0.8s, transform 0.8s",
           }}>
-            <img
-              src={IMGS.fishermen}
-              alt="African coastal community"
-              style={{ width: "100%", height: "100%", objectFit: "cover", display: "block", minHeight: "560px" }}
-            />
-            <div style={{
-              position: "absolute", inset: 0,
-              background: "linear-gradient(to right, transparent, rgba(20,31,24,0.6) 100%)",
-            }} />
-            {/* Caption card */}
+            <img src={IMGS.fishermen} alt="African coastal community"
+              style={{ width: "100%", height: "100%", objectFit: "cover", display: "block", minHeight: "560px" }} />
+            <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to right, transparent, rgba(20,31,24,0.6) 100%)" }} />
             <div style={{
               position: "absolute", bottom: "36px", left: "28px",
               background: TERRA, color: "white", padding: "16px 20px", maxWidth: "220px",
@@ -197,7 +247,6 @@ export default function Afrocean() {
             </div>
           </div>
 
-          {/* Right — text */}
           <div style={{
             padding: "72px 5vw 72px 56px",
             display: "flex", flexDirection: "column", justifyContent: "center",
@@ -207,26 +256,19 @@ export default function Afrocean() {
             <p style={{ fontSize: "10px", letterSpacing: "3px", color: TERRA, marginBottom: "18px", fontWeight: 600 }}>
               THE ROOTS
             </p>
-
             <h2 style={{
               fontWeight: 700, fontSize: "clamp(22px, 2.8vw, 36px)",
               lineHeight: 1.2, color: "white", marginBottom: "20px",
             }}>
               Long before colonial borders, African peoples were master navigators, coastal traders, and ocean stewards.
             </h2>
-
             <p style={{ fontSize: "15px", lineHeight: 1.9, color: CREAM, fontWeight: 300, marginBottom: "16px" }}>
               From the Swahili merchants of East Africa to the Fante fishermen of Ghana's Cape Coast — the sea was always home.
             </p>
-
             <p style={{ fontSize: "15px", lineHeight: 1.9, color: MUTED, fontWeight: 300, marginBottom: "36px" }}>
               Afrocean exists to honour that heritage — connecting the Diaspora back to the indigenous knowledge, the coastal communities, and the ancestral relationship with the ocean that was never truly lost.
             </p>
-
-            <div style={{
-              display: "flex", gap: "36px",
-              paddingTop: "24px", borderTop: "1px solid rgba(255,255,255,0.07)",
-            }}>
+            <div style={{ display: "flex", gap: "36px", paddingTop: "24px", borderTop: "1px solid rgba(255,255,255,0.07)" }}>
               {[
                 { val: "54",    label: "African Nations"     },
                 { val: "3.1M",  label: "KM of Coastline"    },
@@ -244,17 +286,21 @@ export default function Afrocean() {
         </div>
       </section>
 
-      {/* ══════════════════════════════════════════════
-          IMAGE MOSAIC — 5 photos, two rows
-      ══════════════════════════════════════════════ */}
+      {/* ════════ IMAGE MOSAIC — now with clickable tiles ════════ */}
       <section ref={mosaicRef} style={{ background: BG, overflow: "hidden" }}>
+
+        {/* Section header */}
         <div style={{
-          padding: "56px 5vw 32px",
+          padding: "56px 5vw 24px",
           opacity: mosaicVis ? 1 : 0, transform: mosaicVis ? "none" : "translateY(12px)",
           transition: "opacity 0.6s, transform 0.6s",
+          display: "flex", alignItems: "flex-end", justifyContent: "space-between", flexWrap: "wrap", gap: "16px",
         }}>
           <p style={{ fontSize: "10px", letterSpacing: "3px", color: GOLD, margin: 0, fontWeight: 600 }}>
             THE CULTURE
+          </p>
+          <p style={{ fontSize: "12px", color: MUTED, margin: 0, letterSpacing: "0.5px" }}>
+            Click any image to explore the story
           </p>
         </div>
 
@@ -264,24 +310,36 @@ export default function Afrocean() {
           opacity: mosaicVis ? 1 : 0, transform: mosaicVis ? "none" : "translateY(20px)",
           transition: "opacity 0.8s 0.1s, transform 0.8s 0.1s",
         }}>
-          {[
-            { src: IMGS.culture1, h: "300px", label: "Indigenous Dress",     sub: "West Africa"    },
-            { src: IMGS.market,   h: "300px", label: "Community Gathering",  sub: "The Continent"  },
-            { src: IMGS.harbour,  h: "300px", label: "Coastal Heritage",     sub: "Maritime Roots" },
-          ].map((img, i) => (
-            <div key={i} style={{ position: "relative", overflow: "hidden" }}>
-              <img src={img.src} alt={img.label}
-                style={{ width: "100%", height: img.h, objectFit: "cover", display: "block" }} />
-              <div style={{
-                position: "absolute", inset: 0,
-                background: "linear-gradient(to top, rgba(15,25,18,0.85) 0%, transparent 55%)",
-              }} />
-              <div style={{ position: "absolute", bottom: "16px", left: "16px" }}>
-                <span style={{ fontSize: "13px", fontWeight: 600, color: "white", display: "block" }}>{img.label}</span>
-                <span style={{ fontSize: "9px", letterSpacing: "2px", color: GOLD }}>{img.sub.toUpperCase()}</span>
-              </div>
-            </div>
-          ))}
+          {/* Indigenous Dress → On Deck */}
+          <MosaicTile
+            src={IMGS.culture1}
+            label="Indigenous Dress"
+            sub="West Africa"
+            to="/on-deck"
+            height="320px"
+            badge="ON DECK"
+            badgeColor={TEAL}
+          />
+          {/* Community Gathering → What's Rising */}
+          <MosaicTile
+            src={IMGS.market}
+            label="Community Gathering"
+            sub="The Continent"
+            to="/whats-rising"
+            height="320px"
+            badge="WHAT'S RISING"
+            badgeColor={TERRA}
+          />
+          {/* Coastal Heritage → On Deck */}
+          <MosaicTile
+            src={IMGS.harbour}
+            label="Coastal Heritage"
+            sub="Maritime Roots"
+            to="/on-deck"
+            height="320px"
+            badge="ON DECK"
+            badgeColor={TEAL}
+          />
         </div>
 
         {/* Row 2 — 2 images */}
@@ -290,32 +348,71 @@ export default function Afrocean() {
           opacity: mosaicVis ? 1 : 0, transform: mosaicVis ? "none" : "translateY(20px)",
           transition: "opacity 0.8s 0.22s, transform 0.8s 0.22s",
         }}>
-          {[
-            { src: IMGS.youth,    h: "240px", label: "Next Generation", sub: "Diaspora Youth"    },
-            { src: IMGS.diaspora1,h: "240px", label: "The Gathering",   sub: "Afrocean Community"},
-          ].map((img, i) => (
-            <div key={i} style={{ position: "relative", overflow: "hidden" }}>
-              <img src={img.src} alt={img.label}
-                style={{ width: "100%", height: img.h, objectFit: "cover", display: "block" }} />
-              <div style={{
-                position: "absolute", inset: 0,
-                background: "linear-gradient(to top, rgba(15,25,18,0.85) 0%, transparent 55%)",
-              }} />
-              <div style={{ position: "absolute", bottom: "16px", left: "16px" }}>
-                <span style={{ fontSize: "13px", fontWeight: 600, color: "white", display: "block" }}>{img.label}</span>
-                <span style={{ fontSize: "9px", letterSpacing: "2px", color: GOLD }}>{img.sub.toUpperCase()}</span>
-              </div>
-            </div>
-          ))}
+          {/* Next Generation → What's Rising */}
+          <MosaicTile
+            src={IMGS.youth}
+            label="Next Generation"
+            sub="Diaspora Youth"
+            to="/whats-rising"
+            height="260px"
+            badge="WHAT'S RISING"
+            badgeColor={TERRA}
+          />
+          {/* The Gathering → What's Rising */}
+          <MosaicTile
+            src={IMGS.diaspora1}
+            label="The Gathering"
+            sub="Afrocean Community"
+            to="/whats-rising"
+            height="260px"
+            badge="WHAT'S RISING"
+            badgeColor={TERRA}
+          />
+        </div>
+
+        {/* Quick links below mosaic */}
+        <div style={{
+          padding: "24px 5vw 56px",
+          display: "flex", gap: "12px", flexWrap: "wrap",
+          opacity: mosaicVis ? 1 : 0,
+          transition: "opacity 0.6s 0.35s",
+        }}>
+          <Link to="/on-deck" style={{
+            display: "inline-flex", alignItems: "center", gap: "8px",
+            padding: "9px 20px",
+            background: "transparent",
+            border: `1px solid rgba(44,140,124,0.35)`,
+            color: CREAM, textDecoration: "none",
+            fontSize: "10px", letterSpacing: "2px", fontWeight: 600,
+            transition: "border-color 0.2s, color 0.2s",
+          }}
+            onMouseEnter={e => { e.currentTarget.style.borderColor = TEAL; e.currentTarget.style.color = "white"; }}
+            onMouseLeave={e => { e.currentTarget.style.borderColor = "rgba(44,140,124,0.35)"; e.currentTarget.style.color = CREAM; }}
+          >
+            <span style={{ width: "8px", height: "8px", borderRadius: "50%", background: TEAL, flexShrink: 0 }} />
+            ON DECK →
+          </Link>
+          <Link to="/whats-rising" style={{
+            display: "inline-flex", alignItems: "center", gap: "8px",
+            padding: "9px 20px",
+            background: "transparent",
+            border: `1px solid rgba(181,84,30,0.35)`,
+            color: CREAM, textDecoration: "none",
+            fontSize: "10px", letterSpacing: "2px", fontWeight: 600,
+            transition: "border-color 0.2s, color 0.2s",
+          }}
+            onMouseEnter={e => { e.currentTarget.style.borderColor = TERRA; e.currentTarget.style.color = "white"; }}
+            onMouseLeave={e => { e.currentTarget.style.borderColor = "rgba(181,84,30,0.35)"; e.currentTarget.style.color = CREAM; }}
+          >
+            <span style={{ width: "8px", height: "8px", borderRadius: "50%", background: TERRA, flexShrink: 0 }} />
+            WHAT'S RISING, WHAT'S SHIFTING →
+          </Link>
         </div>
       </section>
 
-      {/* ══════════════════════════════════════════════
-          FOUR PILLARS — numbered list
-      ══════════════════════════════════════════════ */}
+      {/* ════════ FOUR PILLARS ════════ */}
       <section ref={pillarsRef} style={{ background: PANEL, padding: "96px 5vw" }}>
         <div style={{ maxWidth: "1200px", margin: "0 auto" }}>
-
           <div style={{
             display: "grid", gridTemplateColumns: "1fr 1fr", gap: "80px",
             alignItems: "end", marginBottom: "56px",
@@ -326,10 +423,7 @@ export default function Afrocean() {
               <p style={{ fontSize: "10px", letterSpacing: "3px", color: GOLD, marginBottom: "12px", fontWeight: 600 }}>
                 FOUR PILLARS
               </p>
-              <h2 style={{
-                fontWeight: 700, fontSize: "clamp(22px, 3vw, 36px)",
-                color: "white", margin: 0, lineHeight: 1.2,
-              }}>
+              <h2 style={{ fontWeight: 700, fontSize: "clamp(22px, 3vw, 36px)", color: "white", margin: 0, lineHeight: 1.2 }}>
                 What Afrocean stands for.
               </h2>
             </div>
@@ -341,24 +435,16 @@ export default function Afrocean() {
           <div style={{ display: "flex", flexDirection: "column" }}>
             {pillars.map((p, i) => (
               <div key={p.num} style={{
-                display: "grid",
-                gridTemplateColumns: "56px 200px 1fr",
-                gap: "40px",
-                padding: "36px 0",
+                display: "grid", gridTemplateColumns: "56px 200px 1fr",
+                gap: "40px", padding: "36px 0",
                 borderTop: "1px solid rgba(255,255,255,0.06)",
                 alignItems: "start",
                 opacity: pillarsVis ? 1 : 0, transform: pillarsVis ? "none" : "translateY(16px)",
                 transition: `opacity 0.6s ${0.1 + i * 0.1}s, transform 0.6s ${0.1 + i * 0.1}s`,
               }}>
-                <span style={{ fontSize: "13px", letterSpacing: "2px", color: MUTED, paddingTop: "2px" }}>
-                  {p.num}
-                </span>
-                <h3 style={{ fontSize: "20px", fontWeight: 700, color: "white", margin: 0 }}>
-                  {p.title}
-                </h3>
-                <p style={{ fontSize: "15px", lineHeight: 1.85, color: CREAM, fontWeight: 300, margin: 0 }}>
-                  {p.body}
-                </p>
+                <span style={{ fontSize: "13px", letterSpacing: "2px", color: MUTED, paddingTop: "2px" }}>{p.num}</span>
+                <h3 style={{ fontSize: "20px", fontWeight: 700, color: "white", margin: 0 }}>{p.title}</h3>
+                <p style={{ fontSize: "15px", lineHeight: 1.85, color: CREAM, fontWeight: 300, margin: 0 }}>{p.body}</p>
               </div>
             ))}
             <div style={{ borderTop: "1px solid rgba(255,255,255,0.06)" }} />
@@ -366,13 +452,9 @@ export default function Afrocean() {
         </div>
       </section>
 
-      {/* ══════════════════════════════════════════════
-          DIASPORA — split text + stacked images
-      ══════════════════════════════════════════════ */}
+      {/* ════════ DIASPORA ════════ */}
       <section ref={diaspRef} style={{ background: BG }}>
         <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", minHeight: "560px" }}>
-
-          {/* Left — text */}
           <div style={{
             padding: "72px 5vw",
             display: "flex", flexDirection: "column", justifyContent: "center",
@@ -382,21 +464,15 @@ export default function Afrocean() {
             <p style={{ fontSize: "10px", letterSpacing: "3px", color: TERRA, marginBottom: "18px", fontWeight: 600 }}>
               THE DIASPORA
             </p>
-
-            <h2 style={{
-              fontWeight: 700, fontSize: "clamp(22px, 2.8vw, 38px)",
-              lineHeight: 1.15, color: "white", marginBottom: "20px",
-            }}>
+            <h2 style={{ fontWeight: 700, fontSize: "clamp(22px, 2.8vw, 38px)", lineHeight: 1.15, color: "white", marginBottom: "20px" }}>
               Where home is a horizon away.
             </h2>
-
             <p style={{ fontSize: "15px", lineHeight: 1.9, color: CREAM, fontWeight: 300, marginBottom: "16px" }}>
               Afrocean is built for the millions of Africans and people of African descent living across the world — from London to Lagos, Brooklyn to Bridgetown — who carry the ocean in their blood but may have never stood at its African shore.
             </p>
             <p style={{ fontSize: "15px", lineHeight: 1.9, color: MUTED, fontWeight: 300, marginBottom: "32px" }}>
               This gathering is the bridge. A space to reconnect with the maritime heritage, the indigenous knowledge, and the living communities that the Diaspora was separated from — and to invest in their future together.
             </p>
-
             <Link to="/partner" style={{
               display: "inline-block", padding: "13px 32px",
               background: TERRA, color: "white",
@@ -409,7 +485,6 @@ export default function Afrocean() {
             >JOIN AFROCEAN →</Link>
           </div>
 
-          {/* Right — two stacked images */}
           <div style={{
             display: "grid", gridTemplateRows: "1fr 1fr", gap: "2px",
             opacity: diaspVis ? 1 : 0, transform: diaspVis ? "none" : "translateX(16px)",
@@ -427,15 +502,11 @@ export default function Afrocean() {
                 <span style={{ fontSize: "9px", letterSpacing: "2px", color: GOLD }}>THE DIASPORA</span>
               </div>
             </div>
-
             <div style={{ position: "relative", overflow: "hidden" }}>
               <img src={IMGS.attire} alt="Indigenous African culture"
                 style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} />
               <div style={{ position: "absolute", inset: 0, background: "rgba(15,25,18,0.2)" }} />
-              <div style={{
-                position: "absolute", top: "16px", left: "16px",
-                background: TERRA, padding: "7px 14px",
-              }}>
+              <div style={{ position: "absolute", top: "16px", left: "16px", background: TERRA, padding: "7px 14px" }}>
                 <span style={{ fontSize: "9px", letterSpacing: "2px", color: "white" }}>THE HOMELAND</span>
               </div>
             </div>
@@ -443,24 +514,18 @@ export default function Afrocean() {
         </div>
       </section>
 
-      {/* ══════════════════════════════════════════════
-          CTA — full bleed, clean
-      ══════════════════════════════════════════════ */}
+      {/* ════════ CTA ════════ */}
       <section ref={ctaRef} style={{
         position: "relative", overflow: "hidden",
         minHeight: "400px", display: "flex", alignItems: "center",
       }}>
-        <img
-          src={IMGS.cta}
-          alt=""
-          style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover" }}
-        />
+        <img src={IMGS.cta} alt=""
+          style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover" }} />
         <div style={{
           position: "absolute", inset: 0,
           background: "linear-gradient(105deg, rgba(15,25,18,0.97) 40%, rgba(15,25,18,0.75) 100%)",
         }} />
         <div className="ct-grain" style={{ zIndex: 1 }} />
-
         <div style={{
           position: "relative", zIndex: 2,
           padding: "80px 5vw", maxWidth: "640px",
@@ -470,24 +535,19 @@ export default function Afrocean() {
           <h2 style={{
             fontWeight: 700, fontSize: "clamp(28px, 4vw, 52px)",
             lineHeight: 1.1, color: "white", marginBottom: "16px",
-          }}>
-            Be part of the next Afrocean.
-          </h2>
-
+          }}>Be part of the next Afrocean.</h2>
           <p style={{
             fontSize: "16px", lineHeight: 1.75, color: CREAM,
             fontWeight: 300, maxWidth: "420px", marginBottom: "36px",
           }}>
             Connect with the African maritime community, the global Diaspora, and indigenous coastal cultures at our flagship cultural gathering.
           </p>
-
           <div style={{ display: "flex", gap: "12px", flexWrap: "wrap" }}>
             <Link to="/partner" style={{
               display: "inline-block", padding: "13px 32px",
               background: GOLD, color: "#0F1912",
               textDecoration: "none", fontSize: "11px",
-              letterSpacing: "2px", fontWeight: 700,
-              transition: "opacity 0.2s",
+              letterSpacing: "2px", fontWeight: 700, transition: "opacity 0.2s",
             }}
               onMouseEnter={e => e.currentTarget.style.opacity = "0.85"}
               onMouseLeave={e => e.currentTarget.style.opacity = "1"}
