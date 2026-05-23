@@ -455,8 +455,8 @@ export default function Home() {
                 Where Africa's maritime industry finds its voice
               </h2>
               <p style={{ fontSize: "16px", lineHeight: 1.85, color: CREAM, fontWeight: 300, marginBottom: "20px" }}>
-                Where Africa's maritime industry finds its voice
-                Founded by Lawrence Dogli, Cabin Tea is a 360 ocean storytelling platform committed to uplifting diverse voices, sparking meaningful conversation, and driving cultural impact. Through powerful documentaries, thought-provoking conversations, and informative series, we explore the projects, people, and ideas that shape Africa’s ocean economy.             </p>
+                Founded by Lawrence Dogli, Cabin Tea is a 360 ocean storytelling platform committed to uplifting diverse voices, sparking meaningful conversation, and driving cultural impact. 
+                Through powerful documentaries, thought-provoking conversations, and informative series, we explore the projects, people, and ideas that shape Africa’s ocean economy.</p>
               <p style={{ fontSize: "16px", lineHeight: 1.85, color: MUTED, fontWeight: 300, marginBottom: "36px" }}>
                 Recorded live in Accra, Ghana. Heard everywhere.
               </p>
