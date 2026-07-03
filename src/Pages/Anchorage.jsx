@@ -2,6 +2,7 @@ import { useRef, useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
+import useIsMobile from "../hooks/useIsMobile";
 
 function useReveal(threshold = 0.1) {
   const ref = useRef(null);
@@ -74,6 +75,7 @@ export default function Anchorage() {
   const [featRef,    featVis]    = useReveal(0.1);
   const [contentRef, contentVis] = useReveal(0.1);
   const [ctaRef,     ctaVis]     = useReveal(0.1);
+  const isMobile = useIsMobile();
 
   return (
     <div style={{ minHeight: "100vh", background: BG, color: "white", overflowX: "hidden" }}>
@@ -106,7 +108,7 @@ export default function Anchorage() {
         }} />
         <div className="ct-grain" style={{ zIndex: 1 }} />
 
-        <div style={{ position: "relative", zIndex: 2, padding: "0 5vw 72px" }}>
+        <div style={{ position: "relative", zIndex: 2, padding: "0 5vw clamp(40px, 7vw, 72px)" }}>
           <p style={{
             fontSize: "11px", letterSpacing: "4px", color: GOLD,
             fontWeight: 500, marginBottom: "16px",
@@ -169,7 +171,7 @@ export default function Anchorage() {
           WHAT IS ANCHORAGE — split image + text
       ══════════════════════════════════════════════ */}
       <section ref={whatRef} style={{ background: PANEL }}>
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", minHeight: "540px" }}>
+        <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr", minHeight: isMobile ? "auto" : "540px" }}>
 
           {/* Left — image with caption */}
           <div style={{
@@ -180,7 +182,7 @@ export default function Anchorage() {
             <img
               src={IMGS.community}
               alt="Anchorage community"
-              style={{ width: "100%", height: "100%", objectFit: "cover", display: "block", minHeight: "540px" }}
+              style={{ width: "100%", height: "100%", objectFit: "cover", display: "block", minHeight: isMobile ? "320px" : "540px" }}
             />
             <div style={{
               position: "absolute", inset: 0,
@@ -203,7 +205,7 @@ export default function Anchorage() {
 
           {/* Right — text */}
           <div style={{
-            padding: "72px 5vw 72px 56px",
+            padding: isMobile ? "40px 5vw" : "72px 5vw 72px 56px",
             display: "flex", flexDirection: "column", justifyContent: "center",
             opacity: whatVis ? 1 : 0, transform: whatVis ? "none" : "translateX(16px)",
             transition: "opacity 0.8s 0.15s, transform 0.8s 0.15s",
@@ -263,7 +265,7 @@ export default function Anchorage() {
 
         {/* Row 1 — 3 images */}
         <div style={{
-          display: "grid", gridTemplateColumns: "1fr 1.5fr 1fr", gap: "2px",
+          display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1.5fr 1fr", gap: "2px",
           opacity: mosaicVis ? 1 : 0, transform: mosaicVis ? "none" : "translateY(20px)",
           transition: "opacity 0.8s 0.1s, transform 0.8s 0.1s",
         }}>
@@ -289,7 +291,7 @@ export default function Anchorage() {
 
         {/* Row 2 — 2 images */}
         <div style={{
-          display: "grid", gridTemplateColumns: "1.4fr 1fr", gap: "2px", marginTop: "2px",
+          display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1.4fr 1fr", gap: "2px", marginTop: "2px",
           opacity: mosaicVis ? 1 : 0, transform: mosaicVis ? "none" : "translateY(20px)",
           transition: "opacity 0.8s 0.22s, transform 0.8s 0.22s",
         }}>
@@ -316,11 +318,11 @@ export default function Anchorage() {
       {/* ══════════════════════════════════════════════
           THREE FEATURES — numbered list
       ══════════════════════════════════════════════ */}
-      <section ref={featRef} style={{ background: PANEL, padding: "96px 5vw" }}>
+      <section ref={featRef} style={{ background: PANEL, padding: "clamp(56px, 8vw, 96px) 5vw" }}>
         <div style={{ maxWidth: "1200px", margin: "0 auto" }}>
 
           <div style={{
-            display: "grid", gridTemplateColumns: "1fr 1fr", gap: "80px",
+            display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr", gap: isMobile ? "40px" : "80px",
             alignItems: "end", marginBottom: "56px",
             opacity: featVis ? 1 : 0, transform: featVis ? "none" : "translateY(12px)",
             transition: "opacity 0.6s, transform 0.6s",
@@ -345,8 +347,8 @@ export default function Anchorage() {
             {features.map((f, i) => (
               <div key={f.num} style={{
                 display: "grid",
-                gridTemplateColumns: "56px 200px 1fr",
-                gap: "40px",
+                gridTemplateColumns: isMobile ? "1fr" : "56px 200px 1fr",
+                gap: isMobile ? "8px" : "40px",
                 padding: "36px 0",
                 borderTop: "1px solid rgba(255,255,255,0.06)",
                 alignItems: "start",
@@ -377,7 +379,7 @@ export default function Anchorage() {
       {/* ══════════════════════════════════════════════
           CONTENT TYPES — four cards
       ══════════════════════════════════════════════ */}
-      <section ref={contentRef} style={{ background: BG, padding: "96px 5vw" }}>
+      <section ref={contentRef} style={{ background: BG, padding: "clamp(56px, 8vw, 96px) 5vw" }}>
         <div style={{ maxWidth: "1200px", margin: "0 auto" }}>
 
           <div style={{
@@ -397,7 +399,7 @@ export default function Anchorage() {
           </div>
 
           <div style={{
-            display: "grid", gridTemplateColumns: "repeat(4, 1fr)",
+            display: "grid", gridTemplateColumns: isMobile ? "1fr" : "repeat(4, 1fr)",
             gap: "2px", background: "rgba(255,255,255,0.04)",
             marginBottom: "48px",
           }}>
@@ -462,7 +464,7 @@ export default function Anchorage() {
 
         <div style={{
           position: "relative", zIndex: 2,
-          padding: "80px 5vw", maxWidth: "640px",
+          padding: "clamp(48px, 7vw, 80px) 5vw", maxWidth: "640px",
           opacity: ctaVis ? 1 : 0, transform: ctaVis ? "none" : "translateY(16px)",
           transition: "opacity 0.8s, transform 0.8s",
         }}>

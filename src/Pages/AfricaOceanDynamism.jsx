@@ -2,6 +2,7 @@ import { useRef, useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
+import useIsMobile from "../hooks/useIsMobile";
 
 function useReveal(threshold = 0.08) {
   const ref = useRef(null);
@@ -81,6 +82,7 @@ export default function AfricaOceanDynamism() {
   const [activeWave, setActiveWave]       = useState(null);
   const [activeCategory, setActiveCategory] = useState("All");
   const [email, setEmail] = useState("");
+  const isMobile = useIsMobile();
 
   return (
     <div style={{ minHeight: "100vh", background: NAVY, color: "white", overflowX: "hidden" }}>
@@ -159,7 +161,7 @@ export default function AfricaOceanDynamism() {
 
           {/* Data strip */}
           <div style={{
-            display: "grid", gridTemplateColumns: "repeat(4, 1fr)",
+            display: "grid", gridTemplateColumns: isMobile ? "repeat(2, 1fr)" : "repeat(4, 1fr)",
             borderTop: `1px solid ${DIM}`,
             opacity: heroVis ? 1 : 0, transform: heroVis ? "none" : "translateY(16px)",
             transition: "opacity 0.7s 0.4s, transform 0.7s 0.4s",
@@ -172,7 +174,8 @@ export default function AfricaOceanDynamism() {
             ].map((d, i) => (
               <div key={i} style={{
                 padding: "24px 0 40px 24px",
-                borderLeft: i > 0 ? `1px solid ${DIM}` : "none",
+                borderLeft: (isMobile ? i % 2 !== 0 : i > 0) ? `1px solid ${DIM}` : "none",
+                borderTop: isMobile && i > 1 ? `1px solid ${DIM}` : "none",
               }}>
                 <span style={{
                   fontSize: "clamp(22px, 3vw, 36px)", fontWeight: 700,
@@ -198,13 +201,13 @@ export default function AfricaOceanDynamism() {
           WHAT WE BELIEVE + THE AGENDA — combined,
           two-column editorial layout
       ══════════════════════════════════════════════ */}
-      <section ref={beliefRef} style={{ background: SLATE, padding: "96px 5vw" }}>
+      <section ref={beliefRef} style={{ background: SLATE, padding: "clamp(56px, 8vw, 96px) 5vw" }}>
         <div style={{ maxWidth: "1200px", margin: "0 auto" }}>
           <div style={{ height: "1px", background: DIM, marginBottom: "48px" }} />
 
           <div style={{
-            display: "grid", gridTemplateColumns: "200px 1fr",
-            gap: "64px",
+            display: "grid", gridTemplateColumns: isMobile ? "1fr" : "200px 1fr",
+            gap: isMobile ? "24px" : "64px",
             opacity: beliefVis ? 1 : 0, transform: beliefVis ? "none" : "translateY(16px)",
             transition: "opacity 0.7s, transform 0.7s",
           }}>
@@ -239,7 +242,7 @@ export default function AfricaOceanDynamism() {
           THE STAKES — It is 2030.
           Two column: narrative left, data right
       ══════════════════════════════════════════════ */}
-      <section ref={stakesRef} style={{ background: NAVY, padding: "96px 5vw" }}>
+      <section ref={stakesRef} style={{ background: NAVY, padding: "clamp(56px, 8vw, 96px) 5vw" }}>
         <div style={{ maxWidth: "1200px", margin: "0 auto" }}>
 
           {/* Header */}
@@ -258,7 +261,7 @@ export default function AfricaOceanDynamism() {
             </div>
           </div>
 
-          <div style={{ display: "grid", gridTemplateColumns: "1fr 300px", gap: "72px", alignItems: "start" }}>
+          <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 300px", gap: isMobile ? "40px" : "72px", alignItems: "start" }}>
 
             {/* Left — narrative, trimmed to essentials */}
             <div style={{
@@ -299,7 +302,7 @@ export default function AfricaOceanDynamism() {
             {/* Right — stat column */}
             <div style={{
               display: "flex", flexDirection: "column", gap: "32px",
-              position: "sticky", top: "80px",
+              position: isMobile ? "static" : "sticky", top: isMobile ? "auto" : "80px",
               opacity: stakesVis ? 1 : 0, transform: stakesVis ? "none" : "translateX(16px)",
               transition: "opacity 0.8s 0.25s, transform 0.8s 0.25s",
             }}>
@@ -326,7 +329,7 @@ export default function AfricaOceanDynamism() {
       {/* ══════════════════════════════════════════════
           SIX STRATEGIC THEMES — accordion
       ══════════════════════════════════════════════ */}
-      <section ref={waveRef} style={{ background: SLATE, padding: "96px 5vw" }}>
+      <section ref={waveRef} style={{ background: SLATE, padding: "clamp(56px, 8vw, 96px) 5vw" }}>
         <div style={{ maxWidth: "1200px", margin: "0 auto" }}>
 
           <div style={{
@@ -380,24 +383,29 @@ export default function AfricaOceanDynamism() {
                   <button onClick={() => setActiveWave(isOpen ? null : i)} style={{
                     width: "100%", background: "none", border: "none",
                     cursor: "pointer", textAlign: "left", padding: "24px 0",
-                    display: "grid", gridTemplateColumns: "48px 1fr 100px 32px",
-                    gap: "28px", alignItems: "center", fontFamily: "inherit",
+                    display: "grid",
+                    gridTemplateColumns: isMobile ? "32px 1fr 24px" : "48px 1fr 100px 32px",
+                    gridTemplateAreas: isMobile ? '"num title icon" "stat stat stat"' : undefined,
+                    gap: isMobile ? "6px 12px" : "28px", alignItems: "center", fontFamily: "inherit",
                   }}>
-                    <span style={{ fontSize: "12px", letterSpacing: "2px", color: isOpen ? SIGNAL : MUTED }}>{wave.num}</span>
+                    <span style={{ fontSize: "12px", letterSpacing: "2px", color: isOpen ? SIGNAL : MUTED, gridArea: isMobile ? "num" : undefined }}>{wave.num}</span>
                     <span style={{
                       fontWeight: 600, fontSize: "clamp(15px, 1.8vw, 19px)",
                       color: isOpen ? "white" : "rgba(255,255,255,0.75)",
                       transition: "color 0.2s",
+                      gridArea: isMobile ? "title" : undefined,
                     }}>{wave.title}</span>
                     <span style={{
                       fontWeight: 700, fontSize: "16px",
-                      color: isOpen ? SIGNAL : MUTED, textAlign: "right", transition: "color 0.2s",
+                      color: isOpen ? SIGNAL : MUTED, textAlign: isMobile ? "left" : "right", transition: "color 0.2s",
+                      gridArea: isMobile ? "stat" : undefined,
                     }}>{wave.stat}</span>
                     <span style={{
                       color: isOpen ? SIGNAL : MUTED, fontSize: "18px",
                       textAlign: "right", display: "block",
                       transform: isOpen ? "rotate(45deg)" : "none",
                       transition: "transform 0.3s, color 0.2s",
+                      gridArea: isMobile ? "icon" : undefined,
                     }}>+</span>
                   </button>
 
@@ -407,14 +415,14 @@ export default function AfricaOceanDynamism() {
                     transition: "max-height 0.4s cubic-bezier(0.4,0,0.2,1)",
                   }}>
                     <div style={{
-                      display: "grid", gridTemplateColumns: "48px 1fr 120px",
-                      gap: "28px", paddingBottom: "28px", alignItems: "start",
+                      display: "grid", gridTemplateColumns: isMobile ? "1fr" : "48px 1fr 120px",
+                      gap: isMobile ? "16px" : "28px", paddingBottom: "28px", alignItems: "start",
                     }}>
-                      <div />
+                      {!isMobile && <div />}
                       <p style={{ fontSize: "15px", lineHeight: 1.85, color: BODY, fontWeight: 300, margin: 0 }}>
                         {wave.body}
                       </p>
-                      <div style={{ textAlign: "right" }}>
+                      <div style={{ textAlign: isMobile ? "left" : "right" }}>
                         <span style={{ fontSize: "28px", fontWeight: 700, color: "rgba(193,39,45,0.18)", display: "block", lineHeight: 1 }}>{wave.stat}</span>
                         <span style={{ fontSize: "9px", letterSpacing: "1.5px", color: MUTED, display: "block", marginTop: "4px" }}>{wave.statLabel.toUpperCase()}</span>
                       </div>
@@ -431,12 +439,12 @@ export default function AfricaOceanDynamism() {
       {/* ══════════════════════════════════════════════
           NEWSLETTER SIGNUP
       ══════════════════════════════════════════════ */}
-      <section ref={emailRef} style={{ background: MID, padding: "96px 5vw" }}>
+      <section ref={emailRef} style={{ background: MID, padding: "clamp(56px, 8vw, 96px) 5vw" }}>
         <div style={{ maxWidth: "1200px", margin: "0 auto" }}>
           <div style={{ height: "1px", background: DIM, marginBottom: "48px" }} />
           <div style={{
-            display: "grid", gridTemplateColumns: "1fr 1fr",
-            gap: "80px", alignItems: "center",
+            display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr",
+            gap: isMobile ? "40px" : "80px", alignItems: "center",
             opacity: emailVis ? 1 : 0, transform: emailVis ? "none" : "translateY(16px)",
             transition: "opacity 0.7s, transform 0.7s",
           }}>

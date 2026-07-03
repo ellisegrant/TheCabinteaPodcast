@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
+import useIsMobile from "../hooks/useIsMobile";
 
 function useReveal(threshold = 0.1) {
   const ref = useRef(null);
@@ -92,6 +93,7 @@ const REASONS = [
 function ContactForm() {
   const [form, setForm] = useState({ name: "", company: "", email: "", tier: "", message: "" });
   const [sent, setSent] = useState(false);
+  const isMobile = useIsMobile();
 
   const update = (k, v) => setForm(f => ({ ...f, [k]: v }));
 
@@ -140,7 +142,7 @@ function ContactForm() {
     <form onSubmit={e => { e.preventDefault(); setSent(true); }}
       style={{ display: "flex", flexDirection: "column", gap: "18px" }}>
 
-      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "14px" }}>
+      <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr", gap: "14px" }}>
         <div>
           <label style={label}>YOUR NAME</label>
           <input required value={form.name} onChange={e => update("name", e.target.value)}
@@ -215,6 +217,7 @@ export default function Partner() {
   const [reasonsRef, reasonsVis] = useReveal(0.08);
   const [tiersRef,   tiersVis]   = useReveal(0.08);
   const [formRef,    formVis]    = useReveal(0.08);
+  const isMobile = useIsMobile();
 
   return (
     <div style={{ minHeight: "100vh", background: BG, color: "white", overflowX: "hidden" }}>
@@ -323,11 +326,11 @@ export default function Partner() {
       {/* ════════════════════════════════════════
           THE PROPOSITION
       ════════════════════════════════════════ */}
-      <section ref={propRef} style={{ background: PANEL, padding: "96px 5vw" }}>
+      <section ref={propRef} style={{ background: PANEL, padding: "clamp(56px, 8vw, 96px) 5vw" }}>
         <div style={{ maxWidth: "1200px", margin: "0 auto" }}>
           <div style={{
-            display: "grid", gridTemplateColumns: "1fr 1fr",
-            gap: "80px", alignItems: "center",
+            display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr",
+            gap: isMobile ? "40px" : "80px", alignItems: "center",
           }}>
             <div style={{
               opacity: propVis ? 1 : 0, transform: propVis ? "none" : "translateX(-20px)",
@@ -388,7 +391,7 @@ export default function Partner() {
       {/* ════════════════════════════════════════
           WHY PARTNER — 4 reasons
       ════════════════════════════════════════ */}
-      <section ref={reasonsRef} style={{ background: BG, padding: "96px 5vw" }}>
+      <section ref={reasonsRef} style={{ background: BG, padding: "clamp(56px, 8vw, 96px) 5vw" }}>
         <div style={{ maxWidth: "1200px", margin: "0 auto" }}>
 
           {/* Header */}
@@ -415,8 +418,8 @@ export default function Partner() {
             {REASONS.map((r, i) => (
               <div key={r.num} style={{
                 display: "grid",
-                gridTemplateColumns: "56px 1fr 1fr",
-                gap: "40px",
+                gridTemplateColumns: isMobile ? "1fr" : "56px 1fr 1fr",
+                gap: isMobile ? "8px" : "40px",
                 padding: "44px 0",
                 borderTop: "1px solid rgba(255,255,255,0.06)",
                 alignItems: "start",
@@ -462,7 +465,7 @@ export default function Partner() {
         }} />
         <div className="ct-grain" style={{ zIndex: 1 }} />
 
-        <div style={{ position: "relative", zIndex: 2, padding: "80px 5vw", maxWidth: "700px" }}>
+        <div style={{ position: "relative", zIndex: 2, padding: "clamp(48px, 7vw, 80px) 5vw", maxWidth: "700px" }}>
           <p style={{ fontSize: "10px", letterSpacing: "3px", color: GOLD, marginBottom: "20px", fontWeight: 600 }}>
             THE KEEPSAKE RITUAL
           </p>
@@ -484,7 +487,7 @@ export default function Partner() {
       {/* ════════════════════════════════════════
           PARTNERSHIP TIERS
       ════════════════════════════════════════ */}
-      <section id="tiers" ref={tiersRef} style={{ background: PANEL, padding: "96px 5vw" }}>
+      <section id="tiers" ref={tiersRef} style={{ background: PANEL, padding: "clamp(56px, 8vw, 96px) 5vw" }}>
         <div style={{ maxWidth: "1200px", margin: "0 auto" }}>
 
           <div style={{
@@ -502,7 +505,7 @@ export default function Partner() {
             }}>Choose your seat.</h2>
           </div>
 
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "2px" }}>
+          <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "repeat(3, 1fr)", gap: "2px" }}>
             {TIERS.map((tier, i) => {
               const [hovered, setHovered] = useState(false);
               return (
@@ -597,15 +600,15 @@ export default function Partner() {
       {/* ════════════════════════════════════════
           CONTACT FORM
       ════════════════════════════════════════ */}
-      <section id="partner-form" ref={formRef} style={{ background: BG, padding: "96px 5vw" }}>
+      <section id="partner-form" ref={formRef} style={{ background: BG, padding: "clamp(56px, 8vw, 96px) 5vw" }}>
         <div style={{ maxWidth: "1200px", margin: "0 auto" }}>
 
           {/* Section rule */}
           <div style={{ height: "1px", background: "rgba(196,164,78,0.15)", marginBottom: "56px" }} />
 
           <div style={{
-            display: "grid", gridTemplateColumns: "1fr 1fr",
-            gap: "96px", alignItems: "start",
+            display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr",
+            gap: isMobile ? "48px" : "96px", alignItems: "start",
           }}>
             {/* Left — pitch */}
             <div style={{

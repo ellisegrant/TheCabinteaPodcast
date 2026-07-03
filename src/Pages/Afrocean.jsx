@@ -2,6 +2,7 @@ import { useRef, useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
+import useIsMobile from "../hooks/useIsMobile";
 
 function useReveal(threshold = 0.1) {
   const ref = useRef(null);
@@ -154,6 +155,7 @@ export default function Afrocean() {
   const [pillarsRef, pillarsVis] = useReveal(0.1);
   const [diaspRef,   diaspVis]   = useReveal(0.1);
   const [ctaRef,     ctaVis]     = useReveal(0.1);
+  const isMobile = useIsMobile();
 
   return (
     <div style={{ minHeight: "100vh", background: BG, color: "white", overflowX: "hidden" }}>
@@ -171,7 +173,7 @@ export default function Afrocean() {
         <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to right, rgba(15,25,18,0.78) 0%, transparent 60%)" }} />
         <div className="ct-grain" style={{ zIndex: 1 }} />
 
-        <div style={{ position: "relative", zIndex: 2, padding: "0 5vw 72px" }}>
+        <div style={{ position: "relative", zIndex: 2, padding: "0 5vw clamp(40px, 7vw, 72px)" }}>
           <p style={{
             fontSize: "11px", letterSpacing: "4px", color: GOLD,
             fontWeight: 500, marginBottom: "16px",
@@ -225,14 +227,14 @@ export default function Afrocean() {
 
       {/* ════════ ROOTS ════════ */}
       <section ref={rootsRef} style={{ background: PANEL }}>
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", minHeight: "560px" }}>
+        <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr", minHeight: isMobile ? "auto" : "560px" }}>
           <div style={{
             position: "relative", overflow: "hidden",
             opacity: rootsVis ? 1 : 0, transform: rootsVis ? "none" : "translateX(-16px)",
             transition: "opacity 0.8s, transform 0.8s",
           }}>
             <img src={IMGS.fishermen} alt="African coastal community"
-              style={{ width: "100%", height: "100%", objectFit: "cover", display: "block", minHeight: "560px" }} />
+              style={{ width: "100%", height: "100%", objectFit: "cover", display: "block", minHeight: isMobile ? "320px" : "560px" }} />
             <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to right, transparent, rgba(20,31,24,0.6) 100%)" }} />
             <div style={{
               position: "absolute", bottom: "36px", left: "28px",
@@ -248,7 +250,7 @@ export default function Afrocean() {
           </div>
 
           <div style={{
-            padding: "72px 5vw 72px 56px",
+            padding: isMobile ? "40px 5vw" : "72px 5vw 72px 56px",
             display: "flex", flexDirection: "column", justifyContent: "center",
             opacity: rootsVis ? 1 : 0, transform: rootsVis ? "none" : "translateX(16px)",
             transition: "opacity 0.8s 0.15s, transform 0.8s 0.15s",
@@ -306,7 +308,7 @@ export default function Afrocean() {
 
         {/* Row 1 — 3 images */}
         <div style={{
-          display: "grid", gridTemplateColumns: "1.4fr 1fr 1fr", gap: "2px",
+          display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1.4fr 1fr 1fr", gap: "2px",
           opacity: mosaicVis ? 1 : 0, transform: mosaicVis ? "none" : "translateY(20px)",
           transition: "opacity 0.8s 0.1s, transform 0.8s 0.1s",
         }}>
@@ -344,7 +346,7 @@ export default function Afrocean() {
 
         {/* Row 2 — 2 images */}
         <div style={{
-          display: "grid", gridTemplateColumns: "1fr 1.4fr", gap: "2px", marginTop: "2px",
+          display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1.4fr", gap: "2px", marginTop: "2px",
           opacity: mosaicVis ? 1 : 0, transform: mosaicVis ? "none" : "translateY(20px)",
           transition: "opacity 0.8s 0.22s, transform 0.8s 0.22s",
         }}>
@@ -411,10 +413,10 @@ export default function Afrocean() {
       </section>
 
       {/* ════════ FOUR PILLARS ════════ */}
-      <section ref={pillarsRef} style={{ background: PANEL, padding: "96px 5vw" }}>
+      <section ref={pillarsRef} style={{ background: PANEL, padding: "clamp(56px, 8vw, 96px) 5vw" }}>
         <div style={{ maxWidth: "1200px", margin: "0 auto" }}>
           <div style={{
-            display: "grid", gridTemplateColumns: "1fr 1fr", gap: "80px",
+            display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr", gap: isMobile ? "40px" : "80px",
             alignItems: "end", marginBottom: "56px",
             opacity: pillarsVis ? 1 : 0, transform: pillarsVis ? "none" : "translateY(12px)",
             transition: "opacity 0.6s, transform 0.6s",
@@ -435,8 +437,8 @@ export default function Afrocean() {
           <div style={{ display: "flex", flexDirection: "column" }}>
             {pillars.map((p, i) => (
               <div key={p.num} style={{
-                display: "grid", gridTemplateColumns: "56px 200px 1fr",
-                gap: "40px", padding: "36px 0",
+                display: "grid", gridTemplateColumns: isMobile ? "1fr" : "56px 200px 1fr",
+                gap: isMobile ? "8px" : "40px", padding: "36px 0",
                 borderTop: "1px solid rgba(255,255,255,0.06)",
                 alignItems: "start",
                 opacity: pillarsVis ? 1 : 0, transform: pillarsVis ? "none" : "translateY(16px)",
@@ -454,9 +456,9 @@ export default function Afrocean() {
 
       {/* ════════ DIASPORA ════════ */}
       <section ref={diaspRef} style={{ background: BG }}>
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", minHeight: "560px" }}>
+        <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr", minHeight: isMobile ? "auto" : "560px" }}>
           <div style={{
-            padding: "72px 5vw",
+            padding: isMobile ? "40px 5vw" : "72px 5vw",
             display: "flex", flexDirection: "column", justifyContent: "center",
             opacity: diaspVis ? 1 : 0, transform: diaspVis ? "none" : "translateX(-16px)",
             transition: "opacity 0.8s, transform 0.8s",
@@ -487,6 +489,7 @@ export default function Afrocean() {
 
           <div style={{
             display: "grid", gridTemplateRows: "1fr 1fr", gap: "2px",
+            minHeight: isMobile ? "400px" : "auto",
             opacity: diaspVis ? 1 : 0, transform: diaspVis ? "none" : "translateX(16px)",
             transition: "opacity 0.8s 0.15s, transform 0.8s 0.15s",
           }}>
@@ -528,7 +531,7 @@ export default function Afrocean() {
         <div className="ct-grain" style={{ zIndex: 1 }} />
         <div style={{
           position: "relative", zIndex: 2,
-          padding: "80px 5vw", maxWidth: "640px",
+          padding: "clamp(48px, 7vw, 80px) 5vw", maxWidth: "640px",
           opacity: ctaVis ? 1 : 0, transform: ctaVis ? "none" : "translateY(16px)",
           transition: "opacity 0.8s, transform 0.8s",
         }}>

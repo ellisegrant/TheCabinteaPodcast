@@ -13,6 +13,7 @@ import CategoryStrip from "./components/CategoryStrip";
 import AfricaOceanDynamism from "./Pages/AfricaOceanDynamism";
 import OnDeck from "./Pages/OnDeck";
 import WhatsRising from "./Pages/WhatsRising";
+import Contact from "./Pages/Contact";
 
 function App() {
   return (
@@ -32,6 +33,7 @@ function App() {
           <Route path="/africa-ocean-dynamism" element={<AfricaOceanDynamism />} />
           <Route path="/on-deck" element={<OnDeck />} />
           <Route path="/whats-rising" element={<WhatsRising />} />
+          <Route path="/contact" element={<Contact />} />
         </Routes>
       </BrowserRouter>
     </PlayerProvider>

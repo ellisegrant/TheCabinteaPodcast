@@ -2,6 +2,7 @@ import { useRef, useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
+import useIsMobile from "../hooks/useIsMobile";
 
 function useReveal(threshold = 0.08) {
   const ref = useRef(null);
@@ -83,14 +84,15 @@ const STORIES = [
 /* ── Story card — compact list style ── */
 function StoryCard({ story, index, visible }) {
   const [hovered, setHovered] = useState(false);
+  const isMobile = useIsMobile();
   return (
     <div
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
       style={{
         display: "grid",
-        gridTemplateColumns: "120px 1fr",
-        gap: "20px",
+        gridTemplateColumns: isMobile ? "80px 1fr" : "120px 1fr",
+        gap: isMobile ? "14px" : "20px",
         padding: "24px 0",
         borderTop: "1px solid rgba(255,255,255,0.06)",
         alignItems: "start",
@@ -101,7 +103,7 @@ function StoryCard({ story, index, visible }) {
       }}
     >
       {/* Thumbnail */}
-      <div style={{ height: "88px", overflow: "hidden", flexShrink: 0 }}>
+      <div style={{ height: isMobile ? "64px" : "88px", overflow: "hidden", flexShrink: 0 }}>
         <img
           src={story.img}
           alt={story.headline}
@@ -144,6 +146,7 @@ export default function WhatsRising() {
   const [introRef,   introVis]   = useReveal(0.08);
   const [storiesRef, storiesVis] = useReveal(0.06);
   const [ctaRef,     ctaVis]     = useReveal(0.1);
+  const isMobile = useIsMobile();
 
   const featured = STORIES.find(s => s.featured);
   const rest = STORIES.filter(s => !s.featured);
@@ -222,8 +225,8 @@ export default function WhatsRising() {
       <section ref={introRef} style={{ background: PANEL, padding: "56px 5vw" }}>
         <div style={{ maxWidth: "1200px", margin: "0 auto" }}>
           <div style={{
-            display: "grid", gridTemplateColumns: "200px 1fr",
-            gap: "60px", alignItems: "center",
+            display: "grid", gridTemplateColumns: isMobile ? "1fr" : "200px 1fr",
+            gap: isMobile ? "20px" : "60px", alignItems: "center",
             opacity: introVis ? 1 : 0, transform: introVis ? "none" : "translateY(14px)",
             transition: "opacity 0.7s, transform 0.7s",
           }}>
@@ -248,12 +251,12 @@ export default function WhatsRising() {
               FEATURED · {featured.edition.toUpperCase()}
             </p>
             <div style={{
-              display: "grid", gridTemplateColumns: "1fr 1fr",
+              display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr",
               gap: "2px", background: PANEL,
               cursor: "pointer",
             }}>
               {/* Featured image */}
-              <div style={{ position: "relative", overflow: "hidden", minHeight: "380px" }}>
+              <div style={{ position: "relative", overflow: "hidden", minHeight: isMobile ? "260px" : "380px" }}>
                 <img
                   src={featured.img}
                   alt={featured.headline}
@@ -337,8 +340,8 @@ export default function WhatsRising() {
           <div style={{
             marginTop: "48px", padding: "32px 36px",
             background: PANEL,
-            display: "grid", gridTemplateColumns: "1fr auto",
-            gap: "28px", alignItems: "center",
+            display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr auto",
+            gap: "28px", alignItems: isMobile ? "start" : "center",
             borderLeft: `3px solid ${TERRA}`,
             opacity: storiesVis ? 1 : 0, transition: "opacity 0.7s 0.4s",
           }}>

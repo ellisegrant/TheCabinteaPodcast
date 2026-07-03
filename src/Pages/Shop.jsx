@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
+import useIsMobile from "../hooks/useIsMobile";
 
 function useReveal(threshold = 0.05) {
   const ref = useRef(null);
@@ -78,6 +79,7 @@ const CATEGORIES = ["All", "Apparel", "Drinkware", "Accessories", "Tea"];
 function CartDrawer({ cart, onClose, onRemove, onQtyChange }) {
   const total = cart.reduce((s, i) => s + i.price * i.qty, 0);
   const count = cart.reduce((s, i) => s + i.qty, 0);
+  const isMobile = useIsMobile();
 
   return (
     <>
@@ -130,13 +132,13 @@ function CartDrawer({ cart, onClose, onRemove, onQtyChange }) {
               {cart.map(item => (
                 <div key={item.id} style={{
                   display: "grid",
-                  gridTemplateColumns: "72px 1fr auto",
-                  gap: "16px", padding: "18px 0",
+                  gridTemplateColumns: isMobile ? "56px 1fr auto" : "72px 1fr auto",
+                  gap: isMobile ? "12px" : "16px", padding: "18px 0",
                   borderBottom: "1px solid rgba(255,255,255,0.05)",
                   alignItems: "center",
                 }}>
                   {/* Thumb */}
-                  <div style={{ width: "72px", height: "72px", overflow: "hidden", background: DARK2, flexShrink: 0 }}>
+                  <div style={{ width: isMobile ? "56px" : "72px", height: isMobile ? "56px" : "72px", overflow: "hidden", background: DARK2, flexShrink: 0 }}>
                     <img src={item.img} alt={item.name}
                       style={{ width: "100%", height: "100%", objectFit: "cover" }} />
                   </div>
@@ -400,7 +402,7 @@ export default function Shop() {
         }} />
         <div className="ct-grain" style={{ zIndex: 1 }} />
 
-        <div style={{ position: "relative", zIndex: 2, padding: "0 5vw 64px" }}>
+        <div style={{ position: "relative", zIndex: 2, padding: "0 5vw clamp(36px, 6vw, 64px)" }}>
           <p style={{
             fontSize: "10px", letterSpacing: "4px", color: GOLD,
             fontWeight: 600, margin: "0 0 16px",
@@ -553,7 +555,7 @@ export default function Shop() {
       <section ref={ctaRef} style={{
         background: PANEL,
         borderTop: "1px solid rgba(255,255,255,0.06)",
-        padding: "64px 5vw",
+        padding: "clamp(36px, 6vw, 64px) 5vw",
       }}>
         <div style={{
           maxWidth: "1300px", margin: "0 auto",

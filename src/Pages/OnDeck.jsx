@@ -2,6 +2,7 @@ import { useRef, useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
+import useIsMobile from "../hooks/useIsMobile";
 
 function useReveal(threshold = 0.08) {
   const ref = useRef(null);
@@ -146,6 +147,7 @@ export default function OnDeck() {
   const [introRef,   introVis]   = useReveal(0.08);
   const [gridRef,    gridVis]    = useReveal(0.06);
   const [ctaRef,     ctaVis]     = useReveal(0.1);
+  const isMobile = useIsMobile();
 
   return (
     <div style={{ minHeight: "100vh", background: BG, color: "white", overflowX: "hidden" }}>
@@ -215,8 +217,8 @@ export default function OnDeck() {
       <section ref={introRef} style={{ background: PANEL, padding: "72px 5vw" }}>
         <div style={{ maxWidth: "1200px", margin: "0 auto" }}>
           <div style={{
-            display: "grid", gridTemplateColumns: "1fr 1fr",
-            gap: "80px", alignItems: "center",
+            display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr",
+            gap: isMobile ? "32px" : "80px", alignItems: "center",
             opacity: introVis ? 1 : 0, transform: introVis ? "none" : "translateY(16px)",
             transition: "opacity 0.7s, transform 0.7s",
           }}>
@@ -235,8 +237,8 @@ export default function OnDeck() {
               </p>
             </div>
             <div style={{
-              borderLeft: "2px solid rgba(44,140,124,0.25)",
-              paddingLeft: "40px",
+              borderLeft: isMobile ? "none" : "2px solid rgba(44,140,124,0.25)",
+              paddingLeft: isMobile ? "0" : "40px",
             }}>
               <p style={{ fontSize: "15px", lineHeight: 1.9, color: MUTED, fontWeight: 300, margin: "0 0 20px" }}>
                 Africa's blue economy is built by real people — port workers, marine scientists, fishermen, lawyers, entrepreneurs. Their stories rarely make headlines. On Deck changes that.
@@ -296,7 +298,7 @@ export default function OnDeck() {
       </section>
 
       {/* ════════ CTA ════════ */}
-      <section ref={ctaRef} style={{ background: PANEL, borderTop: "1px solid rgba(255,255,255,0.06)", padding: "64px 5vw" }}>
+      <section ref={ctaRef} style={{ background: PANEL, borderTop: "1px solid rgba(255,255,255,0.06)", padding: "clamp(36px, 6vw, 64px) 5vw" }}>
         <div style={{
           maxWidth: "1200px", margin: "0 auto",
           display: "flex", alignItems: "center",

@@ -2,6 +2,7 @@ import { useState, useEffect, useRef, useCallback } from "react";
 import { Link } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
+import useIsMobile from "../hooks/useIsMobile";
 
 function useReveal(threshold = 0.1) {
   const ref = useRef(null);
@@ -113,10 +114,11 @@ function EpisodeCarousel({ episodes }) {
   const autoRef    = useRef(null);
   const trackRef   = useRef(null);
   const total = episodes.length;
+  const isMobile = useIsMobile();
 
-  // Card width: 68% of container + 16px gap peek
-  const CARD_W   = 68;   // percent of wrapper
-  const GAP      = 16;   // px between cards
+  // Card width: 68% of container + 16px gap peek (full-width on mobile)
+  const CARD_W   = isMobile ? 92 : 68;   // percent of wrapper
+  const GAP      = isMobile ? 12 : 16;   // px between cards
 
   const startAuto = useCallback(() => {
     clearInterval(autoRef.current);
@@ -204,13 +206,13 @@ function EpisodeCarousel({ episodes }) {
                 <div style={{
                   background: PANEL,
                   display: "grid",
-                  gridTemplateColumns: "1fr 1fr",
-                  height: "460px",
+                  gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr",
+                  height: isMobile ? "auto" : "460px",
                   overflow: "hidden",
                 }}>
 
                   {/* Left — image, strictly contained */}
-                  <div style={{ position: "relative", overflow: "hidden", height: "460px" }}>
+                  <div style={{ position: "relative", overflow: "hidden", height: isMobile ? "220px" : "460px" }}>
                     <img
                       src={ep.img}
                       alt={ep.guest}
@@ -250,10 +252,10 @@ function EpisodeCarousel({ episodes }) {
 
                   {/* Right — info */}
                   <div style={{
-                    padding: "40px 36px",
+                    padding: isMobile ? "24px 22px" : "40px 36px",
                     display: "flex", flexDirection: "column",
                     justifyContent: "center",
-                    borderLeft: "1px solid rgba(255,255,255,0.04)",
+                    borderLeft: isMobile ? "none" : "1px solid rgba(255,255,255,0.04)",
                   }}>
                     <p style={{ fontSize: "10px", letterSpacing: "3.5px", color: GOLD, fontWeight: 600, margin: "0 0 16px" }}>
                       EPISODE {ep.num}
@@ -362,6 +364,7 @@ export default function Home() {
   const [epRef,     epVis]     = useReveal(0.08);
   const [brandsRef, brandsVis] = useReveal(0.08);
   const [ctaRef,    ctaVis]    = useReveal(0.1);
+  const isMobile = useIsMobile();
 
   return (
     <div style={{ minHeight: "100vh", background: BG, color: "white", overflowX: "hidden" }}>
@@ -380,7 +383,7 @@ export default function Home() {
         <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to top, rgba(15,25,18,1) 0%, rgba(15,25,18,0.55) 45%, transparent 80%)" }} />
         <div className="ct-grain" style={{ zIndex: 1 }} />
 
-        <div style={{ position: "relative", zIndex: 2, padding: "0 5vw 72px" }}>
+        <div style={{ position: "relative", zIndex: 2, padding: "0 5vw clamp(40px, 7vw, 72px)" }}>
           <h1 style={{
             fontWeight: 700, fontSize: "clamp(38px, 5vw, 96px)", lineHeight: 1,
             color: "white", margin: "0 0 10px",
@@ -437,9 +440,9 @@ export default function Home() {
       </section>
 
       {/* ════════ ABOUT ════════ */}
-      <section ref={aboutRef} style={{ background: PANEL, padding: "96px 5vw" }}>
+      <section ref={aboutRef} style={{ background: PANEL, padding: "clamp(56px, 8vw, 96px) 5vw" }}>
         <div style={{ maxWidth: "1200px", margin: "0 auto" }}>
-          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "80px", alignItems: "center" }}>
+          <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr", gap: isMobile ? "40px" : "80px", alignItems: "center" }}>
             <div style={{ position: "relative", opacity: aboutVis ? 1 : 0, transform: aboutVis ? "none" : "translateX(-20px)", transition: "opacity 0.8s, transform 0.8s" }}>
               <div style={{ overflow: "hidden" }}>
                 <img src={IMGS.host} alt="Host" style={{ width: "100%", height: "auto", objectFit: "contain", display: "block" }} />
@@ -474,7 +477,7 @@ export default function Home() {
       </section>
 
       {/* ════════ LATEST EPISODES — CAROUSEL ════════ */}
-      <section ref={epRef} style={{ background: BG, padding: "96px 5vw" }}>
+      <section ref={epRef} style={{ background: BG, padding: "clamp(56px, 8vw, 96px) 5vw" }}>
         <div style={{ maxWidth: "1200px", margin: "0 auto" }}>
           <div style={{
             display: "flex", alignItems: "baseline", justifyContent: "space-between", marginBottom: "36px",
@@ -494,13 +497,13 @@ export default function Home() {
       </section>
 
       {/* ════════ THE ECOSYSTEM ════════ */}
-      <section ref={brandsRef} style={{ background: PANEL, padding: "96px 5vw" }}>
+      <section ref={brandsRef} style={{ background: PANEL, padding: "clamp(56px, 8vw, 96px) 5vw" }}>
         <div style={{ maxWidth: "1200px", margin: "0 auto" }}>
           <div style={{ marginBottom: "48px", opacity: brandsVis ? 1 : 0, transform: brandsVis ? "none" : "translateY(12px)", transition: "opacity 0.6s, transform 0.6s" }}>
             <p style={{ fontSize: "10px", letterSpacing: "3px", color: GOLD, marginBottom: "12px", fontWeight: 600 }}>THE ECOSYSTEM</p>
             <h2 style={{ fontWeight: 700, fontSize: "clamp(22px, 3vw, 36px)", color: "white", margin: 0 }}>More than a podcast.</h2>
           </div>
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "2px" }}>
+          <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "repeat(3, 1fr)", gap: "2px" }}>
             {BRANDS.map((brand, i) => {
               const [hovered, setHovered] = useState(false);
               return (
@@ -530,7 +533,7 @@ export default function Home() {
         <img src={IMGS.cta} alt="" style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover" }} />
         <div style={{ position: "absolute", inset: 0, background: "linear-gradient(105deg, rgba(15,25,18,0.96) 40%, rgba(15,25,18,0.7) 100%)" }} />
         <div className="ct-grain" style={{ zIndex: 1 }} />
-        <div style={{ position: "relative", zIndex: 2, padding: "80px 5vw", maxWidth: "680px", opacity: ctaVis ? 1 : 0, transform: ctaVis ? "none" : "translateY(20px)", transition: "opacity 0.8s, transform 0.8s" }}>
+        <div style={{ position: "relative", zIndex: 2, padding: "clamp(48px, 7vw, 80px) 5vw", maxWidth: "680px", opacity: ctaVis ? 1 : 0, transform: ctaVis ? "none" : "translateY(20px)", transition: "opacity 0.8s, transform 0.8s" }}>
           <p style={{ fontSize: "10px", letterSpacing: "3px", color: GOLD, marginBottom: "20px", fontWeight: 600 }}>NEW EPISODES OUT NOW</p>
           <h2 style={{ fontWeight: 700, fontSize: "clamp(32px, 5vw, 64px)", lineHeight: 1, color: "white", marginBottom: "16px" }}>
             Recorded live.<br /><span style={{ color: GOLD }}>Heard everywhere.</span>

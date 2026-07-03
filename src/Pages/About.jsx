@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
+import useIsMobile from "../hooks/useIsMobile";
 
 function useReveal(threshold = 0.1) {
   const ref = useRef(null);
@@ -95,6 +96,7 @@ export default function About() {
   const [ecoRef,     ecoVis]     = useReveal(0.1);
   const [hostRef,    hostVis]    = useReveal(0.1);
   const [ctaRef,     ctaVis]     = useReveal(0.1);
+  const isMobile = useIsMobile();
 
   return (
     <div style={{ minHeight: "100vh", background: BG, color: "white", overflowX: "hidden" }}>
@@ -130,7 +132,7 @@ export default function About() {
 
         <div style={{
           position: "relative", zIndex: 2,
-          padding: "0 5vw 72px",
+          padding: "0 5vw clamp(40px, 7vw, 72px)",
         }}>
           <p style={{
             fontSize: "11px", letterSpacing: "4px", color: GOLD,
@@ -168,8 +170,8 @@ export default function About() {
       ══════════════════════════════════════════════ */}
       <section ref={missionRef} style={{ background: PANEL }}>
         <div style={{
-          display: "grid", gridTemplateColumns: "1fr 1fr",
-          minHeight: "580px",
+          display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr",
+          minHeight: isMobile ? "auto" : "580px",
         }}>
           {/* Left — image */}
           <div style={{
@@ -180,7 +182,7 @@ export default function About() {
             <img
               src={IMGS.market}
               alt="African maritime community"
-              style={{ width: "100%", height: "100%", objectFit: "cover", display: "block", minHeight: "580px" }}
+              style={{ width: "100%", height: "100%", objectFit: "cover", display: "block", minHeight: isMobile ? "320px" : "580px" }}
             />
             <div style={{
               position: "absolute", inset: 0,
@@ -200,7 +202,7 @@ export default function About() {
 
           {/* Right — mission text */}
           <div style={{
-            padding: "72px 5vw 72px 56px",
+            padding: isMobile ? "40px 5vw" : "72px 5vw 72px 56px",
             display: "flex", flexDirection: "column", justifyContent: "center",
             opacity: missionVis ? 1 : 0, transform: missionVis ? "none" : "translateX(16px)",
             transition: "opacity 0.8s 0.15s, transform 0.8s 0.15s",
@@ -249,7 +251,7 @@ export default function About() {
       {/* ══════════════════════════════════════════════
           THREE PILLARS — numbered list, clean
       ══════════════════════════════════════════════ */}
-      <section ref={pillarsRef} style={{ background: BG, padding: "96px 5vw" }}>
+      <section ref={pillarsRef} style={{ background: BG, padding: "clamp(56px, 8vw, 96px) 5vw" }}>
         <div style={{ maxWidth: "1200px", margin: "0 auto" }}>
 
           <div style={{
@@ -272,8 +274,8 @@ export default function About() {
             {pillars.map((p, i) => (
               <div key={p.num} style={{
                 display: "grid",
-                gridTemplateColumns: "56px 180px 1fr",
-                gap: "40px",
+                gridTemplateColumns: isMobile ? "1fr" : "56px 180px 1fr",
+                gap: isMobile ? "8px" : "40px",
                 padding: "40px 0",
                 borderTop: "1px solid rgba(255,255,255,0.06)",
                 alignItems: "start",
@@ -301,7 +303,7 @@ export default function About() {
       {/* ══════════════════════════════════════════════
           ECOSYSTEM — 2×2 card grid
       ══════════════════════════════════════════════ */}
-      <section ref={ecoRef} style={{ background: PANEL, padding: "96px 5vw" }}>
+      <section ref={ecoRef} style={{ background: PANEL, padding: "clamp(56px, 8vw, 96px) 5vw" }}>
         <div style={{ maxWidth: "1200px", margin: "0 auto" }}>
 
           <div style={{
@@ -321,7 +323,7 @@ export default function About() {
           </div>
 
           <div style={{
-            display: "grid", gridTemplateColumns: "1fr 1fr",
+            display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr",
             gap: "2px", background: "rgba(255,255,255,0.04)",
           }}>
             {ecosystem.map((item, i) => (
@@ -366,8 +368,8 @@ export default function About() {
       ══════════════════════════════════════════════ */}
       <section ref={hostRef} style={{ background: BG }}>
         <div style={{
-          display: "grid", gridTemplateColumns: "1fr 1fr",
-          minHeight: "560px",
+          display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr",
+          minHeight: isMobile ? "auto" : "560px",
         }}>
           {/* Left — host photo */}
           <div style={{
@@ -378,7 +380,7 @@ export default function About() {
             <img
               src={IMGS.host}
               alt="Host"
-              style={{ width: "100%", height: "100%", objectFit: "cover", display: "block", minHeight: "560px" }}
+              style={{ width: "100%", height: "100%", objectFit: "cover", display: "block", minHeight: isMobile ? "320px" : "560px" }}
             />
             <div style={{
               position: "absolute", inset: 0,
@@ -396,7 +398,7 @@ export default function About() {
 
           {/* Right — bio */}
           <div style={{
-            padding: "72px 5vw 72px 56px",
+            padding: isMobile ? "40px 5vw" : "72px 5vw 72px 56px",
             display: "flex", flexDirection: "column", justifyContent: "center",
             opacity: hostVis ? 1 : 0, transform: hostVis ? "none" : "translateX(16px)",
             transition: "opacity 0.9s 0.15s, transform 0.9s 0.15s",
@@ -469,7 +471,7 @@ Cabin Tea is built on everything he saw, heard, and learned inside that world. B
 
         <div style={{
           position: "relative", zIndex: 2,
-          padding: "80px 5vw", maxWidth: "640px",
+          padding: "clamp(48px, 7vw, 80px) 5vw", maxWidth: "640px",
           opacity: ctaVis ? 1 : 0, transform: ctaVis ? "none" : "translateY(16px)",
           transition: "opacity 0.8s, transform 0.8s",
         }}>

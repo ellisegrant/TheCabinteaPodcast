@@ -2,6 +2,7 @@ import { useRef, useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
+import useIsMobile from "../hooks/useIsMobile";
 
 function useReveal(threshold = 0.1) {
   const ref = useRef(null);
@@ -92,6 +93,7 @@ export default function CreativeAgency() {
   const [advisoryRef, advisoryVis] = useReveal(0.1);
   const [whyRef,      whyVis]      = useReveal(0.1);
   const [ctaRef,      ctaVis]      = useReveal(0.1);
+  const isMobile = useIsMobile();
 
   return (
     <div style={{ minHeight: "100vh", background: BG, color: "white", overflowX: "hidden" }}>
@@ -120,7 +122,7 @@ export default function CreativeAgency() {
         }} />
         <div className="ct-grain" style={{ zIndex: 1 }} />
 
-        <div style={{ position: "relative", zIndex: 2, padding: "0 5vw 72px" }}>
+        <div style={{ position: "relative", zIndex: 2, padding: "0 5vw clamp(40px, 7vw, 72px)" }}>
           <p style={{
             fontSize: "11px", letterSpacing: "4px", color: GOLD,
             fontWeight: 500, marginBottom: "16px",
@@ -183,13 +185,13 @@ export default function CreativeAgency() {
           MISSION — split layout
       ══════════════════════════════════════════════ */}
       <section ref={missionRef} style={{ background: PANEL }}>
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", minHeight: "480px" }}>
+        <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr", minHeight: isMobile ? "auto" : "480px" }}>
 
           {/* Left — mission statement */}
           <div style={{
-            padding: "72px 5vw",
+            padding: isMobile ? "40px 5vw" : "72px 5vw",
             display: "flex", flexDirection: "column", justifyContent: "center",
-            borderRight: "1px solid rgba(255,255,255,0.06)",
+            borderRight: isMobile ? "none" : "1px solid rgba(255,255,255,0.06)",
             opacity: missionVis ? 1 : 0, transform: missionVis ? "none" : "translateX(-16px)",
             transition: "opacity 0.8s, transform 0.8s",
           }}>
@@ -206,7 +208,7 @@ export default function CreativeAgency() {
 
           {/* Right — body + stats */}
           <div style={{
-            padding: "72px 5vw 72px 56px",
+            padding: isMobile ? "40px 5vw" : "72px 5vw 72px 56px",
             display: "flex", flexDirection: "column", justifyContent: "center",
             opacity: missionVis ? 1 : 0, transform: missionVis ? "none" : "translateX(16px)",
             transition: "opacity 0.8s 0.15s, transform 0.8s 0.15s",
@@ -242,7 +244,7 @@ export default function CreativeAgency() {
       {/* ══════════════════════════════════════════════
           THREE SERVICES — numbered list
       ══════════════════════════════════════════════ */}
-      <section ref={servicesRef} style={{ background: BG, padding: "96px 5vw" }}>
+      <section ref={servicesRef} style={{ background: BG, padding: "clamp(56px, 8vw, 96px) 5vw" }}>
         <div style={{ maxWidth: "1200px", margin: "0 auto" }}>
 
           <div style={{
@@ -265,8 +267,8 @@ export default function CreativeAgency() {
             {services.map((s, i) => (
               <div key={s.num} style={{
                 display: "grid",
-                gridTemplateColumns: "56px 180px 1fr",
-                gap: "40px",
+                gridTemplateColumns: isMobile ? "1fr" : "56px 180px 1fr",
+                gap: isMobile ? "8px" : "40px",
                 padding: "40px 0",
                 borderTop: "1px solid rgba(255,255,255,0.06)",
                 alignItems: "start",
@@ -297,7 +299,7 @@ export default function CreativeAgency() {
       {/* ══════════════════════════════════════════════
           EXPERIENTIAL ADVISORY — three cards
       ══════════════════════════════════════════════ */}
-      <section ref={advisoryRef} style={{ background: PANEL, padding: "96px 5vw" }}>
+      <section ref={advisoryRef} style={{ background: PANEL, padding: "clamp(56px, 8vw, 96px) 5vw" }}>
         <div style={{ maxWidth: "1200px", margin: "0 auto" }}>
 
           <div style={{
@@ -320,7 +322,7 @@ export default function CreativeAgency() {
           </div>
 
           <div style={{
-            display: "grid", gridTemplateColumns: "repeat(3, 1fr)",
+            display: "grid", gridTemplateColumns: isMobile ? "1fr" : "repeat(3, 1fr)",
             gap: "2px", background: "rgba(255,255,255,0.04)",
           }}>
             {advisory.map((a, i) => (
@@ -352,11 +354,11 @@ export default function CreativeAgency() {
       {/* ══════════════════════════════════════════════
           WHY PARTNER — header + 2×2 grid
       ══════════════════════════════════════════════ */}
-      <section ref={whyRef} style={{ background: BG, padding: "96px 5vw" }}>
+      <section ref={whyRef} style={{ background: BG, padding: "clamp(56px, 8vw, 96px) 5vw" }}>
         <div style={{ maxWidth: "1200px", margin: "0 auto" }}>
 
           <div style={{
-            display: "grid", gridTemplateColumns: "1fr 1fr", gap: "80px",
+            display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr", gap: isMobile ? "40px" : "80px",
             alignItems: "end", marginBottom: "48px",
             opacity: whyVis ? 1 : 0, transform: whyVis ? "none" : "translateY(12px)",
             transition: "opacity 0.6s, transform 0.6s",
@@ -378,7 +380,7 @@ export default function CreativeAgency() {
           </div>
 
           <div style={{
-            display: "grid", gridTemplateColumns: "1fr 1fr",
+            display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr",
             gap: "2px", background: "rgba(255,255,255,0.04)",
           }}>
             {pillars.map((p, i) => (
@@ -423,7 +425,7 @@ export default function CreativeAgency() {
 
         <div style={{
           position: "relative", zIndex: 2,
-          padding: "80px 5vw", maxWidth: "640px",
+          padding: "clamp(48px, 7vw, 80px) 5vw", maxWidth: "640px",
           opacity: ctaVis ? 1 : 0, transform: ctaVis ? "none" : "translateY(16px)",
           transition: "opacity 0.8s, transform 0.8s",
         }}>
