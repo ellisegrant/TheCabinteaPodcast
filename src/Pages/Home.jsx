@@ -37,12 +37,6 @@ const IMGS = {
   cta:       "/lighthouse.jpg",
 };
 
-function Spotify() {
-  return <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/></svg>;
-}
-function Apple() {
-  return <svg width="18" height="20" viewBox="0 0 20 24" fill="currentColor"><path d="M16.5 12.5c0-2.8 2.3-4.1 2.4-4.2-1.3-1.9-3.3-2.2-4-2.2-1.7-.2-3.4 1-4.2 1s-2.2-1-3.7-1C5.1 6.1 3.4 7.2 2.4 8.8.5 12.2 1.9 17.2 3.8 20c.9 1.3 2 2.8 3.5 2.8 1.4-.1 1.9-.9 3.6-.9s2.2.9 3.7.9 2.5-1.4 3.4-2.7c1.1-1.5 1.5-3 1.5-3.1-.1 0-2.9-1.1-3-4.5zM13.7 4.3c.8-1 1.3-2.3 1.1-3.6-1.1 0-2.5.7-3.3 1.7-.7.8-1.3 2.1-1.2 3.4 1.3.1 2.5-.6 3.4-1.5z"/></svg>;
-}
 function Youtube() {
   return <svg width="22" height="16" viewBox="0 0 26 18" fill="currentColor"><path d="M25.456 2.818A3.26 3.26 0 0023.162.51C21.13 0 13 0 13 0S4.87 0 2.838.51A3.26 3.26 0 00.544 2.818C0 4.862 0 9 0 9s0 4.138.544 6.182a3.26 3.26 0 002.294 2.308C4.87 18 13 18 13 18s8.13 0 10.162-.51a3.26 3.26 0 002.294-2.308C26 13.138 26 9 26 9s0-4.138-.544-6.182zM10.4 12.857V5.143L17.143 9 10.4 12.857z"/></svg>;
 }
@@ -437,12 +431,10 @@ export default function Home() {
             </div>
             <div style={{ display: "flex", alignItems: "center", gap: "20px", flexShrink: 0 }}>
               <span style={{ fontSize: "9px", letterSpacing: "2.5px", color: MUTED }}>LISTEN ON</span>
-              {[[<Youtube key="yt"/>, "#"], [<Spotify key="sp"/>, "#"], [<Apple key="ap"/>, "#"]].map(([icon, href], i) => (
-                <a key={i} href={href} style={{ color: MUTED, display: "inline-flex", transition: "color 0.2s" }}
-                  onMouseEnter={e => e.currentTarget.style.color = GOLD}
-                  onMouseLeave={e => e.currentTarget.style.color = MUTED}
-                >{icon}</a>
-              ))}
+              <a href="https://www.youtube.com/@CabinTea" target="_blank" rel="noopener noreferrer" style={{ color: MUTED, display: "inline-flex", transition: "color 0.2s" }}
+                onMouseEnter={e => e.currentTarget.style.color = GOLD}
+                onMouseLeave={e => e.currentTarget.style.color = MUTED}
+              ><Youtube /></a>
               <div style={{ width: "1px", height: "16px", background: "rgba(214,207,194,0.15)" }} />
               <a href="https://www.instagram.com/cabinteapodcast/" target="_blank" rel="noopener noreferrer" style={{ color: MUTED, display: "inline-flex", transition: "color 0.2s" }}
                 onMouseEnter={e => e.currentTarget.style.color = GOLD}
