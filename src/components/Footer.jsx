@@ -17,7 +17,7 @@ const socials = [
 
 export default function Footer() {
   return (
-    <footer style={{ background: "var(--dark)", borderTop: "1px solid rgba(196,164,78,0.15)" }}>
+    <footer style={{ background: "#0A0F1C", borderTop: "1px solid rgba(196,164,78,0.15)" }}>
       <div className="px-6 md:px-12" style={{ maxWidth: "1200px", margin: "0 auto", padding: "56px 5vw 28px" }}>
         <div className="flex flex-col md:flex-row md:justify-between gap-10" style={{ marginBottom: "36px" }}>
           {/* Brand */}
