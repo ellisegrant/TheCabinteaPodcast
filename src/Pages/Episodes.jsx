@@ -241,11 +241,25 @@ function EpisodeCard({ ep, index, visible }) {
     >
       {/* ── Thumbnail area ── */}
       <div style={{ position: "relative", height: "220px", overflow: "hidden", flexShrink: 0 }}>
+        {/* Blurred backdrop fill — avoids empty letterbox bars around the contained image */}
+        <img
+          src={ep.img}
+          alt=""
+          aria-hidden="true"
+          style={{
+            position: "absolute", inset: 0,
+            width: "100%", height: "100%", objectFit: "cover",
+            filter: "blur(28px) brightness(0.55)",
+            transform: "scale(1.15)",
+          }}
+        />
+        {/* Full, uncropped thumbnail */}
         <img
           src={ep.img}
           alt={ep.guest}
           style={{
-            width: "100%", height: "100%", objectFit: "cover", display: "block",
+            position: "relative",
+            width: "100%", height: "100%", objectFit: "contain", display: "block",
             transform: hovered ? "scale(1.04)" : "scale(1)",
             transition: "transform 0.6s cubic-bezier(0.16,1,0.3,1)",
           }}

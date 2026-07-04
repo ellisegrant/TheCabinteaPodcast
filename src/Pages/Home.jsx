@@ -214,14 +214,31 @@ function EpisodeCarousel({ episodes }) {
 
                   {/* Left — image, strictly contained */}
                   <div style={{ position: "relative", overflow: "hidden", height: isMobile ? "220px" : "460px" }}>
+                    {/* Blurred backdrop fill — avoids empty letterbox bars around the contained image */}
+                    <img
+                      src={ep.img}
+                      alt=""
+                      aria-hidden="true"
+                      draggable={false}
+                      style={{
+                        position: "absolute", inset: 0,
+                        width: "100%", height: "100%",
+                        objectFit: "cover",
+                        filter: "blur(28px) brightness(0.55)",
+                        transform: "scale(1.15)",
+                        pointerEvents: "none",
+                      }}
+                    />
+                    {/* Full, uncropped thumbnail */}
                     <img
                       src={ep.img}
                       alt={ep.guest}
                       draggable={false}
                       style={{
+                        position: "relative",
                         width: "100%",
                         height: "100%",
-                        objectFit: "cover",
+                        objectFit: "contain",
                         objectPosition: ep.imgPosition,
                         display: "block",
                         pointerEvents: "none",
