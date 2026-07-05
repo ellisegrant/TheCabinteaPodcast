@@ -3,6 +3,9 @@ import { Link } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import useIsMobile from "../hooks/useIsMobile";
+import { getCookie, setCookie } from "../utils/cookies";
+
+const CART_COOKIE = "ct_cart";
 
 function useReveal(threshold = 0.05) {
   const ref = useRef(null);
@@ -72,6 +75,23 @@ const PRODUCTS = [
 ];
 
 const CATEGORIES = ["All", "Apparel", "Drinkware", "Accessories", "Tea"];
+
+// Rehydrate the cart from the { id, qty } list stored in the cookie
+function restoreCartFromCookie() {
+  const saved = getCookie(CART_COOKIE);
+  if (!saved) return [];
+  try {
+    const qtyById = JSON.parse(saved);
+    return qtyById
+      .map(({ id, qty }) => {
+        const product = PRODUCTS.find(p => p.id === id);
+        return product ? { ...product, qty } : null;
+      })
+      .filter(Boolean);
+  } catch {
+    return [];
+  }
+}
 
 /* ════════════════════════════════════════
    CART DRAWER
@@ -338,13 +358,18 @@ function ProductCard({ product, onAdd, justAdded, index, visible }) {
 ════════════════════════════════════════ */
 export default function Shop() {
   const [activeCategory, setActiveCategory] = useState("All");
-  const [cart, setCart]         = useState([]);
+  const [cart, setCart]         = useState(() => restoreCartFromCookie());
   const [addedId, setAddedId]   = useState(null);
   const [cartOpen, setCartOpen] = useState(false);
 
   const [heroRef, heroVis] = useReveal(0.05);
   const [gridRef, gridVis] = useReveal(0.04);
   const [ctaRef,  ctaVis]  = useReveal(0.1);
+
+  // Keep the cookie in sync whenever the cart changes
+  useEffect(() => {
+    setCookie(CART_COOKIE, JSON.stringify(cart.map(({ id, qty }) => ({ id, qty }))));
+  }, [cart]);
 
   const filtered = activeCategory === "All"
     ? PRODUCTS

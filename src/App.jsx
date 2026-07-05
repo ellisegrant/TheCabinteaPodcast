@@ -14,12 +14,14 @@ import AfricaOceanDynamism from "./Pages/AfricaOceanDynamism";
 import OnDeck from "./Pages/OnDeck";
 import WhatsRising from "./Pages/WhatsRising";
 import Contact from "./Pages/Contact";
+import CookieConsent from "./components/CookieConsent";
 
 function App() {
   return (
     <PlayerProvider>
       <BrowserRouter>
         <CategoryStrip />
+        <CookieConsent />
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
