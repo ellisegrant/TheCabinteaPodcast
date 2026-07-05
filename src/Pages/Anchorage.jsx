@@ -221,28 +221,26 @@ export default function Anchorage() {
               Reshaping how the world explores maritime culture.
             </h2>
 
-            <p style={{ fontSize: "15px", lineHeight: 1.9, color: CREAM, fontWeight: 300, marginBottom: "16px" }}>
-              Anchorage is a centralized media hub combined with in-person and digital experiences. We curate personalized recommendations tailored to your interests, reshaping the way we explore the maritime world.
-            </p>
-            <p style={{ fontSize: "15px", lineHeight: 1.9, color: MUTED, fontWeight: 300, marginBottom: "36px" }}>
-              Starting with Africa and the African Diaspora, Anchorage transforms engagement with maritime issues and cultures at every level — from community storytelling to industry insight.
+            <p style={{ fontSize: "15px", lineHeight: 1.9, color: CREAM, fontWeight: 300, marginBottom: "32px" }}>
+              A centralized media hub, in-person and digital — curating personalized maritime content for Africa and the Diaspora.
             </p>
 
             <div style={{
-              display: "flex", gap: "36px",
+              display: "flex", flexWrap: "wrap", gap: "10px",
               paddingTop: "24px", borderTop: "1px solid rgba(255,255,255,0.07)",
             }}>
-              {[
-                { val: "360°",   label: "Media Coverage"  },
-                { val: "Digital",label: "And In-Person"   },
-                { val: "Global", label: "Diaspora Reach"  },
-              ].map(s => (
-                <div key={s.label}>
-                  <span style={{ fontSize: "24px", fontWeight: 700, color: "white", display: "block", lineHeight: 1 }}>{s.val}</span>
-                  <span style={{ fontSize: "9px", letterSpacing: "2px", color: MUTED, display: "block", marginTop: "5px" }}>
-                    {s.label.toUpperCase()}
-                  </span>
-                </div>
+              {contentTypes.map((c, i) => (
+                <span key={c.tag} style={{
+                  display: "inline-flex", alignItems: "center", gap: "6px",
+                  padding: "8px 14px",
+                  border: `1px solid ${i % 2 === 0 ? "rgba(44,140,124,0.4)" : "rgba(196,164,78,0.4)"}`,
+                  borderRadius: "20px",
+                  fontSize: "10px", letterSpacing: "1.5px", fontWeight: 600,
+                  color: i % 2 === 0 ? TEAL : GOLD,
+                }}>
+                  <span style={{ fontSize: "8px" }}>●</span>
+                  {c.tag}
+                </span>
               ))}
             </div>
           </div>
