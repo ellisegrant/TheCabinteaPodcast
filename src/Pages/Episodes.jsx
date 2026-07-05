@@ -45,7 +45,7 @@ const episodes = [
   {
     num: "02",
     guest: "Christopher Trelawny",
-    role: "Documentary Filmmaker",
+    role: "Deputy Secretary-General, Office of Secretary General INTERPORTPOLICE",
     location: "Kenya",
     title: "Maritime Security is Africa's Blind Economic Spot",
     excerpt: "Before Africa understood maritime security as the world knows it today, Christopher Trelawny was helping build its foundation. In this conversation, he recounts his role in the creation of the Djibouti and Yaoundé Codes of Conduct - two landmark maritime security frameworks that addressed piracy and transnational organised crime by providing the cooperation backbone that African and international navies rely on to this day.",
