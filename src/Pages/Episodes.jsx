@@ -1,6 +1,9 @@
 import { useState, useEffect, useRef } from "react";
+import { useSearchParams } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
+
+const slugify = (s) => s.toLowerCase().replace(/\s+/g, "-");
 
 function useReveal(threshold = 0.1) {
   const ref = useRef(null);
@@ -351,12 +354,18 @@ export default function Episodes() {
   const [activeFilter, setActiveFilter] = useState("All Episodes");
   const [heroRef, heroVis] = useReveal(0.05);
   const [gridRef, gridVis] = useReveal(0.05);
+  const [searchParams, setSearchParams] = useSearchParams();
+  const tagParam = searchParams.get("tag");
+
+  const byTag = tagParam
+    ? episodes.filter(e => slugify(e.tag) === tagParam)
+    : episodes;
 
   const filtered = activeFilter === "All Episodes"
-    ? episodes
+    ? byTag
     : activeFilter === "Season 1"
-      ? episodes.filter(e => e.season === 1)
-      : [...episodes].reverse();
+      ? byTag.filter(e => e.season === 1)
+      : [...byTag].reverse();
 
   return (
     <div style={{ minHeight: "100vh", background: BG, color: "white", overflowX: "hidden" }}>
@@ -415,6 +424,26 @@ export default function Episodes() {
       {/* ════════ FILTERS + GRID ════════ */}
       <section ref={gridRef} style={{ background: BG, padding: "48px 5vw 96px" }}>
         <div style={{ maxWidth: "1200px", margin: "0 auto" }}>
+
+          {tagParam && (
+            <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "24px" }}>
+              <span style={{ fontSize: "10px", letterSpacing: "2px", color: GOLD, fontWeight: 600 }}>
+                TOPIC: {tagParam.replace(/-/g, " ").toUpperCase()}
+              </span>
+              <button
+                onClick={() => setSearchParams({})}
+                style={{
+                  background: "none", border: "none", cursor: "pointer",
+                  color: MUTED, fontSize: "16px", lineHeight: 1, padding: 0,
+                  fontFamily: "inherit",
+                }}
+                onMouseEnter={e => e.currentTarget.style.color = "white"}
+                onMouseLeave={e => e.currentTarget.style.color = MUTED}
+              >
+                ×
+              </button>
+            </div>
+          )}
 
           {/* Filter row */}
           <div style={{

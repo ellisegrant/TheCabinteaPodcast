@@ -3,12 +3,13 @@ import { useState, useEffect } from "react";
 
 const categories = [
   { label: "Governance", to: "/episodes?tag=governance" },
-  { label: "Blue Economy", to: "/episodes?tag=blue-economy" },
-  { label: "Culture", to: "/episodes?tag=culture" },
-  { label: "Diaspora", to: "/episodes?tag=diaspora" },
-  { label: "Technology", to: "/episodes?tag=technology" },
   { label: "Community", to: "/episodes?tag=community" },
-  { label: "Investment", to: "/episodes?tag=investment" },
+  { label: "Marine Security", to: "/episodes?tag=marine-security" },
+  { label: "Data Security", to: "/episodes?tag=data-security" },
+  { label: "Diaspora", to: "/afrocean" },
+  { label: "Blue Economy", to: "/africa-ocean-dynamism" },
+  { label: "Culture", to: "/creative-agency" },
+  { label: "Media", to: "/anchorage" },
 ];
 
 export default function CategoryStrip() {
@@ -65,8 +66,8 @@ export default function CategoryStrip() {
 
         <div style={{ width: "1px", height: "14px", background: "rgba(196,164,78,0.2)", marginRight: "20px", flexShrink: 0 }} />
 
-        {categories.map((cat, i) => {
-          const active = location.search.includes(cat.to.split("?tag=")[1]);
+        {categories.map((cat) => {
+          const active = location.pathname + location.search === cat.to;
           return (
             <Link
               key={cat.label}
