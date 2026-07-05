@@ -37,10 +37,10 @@ export default function Navbar() {
   ];
 
   const episodesDropdown = [
-    { label: "All Episodes", to: "/episodes", desc: "Every conversation" },
-    { label: "Afrocean", to: "/afrocean", desc: "Diaspora maritime gatherings" },
-    { label: "Anchorage", to: "/anchorage", desc: "Maritime media hub" },
-    { label: "Africa Ocean Dynamism", to: "/africa-ocean-dynamism", desc: "Blue economy investment thesis" },
+    { label: "All Episodes", to: "/episodes" },
+    { label: "Afrocean", to: "/afrocean" },
+    { label: "Anchorage", to: "/anchorage" },
+    { label: "Africa Ocean Dynamism", to: "/africa-ocean-dynamism" },
   ];
 
   const isActive = (to) => location.pathname === to;
@@ -138,11 +138,8 @@ export default function Navbar() {
                   onMouseEnter={e => e.currentTarget.style.background = "rgba(196,164,78,0.07)"}
                   onMouseLeave={e => e.currentTarget.style.background = "transparent"}
                 >
-                  <span style={{ display: "block", fontSize: "12px", fontWeight: 500, color: "white", marginBottom: "2px" }}>
+                  <span style={{ display: "block", fontSize: "12px", fontWeight: 500, color: "white" }}>
                     {item.label}
-                  </span>
-                  <span style={{ display: "block", fontSize: "11px", color: "rgba(214,207,194,0.4)", fontStyle: "italic" }}>
-                    {item.desc}
                   </span>
                 </Link>
               ))}
