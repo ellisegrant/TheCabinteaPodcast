@@ -3,6 +3,7 @@ import { useSearchParams, Link } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import { episodes } from "../data/episodes";
+import useIsMobile from "../hooks/useIsMobile";
 
 const slugify = (s) => s.toLowerCase().replace(/\s+/g, "-");
 
@@ -300,9 +301,12 @@ function EpisodeCard({ ep, index, visible }) {
 export default function Episodes() {
   const [activeFilter, setActiveFilter] = useState("All Episodes");
   const [heroRef, heroVis] = useReveal(0.05);
+  const [featuredRef, featuredVis] = useReveal(0.1);
   const [gridRef, gridVis] = useReveal(0.05);
   const [searchParams, setSearchParams] = useSearchParams();
   const tagParam = searchParams.get("tag");
+  const featured = episodes.find(e => e.article);
+  const isMobile = useIsMobile();
 
   const byTag = tagParam
     ? episodes.filter(e => slugify(e.tag) === tagParam)
@@ -367,6 +371,72 @@ export default function Episodes() {
           </p>
         </div>
       </section>
+
+      {/* ════════ FEATURED STORY ════════ */}
+      {featured && (
+        <section ref={featuredRef} style={{ background: BG, padding: "56px 5vw 0" }}>
+          <div style={{
+            maxWidth: "1200px", margin: "0 auto",
+            opacity: featuredVis ? 1 : 0, transform: featuredVis ? "none" : "translateY(16px)",
+            transition: "opacity 0.7s, transform 0.7s",
+          }}>
+            <p style={{ fontSize: "10px", letterSpacing: "3px", color: GOLD, marginBottom: "20px", fontWeight: 700 }}>
+              FROM THE JOURNAL
+            </p>
+            <Link to={`/episodes/${featured.slug}`} style={{ textDecoration: "none", display: "block" }}>
+              <div style={{
+                display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr", gap: "2px",
+                background: PANEL, cursor: "pointer",
+              }}>
+                {/* Image */}
+                <div style={{ position: "relative", overflow: "hidden", minHeight: isMobile ? "240px" : "380px" }}>
+                  <img
+                    src={featured.article.img}
+                    alt={featured.article.title}
+                    style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
+                  />
+                  <div style={{
+                    position: "absolute", inset: 0,
+                    background: "linear-gradient(to right, transparent 55%, rgba(20,31,24,0.65) 100%)",
+                  }} />
+                  <span style={{
+                    position: "absolute", top: "20px", left: "20px",
+                    background: GOLD, color: "#0F1912",
+                    fontSize: "9px", letterSpacing: "2px", fontWeight: 700,
+                    padding: "4px 10px",
+                  }}>{featured.tag.toUpperCase()}</span>
+                </div>
+
+                {/* Content */}
+                <div style={{
+                  padding: isMobile ? "32px 26px" : "48px 44px",
+                  display: "flex", flexDirection: "column", justifyContent: "center",
+                }}>
+                  <p style={{ fontSize: "10px", color: MUTED, marginBottom: "16px", letterSpacing: "1px" }}>
+                    ARTICLE · {featured.duration} EPISODE
+                  </p>
+                  <h2 style={{
+                    fontWeight: 700, fontSize: "clamp(22px, 2.6vw, 34px)",
+                    color: "white", lineHeight: 1.2,
+                    margin: "0 0 18px", letterSpacing: "-0.3px",
+                  }}>{featured.article.title}</h2>
+                  <div style={{ width: "28px", height: "1px", background: "rgba(196,164,78,0.3)", margin: "0 0 18px" }} />
+                  <p style={{
+                    fontSize: "15px", lineHeight: 1.8, color: CREAM,
+                    fontWeight: 300, margin: "0 0 32px",
+                  }}>{featured.article.deck}</p>
+                  <span style={{
+                    alignSelf: "flex-start",
+                    padding: "13px 30px",
+                    background: GOLD, color: "#0F1912",
+                    fontSize: "10px", letterSpacing: "2.5px", fontWeight: 700,
+                  }}>READ THE STORY →</span>
+                </div>
+              </div>
+            </Link>
+          </div>
+        </section>
+      )}
 
       {/* ════════ FILTERS + GRID ════════ */}
       <section ref={gridRef} style={{ background: BG, padding: "48px 5vw 96px" }}>

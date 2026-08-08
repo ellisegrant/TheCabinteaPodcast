@@ -73,6 +73,11 @@ export const episodes = [
     date: "Jul 22, 2026",
     img: "episode5.jpeg",
     links: { youtube: "https://www.youtube.com/watch?v=kTQFyOVTqyE", spotify: null },
+    article: {
+      title: "Captain Micah on Reviving Ghana's Maritime Pride and the Future of the Black Star Line",
+      deck: "Captain Micah, former CEO of the Tema Shipyard, lays out a blueprint for how Ghana can reclaim its status as a leading maritime nation — from the legacy of the Black Star Line to the case for a dedicated maritime ministry.",
+      img: "/cap-micah.jpeg",
+    },
   },
 
 ];
