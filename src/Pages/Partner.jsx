@@ -70,22 +70,22 @@ const REASONS = [
   {
     num: "01",
     title: "Cultural Authority",
-    body: "Cabin Tea is the leading voice in Africa's maritime industry culture. Partnering places your brand inside the conversation that shapes the continent's blue economy.",
+    body: "The leading voice in Africa's maritime culture and blue economy conversation.",
   },
   {
     num: "02",
     title: "The Right Audience",
-    body: "Our listeners are professionals, entrepreneurs, and decision-makers across Africa's maritime, trade, and blue economy sectors — high-value and hard to reach.",
+    body: "Direct reach to maritime, trade, and blue-economy decision-makers.",
   },
   {
     num: "03",
     title: "The Keepsake Ritual",
-    body: "At the close of every session, our guest receives a branded tin of that episode's tea — a lasting physical reminder of the conversation, and of your brand.",
+    body: "Every guest keeps a branded tea tin — a lasting reminder of your brand.",
   },
   {
     num: "04",
     title: "Authentic Integration",
-    body: "Your product is not a backdrop. It is woven into the story. We partner exclusively with brands whose values align — sustainability, storytelling, and the sea.",
+    body: "Woven into the story, not slotted into an ad break.",
   },
 ];
 
@@ -344,11 +344,8 @@ export default function Partner() {
             }}>
               Your product is not a backdrop.<br />It is part of the experience.
             </h2>
-            <p style={{ fontSize: "16px", lineHeight: 1.85, color: CREAM, fontWeight: 300, marginBottom: "20px" }}>
-              Cabin Tea is Africa's leading maritime media brand — a live conversation series recorded in Accra and distributed globally. Every episode is built around a carefully chosen cup of tea, shared between host and guest. That tea is your brand's moment.
-            </p>
-            <p style={{ fontSize: "16px", lineHeight: 1.85, color: MUTED, fontWeight: 300 }}>
-              When you partner with Cabin Tea, your brand is not slotted into an ad break. It is woven into the story — present at the table where Africa's maritime future is being discussed, tasted, and remembered.
+            <p style={{ fontSize: "16px", lineHeight: 1.85, color: CREAM, fontWeight: 300 }}>
+              Cabin Tea is Africa's leading maritime media brand, recorded in Accra and distributed globally. Every episode centers on a shared cup of tea — and that's where your brand lives.
             </p>
           </div>
         </div>
@@ -410,43 +407,6 @@ export default function Partner() {
             ))}
             <div style={{ height: "1px", background: "rgba(255,255,255,0.06)" }} />
           </div>
-        </div>
-      </section>
-
-      {/* ════════════════════════════════════════
-          THE KEEPSAKE RITUAL — full bleed banner
-      ════════════════════════════════════════ */}
-      <section style={{
-        position: "relative", overflow: "hidden",
-        minHeight: "380px", display: "flex", alignItems: "center",
-      }}>
-        <img
-          src="/images/partner/ritual.jpg"
-          alt="The Keepsake Ritual"
-          style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover" }}
-        />
-        <div style={{
-          position: "absolute", inset: 0,
-          background: "linear-gradient(105deg, rgba(15,25,18,0.96) 35%, rgba(15,25,18,0.7) 100%)",
-        }} />
-        <div className="ct-grain" style={{ zIndex: 1 }} />
-
-        <div style={{ position: "relative", zIndex: 2, padding: "clamp(48px, 7vw, 80px) 5vw", maxWidth: "700px" }}>
-          <p style={{ fontSize: "10px", letterSpacing: "3px", color: GOLD, marginBottom: "20px", fontWeight: 600 }}>
-            THE KEEPSAKE RITUAL
-          </p>
-          <h2 style={{
-            fontWeight: 700,
-            fontSize: "clamp(26px, 4vw, 52px)",
-            lineHeight: 1.05, color: "white",
-            marginBottom: "20px", letterSpacing: "-1px",
-          }}>
-            A tin they'll keep.<br />
-            <span style={{ color: GOLD }}>A brand they'll remember.</span>
-          </h2>
-          <p style={{ fontSize: "16px", color: CREAM, fontWeight: 300, lineHeight: 1.75, maxWidth: "480px", margin: 0 }}>
-            At the close of every session, our guest receives a branded tin of that episode's tea — a beautiful, lasting reminder of the conversation, and of your brand.
-          </p>
         </div>
       </section>
 
