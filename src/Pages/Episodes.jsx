@@ -1,7 +1,8 @@
 import { useState, useEffect, useRef } from "react";
-import { useSearchParams } from "react-router-dom";
+import { useSearchParams, Link } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
+import { episodes } from "../data/episodes";
 
 const slugify = (s) => s.toLowerCase().replace(/\s+/g, "-");
 
@@ -25,84 +26,6 @@ const PANEL = "#141F18";
 const GOLD  = "#C4A44E";
 const CREAM = "rgba(214,207,194,0.75)";
 const MUTED = "rgba(214,207,194,0.42)";
-
-/* ── Episodes data ── */
-const episodes = [
-  {
-    num: "01",
-    guest: "Prof. Christian Bueger",
-    role: "Maritime Security Scholar",
-    location: "University of Copenhagen",
-    title: "Maritime Security at the UN",
-    excerpt: "One of the world's leading voices on international security and global governance sits down with  Cabin Tea to discuss the global maritime security agenda — and what role Africa and the Indian Ocean can play in shaping it",
-    tag: "Governance",
-    season: 1,
-    duration: "14 min",
-    date: "Apr 27, 2026",
-    img: "/ep1thumbnail.jpg",
-    links: {
-      youtube: "https://www.youtube.com/watch?v=h2B6kPP16-M",   // replace with real YouTube URL
-      spotify: "#",   // replace with real Spotify URL
-    },
-  },
-  {
-    num: "02",
-    guest: "Christopher Trelawny",
-    role: "Deputy Secretary-General, Office of Secretary General INTERPORTPOLICE",
-    location: "Kenya",
-    title: "Maritime Security is Africa's Blind Economic Spot",
-    excerpt: "Before Africa understood maritime security as the world knows it today, Christopher Trelawny was helping build its foundation. In this conversation, he recounts his role in the creation of the Djibouti and Yaoundé Codes of Conduct - two landmark maritime security frameworks that addressed piracy and transnational organised crime by providing the cooperation backbone that African and international navies rely on to this day.",
-    tag: "Community",
-    season: 1,
-    duration: "47 min",
-    date: "May 13, 2026  ",
-    img: "episode2.jpeg",
-    links: { youtube: "https://www.youtube.com/watch?v=PfKqXzdO4u0", spotify: null },
-  },
-  {
-    num: "03",
-    guest: "Simon Church",
-    role: "Special Advisor to the Chairs of the Gulf of Guinea Maritime Collaboration Forum - SHADE, former Special Advisor to European Union Naval Force Operation ATALANTA",
-    location: "Kenya",
-    title: "Counter-Piracy at a Crossroads: Horn of Africa and Gulf of Guinea",
-    excerpt: "What happens when the structures keeping piracy in check start to break down? In this episode of Cabin Tea Network, I sit down with Simon Church - Special Advisor to the Chairs of the Gulf of Guinea Maritime Collaboration Forum - SHADE, former Special Advisor to European Union Naval Force Operation ATALANTA, and a seasoned figure in international maritime security, for an honest, wide-ranging conversation on where global counter-piracy efforts stand today, and where they're heading",
-    tag: "Marine Security",
-    season: 1,
-    duration: "34 min",
-    date: "Jun 8, 2026",
-    img: "episode3.jpeg",
-    links: { youtube: "https://www.youtube.com/watch?v=wPkKmEVDgfk", spotify: null },
-  },
-  {
-    num: "04",
-    guest: "Mr. Quintin Akrobotu",
-    role: "Director of Regulatory Compliance, Ghana Data Protection Commission",
-    location: "Accra",
-    title: "Is Your Data Protected? Data Protection & Digital Governance in Ghana's Maritime Industry",
-    excerpt: "Maritime challenges have increasingly extended beyond the physical domain into the cyber and digital realms, with cyberattacks on ports and shipping systems now capable of causing large-scale physical disruption. In this conversation, Lawrence sits down with Mr. Quintin Akrobotu, Director of Regulatory Compliance, Ghana Data Protection Commission, on the margins of the Maritime Trade Fair 2026 in Accra, Ghana, to explore how data protection and governance apply to Ghana's maritime industry.",
-    tag: "Data Security",
-    season: 1,
-    duration: "17 min",
-    date: "Jun 12, 2026",
-    img: "episode4.jpeg",
-    links: { youtube: "https://www.youtube.com/watch?v=EXiU_bNLvw4", spotify: null },
-  },
-  {
-    num: "05",
-    guest: "Captain Francis K.B. Micah",
-    role: "Maritime Consultant, former CEO of PSC Tema Shipyard & Harbour Master, Port of Tema",
-    location: "Accra",
-    title: "A New Thinking for a Maritime Nation - Beyond Ghana's Black Star Line",
-    excerpt: "Captain Francis K.B. Micah has spent years looking at the dynamics of Ghana owning and operating a national shipping line. Instead of a state-owned model, he proposes a business model based on percentage-share investment, structured to attract genuine business partnership while still allowing Ghana to fly its own flag — and traces that idea back to a career spanning three decades at sea and ashore, from Deck Cadet on Ghana's original Black Star Line to Harbour Master at the Port of Tema.",
-    tag: "Governance",
-    season: 1,
-    duration: "19 min",
-    date: "Jul 22, 2026",
-    img: "episode5.jpeg",
-    links: { youtube: "https://www.youtube.com/watch?v=kTQFyOVTqyE", spotify: null },
-  },
-
-];
 
 const FILTERS = ["All Episodes", "Season 1", "Most Recent"];
 
@@ -354,6 +277,16 @@ function EpisodeCard({ ep, index, visible }) {
           color: CREAM, fontWeight: 300,
           margin: "0 0 20px", flex: 1,
         }}>{ep.excerpt}</p>
+
+        {ep.slug && (
+          <Link to={`/episodes/${ep.slug}`} style={{
+            display: "inline-block", alignSelf: "flex-start",
+            fontSize: "10px", letterSpacing: "1.5px", fontWeight: 600,
+            color: GOLD, textDecoration: "none",
+            borderBottom: "1px solid rgba(196,164,78,0.4)",
+            marginBottom: "16px",
+          }}>READ THE STORY →</Link>
+        )}
 
         {/* Platform selector */}
         <div style={{ marginTop: "auto" }}>

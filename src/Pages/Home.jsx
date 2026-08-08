@@ -80,6 +80,7 @@ const EPISODES = [
   },
   {
     num: "05",
+    slug: "captain-francis-micah",
     guest: "Captain Francis K.B. Micah",
     role: "Maritime Consultant, former CEO of PSC Tema Shipyard & Harbour Master, Port of Tema",
     org: "Accra",
@@ -314,7 +315,18 @@ function EpisodeCarousel({ episodes }) {
                         </svg>
                         LISTEN
                       </Link>
-                      <span style={{ fontSize: "11px", color: MUTED, letterSpacing: "1px" }}>{ep.duration}</span>
+                      {ep.slug && (
+                        <Link to={`/episodes/${ep.slug}`} style={{
+                          fontSize: "10px", letterSpacing: "1.5px", fontWeight: 600,
+                          color: CREAM, textDecoration: "none",
+                          borderBottom: "1px solid rgba(214,207,194,0.3)",
+                          transition: "color 0.2s, border-color 0.2s",
+                        }}
+                          onMouseEnter={e => { e.currentTarget.style.color = GOLD; e.currentTarget.style.borderColor = GOLD; }}
+                          onMouseLeave={e => { e.currentTarget.style.color = CREAM; e.currentTarget.style.borderColor = "rgba(214,207,194,0.3)"; }}
+                        >READ THE STORY</Link>
+                      )}
+                      <span style={{ fontSize: "11px", color: MUTED, letterSpacing: "1px", marginLeft: "auto" }}>{ep.duration}</span>
                     </div>
                   </div>
                 </div>

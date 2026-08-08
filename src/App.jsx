@@ -3,6 +3,7 @@ import Home from "./Pages/Home";
 import About from "./Pages/About";
 import AboutHost from "./Pages/AboutHost";
 import Episodes from "./Pages/Episodes";
+import EpisodeArticle from "./Pages/EpisodeArticle";
 import Partner from "./Pages/Partner";
 import Shop from "./Pages/Shop";
 import CreativeAgency from "./Pages/CreativeAgency";
@@ -27,6 +28,7 @@ function App() {
           <Route path="/about" element={<About />} />
           <Route path="/about-host" element={<AboutHost />} />
           <Route path="/episodes" element={<Episodes />} />
+          <Route path="/episodes/:slug" element={<EpisodeArticle />} />
           <Route path="/partner" element={<Partner />} />
           <Route path="/shop" element={<Shop />} />
           <Route path="/creative-agency" element={<CreativeAgency />} />
