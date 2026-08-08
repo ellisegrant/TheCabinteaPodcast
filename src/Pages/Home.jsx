@@ -34,6 +34,7 @@ const IMGS = {
   ep2:       "/episode2.jpeg",
   ep3:       "/episode3.jpeg",
   ep4:       "/episode4.jpeg",
+  ep5:       "/episode5.jpeg",
   cta:       "/lighthouse.jpg",
 };
 
@@ -51,19 +52,6 @@ function TikTok() {
 }
 
 const EPISODES = [
-  {
-    num: "02",
-    guest: "Christopher Trelawny",
-    role: "Deputy Secretary-General, Office of Secretary General INTERPORTPOLICE",
-    org: "Kenya",
-    title: "Maritime Security is Africa's Blind Economic Spot",
-    excerpt: "Christopher Trelawny recounts his role in creating the Djibouti and Yaoundé Codes of Conduct — the cooperation backbone African and international navies still rely on today.",
-    tag: "Community",
-    duration: "47 min",
-    date: "May 13, 2026",
-    img: IMGS.ep2,
-    imgPosition: "center center",
-  },
   {
     num: "03",
     guest: "Simon Church",
@@ -88,6 +76,19 @@ const EPISODES = [
     duration: "17 min",
     date: "Jun 12, 2026",
     img: IMGS.ep4,
+    imgPosition: "center center",
+  },
+  {
+    num: "05",
+    guest: "Captain Francis K.B. Micah",
+    role: "Maritime Consultant, former CEO of PSC Tema Shipyard & Harbour Master, Port of Tema",
+    org: "Accra",
+    title: "A New Thinking for a Maritime Nation - Beyond Ghana's Black Star Line",
+    excerpt: "Three decades at sea and ashore inform a bold proposal for a share-investment model that lets Ghana own and fly its own shipping line without going fully state-run.",
+    tag: "Governance",
+    duration: "19 min",
+    date: "Jul 22, 2026",
+    img: IMGS.ep5,
     imgPosition: "center center",
   },
 ];

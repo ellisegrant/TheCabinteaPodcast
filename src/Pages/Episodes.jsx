@@ -87,6 +87,20 @@ const episodes = [
     img: "episode4.jpeg",
     links: { youtube: "https://www.youtube.com/watch?v=EXiU_bNLvw4", spotify: null },
   },
+  {
+    num: "05",
+    guest: "Captain Francis K.B. Micah",
+    role: "Maritime Consultant, former CEO of PSC Tema Shipyard & Harbour Master, Port of Tema",
+    location: "Accra",
+    title: "A New Thinking for a Maritime Nation - Beyond Ghana's Black Star Line",
+    excerpt: "Captain Francis K.B. Micah has spent years looking at the dynamics of Ghana owning and operating a national shipping line. Instead of a state-owned model, he proposes a business model based on percentage-share investment, structured to attract genuine business partnership while still allowing Ghana to fly its own flag — and traces that idea back to a career spanning three decades at sea and ashore, from Deck Cadet on Ghana's original Black Star Line to Harbour Master at the Port of Tema.",
+    tag: "Governance",
+    season: 1,
+    duration: "19 min",
+    date: "Jul 22, 2026",
+    img: "episode5.jpeg",
+    links: { youtube: "https://www.youtube.com/watch?v=kTQFyOVTqyE", spotify: null },
+  },
 
 ];
 
