@@ -10,7 +10,6 @@ import CreativeAgency from "./Pages/CreativeAgency";
 import Afrocean from "./Pages/Afrocean";
 import Anchorage from "./Pages/Anchorage";
 import { PlayerProvider } from "./components/EpisodePlayer";
-import CategoryStrip from "./components/CategoryStrip";
 import AfricaOceanDynamism from "./Pages/AfricaOceanDynamism";
 import OnDeck from "./Pages/OnDeck";
 import WhatsRising from "./Pages/WhatsRising";
@@ -21,7 +20,6 @@ function App() {
   return (
     <PlayerProvider>
       <BrowserRouter>
-        <CategoryStrip />
         <CookieConsent />
         <Routes>
           <Route path="/" element={<Home />} />
