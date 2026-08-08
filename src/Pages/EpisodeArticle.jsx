@@ -26,27 +26,57 @@ const MUTED = "rgba(214,207,194,0.42)";
 const display = { fontFamily: "var(--font-display, 'Cormorant Garamond', Georgia, serif)" };
 
 /* ── Article data, keyed by slug ──
-   Only "captain-francis-micah" is populated for now. The opening
-   paragraphs and key-moments below are pulled straight from the
-   episode's own YouTube description as a starter draft — swap in
-   final article copy here whenever it's ready. */
+   Only "captain-francis-micah" is populated for now. */
 const ARTICLES = {
   "captain-francis-micah": {
     tag: "Governance",
     guest: "Captain Francis K.B. Micah",
     role: "Maritime Consultant, former CEO of PSC Tema Shipyard & Harbour Master, Port of Tema",
     location: "Accra, Ghana",
-    title: "A New Thinking for a Maritime Nation - Beyond Ghana's Black Star Line",
-    deck: "Captain Francis K.B. Micah has spent years looking at the dynamics of Ghana owning and operating a national shipping line. Instead of a state-owned model, he proposes a business model based on percentage-share investment — one structured to attract genuine business partnership while still allowing Ghana to fly its own flag.",
+    title: "Captain Micah on Reviving Ghana's Maritime Pride and the Future of the Black Star Line",
+    deck: "In a deep-dive conversation on the Cabin Tea Podcast, Captain Micah, former Chief Executive Officer of the Tema Shipyard, shared a vision for Ghana's maritime industry that blends nostalgia with hard-nosed economic reality. From the legacy of the Black Star Line to the critical need for a dedicated maritime ministry, Micah lays out the blueprint for how Ghana can reclaim its status as a leading maritime nation.",
     date: "July 22, 2026",
     duration: "19 min",
     img: "/cap-micah.jpeg",
     imgCaption: "Captain Micah traces his proposal for Ghana's shipping line back to a career that began as a Deck Cadet Officer on the country's original Black Star Line.",
     youtube: "https://www.youtube.com/watch?v=kTQFyOVTqyE",
     youtubeEmbed: "https://www.youtube.com/embed/kTQFyOVTqyE",
-    body: [
-      "In this episode of #CabinTea x Maritime Trade Fair, Captain Micah traces that idea, and several others, back to a career spanning over three decades at sea and ashore — beginning as a Deck Cadet Officer on Ghana's original Black Star Line, sailing with Pacific International Lines and Iran's shipping line across the Mediterranean and Gulf of Aden, and rising through the ranks to Master, before going on to hold notable roles including Chief Executive Officer of PSC Tema Shipyard Limited and Harbour Master at the Port of Tema, Ghana Ports and Harbours Authority.",
-      "Now a maritime consultant, he also shares his perspectives on some of the current challenges facing the Regional Maritime University, and why real national development through maritime growth may demand a fundamentally different approach to Ghana's maritime strategy and policy.",
+    videoTeaser: "Captain Micah exposes why Ghana's maritime industry is broken.",
+    sections: [
+      {
+        heading: "The Legacy of the Black Star Line",
+        paragraphs: [
+          "The conversation began with the emotional weight of the Black Star Line. Founded shortly after independence, it was more than just a shipping company; it was a symbol of Ghanaian sovereignty. Captain Micah recounted how the generator sets and transformers for the Akosombo Dam were brought into the country by Black Star Line ships, specifically the Lake Bosomtwe.",
+          "“It gave us that sense of pride as a nation,” Micah explained. “But today, the dynamics are entirely different. We don’t necessarily need a 100% state-owned shipping line, but we need a state that has a vested interest and a clear policy direction.”",
+        ],
+      },
+      {
+        heading: "Why Policy is the Ultimate Navigator",
+        paragraphs: [
+          "One of the most striking points Micah raised was the comparison to landlocked Ethiopia. Despite having no coastline, Ethiopia maintains a robust shipping line and a world-class nautical institute. The secret? State policy.",
+          "Micah argued that Ghana’s maritime efforts are currently fragmented across too many agencies. He pointed to the “Blue Economy” ministries in Kenya, Nigeria, and South Africa as models for success. “Maritime is huge,” he noted. “You don't box up maritime issues with road or rail transport. It requires a dedicated focus and political will.”",
+        ],
+      },
+      {
+        heading: "The “Sad” Reality of the Tema Shipyard",
+        paragraphs: [
+          "As the former head of the Tema Shipyard, Micah didn't hold back on the challenges facing Ghana’s infrastructure. He revealed a “sensitive” and “sad” detail: the official legal title for the shipyard is still PSC Tema Shipyard - named after the Penang Shipyard Corporation that once bought into it.",
+          "“If we haven't even been able to change the legal name, how can we move forward with developing the place?” he asked. He emphasized that the shipyard needs a massive injection of capital for modern equipment like high-pressure water blasting and specialized marine steel plates to handle the world's largest vessels.",
+        ],
+      },
+      {
+        heading: "A Crisis in Training",
+        paragraphs: [
+          "Perhaps the most urgent part of the discussion focused on the Regional Maritime University. Micah highlighted a “spanner in the wheel of progress”: the lack of a dedicated training vessel.",
+          "Currently, students complete their academic work but have no way to get the mandatory practical sea-time required for their certifications. “I’ve had students who graduated in 2017 come to me in 2023 saying they still haven't had an opportunity to be on a vessel,” Micah shared. He warned that if the state doesn't intervene to provide these training opportunities, the university risks failing its core purpose.",
+        ],
+      },
+      {
+        heading: "A Message to the Youth",
+        paragraphs: [
+          "Despite the hurdles, Captain Micah remains a champion for the industry. His message to the young Ghanaians entering maritime finance, insurance, and engineering was one of resilience. “Do not give up. Remain hopeful that the point will come where these challenges are a thing of the past.”",
+        ],
+      },
     ],
     timestamps: [
       { t: "01:17", label: "Introduction and initial position on the Black Star Line" },
@@ -210,26 +240,16 @@ export default function EpisodeArticle() {
           opacity: bodyVis ? 1 : 0, transform: bodyVis ? "none" : "translateY(16px)",
           transition: "opacity 0.7s, transform 0.7s",
         }}>
-          <p style={{ fontSize: "16px", lineHeight: 1.85, color: CREAM, fontWeight: 300, margin: "0 0 22px" }}>
-            On this episode of <em>Cabin Tea</em>, host Lawrence Dogli sits down with <strong style={{ color: "white" }}>{article.guest}</strong> — {article.role} — recorded on the margins of the Maritime Trade Fair in {article.location}.
-          </p>
-          {article.body.map((p, i) => (
-            <p key={i} style={{ fontSize: "16px", lineHeight: 1.85, color: CREAM, fontWeight: 300, margin: "0 0 22px" }}>{p}</p>
+          {article.sections.map((section, i) => (
+            <div key={i} style={{ marginBottom: "8px" }}>
+              <h2 style={{ fontSize: "20px", fontWeight: 700, color: "white", margin: i === 0 ? "0 0 16px" : "36px 0 16px" }}>
+                {section.heading}
+              </h2>
+              {section.paragraphs.map((p, j) => (
+                <p key={j} style={{ fontSize: "16px", lineHeight: 1.85, color: CREAM, fontWeight: 300, margin: "0 0 20px" }}>{p}</p>
+              ))}
+            </div>
           ))}
-
-          {/* Editor's note — swap in final copy */}
-          <div style={{
-            margin: "8px 0 36px", padding: "18px 22px",
-            border: "1px dashed rgba(196,164,78,0.35)",
-            background: "rgba(196,164,78,0.04)",
-          }}>
-            <p style={{ fontSize: "10px", letterSpacing: "2px", color: GOLD, fontWeight: 700, margin: "0 0 6px" }}>
-              EDITOR'S NOTE
-            </p>
-            <p style={{ fontSize: "13px", lineHeight: 1.7, color: MUTED, margin: 0 }}>
-              The copy above is a starter draft pulled from the episode's own YouTube description. Swap in the final article text here.
-            </p>
-          </div>
 
           {/* Key moments */}
           <h2 style={{ fontSize: "18px", fontWeight: 700, color: "white", margin: "0 0 18px" }}>Key Moments</h2>
@@ -248,7 +268,10 @@ export default function EpisodeArticle() {
           </div>
 
           {/* Video embed */}
-          <h2 style={{ fontSize: "18px", fontWeight: 700, color: "white", margin: "0 0 18px" }}>Watch the Episode</h2>
+          <h2 style={{ fontSize: "18px", fontWeight: 700, color: "white", margin: "0 0 12px" }}>Watch the Episode</h2>
+          {article.videoTeaser && (
+            <p style={{ fontSize: "15px", lineHeight: 1.7, color: CREAM, fontWeight: 300, margin: "0 0 18px" }}>{article.videoTeaser}</p>
+          )}
           <div style={{ position: "relative", paddingTop: "56.25%", background: PANEL, marginBottom: "20px" }}>
             <iframe
               src={article.youtubeEmbed}
