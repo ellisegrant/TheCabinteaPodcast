@@ -25,9 +25,71 @@ const CREAM = "rgba(214,207,194,0.75)";
 const MUTED = "rgba(214,207,194,0.42)";
 const display = { fontFamily: "var(--font-display, 'Cormorant Garamond', Georgia, serif)" };
 
-/* ── Article data, keyed by slug ──
-   Only "captain-francis-micah" is populated for now. */
+/* ── Article data, keyed by slug ── */
 const ARTICLES = {
+  "christopher-trelawny": {
+    tag: "Community",
+    guest: "Christopher Trelawny",
+    role: "Deputy Secretary-General, Office of Secretary General INTERPORTPOLICE, former Special Adviser to the IMO Secretary General",
+    location: "Kenya",
+    title: "The 200 Mile Strategic Blindspot: Christopher Trelawny on the Real Cost of Africa's Wealth Blindness",
+    deck: "In the grand narrative of a rising Africa, the conversation almost always turns toward the red earth of the interior. We speak of cross border rails, new tech hubs in the highlands, and the potential of the Sahel. But according to Christopher Trelawny, a veteran strategist and former Special Adviser to the IMO Secretary General, we are looking in the wrong direction. While the land gets the headlines, the true engine of the continent's future is idling 200 miles offshore.",
+    lead: "On the latest episode of the Cabin Tea podcast, Trelawny delivered a blunt assessment of why the continent is struggling to monetize its waters. It isn't just about a lack of patrol boats or high tech surveillance. It is about a fundamental misunderstanding of what maritime security actually is and who it is for.",
+    date: "May 13, 2026",
+    duration: "47 min",
+    img: "/christopher2.jpeg",
+    imgCaption: "Christopher Trelawny, recorded on location in Kenya, argues Africa's blue economy is a current reality waiting for a better business plan.",
+    youtube: "https://www.youtube.com/watch?v=PfKqXzdO4u0",
+    youtubeEmbed: "https://www.youtube.com/embed/PfKqXzdO4u0",
+    videoTeaser: "Watch the full conversation on Africa's maritime identity.",
+    sections: [
+      {
+        heading: "The Problem of Wealth Blindness",
+        paragraphs: [
+          "The most critical takeaway from Trelawny's decades at the International Maritime Organization is the concept of Wealth Blindness. He argues that many African states have a cultural tendency to view their maritime domain as a security headache rather than a commercial asset. We see the ocean as a border to be guarded rather than a field to be harvested.",
+          "“Security is an enabler, not an end in itself,” Trelawny notes. The overlooked detail here is the return on investment. When a nation fails to secure its Exclusive Economic Zone, it isn't just inviting illegal fishing or piracy. It is driving up insurance premiums and shipping costs that act as an invisible tax on every citizen. Whether you live in a coastal port or a landlocked city like Ouagadougou, you are paying for the insecurity of the waves every time you buy a bag of grain.",
+        ],
+      },
+      {
+        heading: "A Tale of Two Codes",
+        paragraphs: [
+          "Trelawny highlights a structural flaw in how maritime policy is built across the continent. He points to the stark difference between the Djibouti Code in East Africa and the Yaoundé Code in West Africa. One was driven by transport ministers and focused on the civilian side of trade, while the other was born from a military led initiative.",
+          "For the Blue Economy to truly take root, these two worlds must finally merge. You cannot have a thriving port if the Navy and the Port Authority are operating in different silos. The solution is a unified maritime governance model that treats the ocean with the same administrative respect we give the land. It is about recognizing that the sea is just as much a part of the national estate as any province or region.",
+        ],
+      },
+      {
+        heading: "The Seafarer's Dilemma",
+        paragraphs: [
+          "One of the most technical yet vital parts of the discussion centered on the human element: the Seafarer's Dilemma. Trelawny pulls back the curtain on the intense negotiations regarding whether to arm merchant ships.",
+          "The reality is that the industry's refusal to arm sailors wasn't just a safety choice; it was a legal and moral necessity. If a sailor picks up a weapon, they lose their protected status as a civilian worker under international law. This is a crucial point for African states to understand. We cannot fix a security problem by turning our maritime workforce into combatants. We must protect the dignity of the profession to ensure the next generation of African youth sees the sea as a viable, honorable career.",
+        ],
+      },
+      {
+        heading: "The Spirit of Yaoundé",
+        paragraphs: [
+          "Trelawny recounts a rare moment of clarity in 2013 when thirteen African Heads of State gathered in a single room to sign the Yaoundé Code. He describes it as a moment where the political will finally matched the scale of the problem. It was a rare instance of the continent's kings and presidents looking at the water and claiming it as their own.",
+          "His message to current leaders is that this spirit needs to be reactivated. Maritime security shouldn't be a niche topic for admirals discussed in dark rooms. It should be a standing item on every President's economic agenda. The ocean is the thread that stitches the entire continent's economy together, and it is time we treated it with that level of gravity.",
+        ],
+      },
+      {
+        heading: "The Bottom Line",
+        paragraphs: [
+          "Christopher Trelawny's briefing is a reminder that Africa's Blue Economy isn't a distant dream. It is a current reality that is simply waiting for a better business plan. Until the continent stops being blind to the wealth within its reach, the 200 miles of opportunity will remain a 200 mile liability.",
+        ],
+      },
+    ],
+    timestamps: [
+      { t: "00:00", label: "The “Sea Blindness” & “Wealth Blindness” issue" },
+      { t: "10:12", label: "The 200-mile zone of opportunity: security as a wealth enabler" },
+      { t: "13:34", label: "The birth of the Djibouti Code of Conduct" },
+      { t: "19:10", label: "The controversial debate over armed guards on ships" },
+      { t: "20:42", label: "Piracy vs. armed robbery: the 12-mile jurisdictional difference" },
+      { t: "27:17", label: "The Yaoundé Code of Conduct: political support & architecture" },
+      { t: "30:52", label: "Comparing the Djibouti & Yaoundé Code approaches" },
+      { t: "36:33", label: "Sustainable blue economy: protecting fisheries & licenses" },
+      { t: "46:11", label: "Final thoughts: wealth creation for African economies" },
+    ],
+  },
   "captain-francis-micah": {
     tag: "Governance",
     guest: "Captain Francis K.B. Micah",
@@ -240,9 +302,12 @@ export default function EpisodeArticle() {
           opacity: bodyVis ? 1 : 0, transform: bodyVis ? "none" : "translateY(16px)",
           transition: "opacity 0.7s, transform 0.7s",
         }}>
+          {article.lead && (
+            <p style={{ fontSize: "16px", lineHeight: 1.85, color: CREAM, fontWeight: 300, margin: "0 0 20px" }}>{article.lead}</p>
+          )}
           {article.sections.map((section, i) => (
             <div key={i} style={{ marginBottom: "8px" }}>
-              <h2 style={{ fontSize: "20px", fontWeight: 700, color: "white", margin: i === 0 ? "0 0 16px" : "36px 0 16px" }}>
+              <h2 style={{ fontSize: "20px", fontWeight: 700, color: "white", margin: i === 0 && !article.lead ? "0 0 16px" : "36px 0 16px" }}>
                 {section.heading}
               </h2>
               {section.paragraphs.map((p, j) => (
@@ -252,20 +317,24 @@ export default function EpisodeArticle() {
           ))}
 
           {/* Key moments */}
-          <h2 style={{ fontSize: "18px", fontWeight: 700, color: "white", margin: "0 0 18px" }}>Key Moments</h2>
-          <div style={{ marginBottom: "40px" }}>
-            {article.timestamps.map((ts, i) => (
-              <div key={ts.t} style={{
-                display: "flex", gap: "16px", alignItems: "baseline",
-                padding: "12px 0",
-                borderTop: i === 0 ? "1px solid rgba(255,255,255,0.08)" : "none",
-                borderBottom: "1px solid rgba(255,255,255,0.08)",
-              }}>
-                <span style={{ fontSize: "12px", color: GOLD, fontWeight: 700, letterSpacing: "0.5px", flexShrink: 0, width: "42px" }}>{ts.t}</span>
-                <span style={{ fontSize: "14px", color: CREAM, fontWeight: 300, lineHeight: 1.5 }}>{ts.label}</span>
+          {article.timestamps && (
+            <>
+              <h2 style={{ fontSize: "18px", fontWeight: 700, color: "white", margin: "0 0 18px" }}>Key Moments</h2>
+              <div style={{ marginBottom: "40px" }}>
+                {article.timestamps.map((ts, i) => (
+                  <div key={ts.t} style={{
+                    display: "flex", gap: "16px", alignItems: "baseline",
+                    padding: "12px 0",
+                    borderTop: i === 0 ? "1px solid rgba(255,255,255,0.08)" : "none",
+                    borderBottom: "1px solid rgba(255,255,255,0.08)",
+                  }}>
+                    <span style={{ fontSize: "12px", color: GOLD, fontWeight: 700, letterSpacing: "0.5px", flexShrink: 0, width: "42px" }}>{ts.t}</span>
+                    <span style={{ fontSize: "14px", color: CREAM, fontWeight: 300, lineHeight: 1.5 }}>{ts.label}</span>
+                  </div>
+                ))}
               </div>
-            ))}
-          </div>
+            </>
+          )}
 
           {/* Video embed */}
           <h2 style={{ fontSize: "18px", fontWeight: 700, color: "white", margin: "0 0 12px" }}>Watch the Episode</h2>

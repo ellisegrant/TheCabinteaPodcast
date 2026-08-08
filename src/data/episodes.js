@@ -19,6 +19,7 @@ export const episodes = [
   },
   {
     num: "02",
+    slug: "christopher-trelawny",
     guest: "Christopher Trelawny",
     role: "Deputy Secretary-General, Office of Secretary General INTERPORTPOLICE",
     location: "Kenya",
@@ -30,6 +31,11 @@ export const episodes = [
     date: "May 13, 2026  ",
     img: "episode2.jpeg",
     links: { youtube: "https://www.youtube.com/watch?v=PfKqXzdO4u0", spotify: null },
+    article: {
+      title: "The 200 Mile Strategic Blindspot: Christopher Trelawny on the Real Cost of Africa's Wealth Blindness",
+      deck: "A veteran strategist and former Special Adviser to the IMO Secretary General argues Africa keeps looking inland for growth when the real engine of its future is idling 200 miles offshore.",
+      img: "/christopher2.jpeg",
+    },
   },
   {
     num: "03",

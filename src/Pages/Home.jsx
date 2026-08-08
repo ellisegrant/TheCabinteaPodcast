@@ -395,7 +395,9 @@ export default function Home() {
   const [brandsRef, brandsVis] = useReveal(0.08);
   const [ctaRef,    ctaVis]    = useReveal(0.1);
   const isMobile = useIsMobile();
-  const featured = ALL_EPISODES.find(e => e.article);
+  const articlesList = ALL_EPISODES.filter(e => e.article);
+  const featured = articlesList[articlesList.length - 1];
+  const moreArticles = articlesList.slice(0, -1).reverse();
 
   return (
     <div style={{ minHeight: "100vh", background: BG, color: "white", overflowX: "hidden" }}>
@@ -579,6 +581,30 @@ export default function Home() {
                 </div>
               </div>
             </Link>
+
+            {moreArticles.length > 0 && (
+              <div style={{ display: "flex", flexDirection: "column", marginTop: "8px" }}>
+                {moreArticles.map(ep => (
+                  <Link key={ep.slug} to={`/episodes/${ep.slug}`} style={{
+                    display: "grid", gridTemplateColumns: isMobile ? "80px 1fr" : "120px 1fr",
+                    gap: isMobile ? "14px" : "20px",
+                    padding: "18px 0",
+                    borderTop: "1px solid rgba(255,255,255,0.07)",
+                    textDecoration: "none", alignItems: "center",
+                  }}>
+                    <div style={{ height: isMobile ? "64px" : "80px", overflow: "hidden", flexShrink: 0 }}>
+                      <img src={ep.article.img} alt={ep.article.title} style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} />
+                    </div>
+                    <div>
+                      <p style={{ fontSize: "9px", letterSpacing: "2px", color: GOLD, fontWeight: 700, margin: "0 0 6px" }}>
+                        {ep.tag.toUpperCase()}
+                      </p>
+                      <p style={{ fontSize: "14px", fontWeight: 700, color: "white", margin: 0, lineHeight: 1.35 }}>{ep.article.title}</p>
+                    </div>
+                  </Link>
+                ))}
+              </div>
+            )}
           </div>
         </section>
       )}
