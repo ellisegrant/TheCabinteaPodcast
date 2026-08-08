@@ -188,16 +188,6 @@ export default function About() {
               position: "absolute", inset: 0,
               background: "linear-gradient(to right, transparent, rgba(20,31,24,0.6) 100%)",
             }} />
-            {/* Stat */}
-            <div style={{
-              position: "absolute", bottom: "36px", left: "28px",
-              background: TERRA, color: "white", padding: "18px 22px",
-            }}>
-              <span style={{ fontSize: "40px", fontWeight: 700, display: "block", lineHeight: 1 }}>50%+</span>
-              <span style={{ fontSize: "11px", lineHeight: 1.5, display: "block", marginTop: "6px", color: "rgba(255,255,255,0.85)" }}>
-                of Africa under 25. The blue economy renaissance belongs to this generation.
-              </span>
-            </div>
           </div>
 
           {/* Right — mission text */}

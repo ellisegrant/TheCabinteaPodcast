@@ -465,10 +465,6 @@ export default function Home() {
               <div style={{ overflow: "hidden" }}>
                 <img src={IMGS.host} alt="Host" style={{ width: "100%", height: "auto", objectFit: "contain", display: "block" }} />
               </div>
-              <div style={{ position: "absolute", bottom: "-1px", right: "-1px", background: GOLD, color: "#0F1912", padding: "20px 24px" }}>
-                <span style={{ fontSize: "36px", fontWeight: 700, display: "block", lineHeight: 1 }}>360°</span>
-                <span style={{ fontSize: "9px", letterSpacing: "2px", fontWeight: 600, display: "block", marginTop: "4px" }}>MARITIME MEDIA</span>
-              </div>
             </div>
             <div style={{ opacity: aboutVis ? 1 : 0, transform: aboutVis ? "none" : "translateX(20px)", transition: "opacity 0.8s 0.15s, transform 0.8s 0.15s" }}>
               <p style={{ fontSize: "10px", letterSpacing: "3px", color: GOLD, marginBottom: "20px", fontWeight: 600 }}>ABOUT CABIN TEA</p>
