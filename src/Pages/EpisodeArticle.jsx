@@ -40,7 +40,7 @@ const ARTICLES = {
     deck: "Captain Francis K.B. Micah has spent years looking at the dynamics of Ghana owning and operating a national shipping line. Instead of a state-owned model, he proposes a business model based on percentage-share investment — one structured to attract genuine business partnership while still allowing Ghana to fly its own flag.",
     date: "July 22, 2026",
     duration: "19 min",
-    img: "/episode5.jpeg",
+    img: "/cap-micah.jpeg",
     imgCaption: "Captain Micah traces his proposal for Ghana's shipping line back to a career that began as a Deck Cadet Officer on the country's original Black Star Line.",
     youtube: "https://www.youtube.com/watch?v=kTQFyOVTqyE",
     youtubeEmbed: "https://www.youtube.com/embed/kTQFyOVTqyE",
