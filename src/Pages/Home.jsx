@@ -478,17 +478,9 @@ export default function Home() {
               <p style={{ fontSize: "16px", lineHeight: 1.85, color: CREAM, fontWeight: 300, marginBottom: "20px" }}>
                 Founded by Lawrence Dogli, Cabin Tea is a 360 ocean storytelling platform committed to uplifting diverse voices, sparking meaningful conversation, and driving cultural impact. 
                 Through powerful documentaries, thought-provoking conversations, and informative series, we explore the projects, people, and ideas that shape Africa’s ocean economy.</p>
-              <p style={{ fontSize: "16px", lineHeight: 1.85, color: MUTED, fontWeight: 300, marginBottom: "36px" }}>
+              <p style={{ fontSize: "16px", lineHeight: 1.85, color: MUTED, fontWeight: 300 }}>
                 Recorded live in Accra, Ghana. Heard everywhere.
               </p>
-              <div style={{ display: "flex", gap: "40px", paddingTop: "28px", borderTop: "1px solid rgba(255,255,255,0.07)" }}>
-                {[{ val: "54", label: "African Nations" }, { val: "Global", label: "Diaspora Reach" }, { val: "Live", label: "Recorded" }].map(s => (
-                  <div key={s.label}>
-                    <span style={{ fontSize: "26px", fontWeight: 700, color: "white", display: "block", lineHeight: 1 }}>{s.val}</span>
-                    <span style={{ fontSize: "9px", letterSpacing: "2px", color: MUTED, display: "block", marginTop: "5px" }}>{s.label.toUpperCase()}</span>
-                  </div>
-                ))}
-              </div>
             </div>
           </div>
         </div>

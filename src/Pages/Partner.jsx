@@ -329,61 +329,27 @@ export default function Partner() {
       <section ref={propRef} style={{ background: PANEL, padding: "clamp(56px, 8vw, 96px) 5vw" }}>
         <div style={{ maxWidth: "1200px", margin: "0 auto" }}>
           <div style={{
-            display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr",
-            gap: isMobile ? "40px" : "80px", alignItems: "center",
+            maxWidth: "720px",
+            opacity: propVis ? 1 : 0, transform: propVis ? "none" : "translateY(20px)",
+            transition: "opacity 0.8s, transform 0.8s",
           }}>
-            <div style={{
-              opacity: propVis ? 1 : 0, transform: propVis ? "none" : "translateX(-20px)",
-              transition: "opacity 0.8s, transform 0.8s",
+            <p style={{ fontSize: "10px", letterSpacing: "3px", color: GOLD, marginBottom: "20px", fontWeight: 600 }}>
+              THE PROPOSITION
+            </p>
+            <h2 style={{
+              fontWeight: 700,
+              fontSize: "clamp(28px, 3.5vw, 44px)",
+              lineHeight: 1.1, color: "white",
+              marginBottom: "24px", letterSpacing: "-0.5px",
             }}>
-              <p style={{ fontSize: "10px", letterSpacing: "3px", color: GOLD, marginBottom: "20px", fontWeight: 600 }}>
-                THE PROPOSITION
-              </p>
-              <h2 style={{
-                fontWeight: 700,
-                fontSize: "clamp(28px, 3.5vw, 44px)",
-                lineHeight: 1.1, color: "white",
-                marginBottom: "24px", letterSpacing: "-0.5px",
-              }}>
-                Your product is not a backdrop.<br />It is part of the experience.
-              </h2>
-              <p style={{ fontSize: "16px", lineHeight: 1.85, color: CREAM, fontWeight: 300, marginBottom: "20px" }}>
-                Cabin Tea is Africa's leading maritime media brand — a live conversation series recorded in Accra and distributed globally. Every episode is built around a carefully chosen cup of tea, shared between host and guest. That tea is your brand's moment.
-              </p>
-              <p style={{ fontSize: "16px", lineHeight: 1.85, color: MUTED, fontWeight: 300 }}>
-                When you partner with Cabin Tea, your brand is not slotted into an ad break. It is woven into the story — present at the table where Africa's maritime future is being discussed, tasted, and remembered.
-              </p>
-            </div>
-
-            {/* Right — stat blocks */}
-            <div style={{
-              opacity: propVis ? 1 : 0, transform: propVis ? "none" : "translateX(20px)",
-              transition: "opacity 0.8s 0.15s, transform 0.8s 0.15s",
-              display: "grid", gridTemplateColumns: "1fr 1fr", gap: "2px",
-            }}>
-              {[
-                { val: "54", label: "African Nations", sub: "Continental reach" },
-                { val: "Global", label: "Diaspora", sub: "International audience" },
-                { val: "Live", label: "Recorded", sub: "In Accra, Ghana" },
-                { val: "100%", label: "Brand Aligned", sub: "Curated partnerships only" },
-              ].map(s => (
-                <div key={s.label} style={{
-                  background: DARK2,
-                  padding: "28px 24px",
-                  borderBottom: `2px solid rgba(196,164,78,0)`,
-                  transition: "border-color 0.2s",
-                }}
-                  onMouseEnter={e => e.currentTarget.style.borderBottomColor = GOLD}
-                  onMouseLeave={e => e.currentTarget.style.borderBottomColor = "rgba(196,164,78,0)"}
-                >
-                  <span style={{ fontSize: "28px", fontWeight: 700, color: "white", display: "block", lineHeight: 1 }}>{s.val}</span>
-                  <span style={{ fontSize: "9px", letterSpacing: "2px", color: GOLD, display: "block", marginTop: "6px", fontWeight: 600 }}>
-                    {s.label.toUpperCase()}
-                  </span>
-                  <span style={{ fontSize: "11px", color: MUTED, display: "block", marginTop: "4px" }}>{s.sub}</span>
-                </div>
-              ))}
-            </div>
+              Your product is not a backdrop.<br />It is part of the experience.
+            </h2>
+            <p style={{ fontSize: "16px", lineHeight: 1.85, color: CREAM, fontWeight: 300, marginBottom: "20px" }}>
+              Cabin Tea is Africa's leading maritime media brand — a live conversation series recorded in Accra and distributed globally. Every episode is built around a carefully chosen cup of tea, shared between host and guest. That tea is your brand's moment.
+            </p>
+            <p style={{ fontSize: "16px", lineHeight: 1.85, color: MUTED, fontWeight: 300 }}>
+              When you partner with Cabin Tea, your brand is not slotted into an ad break. It is woven into the story — present at the table where Africa's maritime future is being discussed, tasted, and remembered.
+            </p>
           </div>
         </div>
       </section>

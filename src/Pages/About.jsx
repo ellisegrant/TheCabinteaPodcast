@@ -222,28 +222,9 @@ export default function About() {
               Our mission is to foster a strong cultural connection and enhance economic opportunities between Africa and the Diaspora — facilitating exchange, collaboration, and mutual growth.
             </p>
 
-            <p style={{ fontSize: "15px", lineHeight: 1.9, color: MUTED, fontWeight: 300, marginBottom: "36px" }}>
+            <p style={{ fontSize: "15px", lineHeight: 1.9, color: MUTED, fontWeight: 300 }}>
               We strive to create avenues for economic empowerment and sustainable development that benefit both the African continent and Diaspora communities worldwide.
             </p>
-
-            <div style={{
-              display: "flex", gap: "36px",
-              paddingTop: "24px",
-              borderTop: "1px solid rgba(255,255,255,0.07)",
-            }}>
-              {[
-                { val: "360°", label: "Media Network" },
-                { val: "Global", label: "Diaspora Reach" },
-                { val: "Africa", label: "Next Generation" },
-              ].map(s => (
-                <div key={s.label}>
-                  <span style={{ fontSize: "24px", fontWeight: 700, color: "white", display: "block", lineHeight: 1 }}>{s.val}</span>
-                  <span style={{ fontSize: "9px", letterSpacing: "2px", color: MUTED, display: "block", marginTop: "5px" }}>
-                    {s.label.toUpperCase()}
-                  </span>
-                </div>
-              ))}
-            </div>
           </div>
         </div>
       </section>

@@ -206,7 +206,7 @@ export default function CreativeAgency() {
             </h2>
           </div>
 
-          {/* Right — body + stats */}
+          {/* Right — body */}
           <div style={{
             padding: isMobile ? "40px 5vw" : "72px 5vw 72px 56px",
             display: "flex", flexDirection: "column", justifyContent: "center",
@@ -215,28 +215,10 @@ export default function CreativeAgency() {
           }}>
             <p style={{
               fontSize: "15px", lineHeight: 1.9, color: CREAM,
-              fontWeight: 300, marginBottom: "32px",
+              fontWeight: 300,
             }}>
               We connect brands, businesses, and leaders to the vibrancy, innovation, and commercial power of African and global Maritime Culture and Industry. Our expertise spans strategy, creativity, and immersive experiences — designed to deliver measurable impact for people and organisations.
             </p>
-
-            <div style={{
-              display: "flex", gap: "36px",
-              paddingTop: "24px", borderTop: "1px solid rgba(255,255,255,0.07)",
-            }}>
-              {[
-                { val: "3",      label: "Core Services"    },
-                { val: "360°",   label: "Cultural Reach"   },
-                { val: "Global", label: "Diaspora Network" },
-              ].map(s => (
-                <div key={s.label}>
-                  <span style={{ fontSize: "24px", fontWeight: 700, color: "white", display: "block", lineHeight: 1 }}>{s.val}</span>
-                  <span style={{ fontSize: "9px", letterSpacing: "2px", color: MUTED, display: "block", marginTop: "5px" }}>
-                    {s.label.toUpperCase()}
-                  </span>
-                </div>
-              ))}
-            </div>
           </div>
         </div>
       </section>

@@ -152,41 +152,12 @@ export default function AfricaOceanDynamism() {
 
           <p style={{
             fontSize: "17px", color: BODY, lineHeight: 1.7,
-            fontWeight: 300, maxWidth: "520px", marginBottom: "48px",
+            fontWeight: 300, maxWidth: "520px",
             opacity: heroVis ? 1 : 0, transform: heroVis ? "none" : "translateY(14px)",
             transition: "opacity 0.7s 0.28s, transform 0.7s 0.28s",
           }}>
             A conviction that the founders building solutions to Africa's ocean and maritime challenges deserve serious, sustained investment.
           </p>
-
-          {/* Data strip */}
-          <div style={{
-            display: "grid", gridTemplateColumns: isMobile ? "repeat(2, 1fr)" : "repeat(4, 1fr)",
-            borderTop: `1px solid ${DIM}`,
-            opacity: heroVis ? 1 : 0, transform: heroVis ? "none" : "translateY(16px)",
-            transition: "opacity 0.7s 0.4s, transform 0.7s 0.4s",
-          }}>
-            {[
-              { val: "38",      label: "Coastal & island states"            },
-              { val: "40,000+", label: "Kilometres of coastline"            },
-              { val: "90%",     label: "Global trade passes Africa's waters" },
-              { val: "$300B",   label: "Annual blue economy value"          },
-            ].map((d, i) => (
-              <div key={i} style={{
-                padding: "24px 0 40px 24px",
-                borderLeft: (isMobile ? i % 2 !== 0 : i > 0) ? `1px solid ${DIM}` : "none",
-                borderTop: isMobile && i > 1 ? `1px solid ${DIM}` : "none",
-              }}>
-                <span style={{
-                  fontSize: "clamp(22px, 3vw, 36px)", fontWeight: 700,
-                  color: "white", display: "block", lineHeight: 1,
-                }}>{d.val}</span>
-                <span style={{ fontSize: "10px", letterSpacing: "1.5px", color: MUTED, display: "block", marginTop: "6px" }}>
-                  {d.label.toUpperCase()}
-                </span>
-              </div>
-            ))}
-          </div>
         </div>
 
         <style>{`
@@ -261,10 +232,11 @@ export default function AfricaOceanDynamism() {
             </div>
           </div>
 
-          <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 300px", gap: isMobile ? "40px" : "72px", alignItems: "start" }}>
+          <div style={{ display: "grid", gridTemplateColumns: "1fr", alignItems: "start" }}>
 
-            {/* Left — narrative, trimmed to essentials */}
+            {/* Narrative, trimmed to essentials */}
             <div style={{
+              maxWidth: "720px",
               opacity: stakesVis ? 1 : 0, transform: stakesVis ? "none" : "translateX(-16px)",
               transition: "opacity 0.8s 0.1s, transform 0.8s 0.1s",
             }}>
@@ -297,30 +269,6 @@ export default function AfricaOceanDynamism() {
                   That is the investment Africa Ocean Dynamism is making. And the moment for it has never been more urgent.
                 </p>
               </div>
-            </div>
-
-            {/* Right — stat column */}
-            <div style={{
-              display: "flex", flexDirection: "column", gap: "32px",
-              position: isMobile ? "static" : "sticky", top: isMobile ? "auto" : "80px",
-              opacity: stakesVis ? 1 : 0, transform: stakesVis ? "none" : "translateX(16px)",
-              transition: "opacity 0.8s 0.25s, transform 0.8s 0.25s",
-            }}>
-              {[
-                { val: "$300B",    label: "Blue economy annual value",        sub: "Projected to double to $600B by 2030"              },
-                { val: "95%",      label: "Internet via undersea cable",       sub: "Through contested maritime zones"                  },
-                { val: "$2B",      label: "Annual piracy cost",               sub: "Gulf of Guinea — Stable Seas"                      },
-                { val: "40,000km", label: "African coastline",                sub: "Atlantic, Indian Ocean, and Red Sea"               },
-              ].map((s, i) => (
-                <div key={i}>
-                  {i > 0 && <div style={{ height: "1px", background: DIM, marginBottom: "32px" }} />}
-                  <div style={{ borderLeft: `3px solid ${SIGNAL}`, paddingLeft: "18px" }}>
-                    <span style={{ fontSize: "clamp(24px, 3vw, 36px)", fontWeight: 700, color: "white", display: "block", lineHeight: 1 }}>{s.val}</span>
-                    <span style={{ fontSize: "10px", letterSpacing: "1.5px", color: SIGNAL, display: "block", marginTop: "6px", fontWeight: 600 }}>{s.label.toUpperCase()}</span>
-                    {s.sub && <span style={{ fontSize: "12px", color: MUTED, display: "block", marginTop: "4px", lineHeight: 1.5 }}>{s.sub}</span>}
-                  </div>
-                </div>
-              ))}
             </div>
           </div>
         </div>

@@ -267,23 +267,9 @@ export default function Afrocean() {
             <p style={{ fontSize: "15px", lineHeight: 1.9, color: CREAM, fontWeight: 300, marginBottom: "16px" }}>
               From the Swahili merchants of East Africa to the Fante fishermen of Ghana's Cape Coast — the sea was always home.
             </p>
-            <p style={{ fontSize: "15px", lineHeight: 1.9, color: MUTED, fontWeight: 300, marginBottom: "36px" }}>
+            <p style={{ fontSize: "15px", lineHeight: 1.9, color: MUTED, fontWeight: 300 }}>
               Afrocean exists to honour that heritage — connecting the Diaspora back to the indigenous knowledge, the coastal communities, and the ancestral relationship with the ocean that was never truly lost.
             </p>
-            <div style={{ display: "flex", gap: "36px", paddingTop: "24px", borderTop: "1px solid rgba(255,255,255,0.07)" }}>
-              {[
-                { val: "54",    label: "African Nations"     },
-                { val: "3.1M",  label: "KM of Coastline"    },
-                { val: "1000+", label: "Years of Navigation" },
-              ].map(s => (
-                <div key={s.label}>
-                  <span style={{ fontSize: "24px", fontWeight: 700, color: "white", display: "block", lineHeight: 1 }}>{s.val}</span>
-                  <span style={{ fontSize: "9px", letterSpacing: "2px", color: MUTED, display: "block", marginTop: "5px" }}>
-                    {s.label.toUpperCase()}
-                  </span>
-                </div>
-              ))}
-            </div>
           </div>
         </div>
       </section>
