@@ -66,12 +66,12 @@ function PlatformSelector({ links }) {
       <button
         onClick={(e) => { e.stopPropagation(); setOpen(v => !v); }}
         style={{
-          display: "flex", alignItems: "center", gap: "10px",
-          padding: "9px 16px",
+          display: "flex", alignItems: "center", gap: "8px",
+          padding: "8px 14px",
           background: open ? GOLD : "transparent",
           border: `1px solid ${open ? GOLD : "rgba(196,164,78,0.4)"}`,
           color: open ? "#0F1912" : CREAM,
-          fontSize: "10px", letterSpacing: "2px", fontWeight: 700,
+          fontSize: "9px", letterSpacing: "1.5px", fontWeight: 700,
           cursor: "pointer", fontFamily: "inherit",
           transition: "all 0.2s",
         }}
@@ -181,7 +181,7 @@ function EpisodeCard({ ep, index, visible }) {
       }}
     >
       {/* ── Thumbnail area ── */}
-      <div style={{ position: "relative", height: "220px", overflow: "hidden", flexShrink: 0 }}>
+      <div style={{ position: "relative", height: "150px", overflow: "hidden", flexShrink: 0 }}>
         {/* Blurred backdrop fill — avoids empty letterbox bars around the contained image */}
         <img
           src={ep.img}
@@ -244,48 +244,41 @@ function EpisodeCard({ ep, index, visible }) {
       </div>
 
       {/* ── Card body ── */}
-      <div style={{ padding: "20px 22px 22px", flex: 1, display: "flex", flexDirection: "column" }}>
+      <div style={{ padding: "16px 18px 18px", flex: 1, display: "flex", flexDirection: "column" }}>
 
         {/* Guest name */}
         <h3 style={{
-          fontSize: "19px", fontWeight: 700,
+          fontSize: "16px", fontWeight: 700,
           color: hovered ? GOLD : "white",
-          lineHeight: 1.2, margin: "0 0 4px",
+          lineHeight: 1.2, margin: "0 0 3px",
           transition: "color 0.2s",
         }}>{ep.guest}</h3>
 
         {/* Role · Location */}
         <p style={{
-          fontSize: "11px", letterSpacing: "1px",
-          color: GOLD, margin: "0 0 12px", fontWeight: 500,
+          fontSize: "10px", letterSpacing: "0.5px",
+          color: GOLD, margin: "0 0 10px", fontWeight: 500,
+          overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap",
         }}>
           {ep.role} · {ep.location}
         </p>
 
-        {/* Divider */}
-        <div style={{ width: "24px", height: "1px", background: "rgba(196,164,78,0.3)", marginBottom: "12px" }} />
-
-        {/* Episode title */}
-        <p style={{
-          fontSize: "13px", letterSpacing: "0.5px",
-          color: "white", fontWeight: 600,
-          margin: "0 0 10px", lineHeight: 1.4,
-        }}>"{ep.title}"</p>
-
         {/* Excerpt */}
         <p style={{
-          fontSize: "13px", lineHeight: 1.65,
+          fontSize: "12px", lineHeight: 1.55,
           color: CREAM, fontWeight: 300,
-          margin: "0 0 20px", flex: 1,
+          margin: "0 0 14px", flex: 1,
+          display: "-webkit-box", WebkitLineClamp: 3, WebkitBoxOrient: "vertical",
+          overflow: "hidden",
         }}>{ep.excerpt}</p>
 
         {ep.slug && (
           <Link to={`/episodes/${ep.slug}`} style={{
             display: "inline-block", alignSelf: "flex-start",
-            fontSize: "10px", letterSpacing: "1.5px", fontWeight: 600,
+            fontSize: "9px", letterSpacing: "1.5px", fontWeight: 600,
             color: GOLD, textDecoration: "none",
             borderBottom: "1px solid rgba(196,164,78,0.4)",
-            marginBottom: "16px",
+            marginBottom: "12px",
           }}>READ THE STORY →</Link>
         )}
 
@@ -492,8 +485,8 @@ export default function Episodes() {
           {filtered.length > 0 ? (
             <div style={{
               display: "grid",
-              gridTemplateColumns: "repeat(auto-fill, minmax(320px, 1fr))",
-              gap: "24px",
+              gridTemplateColumns: "repeat(auto-fill, minmax(260px, 1fr))",
+              gap: "20px",
             }}>
               {filtered.map((ep, i) => (
                 <EpisodeCard key={ep.num} ep={ep} index={i} visible={gridVis} />
