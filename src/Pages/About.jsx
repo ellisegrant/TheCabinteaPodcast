@@ -18,74 +18,34 @@ function useReveal(threshold = 0.1) {
   return [ref, visible];
 }
 
-/* ── Palette ── */
+/* ── Palette — single accent for a calmer, easier read ── */
 const BG    = "#0F1912";
 const PANEL = "#141F18";
-const DARK2 = "#1A2820";
 const GOLD  = "#C4A44E";
-const TERRA = "#B5541E";
-const TEAL  = "#2C8C7C";
 const CREAM = "rgba(214,207,194,0.75)";
 const MUTED = "rgba(214,207,194,0.42)";
 
 /* ── Exact image paths from the document ── */
 const IMGS = {
   hero:      "/abouthero1.jpg",
-  community: "/ghanamen.jpg",
   market:    "/diaspora1.jpg",
-  diaspora:  "/diaspora2.jpg",
   host:      "/hostimage",
   cta:       "/africanwomen.jpg",
 };
 
-/* ── Pillars — exact content from document ── */
+/* ── Pillars ── */
 const pillars = [
   {
-    num: "01",
     title: "Unite",
-    body: "Building a cultural ecosystem that brings together people and enterprises of the African maritime industry — across the continent and the Diaspora.",
+    body: "Building a cultural ecosystem that brings together the people and enterprises of the African maritime industry — across the continent and the Diaspora.",
   },
   {
-    num: "02",
     title: "Invest",
-    body: "Creating real economic pathways between Africa and the Diaspora by facilitating cultural and industry exchange, collaboration, and mutual growth.",
+    body: "Creating real economic pathways between Africa and the Diaspora through exchange, collaboration, and mutual growth.",
   },
   {
-    num: "03",
     title: "Celebrate",
-    body: "Spotlighting emerging trends, elevating local insights, and amplifying African maritime culture to the world with intention and pride.",
-  },
-];
-
-/* ── Ecosystem — exact content from document ── */
-const ecosystem = [
-  {
-    tag: "PODCAST",
-    name: "Cabin Tea",
-    desc: "A live conversation series where ocean professionals come together over a carefully chosen cup of tea. Recorded live in Accra, heard everywhere.",
-    to: "/episodes",
-    accent: TEAL,
-  },
-  {
-    tag: "GATHERING",
-    name: "Afrocean",
-    desc: "A dynamic gathering that unites individuals of the African Diaspora, fostering a deep connection with their maritime heritage through cultural exchange.",
-    to: "/afrocean",
-    accent: GOLD,
-  },
-  {
-    tag: "MEDIA HUB",
-    name: "Anchorage",
-    desc: "A centralized media hub curating personalized maritime content and reshaping how the Diaspora engages with the maritime world.",
-    to: "/anchorage",
-    accent: TEAL,
-  },
-  {
-    tag: "AGENCY",
-    name: "Creative Agency",
-    desc: "Connecting brands to the vibrancy, innovation, and commercial power of African maritime culture through strategy, creativity, and immersive experiences.",
-    to: "/creative-agency",
-    accent: TERRA,
+    body: "Spotlighting the trends, people, and stories shaping African maritime culture.",
   },
 ];
 
@@ -93,7 +53,6 @@ export default function About() {
   const [heroRef,    heroVis]    = useReveal(0.05);
   const [missionRef, missionVis] = useReveal(0.1);
   const [pillarsRef, pillarsVis] = useReveal(0.1);
-  const [ecoRef,     ecoVis]     = useReveal(0.1);
   const [hostRef,    hostVis]    = useReveal(0.1);
   const [ctaRef,     ctaVis]     = useReveal(0.1);
   const isMobile = useIsMobile();
@@ -197,7 +156,7 @@ export default function About() {
             opacity: missionVis ? 1 : 0, transform: missionVis ? "none" : "translateX(16px)",
             transition: "opacity 0.8s 0.15s, transform 0.8s 0.15s",
           }}>
-            <p style={{ fontSize: "10px", letterSpacing: "3px", color: TEAL, marginBottom: "18px", fontWeight: 600 }}>
+            <p style={{ fontSize: "10px", letterSpacing: "3px", color: GOLD, marginBottom: "18px", fontWeight: 600 }}>
               OUR MISSION
             </p>
 
@@ -208,12 +167,8 @@ export default function About() {
               A Cultural Ecosystem That Unites, Invests in, and Celebrates African Maritime.
             </h2>
 
-            <p style={{ fontSize: "15px", lineHeight: 1.9, color: CREAM, fontWeight: 300, marginBottom: "16px" }}>
-              Our mission is to foster a strong cultural connection and enhance economic opportunities between Africa and the Diaspora — facilitating exchange, collaboration, and mutual growth.
-            </p>
-
-            <p style={{ fontSize: "15px", lineHeight: 1.9, color: MUTED, fontWeight: 300 }}>
-              We strive to create avenues for economic empowerment and sustainable development that benefit both the African continent and Diaspora communities worldwide.
+            <p style={{ fontSize: "15px", lineHeight: 1.9, color: CREAM, fontWeight: 300 }}>
+              We foster a strong cultural connection and real economic opportunity between Africa and the Diaspora — through exchange, collaboration, and mutual growth.
             </p>
           </div>
         </div>
@@ -241,94 +196,21 @@ export default function About() {
             </h2>
           </div>
 
-          <div style={{ display: "flex", flexDirection: "column" }}>
+          <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "repeat(3, 1fr)", gap: isMobile ? "32px" : "48px" }}>
             {pillars.map((p, i) => (
-              <div key={p.num} style={{
-                display: "grid",
-                gridTemplateColumns: isMobile ? "1fr" : "56px 180px 1fr",
-                gap: isMobile ? "8px" : "40px",
-                padding: "40px 0",
-                borderTop: "1px solid rgba(255,255,255,0.06)",
-                alignItems: "start",
+              <div key={p.title} style={{
+                paddingTop: "20px",
+                borderTop: `2px solid ${GOLD}`,
                 opacity: pillarsVis ? 1 : 0, transform: pillarsVis ? "none" : "translateY(16px)",
                 transition: `opacity 0.6s ${0.1 + i * 0.12}s, transform 0.6s ${0.1 + i * 0.12}s`,
               }}>
-                <span style={{ fontSize: "13px", letterSpacing: "2px", color: MUTED, paddingTop: "2px" }}>
-                  {p.num}
-                </span>
-                <h3 style={{
-                  fontSize: "22px", fontWeight: 700, color: "white", margin: 0,
-                }}>
+                <h3 style={{ fontSize: "20px", fontWeight: 700, color: "white", margin: "0 0 10px" }}>
                   {p.title}
                 </h3>
-                <p style={{ fontSize: "15px", lineHeight: 1.85, color: CREAM, fontWeight: 300, margin: 0 }}>
+                <p style={{ fontSize: "14px", lineHeight: 1.75, color: CREAM, fontWeight: 300, margin: 0 }}>
                   {p.body}
                 </p>
               </div>
-            ))}
-            <div style={{ borderTop: "1px solid rgba(255,255,255,0.06)" }} />
-          </div>
-        </div>
-      </section>
-
-      {/* ══════════════════════════════════════════════
-          ECOSYSTEM — 2×2 card grid
-      ══════════════════════════════════════════════ */}
-      <section ref={ecoRef} style={{ background: PANEL, padding: "clamp(56px, 8vw, 96px) 5vw" }}>
-        <div style={{ maxWidth: "1200px", margin: "0 auto" }}>
-
-          <div style={{
-            marginBottom: "48px",
-            opacity: ecoVis ? 1 : 0, transform: ecoVis ? "none" : "translateY(12px)",
-            transition: "opacity 0.6s, transform 0.6s",
-          }}>
-            <p style={{ fontSize: "10px", letterSpacing: "3px", color: GOLD, marginBottom: "12px", fontWeight: 600 }}>
-              THE ECOSYSTEM
-            </p>
-            <h2 style={{
-              fontWeight: 700, fontSize: "clamp(22px, 3vw, 36px)",
-              color: "white", margin: 0, lineHeight: 1.2,
-            }}>
-              More than a podcast.
-            </h2>
-          </div>
-
-          <div style={{
-            display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr",
-            gap: "2px", background: "rgba(255,255,255,0.04)",
-          }}>
-            {ecosystem.map((item, i) => (
-              <Link key={item.name} to={item.to} style={{
-                textDecoration: "none",
-                background: PANEL,
-                padding: "44px 40px",
-                display: "flex", flexDirection: "column",
-                borderTop: `2px solid ${item.accent}`,
-                transition: "background 0.25s",
-                opacity: ecoVis ? 1 : 0, transform: ecoVis ? "none" : "translateY(20px)",
-                transitionProperty: "background, opacity, transform",
-                transitionDuration: "0.25s, 0.6s, 0.6s",
-                transitionDelay: `0s, ${0.1 + i * 0.1}s, ${0.1 + i * 0.1}s`,
-              }}
-                onMouseEnter={e => e.currentTarget.style.background = DARK2}
-                onMouseLeave={e => e.currentTarget.style.background = PANEL}
-              >
-                <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: "20px" }}>
-                  <span style={{
-                    fontSize: "9px", letterSpacing: "2.5px", fontWeight: 700,
-                    color: item.accent,
-                  }}>{item.tag}</span>
-                  <span style={{ color: MUTED, fontSize: "16px" }}>→</span>
-                </div>
-                <h3 style={{
-                  fontSize: "clamp(20px, 2.2vw, 28px)", fontWeight: 700,
-                  color: "white", margin: "0 0 12px",
-                }}>{item.name}</h3>
-                <p style={{
-                  fontSize: "14px", lineHeight: 1.8,
-                  color: MUTED, fontWeight: 300, margin: 0,
-                }}>{item.desc}</p>
-              </Link>
             ))}
           </div>
         </div>
@@ -357,14 +239,6 @@ export default function About() {
               position: "absolute", inset: 0,
               background: "linear-gradient(to right, transparent, rgba(15,25,18,0.6) 100%)",
             }} />
-            <div style={{
-              position: "absolute", top: "28px", left: "24px",
-              background: TERRA, padding: "7px 14px",
-            }}>
-              <span style={{ fontSize: "9px", letterSpacing: "2px", fontWeight: 700, color: "white" }}>
-                HOST & CREATOR
-              </span>
-            </div>
           </div>
 
           {/* Right — bio */}
@@ -374,7 +248,7 @@ export default function About() {
             opacity: hostVis ? 1 : 0, transform: hostVis ? "none" : "translateX(16px)",
             transition: "opacity 0.9s 0.15s, transform 0.9s 0.15s",
           }}>
-            <p style={{ fontSize: "10px", letterSpacing: "3px", color: TERRA, marginBottom: "18px", fontWeight: 600 }}>
+            <p style={{ fontSize: "10px", letterSpacing: "3px", color: GOLD, marginBottom: "18px", fontWeight: 600 }}>
               YOUR HOST
             </p>
 
@@ -389,35 +263,12 @@ export default function About() {
               HOST & CREATOR · CABIN TEA
             </p>
 
-            <div style={{
-              width: "36px", height: "2px", background: TERRA, marginBottom: "28px",
-            }} />
-
             <p style={{
               fontSize: "16px", lineHeight: 1.9, color: CREAM,
-              fontWeight: 300, marginBottom: "16px", maxWidth: "400px",
+              fontWeight: 300, maxWidth: "400px",
             }}>
-              Lawrence Dogli didn't just study Africa's maritime world — he lived it from the inside. A graduate of the Regional Maritime University in Ghana, Lawrence spent the beginning of his professional career at the Gulf of 
-              Guinea Maritime Institute, coordinating some of the most consequential maritime security and blue economy projects in West and Central Africa.
+              A graduate of the Regional Maritime University in Ghana, Lawrence built his career at the Gulf of Guinea Maritime Institute before carrying African perspectives into policy rooms from Lisbon to Dakar. Cabin Tea is built on everything he's seen, heard, and learned inside that world.
             </p>
-            <p style={{
-              fontSize: "14px", lineHeight: 1.8, color: MUTED,
-              fontWeight: 300, maxWidth: "400px", marginBottom: "36px",
-            }}>
-               He contributed to the development of Ghana's National Maritime Strategy, worked with the European Union to train local journalists on maritime affairs, and carried African perspectives into policy rooms from Lisbon to Brussels, Naples to Dakar — including as a technical expert to the International Maritime Organisation and contributing expert to the North Atlantic Treaty Organisation on maritime security in the Gulf of Guinea. He is a Chatham House Common Futures Conversations alumnus and a global voice on blue economy issues in Africa's marine sector.
-Cabin Tea is built on everything he saw, heard, and learned inside that world. Because Africa's ocean story deserves to be told by the people who live it.
-            </p>
-
-            <Link to="/about-host" style={{
-              display: "inline-block", padding: "12px 28px",
-              background: TERRA, color: "white",
-              textDecoration: "none", fontSize: "10px",
-              letterSpacing: "2px", fontWeight: 700,
-              transition: "opacity 0.2s", alignSelf: "flex-start",
-            }}
-              onMouseEnter={e => e.currentTarget.style.opacity = "0.85"}
-              onMouseLeave={e => e.currentTarget.style.opacity = "1"}
-            >READ FULL BIO →</Link>
           </div>
         </div>
       </section>

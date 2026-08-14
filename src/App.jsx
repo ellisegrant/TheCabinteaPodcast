@@ -1,7 +1,6 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./Pages/Home";
 import About from "./Pages/About";
-import AboutHost from "./Pages/AboutHost";
 import Episodes from "./Pages/Episodes";
 import EpisodeArticle from "./Pages/EpisodeArticle";
 import Partner from "./Pages/Partner";
@@ -24,7 +23,6 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
-          <Route path="/about-host" element={<AboutHost />} />
           <Route path="/episodes" element={<Episodes />} />
           <Route path="/episodes/:slug" element={<EpisodeArticle />} />
           <Route path="/partner" element={<Partner />} />
