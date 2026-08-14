@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from "react";
 import { useSearchParams, Link } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
-import { episodes } from "../data/episodes";
+import { episodes, journalArticles } from "../data/episodes";
 import useIsMobile from "../hooks/useIsMobile";
 
 const slugify = (s) => s.toLowerCase().replace(/\s+/g, "-");
@@ -298,7 +298,7 @@ export default function Episodes() {
   const [gridRef, gridVis] = useReveal(0.05);
   const [searchParams, setSearchParams] = useSearchParams();
   const tagParam = searchParams.get("tag");
-  const articlesList = episodes.filter(e => e.article);
+  const articlesList = [...episodes.filter(e => e.article), ...journalArticles];
   const featured = articlesList[articlesList.length - 1];
   const moreArticles = articlesList.slice(0, -1).reverse();
   const isMobile = useIsMobile();
@@ -408,7 +408,7 @@ export default function Episodes() {
                   display: "flex", flexDirection: "column", justifyContent: "center",
                 }}>
                   <p style={{ fontSize: "10px", color: MUTED, marginBottom: "16px", letterSpacing: "1px" }}>
-                    ARTICLE · {featured.duration} EPISODE
+                    ARTICLE · {featured.readTime || `${featured.duration} EPISODE`}
                   </p>
                   <h2 style={{
                     fontWeight: 700, fontSize: "clamp(22px, 2.6vw, 34px)",

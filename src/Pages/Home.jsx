@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import useIsMobile from "../hooks/useIsMobile";
-import { episodes as ALL_EPISODES } from "../data/episodes";
+import { episodes as ALL_EPISODES, journalArticles } from "../data/episodes";
 
 function useReveal(threshold = 0.1) {
   const ref = useRef(null);
@@ -395,7 +395,7 @@ export default function Home() {
   const [brandsRef, brandsVis] = useReveal(0.08);
   const [ctaRef,    ctaVis]    = useReveal(0.1);
   const isMobile = useIsMobile();
-  const articlesList = ALL_EPISODES.filter(e => e.article);
+  const articlesList = [...ALL_EPISODES.filter(e => e.article), ...journalArticles];
   const featured = articlesList[articlesList.length - 1];
   const moreArticles = articlesList.slice(0, -1).reverse();
 
@@ -560,7 +560,7 @@ export default function Home() {
                   display: "flex", flexDirection: "column", justifyContent: "center",
                 }}>
                   <p style={{ fontSize: "10px", color: MUTED, marginBottom: "16px", letterSpacing: "1px" }}>
-                    ARTICLE · {featured.duration} EPISODE
+                    ARTICLE · {featured.readTime || `${featured.duration} EPISODE`}
                   </p>
                   <h2 style={{
                     fontWeight: 700, fontSize: "clamp(22px, 2.6vw, 34px)",

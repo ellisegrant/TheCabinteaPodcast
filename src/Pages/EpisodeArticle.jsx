@@ -2,7 +2,7 @@ import { useRef, useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
-import { episodes } from "../data/episodes";
+import { episodes, journalArticles } from "../data/episodes";
 
 function useReveal(threshold = 0.08) {
   const ref = useRef(null);
@@ -152,6 +152,67 @@ const ARTICLES = {
       { t: "17:42", label: "A final message to the youth" },
     ],
   },
+  "gulf-of-guinea-vs-strait-of-hormuz": {
+    tag: "Opinion",
+    byline: "Lawrence Dogli",
+    bylineRole: "Curator and Creative Director, Cabin Tea",
+    title: "If the Gulf of Guinea Is Safer than the Strait of Hormuz, Why Aren't the Tankers Coming?",
+    deck: "Cabin Tea founder Lawrence Dogli argues that safety alone won't pull tankers toward West Africa — the Gulf of Guinea needs the loading architecture, infrastructure and commercial confidence that made the Strait of Hormuz indispensable in the first place.",
+    lead: "The question of whether the Gulf of Guinea is safer than the Strait of Hormuz may be less straightforward than it first appears. Safer for whom? Safer against what? And safer in relation to which conception of maritime security?",
+    date: "August 14, 2026",
+    readTime: "5 min read",
+    img: "/gog-hormuz-tankers.jpeg",
+    imgCaption: "A small boat sails past cargo ships and other commercial vessels anchored in the Strait of Hormuz off Bandar Abbas, Iran, Wednesday, Aug. 5, 2026.",
+    imgCredit: "Amirhosein Khorgooi/ISNA via AP",
+    sections: [
+      {
+        heading: "Different Waters, Different Dangers",
+        paragraphs: [
+          "The Gulf of Guinea and the Strait of Hormuz have very different security environments. The Gulf of Guinea has historically been associated with piracy, armed robbery, kidnapping, illegal bunkering, trafficking and IUU fishing. Hormuz presents a different risk profile, shaped far more heavily by geopolitical tensions, military confrontation and the vulnerability of a critical energy chokepoint. The International Energy Agency estimates that about 20 million barrels per day of crude oil and oil products moved through Hormuz in 2025, representing around a quarter of global seaborne oil trade. At the same time, the IMO continues to maintain dedicated reporting on piracy and armed robbery in the Gulf of Guinea and other regions.",
+          "So perhaps asking which waterway is simply “safer” misses the point. Different maritime spaces have different degrees and types of insecurity.",
+        ],
+      },
+      {
+        heading: "Tankers Follow Cargo, Not Safety",
+        paragraphs: [
+          "But let us accept the proposition for a moment: if the Gulf of Guinea can provide a comparatively safer environment for commercial shipping, why are the oil tankers not choosing alternative sources of oil and gas from West Africa? There is an obvious answer: a tanker does not choose a sea simply because it is safe. It follows the cargo, and the cargo follows an energy system.",
+          "Hormuz is not strategically important merely because tankers pass through it. Its importance comes from the enormous concentration of oil and gas production, export infrastructure, storage, pipelines, terminals, refineries, markets and established commercial relationships surrounding it. The geography has been reinforced by decades of investment and geopolitical interest. Its vulnerability is therefore also a consequence of its strategic importance.",
+        ],
+      },
+      {
+        heading: "Ghana, Nigeria, and the Resources Already in Place",
+        paragraphs: [
+          "Ghana has oil and is developing a Petroleum Hub in Jomoro, with plans that include refineries, petrochemical facilities, substantial storage capacity and jetties for import and export activities. The project is explicitly conceived as part of a regional energy and petroleum ecosystem. Nigeria provides the scale, with its established oil and gas industry and ambitions to connect its gas resources to European markets through the Trans-Saharan Gas Pipeline. Construction of Algeria's section of that project has now commenced.",
+          "The resources, therefore, are not the central question. The question is whether the Gulf of Guinea can develop the loading architecture, storage, pipelines, ports, processing capacity, markets, insurance environment and maritime-security arrangements required to make those resources commercially attractive to international shipping.",
+        ],
+      },
+      {
+        heading: "More Than Safe Waters: Building a Complete Energy Corridor",
+        paragraphs: [
+          "If tankers are to choose the Gulf of Guinea, the region must offer more than safe waters. It must offer a complete and reliable energy corridor. And security is only one part of that proposition.",
+          "There must be confidence that a tanker can load efficiently. That cargo will be available reliably. That ports can handle the required volumes. That infrastructure will function. That insurance costs will remain commercially viable. That contracts and regulations will be predictable. And that the sea line connecting the cargo to its market will remain secure.",
+          "The Mahanian conception of sea power reminds us that maritime power is closely connected to commerce and the ability to maintain the communications through which commerce moves. A naval or maritime-security posture is therefore not valuable only because it can confront threats. Its deeper economic value lies in creating confidence that commercial activity can continue.",
+        ],
+      },
+      {
+        heading: "From Protecting Waters to Creating Confidence",
+        paragraphs: [
+          "That raises a different question for the Gulf of Guinea: Can we build a maritime-security architecture that does not merely protect our waters, but makes those waters commercially attractive? A region can have oil without becoming an energy corridor. It can have ports without becoming a maritime hub. It can have naval assets without creating commercial confidence. And it can reduce piracy without necessarily attracting greater energy investment.",
+          "Ghana's Petroleum Hub, Nigeria's energy resources, the ports and offshore infrastructure of the region, and the emerging architecture of Gulf of Guinea maritime cooperation should not be viewed as isolated developments. They can be understood as components of a wider regional economic-security system.",
+          "Even the current Ghana-Togo maritime-boundary proceedings remind us that the Gulf of Guinea is not simply an expanse of water. Maritime space carries questions of jurisdiction, resources, infrastructure, security and economic opportunity. Ghana and Togo's delimitation dispute was submitted to a Special Chamber of the International Tribunal for the Law of the Sea in June 2026.",
+        ],
+      },
+      {
+        heading: "The Bottom Line",
+        paragraphs: [
+          "The strategic question is therefore bigger than whether Ghana or Nigeria can produce more oil. It is whether the Gulf of Guinea can become a predictable, secure and commercially compelling maritime energy environment. This does not mean replacing Hormuz. That would be unrealistic. The lesson from Hormuz is instead that excessive concentration in one strategic corridor creates systemic vulnerability. A more resilient global energy system needs diversified sources, routes and infrastructure.",
+          "The Gulf of Guinea could contribute to that diversification. But to do so, the region would need to think differently about maritime security. Instead of asking only whether our waters are safe, we should ask what economic value that security enables. If the answer is greater energy production, more tanker traffic, stronger ports, investment in loading and storage infrastructure, better insurance conditions, deeper regional cooperation and more secure sea lines of communication, then maritime security becomes more than a defence objective. It becomes economic infrastructure.",
+          "Perhaps, then, the most important question is not whether the Gulf of Guinea is safer than Hormuz. It is this: Can we make the Gulf of Guinea demonstrably safe, commercially reliable and strategically attractive enough that an international tanker owner looks at Ghana or Nigeria and says: “Yes, I will take my cargo from here”? If we can answer that question, then safety ceases to be merely a description of our maritime environment.",
+          "It becomes a competitive advantage.",
+        ],
+      },
+    ],
+  },
 };
 
 /* ── Share icons ── */
@@ -243,10 +304,10 @@ export default function EpisodeArticle() {
               <img src="/YellowNoLogo.png" alt="" style={{ width: "30px", height: "30px", objectFit: "contain", flexShrink: 0 }} />
               <div>
                 <p style={{ fontSize: "11px", fontWeight: 700, letterSpacing: "0.5px", color: "white", margin: 0 }}>
-                  CABIN TEA STAFF
+                  {article.byline ? article.byline.toUpperCase() : "CABIN TEA STAFF"}
                 </p>
                 <p style={{ fontSize: "11px", color: MUTED, margin: 0 }}>
-                  {article.date} · {article.duration} watch
+                  {article.bylineRole ? `${article.bylineRole} · ` : ""}{article.date} · {article.readTime || `${article.duration} watch`}
                 </p>
               </div>
             </div>
@@ -290,7 +351,9 @@ export default function EpisodeArticle() {
           </div>
           <p style={{ fontSize: "12px", lineHeight: 1.6, color: MUTED, margin: "12px 0 0" }}>
             {article.imgCaption}{" "}
-            <span style={{ color: "rgba(214,207,194,0.3)" }}>Photo courtesy of Cabin Tea.</span>
+            <span style={{ color: "rgba(214,207,194,0.3)" }}>
+              {article.imgCredit ? `Photo: ${article.imgCredit}.` : "Photo courtesy of Cabin Tea."}
+            </span>
           </p>
         </div>
       </section>
@@ -337,28 +400,32 @@ export default function EpisodeArticle() {
           )}
 
           {/* Video embed */}
-          <h2 style={{ fontSize: "18px", fontWeight: 700, color: "white", margin: "0 0 12px" }}>Watch the Episode</h2>
-          {article.videoTeaser && (
-            <p style={{ fontSize: "15px", lineHeight: 1.7, color: CREAM, fontWeight: 300, margin: "0 0 18px" }}>{article.videoTeaser}</p>
+          {article.youtubeEmbed && (
+            <>
+              <h2 style={{ fontSize: "18px", fontWeight: 700, color: "white", margin: "0 0 12px" }}>Watch the Episode</h2>
+              {article.videoTeaser && (
+                <p style={{ fontSize: "15px", lineHeight: 1.7, color: CREAM, fontWeight: 300, margin: "0 0 18px" }}>{article.videoTeaser}</p>
+              )}
+              <div style={{ position: "relative", paddingTop: "56.25%", background: PANEL, marginBottom: "20px" }}>
+                <iframe
+                  src={article.youtubeEmbed}
+                  title={article.title}
+                  style={{ position: "absolute", inset: 0, width: "100%", height: "100%", border: "none" }}
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  allowFullScreen
+                />
+              </div>
+              <a href={article.youtube} target="_blank" rel="noopener noreferrer" style={{
+                display: "inline-flex", alignItems: "center", gap: "9px",
+                padding: "12px 26px", background: GOLD, color: BG,
+                textDecoration: "none", fontSize: "10px",
+                letterSpacing: "2px", fontWeight: 700, marginBottom: "56px",
+              }}>
+                <svg width="10" height="12" viewBox="0 0 10 12" fill="currentColor"><path d="M0 0l10 6-10 6V0z"/></svg>
+                WATCH ON YOUTUBE
+              </a>
+            </>
           )}
-          <div style={{ position: "relative", paddingTop: "56.25%", background: PANEL, marginBottom: "20px" }}>
-            <iframe
-              src={article.youtubeEmbed}
-              title={article.title}
-              style={{ position: "absolute", inset: 0, width: "100%", height: "100%", border: "none" }}
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-              allowFullScreen
-            />
-          </div>
-          <a href={article.youtube} target="_blank" rel="noopener noreferrer" style={{
-            display: "inline-flex", alignItems: "center", gap: "9px",
-            padding: "12px 26px", background: GOLD, color: BG,
-            textDecoration: "none", fontSize: "10px",
-            letterSpacing: "2px", fontWeight: 700, marginBottom: "56px",
-          }}>
-            <svg width="10" height="12" viewBox="0 0 10 12" fill="currentColor"><path d="M0 0l10 6-10 6V0z"/></svg>
-            WATCH ON YOUTUBE
-          </a>
         </div>
       </section>
 
