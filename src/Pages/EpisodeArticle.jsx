@@ -157,7 +157,7 @@ const ARTICLES = {
     byline: "Lawrence Dogli",
     bylineRole: "Curator and Creative Director, Cabin Tea",
     title: "If the Gulf of Guinea Is Safer than the Strait of Hormuz, Why Aren't the Tankers Coming?",
-    deck: "Cabin Tea founder Lawrence Dogli argues that safety alone won't pull tankers toward West Africa — the Gulf of Guinea needs the loading architecture, infrastructure and commercial confidence that made the Strait of Hormuz indispensable in the first place.",
+    deck: "Cabin Tea co-founder Lawrence Dogli argues that safety alone won't pull tankers toward West Africa — the Gulf of Guinea needs the loading architecture, infrastructure and commercial confidence that made the Strait of Hormuz indispensable in the first place.",
     lead: "The question of whether the Gulf of Guinea is safer than the Strait of Hormuz may be less straightforward than it first appears. Safer for whom? Safer against what? And safer in relation to which conception of maritime security?",
     date: "August 14, 2026",
     readTime: "5 min read",
