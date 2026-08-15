@@ -36,6 +36,7 @@ const IMGS = {
   ep3:       "/episode3.jpeg",
   ep4:       "/episode4.jpeg",
   ep5:       "/episode5.jpeg",
+  ep6:       "/episode6.jpeg",
   cta:       "/lighthouse.jpg",
 };
 
@@ -53,19 +54,6 @@ function TikTok() {
 }
 
 const EPISODES = [
-  {
-    num: "03",
-    guest: "Simon Church",
-    role: "Special Advisor, Gulf of Guinea Maritime Collaboration Forum",
-    org: "Kenya",
-    title: "Counter-Piracy at a Crossroads: Horn of Africa and Gulf of Guinea",
-    excerpt: "An honest, wide-ranging conversation on where global counter-piracy efforts stand today — and where they're heading.",
-    tag: "Marine Security",
-    duration: "34 min",
-    date: "Jun 8, 2026",
-    img: IMGS.ep3,
-    imgPosition: "center center",
-  },
   {
     num: "04",
     guest: "Mr. Quintin Akrobotu",
@@ -91,6 +79,19 @@ const EPISODES = [
     duration: "19 min",
     date: "Jul 22, 2026",
     img: IMGS.ep5,
+    imgPosition: "center center",
+  },
+  {
+    num: "06",
+    guest: "Gertrude Adwoa Ohene-Asienim, FICS",
+    role: "Executive Director, Whitestone Shipbrokers Limited & West Africa School of Shipping",
+    org: "Accra",
+    title: "The Playbook for Shipbroking",
+    excerpt: "The first female Chartered Shipbroker in West Africa on building a shipbroking practice from the ground up, and why the ceiling for expertise in Ghana's shipping industry has never been higher.",
+    tag: "Governance",
+    duration: "83 min",
+    date: "Aug 4, 2026",
+    img: IMGS.ep6,
     imgPosition: "center center",
   },
 ];

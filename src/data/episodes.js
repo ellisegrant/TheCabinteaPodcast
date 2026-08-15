@@ -85,7 +85,20 @@ export const episodes = [
       img: "/cap-micah.jpeg",
     },
   },
-
+  {
+    num: "06",
+    guest: "Gertrude Adwoa Ohene-Asienim, FICS",
+    role: "Executive Director, Whitestone Shipbrokers Limited & West Africa School of Shipping",
+    location: "Accra",
+    title: "The Playbook for Shipbroking",
+    excerpt: "In 2011, Gertrude Adwoa Ohene-Asienim became Country Manager for Offshore Shipbrokers, opening the firm's Accra office as it followed Ghana into its oil boom era. She built her shipbroking practice from the ground up, before going on to earn her Fellowship and become the first female Chartered Shipbroker in West Africa. Fifteen years later, as CEO of Whitestone Shipbrokers and the West Africa School of Shipping, she sits down with Lawrence Dogli to discuss the shipbroking practice in West Africa, ambition for the next generation, and why the ceiling for quality expertise and exceptional professionalism in Ghana's shipping industry has never been higher.",
+    tag: "Governance",
+    season: 1,
+    duration: "83 min",
+    date: "Aug 4, 2026",
+    img: "episode6.jpeg",
+    links: { youtube: "https://youtu.be/tdtPB5Hpu1o", spotify: null },
+  },
 ];
 
 /* ── Journal-only articles — editorials not tied to a specific episode ── */
