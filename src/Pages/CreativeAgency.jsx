@@ -206,14 +206,27 @@ export default function CreativeAgency() {
             </h2>
           </div>
 
-          {/* Right — body */}
+          {/* Right — body, video backdrop */}
           <div style={{
+            position: "relative", overflow: "hidden",
             padding: isMobile ? "40px 5vw" : "72px 5vw 72px 56px",
             display: "flex", flexDirection: "column", justifyContent: "center",
+            minHeight: isMobile ? "360px" : "auto",
             opacity: missionVis ? 1 : 0, transform: missionVis ? "none" : "translateX(16px)",
             transition: "opacity 0.8s 0.15s, transform 0.8s 0.15s",
           }}>
+            <video autoPlay muted loop playsInline style={{
+              position: "absolute", inset: 0,
+              width: "100%", height: "100%", objectFit: "cover",
+            }}>
+              <source src="/cabin-video.mp4" type="video/mp4" />
+            </video>
+            <div style={{
+              position: "absolute", inset: 0,
+              background: "linear-gradient(105deg, rgba(20,31,24,0.92) 30%, rgba(20,31,24,0.55) 100%)",
+            }} />
             <p style={{
+              position: "relative",
               fontSize: "15px", lineHeight: 1.9, color: CREAM,
               fontWeight: 300,
             }}>
