@@ -193,7 +193,7 @@ export default function CreativeAgency() {
               fontWeight: 700, fontSize: "clamp(24px, 3vw, 42px)",
               lineHeight: 1.15, color: "white", marginBottom: "0",
             }}>
-              Make maritime in Africa visible, relevant and irresistible.
+              Make maritime in Africa visible, relevant, and investable.
             </h2>
           </div>
 
@@ -205,7 +205,7 @@ export default function CreativeAgency() {
             opacity: missionVis ? 1 : 0, transform: missionVis ? "none" : "translateX(16px)",
             transition: "opacity 0.8s 0.15s, transform 0.8s 0.15s",
           }}>
-            <video autoPlay muted loop playsInline style={{
+            <video controls loop playsInline style={{
               width: "100%", height: "auto", display: "block", objectFit: "cover",
             }}>
               <source src="/cabin-video.mp4" type="video/mp4" />
