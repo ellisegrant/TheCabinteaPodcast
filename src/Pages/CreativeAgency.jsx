@@ -78,20 +78,11 @@ const advisory = [
   },
 ];
 
-/* ── Why partner — exact content from document ── */
-const pillars = [
-  { title: "Cultural Authority",  body: "The leading voice in Africa's maritime industry culture.",             accent: TERRA },
-  { title: "Network Access",      body: "Direct connections to experts, industries, and business leaders.",      accent: GOLD  },
-  { title: "Strategic Impact",    body: "Campaigns and experiences with measurable ROI.",                        accent: TEAL  },
-  { title: "Tailored Solutions",  body: "Every engagement is customized to your brand and objectives.",          accent: TERRA },
-];
-
 export default function CreativeAgency() {
   const [heroRef,     heroVis]     = useReveal(0.05);
   const [missionRef,  missionVis]  = useReveal(0.1);
   const [servicesRef, servicesVis] = useReveal(0.1);
   const [advisoryRef, advisoryVis] = useReveal(0.1);
-  const [whyRef,      whyVis]      = useReveal(0.1);
   const [ctaRef,      ctaVis]      = useReveal(0.1);
   const isMobile = useIsMobile();
 
@@ -332,60 +323,6 @@ export default function CreativeAgency() {
                 <div style={{ width: "24px", height: "2px", background: a.accent, marginBottom: "14px" }} />
                 <p style={{ fontSize: "14px", lineHeight: 1.8, color: MUTED, fontWeight: 300, margin: 0 }}>
                   {a.body}
-                </p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ══════════════════════════════════════════════
-          WHY PARTNER — header + 2×2 grid
-      ══════════════════════════════════════════════ */}
-      <section ref={whyRef} style={{ background: BG, padding: "clamp(56px, 8vw, 96px) 5vw" }}>
-        <div style={{ maxWidth: "1200px", margin: "0 auto" }}>
-
-          <div style={{
-            display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr", gap: isMobile ? "40px" : "80px",
-            alignItems: "end", marginBottom: "48px",
-            opacity: whyVis ? 1 : 0, transform: whyVis ? "none" : "translateY(12px)",
-            transition: "opacity 0.6s, transform 0.6s",
-          }}>
-            <div>
-              <p style={{ fontSize: "10px", letterSpacing: "3px", color: TEAL, marginBottom: "12px", fontWeight: 600 }}>
-                THE ADVANTAGE
-              </p>
-              <h2 style={{
-                fontWeight: 700, fontSize: "clamp(22px, 3vw, 36px)",
-                color: "white", margin: 0, lineHeight: 1.2,
-              }}>
-                Why partner with us.
-              </h2>
-            </div>
-            <p style={{ fontSize: "15px", lineHeight: 1.8, color: MUTED, fontWeight: 300, margin: 0 }}>
-              Every engagement is built on cultural authority, meaningful networks, and a commitment to measurable outcomes for brands in the African maritime space.
-            </p>
-          </div>
-
-          <div style={{
-            display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr",
-            gap: "2px", background: "rgba(255,255,255,0.04)",
-          }}>
-            {pillars.map((p, i) => (
-              <div key={p.title} style={{
-                background: BG, padding: "36px 32px",
-                borderLeft: `3px solid ${p.accent}`,
-                opacity: whyVis ? 1 : 0, transform: whyVis ? "none" : "translateY(16px)",
-                transition: `opacity 0.6s ${0.1 + i * 0.1}s, transform 0.6s ${0.1 + i * 0.1}s`,
-              }}>
-                <h4 style={{
-                  fontSize: "12px", letterSpacing: "1.5px", fontWeight: 700,
-                  color: p.accent, marginBottom: "8px",
-                }}>
-                  {p.title.toUpperCase()}
-                </h4>
-                <p style={{ fontSize: "14px", lineHeight: 1.75, color: MUTED, fontWeight: 300, margin: 0 }}>
-                  {p.body}
                 </p>
               </div>
             ))}
