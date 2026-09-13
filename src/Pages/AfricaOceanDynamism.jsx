@@ -28,59 +28,11 @@ const MUTED  = "rgba(255,255,255,0.45)";
 const BODY   = "rgba(255,255,255,0.68)";
 const SIGNAL = "#C1272D";
 
-/* ── Six strategic themes — exact content from document ── */
-const WAVES = [
-  {
-    num: "01",
-    title: "Maritime Sovereignty & Blue Security",
-    body: "Africa's 38 coastal and island states collectively control over 13 million square kilometres of ocean, yet limited surveillance and enforcement capacity has created a persistent sovereignty gap that enables threats such as illegal fishing, maritime crime, and external interference. The continent is beginning to close this gap through AI-powered surveillance systems, drones, autonomous vessels, and integrated satellite data.",
-    stat: "13M km²", statLabel: "Ocean under African jurisdiction",
-  },
-  {
-    num: "02",
-    title: "Industrial Capacity & Ocean Manufacturing",
-    body: "Africa's blue economy remains heavily dependent on imported vessels, marine equipment, and offshore infrastructure. In response, Ghana, Nigeria, South Africa, and Kenya are investing in local shipbuilding, marine fabrication, and equipment production — enabling fisheries, ports, and offshore energy sectors to operate with greater resilience.",
-    stat: "$300B", statLabel: "Blue economy annual value",
-  },
-  {
-    num: "03",
-    title: "Supply Chain Sovereignty",
-    body: "With around 90 percent of Africa's trade moving by sea, the continent is highly exposed to disruptions in global shipping routes. Real-time maritime tracking platforms, satellite connectivity, and digital customs systems are enhancing visibility and efficiency. Intra-African maritime trade corridors under AfCFTA are gradually reducing dependence on external routes.",
-    stat: "90%", statLabel: "Of Africa's trade moves by sea",
-  },
-  {
-    num: "04",
-    title: "Energy Security & the Blue Economy",
-    body: "Africa's offshore energy resources — spanning oil, gas, and vast renewable potential — coexist with widespread energy insecurity. The strategic pathway forward lies in offshore wind, blue hydrogen, floating solar, and tidal technologies, enabling energy security and sustainable blue economy growth.",
-    stat: "$600B", statLabel: "Projected blue economy value by 2030",
-  },
-  {
-    num: "05",
-    title: "Blue Foods & Ocean Nutrition Security",
-    body: "Blue foods — fish, shellfish, and aquatic plants — are central to Africa's food systems. The sector faces pressure from illegal fishing, post-harvest losses, and weak cold-chain infrastructure. Scaling sustainable aquaculture, improving fisheries governance, and leveraging digital traceability can significantly boost productivity and resilience.",
-    stat: "$2B", statLabel: "Annual piracy cost in Gulf of Guinea",
-  },
-  {
-    num: "06",
-    title: "Technology & Innovation",
-    body: "Sovereign ocean surveillance, AI-powered fisheries monitoring, indigenous undersea cable infrastructure, blue carbon markets, and ocean-based food systems are strategic necessities. Approximately 95 percent of Africa's international internet traffic travels through undersea cables passing through contested maritime zones.",
-    stat: "95%", statLabel: "Of Africa's internet travels undersea",
-  },
-];
-
-const CATEGORIES = [
-  "All", "Security & Governance", "Trade & Infrastructure",
-  "Food & Energy", "Technology & Innovation", "Sustainability & Climate", "People & Skills",
-];
-
 export default function AfricaOceanDynamism() {
   const [heroRef,    heroVis]    = useReveal(0.05);
   const [beliefRef,  beliefVis]  = useReveal(0.08);
   const [stakesRef,  stakesVis]  = useReveal(0.08);
-  const [waveRef,    waveVis]    = useReveal(0.06);
   const [emailRef,   emailVis]   = useReveal(0.1);
-  const [activeWave, setActiveWave]       = useState(null);
-  const [activeCategory, setActiveCategory] = useState("All");
   const [email, setEmail] = useState("");
   const isMobile = useIsMobile();
 
@@ -198,11 +150,8 @@ export default function AfricaOceanDynamism() {
               }}>
                 At the heart of Africa Ocean Dynamism is a conviction: that the founders building solutions to Africa's ocean and maritime challenges deserve serious, sustained investment.
               </p>
-              <p style={{ fontSize: "15px", lineHeight: 1.9, color: BODY, fontWeight: 300, marginBottom: "16px", maxWidth: "680px" }}>
-                We amplify companies working at the intersection of economic opportunity and continental responsibility, across food systems, human security, environmental stewardship, and ocean-based growth. The founders we believe in are driven by problems that matter, and they understand that governments — whether as clients, rivals, or essential partners — are inseparable from the work of building a thriving ocean economy.
-              </p>
               <p style={{ fontSize: "15px", lineHeight: 1.9, color: BODY, fontWeight: 300, maxWidth: "680px" }}>
-                Progress of this kind does not sustain itself. It requires capital, conviction, and a willingness to back founders who are thinking not in quarters but in generations. That is the investment we are making.
+                We amplify companies working across food systems, human security, environmental stewardship, and ocean-based growth — founders thinking not in quarters but in generations. That is the investment we are making.
               </p>
             </div>
           </div>
@@ -244,19 +193,7 @@ export default function AfricaOceanDynamism() {
                 The world is on edge — and Africa's coastlines are no longer peripheral to what happens next.
               </p>
               <p style={{ fontSize: "15px", lineHeight: 1.9, color: BODY, fontWeight: 300, marginBottom: "24px" }}>
-                Africa has 38 coastal and island states bordering three of the world's most strategically significant bodies of water — the Atlantic Ocean, the Indian Ocean, and the Red Sea — through which an estimated 90 percent of global trade passes by volume. When the world's maritime order fractures, Africa does not simply observe the crisis. It absorbs it.
-              </p>
-
-              <div style={{ height: "1px", background: DIM, margin: "32px 0" }} />
-              <p style={{ fontSize: "9px", letterSpacing: "3px", color: MUTED, marginBottom: "16px" }}>THE VULNERABILITY</p>
-              <p style={{ fontSize: "15px", lineHeight: 1.9, color: BODY, fontWeight: 300, marginBottom: "24px" }}>
-                Africa imports the majority of its wheat through the Red Sea and the Suez Canal corridor. Houthi attacks on commercial shipping offered a preview of what disruption to that corridor costs: freight rates surged, rerouting added weeks in fuel costs, and food import-dependent nations faced renewed inflationary pressure. Africa's blue economy — currently $300 billion annually and projected to double by 2030 — is structurally exposed to exactly these external shocks.
-              </p>
-
-              <div style={{ height: "1px", background: DIM, margin: "32px 0" }} />
-              <p style={{ fontSize: "9px", letterSpacing: "3px", color: MUTED, marginBottom: "16px" }}>THE ARGUMENT</p>
-              <p style={{ fontSize: "15px", lineHeight: 1.9, color: BODY, fontWeight: 300, marginBottom: "24px" }}>
-                The founders doing this work exist. They are building across Lagos, Mombasa, Dakar, Cape Town, Accra, and Maputo — tracking illegal fishing fleets, decarbonising port operations, digitising customs corridors, and feeding coastal populations from ocean systems that are more productive and more sustainable than those they are replacing.
+                Africa's blue economy — currently $300 billion annually — is structurally exposed to shocks in global shipping and trade. But the founders building solutions already exist: across Lagos, Mombasa, Dakar, Cape Town, Accra, and Maputo, they're tracking illegal fishing fleets, decarbonising ports, digitising customs corridors, and feeding coastal populations from more sustainable ocean systems.
               </p>
 
               {/* Closing callout */}
@@ -270,116 +207,6 @@ export default function AfricaOceanDynamism() {
                 </p>
               </div>
             </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ══════════════════════════════════════════════
-          SIX STRATEGIC THEMES — accordion
-      ══════════════════════════════════════════════ */}
-      <section ref={waveRef} style={{ background: SLATE, padding: "clamp(56px, 8vw, 96px) 5vw" }}>
-        <div style={{ maxWidth: "1200px", margin: "0 auto" }}>
-
-          <div style={{
-            marginBottom: "48px",
-            opacity: waveVis ? 1 : 0, transform: waveVis ? "none" : "translateY(12px)",
-            transition: "opacity 0.6s, transform 0.6s",
-          }}>
-            <div style={{ height: "1px", background: DIM, marginBottom: "28px" }} />
-            <span style={{ fontSize: "9px", letterSpacing: "3px", color: SIGNAL, display: "block", marginBottom: "10px", fontWeight: 600 }}>
-              THE NEXT BIG WAVE
-            </span>
-            <h2 style={{
-              fontWeight: 700, fontSize: "clamp(22px, 3vw, 36px)",
-              color: "white", margin: "0 0 6px", lineHeight: 1.2,
-            }}>Six Strategic Themes</h2>
-            <p style={{ fontSize: "14px", color: MUTED, fontWeight: 300, margin: 0 }}>
-              Africa Ocean Dynamism 20: Race to Sustainability
-            </p>
-          </div>
-
-          {/* Category filter */}
-          <div style={{
-            display: "flex", flexWrap: "wrap", gap: "8px", marginBottom: "40px",
-            opacity: waveVis ? 1 : 0, transition: "opacity 0.6s 0.1s",
-          }}>
-            {CATEGORIES.map(cat => (
-              <button key={cat} onClick={() => setActiveCategory(cat)} style={{
-                padding: "7px 16px",
-                background: activeCategory === cat ? SIGNAL : "transparent",
-                border: `1px solid ${activeCategory === cat ? SIGNAL : DIM}`,
-                color: activeCategory === cat ? "white" : MUTED,
-                fontSize: "10px", letterSpacing: "1.5px", fontWeight: 600,
-                cursor: "pointer", fontFamily: "inherit", transition: "all 0.2s",
-              }}
-                onMouseEnter={e => { if (activeCategory !== cat) { e.currentTarget.style.borderColor = "rgba(255,255,255,0.3)"; e.currentTarget.style.color = "white"; }}}
-                onMouseLeave={e => { if (activeCategory !== cat) { e.currentTarget.style.borderColor = DIM; e.currentTarget.style.color = MUTED; }}}
-              >{cat}</button>
-            ))}
-          </div>
-
-          {/* Accordion */}
-          <div style={{ display: "flex", flexDirection: "column" }}>
-            {WAVES.map((wave, i) => {
-              const isOpen = activeWave === i;
-              return (
-                <div key={wave.num} style={{
-                  borderTop: `1px solid ${DIM}`,
-                  opacity: waveVis ? 1 : 0,
-                  transition: `opacity 0.5s ${0.05 + i * 0.07}s`,
-                }}>
-                  <button onClick={() => setActiveWave(isOpen ? null : i)} style={{
-                    width: "100%", background: "none", border: "none",
-                    cursor: "pointer", textAlign: "left", padding: "24px 0",
-                    display: "grid",
-                    gridTemplateColumns: isMobile ? "32px 1fr 24px" : "48px 1fr 100px 32px",
-                    gridTemplateAreas: isMobile ? '"num title icon" "stat stat stat"' : undefined,
-                    gap: isMobile ? "6px 12px" : "28px", alignItems: "center", fontFamily: "inherit",
-                  }}>
-                    <span style={{ fontSize: "12px", letterSpacing: "2px", color: isOpen ? SIGNAL : MUTED, gridArea: isMobile ? "num" : undefined }}>{wave.num}</span>
-                    <span style={{
-                      fontWeight: 600, fontSize: "clamp(15px, 1.8vw, 19px)",
-                      color: isOpen ? "white" : "rgba(255,255,255,0.75)",
-                      transition: "color 0.2s",
-                      gridArea: isMobile ? "title" : undefined,
-                    }}>{wave.title}</span>
-                    <span style={{
-                      fontWeight: 700, fontSize: "16px",
-                      color: isOpen ? SIGNAL : MUTED, textAlign: isMobile ? "left" : "right", transition: "color 0.2s",
-                      gridArea: isMobile ? "stat" : undefined,
-                    }}>{wave.stat}</span>
-                    <span style={{
-                      color: isOpen ? SIGNAL : MUTED, fontSize: "18px",
-                      textAlign: "right", display: "block",
-                      transform: isOpen ? "rotate(45deg)" : "none",
-                      transition: "transform 0.3s, color 0.2s",
-                      gridArea: isMobile ? "icon" : undefined,
-                    }}>+</span>
-                  </button>
-
-                  <div style={{
-                    overflow: "hidden",
-                    maxHeight: isOpen ? "320px" : "0",
-                    transition: "max-height 0.4s cubic-bezier(0.4,0,0.2,1)",
-                  }}>
-                    <div style={{
-                      display: "grid", gridTemplateColumns: isMobile ? "1fr" : "48px 1fr 120px",
-                      gap: isMobile ? "16px" : "28px", paddingBottom: "28px", alignItems: "start",
-                    }}>
-                      {!isMobile && <div />}
-                      <p style={{ fontSize: "15px", lineHeight: 1.85, color: BODY, fontWeight: 300, margin: 0 }}>
-                        {wave.body}
-                      </p>
-                      <div style={{ textAlign: isMobile ? "left" : "right" }}>
-                        <span style={{ fontSize: "28px", fontWeight: 700, color: "rgba(193,39,45,0.18)", display: "block", lineHeight: 1 }}>{wave.stat}</span>
-                        <span style={{ fontSize: "9px", letterSpacing: "1.5px", color: MUTED, display: "block", marginTop: "4px" }}>{wave.statLabel.toUpperCase()}</span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              );
-            })}
-            <div style={{ height: "1px", background: DIM }} />
           </div>
         </div>
       </section>
