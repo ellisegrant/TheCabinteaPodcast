@@ -34,47 +34,42 @@ const IMGS = {
   cta:  "/maritimeheritage.jpg",
 };
 
-/* ── Services — exact content from document ── */
-const services = [
+/* ── Areas of cooperation — condensed from the Creative Agency brief ── */
+const cooperation = [
   {
     num: "01",
-    title: "CONTEXT",
-    headline: "Strategy & Insight",
-    body: "We start by deeply understanding your objectives and audience. Our strategy team conducts rigorous analysis, identifies touchpoints, and develops insights to create campaigns that resonate globally.",
-  },
-  {
-    num: "02",
-    title: "CREATE",
-    headline: "Craft & Campaign",
-    body: "Our team blends creativity, strategic thinking, cultural and industry insight to craft compelling campaigns. From concept to execution, we ensure your brand authentically reflects the richness and diversity of African culture.",
-  },
-  {
-    num: "03",
-    title: "AMPLIFY",
-    headline: "Impact & Reach",
-    body: "Impact matters. We measure meaningful outcomes, ensuring campaigns deliver tangible results, expand reach, and deepen connections with audiences across the African continent and Diaspora.",
-  },
-];
-
-/* ── Advisory — exact content from document ── */
-const advisory = [
-  {
-    num: "01",
-    title: "TECHNOLOGY",
-    body: "Our team works closely with clients to design tailored technology immersions, connecting you with leading global innovation hubs, startups, and tech leaders to uncover opportunities for partnerships, innovation, and growth.",
-    accent: TERRA,
-  },
-  {
-    num: "02",
-    title: "CAREER & EDUCATION",
-    body: "We collaborate with partners to craft curated experiences, providing access to maritime organisations, experts, and cultural leaders — helping partners gain insights, build networks, and explore collaborations in Africa's most vibrant maritime industries.",
+    title: "INSIGHT",
+    headline: "We help clients understand the market before they enter it.",
+    body: "Research and intelligence that map the landscape, track trends, and surface the insight needed for informed decisions.",
     accent: GOLD,
   },
   {
+    num: "02",
+    title: "ACCESS",
+    headline: "We open doors.",
+    body: "Stakeholder engagement and liaison connect clients with the government bodies, industry players, and decision-makers who shape outcomes in Ghana's mission-critical sectors.",
+    accent: TERRA,
+  },
+  {
     num: "03",
-    title: "BLUE ECONOMY INVESTMENT",
-    body: "Our experts guide clients through high-level blue economy investment immersions, arranging meetings with organisations, executives, and investors to identify market opportunities, strategic partnerships, and actionable business outcomes.",
+    title: "GROWTH",
+    headline: "We turn insight into opportunity.",
+    body: "Business development work identifies and develops commercial prospects, moving clients from market entry to sustained growth.",
     accent: TEAL,
+  },
+  {
+    num: "04",
+    title: "EXPERTISE",
+    headline: "We advise on what matters.",
+    body: "Sector advisory and technical support guide clients through the demands of oil and gas, mining, maritime, and other complex sectors.",
+    accent: GOLD,
+  },
+  {
+    num: "05",
+    title: "NARRATIVE",
+    headline: "We tell the story right.",
+    body: "PR and strategic communication ensure every stakeholder interaction is backed by a clear, credible narrative.",
+    accent: TERRA,
   },
 ];
 
@@ -82,7 +77,6 @@ export default function CreativeAgency() {
   const [heroRef,     heroVis]     = useReveal(0.05);
   const [missionRef,  missionVis]  = useReveal(0.1);
   const [servicesRef, servicesVis] = useReveal(0.1);
-  const [advisoryRef, advisoryVis] = useReveal(0.1);
   const [ctaRef,      ctaVis]      = useReveal(0.1);
   const isMobile = useIsMobile();
 
@@ -140,7 +134,7 @@ export default function CreativeAgency() {
             opacity: heroVis ? 1 : 0, transform: heroVis ? "none" : "translateY(14px)",
             transition: "opacity 0.7s 0.28s, transform 0.7s 0.28s",
           }}>
-            Connecting people and brands to community and industry culture — from the African continent to the global Diaspora.
+            We exist to advance our clients' market position and commercial interests across Ghana and the wider region.
           </p>
 
           <div style={{
@@ -193,7 +187,7 @@ export default function CreativeAgency() {
               fontWeight: 700, fontSize: "clamp(24px, 3vw, 42px)",
               lineHeight: 1.15, color: "white", marginBottom: "0",
             }}>
-              Make maritime in Africa visible, relevant, and investable.
+              Advance our clients' market position and commercial interests across Ghana and the wider region.
             </h2>
           </div>
 
@@ -214,7 +208,7 @@ export default function CreativeAgency() {
               fontSize: "15px", lineHeight: 1.9, color: CREAM,
               fontWeight: 300, margin: 0,
             }}>
-              We connect brands, businesses, and leaders to the vibrancy, innovation, and commercial power of African and global Maritime Culture and Industry. Our expertise spans strategy, creativity, and immersive experiences — designed to deliver measurable impact for people and organisations.
+              Cabin Tea is a creative and advisory agency supporting market development, stakeholder engagement, business development, and capacity-building across Ghana's mission-critical sectors — oil and gas, mining, maritime, fisheries, ports, security, transport, and logistics.
             </p>
           </div>
         </div>
@@ -232,18 +226,21 @@ export default function CreativeAgency() {
             transition: "opacity 0.6s, transform 0.6s",
           }}>
             <p style={{ fontSize: "10px", letterSpacing: "3px", color: GOLD, marginBottom: "12px", fontWeight: 600 }}>
-              CREATIVE AGENCY SERVICES
+              OUR SERVICES
             </p>
             <h2 style={{
               fontWeight: 700, fontSize: "clamp(22px, 3vw, 36px)",
-              color: "white", margin: 0, lineHeight: 1.2,
+              color: "white", margin: "0 0 10px", lineHeight: 1.2,
             }}>
-              Three steps. One strategy.
+              Areas of Cooperation
             </h2>
+            <p style={{ fontSize: "15px", color: MUTED, fontWeight: 300, maxWidth: "520px", lineHeight: 1.7, margin: 0 }}>
+              Local market knowledge, stakeholder access, market intelligence, and sector advisory — helping clients develop commercial opportunities in Ghana and, where mutually agreed, across the region.
+            </p>
           </div>
 
           <div style={{ display: "flex", flexDirection: "column" }}>
-            {services.map((s, i) => (
+            {cooperation.map((s, i) => (
               <div key={s.num} style={{
                 display: "grid",
                 gridTemplateColumns: isMobile ? "1fr" : "56px 180px 1fr",
@@ -252,16 +249,16 @@ export default function CreativeAgency() {
                 borderTop: "1px solid rgba(255,255,255,0.06)",
                 alignItems: "start",
                 opacity: servicesVis ? 1 : 0, transform: servicesVis ? "none" : "translateY(16px)",
-                transition: `opacity 0.6s ${0.1 + i * 0.12}s, transform 0.6s ${0.1 + i * 0.12}s`,
+                transition: `opacity 0.6s ${0.1 + i * 0.1}s, transform 0.6s ${0.1 + i * 0.1}s`,
               }}>
                 <span style={{ fontSize: "13px", letterSpacing: "2px", color: MUTED, paddingTop: "2px" }}>
                   {s.num}
                 </span>
                 <div>
-                  <span style={{ fontSize: "10px", letterSpacing: "2px", color: TERRA, display: "block", marginBottom: "6px", fontWeight: 600 }}>
+                  <span style={{ fontSize: "10px", letterSpacing: "2px", color: s.accent, display: "block", marginBottom: "6px", fontWeight: 600 }}>
                     {s.title}
                   </span>
-                  <h3 style={{ fontSize: "20px", fontWeight: 700, color: "white", margin: 0 }}>
+                  <h3 style={{ fontSize: "18px", fontWeight: 700, color: "white", margin: 0, lineHeight: 1.3 }}>
                     {s.headline}
                   </h3>
                 </div>
@@ -271,61 +268,6 @@ export default function CreativeAgency() {
               </div>
             ))}
             <div style={{ borderTop: "1px solid rgba(255,255,255,0.06)" }} />
-          </div>
-        </div>
-      </section>
-
-      {/* ══════════════════════════════════════════════
-          EXPERIENTIAL ADVISORY — three cards
-      ══════════════════════════════════════════════ */}
-      <section ref={advisoryRef} style={{ background: PANEL, padding: "clamp(56px, 8vw, 96px) 5vw" }}>
-        <div style={{ maxWidth: "1200px", margin: "0 auto" }}>
-
-          <div style={{
-            marginBottom: "48px",
-            opacity: advisoryVis ? 1 : 0, transform: advisoryVis ? "none" : "translateY(12px)",
-            transition: "opacity 0.6s, transform 0.6s",
-          }}>
-            <p style={{ fontSize: "10px", letterSpacing: "3px", color: GOLD, marginBottom: "12px", fontWeight: 600 }}>
-              IMMERSIVE EXPERIENCES
-            </p>
-            <h2 style={{
-              fontWeight: 700, fontSize: "clamp(22px, 3vw, 36px)",
-              color: "white", margin: "0 0 10px", lineHeight: 1.2,
-            }}>
-              Experiential Advisory Services
-            </h2>
-            <p style={{ fontSize: "15px", color: MUTED, fontWeight: 300, maxWidth: "480px", lineHeight: 1.7, margin: 0 }}>
-              Hands-on exposure to global personalities, tech and business ecosystems and experiences.
-            </p>
-          </div>
-
-          <div style={{
-            display: "grid", gridTemplateColumns: isMobile ? "1fr" : "repeat(3, 1fr)",
-            gap: "2px", background: "rgba(255,255,255,0.04)",
-          }}>
-            {advisory.map((a, i) => (
-              <div key={a.num} style={{
-                background: PANEL, padding: "40px 32px",
-                borderTop: `2px solid ${a.accent}`,
-                opacity: advisoryVis ? 1 : 0, transform: advisoryVis ? "none" : "translateY(20px)",
-                transition: `opacity 0.6s ${0.1 + i * 0.12}s, transform 0.6s ${0.1 + i * 0.12}s`,
-              }}>
-                <span style={{ fontSize: "9px", letterSpacing: "2px", color: a.accent, display: "block", marginBottom: "16px", fontWeight: 700 }}>
-                  {a.num}
-                </span>
-                <h3 style={{
-                  fontSize: "16px", fontWeight: 700, color: "white",
-                  margin: "0 0 14px", letterSpacing: "0.5px",
-                }}>
-                  {a.title}
-                </h3>
-                <div style={{ width: "24px", height: "2px", background: a.accent, marginBottom: "14px" }} />
-                <p style={{ fontSize: "14px", lineHeight: 1.8, color: MUTED, fontWeight: 300, margin: 0 }}>
-                  {a.body}
-                </p>
-              </div>
-            ))}
           </div>
         </div>
       </section>
