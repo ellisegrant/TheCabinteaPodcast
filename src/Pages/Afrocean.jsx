@@ -24,7 +24,6 @@ const PANEL = "#141F18";
 const DARK2 = "#1A2820";
 const GOLD  = "#C4A44E";
 const TERRA = "#B5541E";
-const TEAL  = "#2C8C7C";
 const CREAM = "rgba(214,207,194,0.75)";
 const MUTED = "rgba(214,207,194,0.42)";
 
@@ -32,39 +31,31 @@ const IMGS = {
   hero:      "/handshero.jpg",
   fishermen: "/afroceanhero",
   culture1:  "/dis2.jpg",
-  diaspora1: "/africandrum.jpg",
   market:    "/africanmask1.jpg",
-  harbour:   "/africanmask2.jpg",
-  attire:    "/afrique.jpg",
-  youth:     "/afrique3.jpg",
   cta:       "/cabin.jpg",
 };
 
 const pillars = [
   {
-    num: "01",
     title: "Cultural Exchange",
-    body: "A dedicated space for the African Diaspora to return to their maritime heritage through dialogue, performance, storytelling, and shared memory — the way the Sankofa bird looks back while flying forward.",
+    body: "A dedicated space for the African Diaspora to return to their maritime heritage through dialogue, performance, storytelling, and shared memory.",
   },
   {
-    num: "02",
     title: "Knowledge Sharing",
-    body: "Industry leaders, community elders, indigenous knowledge holders, and emerging voices converge to share expertise and lived experience across the blue economy and its cultural heritage.",
+    body: "Industry leaders, community elders, and emerging voices share expertise and lived experience across the blue economy and its cultural heritage.",
   },
   {
-    num: "03",
     title: "Networking",
-    body: "Strategic connections forged between professionals, entrepreneurs, and institutions across Africa and the Diaspora — like teeth and tongue, inseparable and stronger together.",
+    body: "Strategic connections forged between professionals, entrepreneurs, and institutions across Africa and the Diaspora.",
   },
   {
-    num: "04",
     title: "Economic Access",
-    body: "Facilitating greater access to economic opportunities and resources — adapting, growing, and carving new paths both within the Diaspora and on the African continent.",
+    body: "Facilitating greater access to economic opportunities and resources, within the Diaspora and on the African continent.",
   },
 ];
 
 /* ── Reusable hoverable mosaic tile ── */
-function MosaicTile({ src, label, sub, to, height = "300px", badge, badgeColor = GOLD }) {
+function MosaicTile({ src, label, sub, to, height = "300px" }) {
   const [hovered, setHovered] = useState(false);
   return (
     <Link
@@ -85,64 +76,25 @@ function MosaicTile({ src, label, sub, to, height = "300px", badge, badgeColor =
           height,
           objectFit: "cover",
           display: "block",
-          transform: hovered ? "scale(1.05)" : "scale(1)",
+          transform: hovered ? "scale(1.04)" : "scale(1)",
           transition: "transform 0.65s cubic-bezier(0.16,1,0.3,1)",
         }}
       />
 
-      {/* Dark overlay strengthens on hover */}
       <div style={{
         position: "absolute", inset: 0,
-        background: "linear-gradient(to top, rgba(15,25,18,0.92) 0%, rgba(15,25,18,0.3) 55%, transparent 100%)",
-        opacity: hovered ? 1 : 0.75,
-        transition: "opacity 0.35s",
+        background: "linear-gradient(to top, rgba(15,25,18,0.85) 0%, rgba(15,25,18,0.2) 55%, transparent 100%)",
       }} />
 
-      {/* Bottom label */}
       <div style={{ position: "absolute", bottom: "18px", left: "18px", right: "18px" }}>
         <span style={{
           fontSize: "14px", fontWeight: 700,
           color: "white", display: "block", marginBottom: "4px",
-          letterSpacing: "0",
         }}>{label}</span>
         <span style={{
           fontSize: "9px", letterSpacing: "2.5px",
           color: GOLD, fontWeight: 600,
         }}>{sub.toUpperCase()}</span>
-      </div>
-
-      {/* Badge top-right — appears on hover */}
-      {badge && (
-        <div style={{
-          position: "absolute", top: "16px", right: "16px",
-          background: badgeColor,
-          color: badgeColor === GOLD ? BG : "white",
-          fontSize: "8px", letterSpacing: "2px", fontWeight: 700,
-          padding: "5px 10px",
-          opacity: hovered ? 1 : 0,
-          transform: hovered ? "translateY(0)" : "translateY(-6px)",
-          transition: "opacity 0.25s, transform 0.3s",
-        }}>{badge}</div>
-      )}
-
-      {/* Arrow indicator — appears on hover */}
-      <div style={{
-        position: "absolute", top: "16px", left: "16px",
-        opacity: hovered ? 1 : 0,
-        transform: hovered ? "translateX(0)" : "translateX(-8px)",
-        transition: "opacity 0.25s, transform 0.3s",
-      }}>
-        <div style={{
-          background: "rgba(15,25,18,0.85)",
-          backdropFilter: "blur(8px)",
-          border: "1px solid rgba(196,164,78,0.25)",
-          padding: "5px 12px",
-          display: "flex", alignItems: "center", gap: "6px",
-        }}>
-          <span style={{ fontSize: "9px", letterSpacing: "2px", color: GOLD, fontWeight: 700 }}>
-            READ MORE →
-          </span>
-        </div>
       </div>
     </Link>
   );
@@ -194,7 +146,7 @@ export default function Afrocean() {
             opacity: heroVis ? 1 : 0, transform: heroVis ? "none" : "translateY(14px)",
             transition: "opacity 0.7s 0.28s, transform 0.7s 0.28s",
           }}>
-            A dynamic and inclusive gathering that unites individuals of the African Diaspora, fostering a deep connection with their maritime heritage and indigenous roots.
+            A gathering that connects the African Diaspora with its maritime heritage and indigenous roots.
           </p>
 
           <div style={{
@@ -264,11 +216,8 @@ export default function Afrocean() {
             }}>
               Long before colonial borders, African peoples were master navigators, coastal traders, and ocean stewards.
             </h2>
-            <p style={{ fontSize: "15px", lineHeight: 1.9, color: CREAM, fontWeight: 300, marginBottom: "16px" }}>
-              From the Swahili merchants of East Africa to the Fante fishermen of Ghana's Cape Coast — the sea was always home.
-            </p>
-            <p style={{ fontSize: "15px", lineHeight: 1.9, color: MUTED, fontWeight: 300 }}>
-              Afrocean exists to honour that heritage — connecting the Diaspora back to the indigenous knowledge, the coastal communities, and the ancestral relationship with the ocean that was never truly lost.
+            <p style={{ fontSize: "15px", lineHeight: 1.9, color: CREAM, fontWeight: 300 }}>
+              From the Swahili merchants of East Africa to the Fante fishermen of Ghana's Cape Coast, the sea was always home. Afrocean exists to honour that heritage, connecting the Diaspora back to the coastal communities and ancestral relationship with the ocean.
             </p>
           </div>
         </div>
@@ -287,114 +236,28 @@ export default function Afrocean() {
           <p style={{ fontSize: "10px", letterSpacing: "3px", color: GOLD, margin: 0, fontWeight: 600 }}>
             THE CULTURE
           </p>
-          <p style={{ fontSize: "12px", color: MUTED, margin: 0, letterSpacing: "0.5px" }}>
-            Click any image to explore the story
-          </p>
         </div>
 
-        {/* Row 1 — 3 images */}
         <div style={{
-          display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1.4fr 1fr 1fr", gap: "2px",
+          display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr", gap: "2px",
           opacity: mosaicVis ? 1 : 0, transform: mosaicVis ? "none" : "translateY(20px)",
           transition: "opacity 0.8s 0.1s, transform 0.8s 0.1s",
+          marginBottom: "56px",
         }}>
-          {/* Indigenous Dress → On Deck */}
           <MosaicTile
             src={IMGS.culture1}
             label="Indigenous Dress"
             sub="West Africa"
             to="/on-deck"
-            height="320px"
-            badge="ON DECK"
-            badgeColor={TEAL}
+            height="340px"
           />
-          {/* Community Gathering → What's Rising */}
           <MosaicTile
             src={IMGS.market}
             label="Community Gathering"
             sub="The Continent"
             to="/whats-rising"
-            height="320px"
-            badge="WHAT'S RISING"
-            badgeColor={TERRA}
+            height="340px"
           />
-          {/* Coastal Heritage → On Deck */}
-          <MosaicTile
-            src={IMGS.harbour}
-            label="Coastal Heritage"
-            sub="Maritime Roots"
-            to="/on-deck"
-            height="320px"
-            badge="ON DECK"
-            badgeColor={TEAL}
-          />
-        </div>
-
-        {/* Row 2 — 2 images */}
-        <div style={{
-          display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1.4fr", gap: "2px", marginTop: "2px",
-          opacity: mosaicVis ? 1 : 0, transform: mosaicVis ? "none" : "translateY(20px)",
-          transition: "opacity 0.8s 0.22s, transform 0.8s 0.22s",
-        }}>
-          {/* Next Generation → What's Rising */}
-          <MosaicTile
-            src={IMGS.youth}
-            label="Next Generation"
-            sub="Diaspora Youth"
-            to="/whats-rising"
-            height="260px"
-            badge="WHAT'S RISING"
-            badgeColor={TERRA}
-          />
-          {/* The Gathering → What's Rising */}
-          <MosaicTile
-            src={IMGS.diaspora1}
-            label="The Gathering"
-            sub="Afrocean Community"
-            to="/whats-rising"
-            height="260px"
-            badge="WHAT'S RISING"
-            badgeColor={TERRA}
-          />
-        </div>
-
-        {/* Quick links below mosaic */}
-        <div style={{
-          padding: "24px 5vw 56px",
-          display: "flex", gap: "12px", flexWrap: "wrap",
-          opacity: mosaicVis ? 1 : 0,
-          transition: "opacity 0.6s 0.35s",
-        }}>
-          <Link to="/on-deck" style={{
-            display: "inline-flex", alignItems: "center", gap: "8px",
-            padding: "9px 20px",
-            background: "transparent",
-            border: `1px solid rgba(44,140,124,0.35)`,
-            color: CREAM, textDecoration: "none",
-            fontSize: "10px", letterSpacing: "2px", fontWeight: 600,
-            transition: "border-color 0.2s, color 0.2s",
-          }}
-            onMouseEnter={e => { e.currentTarget.style.borderColor = TEAL; e.currentTarget.style.color = "white"; }}
-            onMouseLeave={e => { e.currentTarget.style.borderColor = "rgba(44,140,124,0.35)"; e.currentTarget.style.color = CREAM; }}
-          >
-            <span style={{ width: "8px", height: "8px", borderRadius: "50%", background: TEAL, flexShrink: 0 }} />
-            ON DECK →
-          </Link>
-          <Link to="/whats-rising" style={{
-            display: "inline-flex", alignItems: "center", gap: "8px",
-            padding: "9px 20px",
-            background: "transparent",
-            border: `1px solid rgba(181,84,30,0.35)`,
-            color: CREAM, textDecoration: "none",
-            fontSize: "10px", letterSpacing: "2px", fontWeight: 600,
-            transition: "border-color 0.2s, color 0.2s",
-          }}
-            onMouseEnter={e => { e.currentTarget.style.borderColor = TERRA; e.currentTarget.style.color = "white"; }}
-            onMouseLeave={e => { e.currentTarget.style.borderColor = "rgba(181,84,30,0.35)"; e.currentTarget.style.color = CREAM; }}
-          >
-            <span style={{ width: "8px", height: "8px", borderRadius: "50%", background: TERRA, flexShrink: 0 }} />
-            WHAT'S RISING, WHAT'S SHIFTING →
-          </Link>
         </div>
       </section>
 
@@ -416,21 +279,20 @@ export default function Afrocean() {
               </h2>
             </div>
             <p style={{ fontSize: "15px", lineHeight: 1.8, color: MUTED, fontWeight: 300, margin: 0 }}>
-              Each pillar is grounded in Adinkra philosophy — the visual language of the Akan people of Ghana, used for centuries to encode wisdom, values, and cultural identity.
+              Each pillar draws on Adinkra philosophy, the visual language the Akan people of Ghana have used for centuries to encode wisdom and cultural identity.
             </p>
           </div>
 
           <div style={{ display: "flex", flexDirection: "column" }}>
             {pillars.map((p, i) => (
-              <div key={p.num} style={{
-                display: "grid", gridTemplateColumns: isMobile ? "1fr" : "56px 200px 1fr",
+              <div key={p.title} style={{
+                display: "grid", gridTemplateColumns: isMobile ? "1fr" : "200px 1fr",
                 gap: isMobile ? "8px" : "40px", padding: "36px 0",
                 borderTop: "1px solid rgba(255,255,255,0.06)",
                 alignItems: "start",
                 opacity: pillarsVis ? 1 : 0, transform: pillarsVis ? "none" : "translateY(16px)",
                 transition: `opacity 0.6s ${0.1 + i * 0.1}s, transform 0.6s ${0.1 + i * 0.1}s`,
               }}>
-                <span style={{ fontSize: "13px", letterSpacing: "2px", color: MUTED, paddingTop: "2px" }}>{p.num}</span>
                 <h3 style={{ fontSize: "20px", fontWeight: 700, color: "white", margin: 0 }}>{p.title}</h3>
                 <p style={{ fontSize: "15px", lineHeight: 1.85, color: CREAM, fontWeight: 300, margin: 0 }}>{p.body}</p>
               </div>
@@ -441,65 +303,31 @@ export default function Afrocean() {
       </section>
 
       {/* ════════ DIASPORA ════════ */}
-      <section ref={diaspRef} style={{ background: BG }}>
-        <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr", minHeight: isMobile ? "auto" : "560px" }}>
-          <div style={{
-            padding: isMobile ? "40px 5vw" : "72px 5vw",
-            display: "flex", flexDirection: "column", justifyContent: "center",
-            opacity: diaspVis ? 1 : 0, transform: diaspVis ? "none" : "translateX(-16px)",
-            transition: "opacity 0.8s, transform 0.8s",
-          }}>
-            <p style={{ fontSize: "10px", letterSpacing: "3px", color: TERRA, marginBottom: "18px", fontWeight: 600 }}>
-              THE DIASPORA
-            </p>
-            <h2 style={{ fontWeight: 700, fontSize: "clamp(22px, 2.8vw, 38px)", lineHeight: 1.15, color: "white", marginBottom: "20px" }}>
-              Where home is a horizon away.
-            </h2>
-            <p style={{ fontSize: "15px", lineHeight: 1.9, color: CREAM, fontWeight: 300, marginBottom: "16px" }}>
-              Afrocean is built for the millions of Africans and people of African descent living across the world — from London to Lagos, Brooklyn to Bridgetown — who carry the ocean in their blood but may have never stood at its African shore.
-            </p>
-            <p style={{ fontSize: "15px", lineHeight: 1.9, color: MUTED, fontWeight: 300, marginBottom: "32px" }}>
-              This gathering is the bridge. A space to reconnect with the maritime heritage, the indigenous knowledge, and the living communities that the Diaspora was separated from — and to invest in their future together.
-            </p>
-            <Link to="/partner" style={{
-              display: "inline-block", padding: "13px 32px",
-              background: TERRA, color: "white",
-              textDecoration: "none", fontSize: "11px",
-              letterSpacing: "2px", fontWeight: 700,
-              transition: "opacity 0.2s", alignSelf: "flex-start",
-            }}
-              onMouseEnter={e => e.currentTarget.style.opacity = "0.85"}
-              onMouseLeave={e => e.currentTarget.style.opacity = "1"}
-            >JOIN AFROCEAN →</Link>
-          </div>
-
-          <div style={{
-            display: "grid", gridTemplateRows: "1fr 1fr", gap: "2px",
-            minHeight: isMobile ? "400px" : "auto",
-            opacity: diaspVis ? 1 : 0, transform: diaspVis ? "none" : "translateX(16px)",
-            transition: "opacity 0.8s 0.15s, transform 0.8s 0.15s",
-          }}>
-            <div style={{ position: "relative", overflow: "hidden" }}>
-              <img src={IMGS.diaspora1} alt="African Diaspora"
-                style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} />
-              <div style={{ position: "absolute", inset: 0, background: "rgba(15,25,18,0.2)" }} />
-              <div style={{
-                position: "absolute", top: "16px", left: "16px",
-                background: "rgba(15,25,18,0.85)", backdropFilter: "blur(8px)",
-                padding: "7px 14px", border: "1px solid rgba(255,255,255,0.1)",
-              }}>
-                <span style={{ fontSize: "9px", letterSpacing: "2px", color: GOLD }}>THE DIASPORA</span>
-              </div>
-            </div>
-            <div style={{ position: "relative", overflow: "hidden" }}>
-              <img src={IMGS.attire} alt="Indigenous African culture"
-                style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} />
-              <div style={{ position: "absolute", inset: 0, background: "rgba(15,25,18,0.2)" }} />
-              <div style={{ position: "absolute", top: "16px", left: "16px", background: TERRA, padding: "7px 14px" }}>
-                <span style={{ fontSize: "9px", letterSpacing: "2px", color: "white" }}>THE HOMELAND</span>
-              </div>
-            </div>
-          </div>
+      <section ref={diaspRef} style={{ background: BG, padding: "clamp(56px, 8vw, 96px) 5vw" }}>
+        <div style={{
+          maxWidth: "720px", margin: "0 auto", textAlign: "center",
+          opacity: diaspVis ? 1 : 0, transform: diaspVis ? "none" : "translateY(16px)",
+          transition: "opacity 0.8s, transform 0.8s",
+        }}>
+          <p style={{ fontSize: "10px", letterSpacing: "3px", color: TERRA, marginBottom: "18px", fontWeight: 600 }}>
+            THE DIASPORA
+          </p>
+          <h2 style={{ fontWeight: 700, fontSize: "clamp(22px, 2.8vw, 38px)", lineHeight: 1.15, color: "white", marginBottom: "20px" }}>
+            Where home is a horizon away.
+          </h2>
+          <p style={{ fontSize: "15px", lineHeight: 1.9, color: CREAM, fontWeight: 300, marginBottom: "32px" }}>
+            Afrocean is built for Africans and people of African descent across the world who carry the ocean in their blood. It's a bridge back to the maritime heritage and living communities the Diaspora was separated from.
+          </p>
+          <Link to="/partner" style={{
+            display: "inline-block", padding: "13px 32px",
+            background: TERRA, color: "white",
+            textDecoration: "none", fontSize: "11px",
+            letterSpacing: "2px", fontWeight: 700,
+            transition: "opacity 0.2s",
+          }}
+            onMouseEnter={e => e.currentTarget.style.opacity = "0.85"}
+            onMouseLeave={e => e.currentTarget.style.opacity = "1"}
+          >JOIN AFROCEAN →</Link>
         </div>
       </section>
 
