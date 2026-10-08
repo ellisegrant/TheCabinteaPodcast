@@ -31,7 +31,7 @@ const MUTED = "rgba(214,207,194,0.42)";
 /* ── Image paths ── */
 const IMGS = {
   hero: "/agency1.jpeg",
-  cta:  "/maritimeheritage.jpg",
+  cta:  "/agency2.jpeg",
 };
 
 /* ── Areas of cooperation — condensed from the Creative Agency brief ── */
