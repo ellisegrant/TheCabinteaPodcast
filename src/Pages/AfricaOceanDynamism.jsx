@@ -18,15 +18,14 @@ function useReveal(threshold = 0.08) {
   return [ref, visible];
 }
 
-/* ── Palette — cold, strategic, editorial ── */
-const NAVY   = "#0A0F1C";
-const SLATE  = "#111827";
-const MID    = "#1C2537";
-const STEEL  = "#2D3A52";
-const DIM    = "rgba(255,255,255,0.1)";
-const MUTED  = "rgba(255,255,255,0.45)";
-const BODY   = "rgba(255,255,255,0.68)";
-const SIGNAL = "#C1272D";
+/* ── Palette — matches site exactly ── */
+const BG    = "#0F1912";
+const PANEL = "#141F18";
+const DARK2 = "#1A2820";
+const GOLD  = "#C4A44E";
+const CREAM = "rgba(214,207,194,0.75)";
+const MUTED = "rgba(214,207,194,0.42)";
+const DIM   = "rgba(255,255,255,0.06)";
 
 export default function AfricaOceanDynamism() {
   const [heroRef,    heroVis]    = useReveal(0.05);
@@ -37,7 +36,7 @@ export default function AfricaOceanDynamism() {
   const isMobile = useIsMobile();
 
   return (
-    <div style={{ minHeight: "100vh", background: NAVY, color: "white", overflowX: "hidden" }}>
+    <div style={{ minHeight: "100vh", background: BG, color: "white", overflowX: "hidden" }}>
       <Navbar />
 
       {/* ══════════════════════════════════════════════
@@ -55,27 +54,13 @@ export default function AfricaOceanDynamism() {
         />
         <div style={{
           position: "absolute", inset: 0,
-          background: "linear-gradient(to top, rgba(10,15,28,1) 0%, rgba(10,15,28,0.75) 50%, rgba(10,15,28,0.35) 100%)",
+          background: "linear-gradient(to top, rgba(15,25,18,1) 0%, rgba(15,25,18,0.75) 50%, rgba(15,25,18,0.35) 100%)",
         }} />
         <div style={{
           position: "absolute", inset: 0,
-          background: "linear-gradient(to right, rgba(10,15,28,0.8) 0%, transparent 60%)",
+          background: "linear-gradient(to right, rgba(15,25,18,0.8) 0%, transparent 60%)",
         }} />
         <div className="ct-grain" style={{ zIndex: 1 }} />
-
-        {/* Live dot */}
-        <div style={{
-          position: "absolute", top: "88px", right: "5vw", zIndex: 2,
-          display: "flex", alignItems: "center", gap: "8px",
-          opacity: heroVis ? 1 : 0, transition: "opacity 0.6s 0.5s",
-        }}>
-          <div style={{
-            width: "6px", height: "6px", borderRadius: "50%",
-            background: SIGNAL, boxShadow: `0 0 10px ${SIGNAL}`,
-            animation: "aod-pulse 2s ease-in-out infinite",
-          }} />
-          <span style={{ fontSize: "9px", letterSpacing: "3px", color: MUTED }}>LIVE · 2030 SCENARIO</span>
-        </div>
 
         <div style={{ position: "relative", zIndex: 2, padding: "0 5vw 0" }}>
           {/* Eyebrow */}
@@ -84,8 +69,8 @@ export default function AfricaOceanDynamism() {
             opacity: heroVis ? 1 : 0, transform: heroVis ? "none" : "translateY(10px)",
             transition: "opacity 0.6s 0.1s, transform 0.6s 0.1s",
           }}>
-            <div style={{ width: "20px", height: "2px", background: SIGNAL }} />
-            <span style={{ fontSize: "10px", letterSpacing: "4px", color: SIGNAL, fontWeight: 600 }}>
+            <div style={{ width: "20px", height: "2px", background: GOLD }} />
+            <span style={{ fontSize: "10px", letterSpacing: "4px", color: GOLD, fontWeight: 600 }}>
               CABIN TEA · AFRICA OCEAN DYNAMISM
             </span>
           </div>
@@ -103,7 +88,7 @@ export default function AfricaOceanDynamism() {
           </h1>
 
           <p style={{
-            fontSize: "17px", color: BODY, lineHeight: 1.7,
+            fontSize: "17px", color: CREAM, lineHeight: 1.7,
             fontWeight: 300, maxWidth: "520px",
             opacity: heroVis ? 1 : 0, transform: heroVis ? "none" : "translateY(14px)",
             transition: "opacity 0.7s 0.28s, transform 0.7s 0.28s",
@@ -111,20 +96,13 @@ export default function AfricaOceanDynamism() {
             A conviction that the founders building solutions to Africa's ocean and maritime challenges deserve serious, sustained investment.
           </p>
         </div>
-
-        <style>{`
-          @keyframes aod-pulse {
-            0%, 100% { opacity: 1; transform: scale(1); }
-            50% { opacity: 0.4; transform: scale(0.7); }
-          }
-        `}</style>
       </section>
 
       {/* ══════════════════════════════════════════════
           WHAT WE BELIEVE + THE AGENDA — combined,
           two-column editorial layout
       ══════════════════════════════════════════════ */}
-      <section ref={beliefRef} style={{ background: SLATE, padding: "clamp(56px, 8vw, 96px) 5vw" }}>
+      <section ref={beliefRef} style={{ background: PANEL, padding: "clamp(56px, 8vw, 96px) 5vw" }}>
         <div style={{ maxWidth: "1200px", margin: "0 auto" }}>
           <div style={{ height: "1px", background: DIM, marginBottom: "48px" }} />
 
@@ -139,7 +117,7 @@ export default function AfricaOceanDynamism() {
               <span style={{ fontSize: "9px", letterSpacing: "3px", color: MUTED, display: "block", marginBottom: "12px" }}>
                 WHAT WE BELIEVE
               </span>
-              <div style={{ width: "20px", height: "2px", background: SIGNAL }} />
+              <div style={{ width: "20px", height: "2px", background: GOLD }} />
             </div>
 
             {/* Right content */}
@@ -150,7 +128,7 @@ export default function AfricaOceanDynamism() {
               }}>
                 At the heart of Africa Ocean Dynamism is a conviction: that the founders building solutions to Africa's ocean and maritime challenges deserve serious, sustained investment.
               </p>
-              <p style={{ fontSize: "15px", lineHeight: 1.9, color: BODY, fontWeight: 300, maxWidth: "680px" }}>
+              <p style={{ fontSize: "15px", lineHeight: 1.9, color: CREAM, fontWeight: 300, maxWidth: "680px" }}>
                 We amplify companies working across food systems, human security, environmental stewardship, and ocean-based growth — founders thinking not in quarters but in generations. That is the investment we are making.
               </p>
             </div>
@@ -162,7 +140,7 @@ export default function AfricaOceanDynamism() {
           THE STAKES — It is 2030.
           Two column: narrative left, data right
       ══════════════════════════════════════════════ */}
-      <section ref={stakesRef} style={{ background: NAVY, padding: "clamp(56px, 8vw, 96px) 5vw" }}>
+      <section ref={stakesRef} style={{ background: BG, padding: "clamp(56px, 8vw, 96px) 5vw" }}>
         <div style={{ maxWidth: "1200px", margin: "0 auto" }}>
 
           {/* Header */}
@@ -171,9 +149,9 @@ export default function AfricaOceanDynamism() {
             opacity: stakesVis ? 1 : 0, transform: stakesVis ? "none" : "translateY(12px)",
             transition: "opacity 0.6s, transform 0.6s",
           }}>
-            <div style={{ height: "1px", background: `rgba(193,39,45,0.4)`, marginBottom: "24px" }} />
+            <div style={{ height: "1px", background: DIM, marginBottom: "24px" }} />
             <div style={{ display: "flex", alignItems: "baseline", gap: "20px" }}>
-              <span style={{ fontSize: "9px", letterSpacing: "3px", color: SIGNAL, fontWeight: 600 }}>THE STAKES</span>
+              <span style={{ fontSize: "9px", letterSpacing: "3px", color: GOLD, fontWeight: 600 }}>THE STAKES</span>
               <h2 style={{
                 fontWeight: 700, fontSize: "clamp(28px, 4vw, 52px)",
                 color: "white", lineHeight: 1.05, margin: 0,
@@ -192,14 +170,14 @@ export default function AfricaOceanDynamism() {
               <p style={{ fontSize: "17px", lineHeight: 1.75, color: "white", fontWeight: 400, marginBottom: "24px" }}>
                 The world is on edge — and Africa's coastlines are no longer peripheral to what happens next.
               </p>
-              <p style={{ fontSize: "15px", lineHeight: 1.9, color: BODY, fontWeight: 300, marginBottom: "24px" }}>
+              <p style={{ fontSize: "15px", lineHeight: 1.9, color: CREAM, fontWeight: 300, marginBottom: "24px" }}>
                 Africa's blue economy — currently $300 billion annually — is structurally exposed to shocks in global shipping and trade. But the founders building solutions already exist: across Lagos, Mombasa, Dakar, Cape Town, Accra, and Maputo, they're tracking illegal fishing fleets, decarbonising ports, digitising customs corridors, and feeding coastal populations from more sustainable ocean systems.
               </p>
 
               {/* Closing callout */}
               <div style={{
                 padding: "28px 32px",
-                background: MID, borderLeft: `3px solid ${SIGNAL}`,
+                background: DARK2, borderLeft: `3px solid ${GOLD}`,
                 marginTop: "8px",
               }}>
                 <p style={{ fontSize: "16px", lineHeight: 1.6, color: "white", margin: 0 }}>
@@ -214,7 +192,7 @@ export default function AfricaOceanDynamism() {
       {/* ══════════════════════════════════════════════
           NEWSLETTER SIGNUP
       ══════════════════════════════════════════════ */}
-      <section ref={emailRef} style={{ background: MID, padding: "clamp(56px, 8vw, 96px) 5vw" }}>
+      <section ref={emailRef} style={{ background: DARK2, padding: "clamp(56px, 8vw, 96px) 5vw" }}>
         <div style={{ maxWidth: "1200px", margin: "0 auto" }}>
           <div style={{ height: "1px", background: DIM, marginBottom: "48px" }} />
           <div style={{
@@ -224,7 +202,7 @@ export default function AfricaOceanDynamism() {
             transition: "opacity 0.7s, transform 0.7s",
           }}>
             <div>
-              <span style={{ fontSize: "9px", letterSpacing: "3px", color: SIGNAL, display: "block", marginBottom: "16px", fontWeight: 600 }}>
+              <span style={{ fontSize: "9px", letterSpacing: "3px", color: GOLD, display: "block", marginBottom: "16px", fontWeight: 600 }}>
                 AFRICA OCEAN DYNAMISM STARTS WITH PEOPLE
               </span>
               <h2 style={{
@@ -246,7 +224,7 @@ export default function AfricaOceanDynamism() {
                 onChange={e => setEmail(e.target.value)}
                 style={{
                   width: "100%", padding: "15px 18px",
-                  background: STEEL, border: `1px solid ${DIM}`,
+                  background: DARK2, border: `1px solid ${DIM}`,
                   color: "white", fontSize: "14px",
                   fontFamily: "inherit", outline: "none",
                   boxSizing: "border-box", transition: "border-color 0.2s",
@@ -257,7 +235,7 @@ export default function AfricaOceanDynamism() {
               <button
                 onClick={() => { if (email) { alert("Thank you for signing up."); setEmail(""); }}}
                 style={{
-                  padding: "15px 28px", background: SIGNAL, color: "white",
+                  padding: "15px 28px", background: GOLD, color: BG,
                   border: "none", cursor: "pointer",
                   fontSize: "10px", letterSpacing: "3px", fontWeight: 700,
                   fontFamily: "inherit", transition: "opacity 0.2s",
