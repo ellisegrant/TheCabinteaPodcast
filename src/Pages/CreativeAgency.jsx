@@ -28,9 +28,9 @@ const TEAL  = "#2C8C7C";
 const CREAM = "rgba(214,207,194,0.75)";
 const MUTED = "rgba(214,207,194,0.42)";
 
-/* ── Image paths — exact from document ── */
+/* ── Image paths ── */
 const IMGS = {
-  hero: "/creativeagency.jpg",
+  hero: "/agency1.jpeg",
   cta:  "/maritimeheritage.jpg",
 };
 
