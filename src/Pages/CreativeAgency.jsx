@@ -37,35 +37,30 @@ const IMGS = {
 /* ── Areas of cooperation — condensed from the Creative Agency brief ── */
 const cooperation = [
   {
-    num: "01",
     title: "INSIGHT",
     headline: "We help clients understand the market before they enter it.",
     body: "Research and intelligence that map the landscape, track trends, and surface the insight needed for informed decisions.",
     accent: GOLD,
   },
   {
-    num: "02",
     title: "ACCESS",
     headline: "We open doors.",
     body: "Stakeholder engagement and liaison connect clients with the government bodies, industry players, and decision-makers who shape outcomes in Ghana's mission-critical sectors.",
     accent: TERRA,
   },
   {
-    num: "03",
     title: "GROWTH",
     headline: "We turn insight into opportunity.",
     body: "Business development work identifies and develops commercial prospects, moving clients from market entry to sustained growth.",
     accent: TEAL,
   },
   {
-    num: "04",
     title: "EXPERTISE",
     headline: "We advise on what matters.",
     body: "Sector advisory and technical support guide clients through the demands of oil and gas, mining, maritime, and other complex sectors.",
     accent: GOLD,
   },
   {
-    num: "05",
     title: "NARRATIVE",
     headline: "We tell the story right.",
     body: "PR and strategic communication ensure every stakeholder interaction is backed by a clear, credible narrative.",
@@ -215,7 +210,7 @@ export default function CreativeAgency() {
       </section>
 
       {/* ══════════════════════════════════════════════
-          THREE SERVICES — numbered list
+          AREAS OF COOPERATION
       ══════════════════════════════════════════════ */}
       <section ref={servicesRef} style={{ background: BG, padding: "clamp(56px, 8vw, 96px) 5vw" }}>
         <div style={{ maxWidth: "1200px", margin: "0 auto" }}>
@@ -241,9 +236,9 @@ export default function CreativeAgency() {
 
           <div style={{ display: "flex", flexDirection: "column" }}>
             {cooperation.map((s, i) => (
-              <div key={s.num} style={{
+              <div key={s.title} style={{
                 display: "grid",
-                gridTemplateColumns: isMobile ? "1fr" : "56px 180px 1fr",
+                gridTemplateColumns: isMobile ? "1fr" : "180px 1fr",
                 gap: isMobile ? "8px" : "40px",
                 padding: "40px 0",
                 borderTop: "1px solid rgba(255,255,255,0.06)",
@@ -251,9 +246,6 @@ export default function CreativeAgency() {
                 opacity: servicesVis ? 1 : 0, transform: servicesVis ? "none" : "translateY(16px)",
                 transition: `opacity 0.6s ${0.1 + i * 0.1}s, transform 0.6s ${0.1 + i * 0.1}s`,
               }}>
-                <span style={{ fontSize: "13px", letterSpacing: "2px", color: MUTED, paddingTop: "2px" }}>
-                  {s.num}
-                </span>
                 <div>
                   <span style={{ fontSize: "10px", letterSpacing: "2px", color: s.accent, display: "block", marginBottom: "6px", fontWeight: 600 }}>
                     {s.title}
